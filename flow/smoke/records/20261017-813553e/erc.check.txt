@@ -1,0 +1,5 @@
+report: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-5/flow/smoke/records/20261017-813553e/erc.json
+status: match
+  [OK] provenance.input.content_hash
+  [OK] provenance.spec.content_hash
+  [OK] provenance.deck.content_hash

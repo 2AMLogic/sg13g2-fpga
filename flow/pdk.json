@@ -1,0 +1,15 @@
+{
+  "pdk": "IHP-Open-PDK",
+  "variant": "ihp-sg13g2",
+  "upstream": "https://github.com/IHP-GmbH/IHP-Open-PDK",
+  "tag": "v0.3.0",
+  "commit": "5cccb161f7492697cfa52eb14dc03beb00bdca9e",
+  "commit_source": "git ls-remote https://github.com/IHP-GmbH/IHP-Open-PDK.git refs/tags/v0.3.0 (lightweight tag, 2026-10-17)",
+  "local_bundle": {
+    "klt_version_stamp": "fetched:0.3.0",
+    "bundle_sha256": "b3943b5757f106b62bf54d3477f76e4ea6deed9ff3e9772dab598e03b9f4b863",
+    "bundle_note": "The fleet bundle (.pdk-store.json) carries no git metadata, so it cannot be verified to equal the commit above; see 2AMLogic/klayout-tools#3786."
+  },
+  "cell_library": "sg13g2_stdcell",
+  "smoke_corner": "typ_1p20V_25C"
+}
