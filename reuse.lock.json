@@ -1,0 +1,289 @@
+{
+  "schema_version": 1,
+  "source_repo": "2AMLogic/sky130-fpga",
+  "source_commit": "42a8db00e138aa892a388b077a8ae2ea2ccab511",
+  "files": [
+    {
+      "path": "design/fabulous/.FABulous/.env",
+      "sha256": "74903ed971163d50f48e1f50738d6fb3a7bce03fdbb8675e926986986fdcd812",
+      "mode": "vendored",
+      "destination": "rtl/common/fabulous/.FABulous/.env"
+    },
+    {
+      "path": "design/fabulous/FABulous.tcl",
+      "sha256": "327de37ffeefffb5b6844fd10dc3d7631b18bf573445dff8bd11237fcf158355",
+      "mode": "vendored",
+      "destination": "rtl/common/fabulous/FABulous.tcl"
+    },
+    {
+      "path": "design/fabulous/Fabric/models_pack.v",
+      "sha256": "0bb111e18e1941b5c21d528ef60d2e3195ed311b99f59c35c9f2fc8543344a09",
+      "mode": "vendored",
+      "destination": "rtl/common/fabulous/Fabric/models_pack.v"
+    },
+    {
+      "path": "design/fabulous/Tile/CAP_E/CAP_E.csv",
+      "sha256": "f43ffcb623b03c03a83a46d79f7902b7f707c7cc3293cc89bdb34939fc020437",
+      "mode": "vendored",
+      "destination": "rtl/common/fabulous/Tile/CAP_E/CAP_E.csv"
+    },
+    {
+      "path": "design/fabulous/Tile/CAP_E/CAP_E_switch_matrix.list",
+      "sha256": "4462bf06c1d5cb891caf003eb87f402a1778462e12935a7e41b8b8603672100c",
+      "mode": "vendored",
+      "destination": "rtl/common/fabulous/Tile/CAP_E/CAP_E_switch_matrix.list"
+    },
+    {
+      "path": "design/fabulous/Tile/CAP_N/CAP_N.csv",
+      "sha256": "36edca6a4f09954597ab60b9233e16e35f2716660bb8f3dac24bbd3812fdcdd5",
+      "mode": "vendored",
+      "destination": "rtl/common/fabulous/Tile/CAP_N/CAP_N.csv"
+    },
+    {
+      "path": "design/fabulous/Tile/CAP_N/CAP_N_switch_matrix.list",
+      "sha256": "b051cecb17d17526897215e7ff4dd9f1649d3319473bf54eeb15ac6a4bfaca0c",
+      "mode": "vendored",
+      "destination": "rtl/common/fabulous/Tile/CAP_N/CAP_N_switch_matrix.list"
+    },
+    {
+      "path": "design/fabulous/Tile/CAP_S/CAP_S.csv",
+      "sha256": "36b999ec68cef56da5b4ffa11c0ad03ed353037657401a32ba52d248cd7bf33b",
+      "mode": "vendored",
+      "destination": "rtl/common/fabulous/Tile/CAP_S/CAP_S.csv"
+    },
+    {
+      "path": "design/fabulous/Tile/CAP_S/CAP_S_switch_matrix.list",
+      "sha256": "f313331c77631126cc3ecd3361d3adba035db4bef97fb3dba7f971694ac8889a",
+      "mode": "vendored",
+      "destination": "rtl/common/fabulous/Tile/CAP_S/CAP_S_switch_matrix.list"
+    },
+    {
+      "path": "design/fabulous/Tile/CAP_W/CAP_W.csv",
+      "sha256": "35b54c26d37c7b5e7afd69256be0f48016fb51331e2a90b8d11b018aa190827c",
+      "mode": "vendored",
+      "destination": "rtl/common/fabulous/Tile/CAP_W/CAP_W.csv"
+    },
+    {
+      "path": "design/fabulous/Tile/CAP_W/CAP_W_switch_matrix.list",
+      "sha256": "6fe37bc0bb616db9374ff04e3ac3460ca9f08d0be287a90d49c68450a0acc969",
+      "mode": "vendored",
+      "destination": "rtl/common/fabulous/Tile/CAP_W/CAP_W_switch_matrix.list"
+    },
+    {
+      "path": "design/fabulous/Tile/LOGIC4/LOGIC4.csv",
+      "sha256": "bcb5e1322959a1e8e1fba7748a3c32030431b6e51ffe8d9c8293f099c332de61",
+      "mode": "vendored",
+      "destination": "rtl/common/fabulous/Tile/LOGIC4/LOGIC4.csv"
+    },
+    {
+      "path": "design/fabulous/Tile/LOGIC4/LOGIC4_switch_matrix.list",
+      "sha256": "867a5f8ff768e07503f4b4aa168d3b546bc3ff4328401b48e4b1cf075588a28c",
+      "mode": "vendored",
+      "destination": "rtl/common/fabulous/Tile/LOGIC4/LOGIC4_switch_matrix.list"
+    },
+    {
+      "path": "design/fabulous/Tile/LOGIC4/lut4_ff_bel.v",
+      "sha256": "8ae0889ced0347a9e0ec271c12e8cd95518b40b6faa9753efaee05c59581aeeb",
+      "mode": "vendored",
+      "destination": "rtl/common/fabulous/Tile/LOGIC4/lut4_ff_bel.v"
+    },
+    {
+      "path": "design/fabulous/fabric.csv",
+      "sha256": "351d92bbe22836f40c277db5743ea1d563263f7aff99d7b22a2c3348bb78faca",
+      "mode": "vendored",
+      "destination": "rtl/common/fabulous/fabric.csv"
+    },
+    {
+      "path": "design/fabulous/nextpnr/cells_map.v",
+      "sha256": "d67b706132c679a877048f07d6242cfdc1963ef5edc2d990bc5598e4ec598127",
+      "mode": "vendored",
+      "destination": "rtl/common/fabulous/nextpnr/cells_map.v"
+    },
+    {
+      "path": "design/fabulous/nextpnr/ff_map.v",
+      "sha256": "9df46227f8f49f34b27bda55cd5a4bc3196139845122d339bc43446c9277d019",
+      "mode": "vendored",
+      "destination": "rtl/common/fabulous/nextpnr/ff_map.v"
+    },
+    {
+      "path": "design/fabulous/nextpnr/io_map.v",
+      "sha256": "6ca3077c1051b40b966bde633a2ee7c537ea12077db012a2c7a6bb272f561cd5",
+      "mode": "vendored",
+      "destination": "rtl/common/fabulous/nextpnr/io_map.v"
+    },
+    {
+      "path": "design/fabulous/nextpnr/io_prims.v",
+      "sha256": "4f89c7642dafc1f80f1b527c83a322b59723eaece02e05c0d950c69be0550b47",
+      "mode": "vendored",
+      "destination": "rtl/common/fabulous/nextpnr/io_prims.v"
+    },
+    {
+      "path": "design/fabulous/nextpnr/prims.v",
+      "sha256": "c3237a99ffd38f1e9e043f5952429f6e349a22be22d9482ff719e8dc6beff57d",
+      "mode": "vendored",
+      "destination": "rtl/common/fabulous/nextpnr/prims.v"
+    },
+    {
+      "path": "design/fabulous/nextpnr/top.v",
+      "sha256": "d885a0966259dccdb1ef3d1824d9832dfb56689ac0aaf45631f4170f2f57e96b",
+      "mode": "vendored",
+      "destination": "rtl/common/fabulous/nextpnr/top.v"
+    },
+    {
+      "path": "design/fabulous/nextpnr/top_const.v",
+      "sha256": "d1aaea38b7c749281f1d7fe5d03f39dcee26422481bef8d86ea901d7e476d3a6",
+      "mode": "vendored",
+      "destination": "rtl/common/fabulous/nextpnr/top_const.v"
+    },
+    {
+      "path": "design/fabulous/nextpnr/top_io.pcf",
+      "sha256": "297732d3d6f93d04a857716ac6e5f29deb74bfeafb0ab2b93e9ab5eb6a763128",
+      "mode": "vendored",
+      "destination": "rtl/common/fabulous/nextpnr/top_io.pcf"
+    },
+    {
+      "path": "design/fabulous/nextpnr/top_io.v",
+      "sha256": "8d8b199ce8aaa9fbd8a932e85e691f2b8107d62adc46f905acfd34f585fcd1ae",
+      "mode": "vendored",
+      "destination": "rtl/common/fabulous/nextpnr/top_io.v"
+    },
+    {
+      "path": "design/fabulous/nextpnr/top_ports.v",
+      "sha256": "26e062f9584178d914d8d6b88e79cfdd9bdfd01fcc38611010b43276a754e3a0",
+      "mode": "vendored",
+      "destination": "rtl/common/fabulous/nextpnr/top_ports.v"
+    },
+    {
+      "path": "design/fabulous/nextpnr/top_reg.pcf",
+      "sha256": "ba31321acc57aa9b37be11c12c8e5f07fa17ad127430a34fe59eb46f10bb5e44",
+      "mode": "vendored",
+      "destination": "rtl/common/fabulous/nextpnr/top_reg.pcf"
+    },
+    {
+      "path": "design/fabulous/nextpnr/top_reg.v",
+      "sha256": "011bec7fa7abd7334d63ec2e3de448dee80e195dd2e92b63e6dc46b992a9af0f",
+      "mode": "vendored",
+      "destination": "rtl/common/fabulous/nextpnr/top_reg.v"
+    },
+    {
+      "path": "design/fabulous/tb_configmem_equiv.v",
+      "sha256": "613e07b2367ad773a1104460eedbc9cae57697b9d8f26d41d54247dfe46e0fde",
+      "mode": "vendored",
+      "destination": "verification/common/fabulous/tb_configmem_equiv.v"
+    },
+    {
+      "path": "design/fabulous/tb_lut4_ff_bel_equiv.v",
+      "sha256": "d76678ab028ac0f5c564b8c3e6449354d2265d7c90c8ec7642554158008c0035",
+      "mode": "vendored",
+      "destination": "verification/common/fabulous/tb_lut4_ff_bel_equiv.v"
+    },
+    {
+      "path": "design/fabulous/tb_switch_matrix_equiv.v",
+      "sha256": "089505e1b25d60010c53f37faf985f98a40bfda4a39f7ab7247fb29a104565f0",
+      "mode": "vendored",
+      "destination": "verification/common/fabulous/tb_switch_matrix_equiv.v"
+    },
+    {
+      "path": "design/gen/gen_switch_matrix.py",
+      "sha256": "5fc6d7b7003b16739f9e8a1d076c76cf3b8b954eba478b8fcca8bb0cebda612c",
+      "mode": "vendored",
+      "destination": "rtl/common/gen/gen_switch_matrix.py"
+    },
+    {
+      "path": "design/rtl/logic_tile.v",
+      "sha256": "43eb20d40a2414d1a545cdf7718449e1eb498e0b63c9aee0ba82bc9c9c047446",
+      "mode": "vendored",
+      "destination": "rtl/common/rtl/logic_tile.v"
+    },
+    {
+      "path": "design/rtl/logic_tile_routed.v",
+      "sha256": "6f5c0fee5e882ecff60851c8d9daf6a86486abab6eb0da3e82b45ff143670fd0",
+      "mode": "vendored",
+      "destination": "rtl/common/rtl/logic_tile_routed.v"
+    },
+    {
+      "path": "design/rtl/logic_tile_switch_matrix.v",
+      "sha256": "34f38f5837b7384e919dc4e21081124786600638aba41159379d95262636eb65",
+      "mode": "vendored",
+      "destination": "rtl/common/rtl/logic_tile_switch_matrix.v"
+    },
+    {
+      "path": "design/rtl/lut4_slice.v",
+      "sha256": "670559dfb7e57cb8b9b636a211187406e9c9f6e09a9b5ff2c044024030a7a4aa",
+      "mode": "vendored",
+      "destination": "rtl/common/rtl/lut4_slice.v"
+    },
+    {
+      "path": "sim/switch_matrix_tb_gen.vh",
+      "sha256": "42d60d50e22d50d30590dec8f5454fa5dab1e8dcd19612ac17b5fdafc935b7df",
+      "mode": "vendored",
+      "destination": "verification/common/sim/switch_matrix_tb_gen.vh"
+    },
+    {
+      "path": "sim/tb_boundary_fwd.v",
+      "sha256": "fdcc61136469c2f11f563947cf726a64da712c99c93d5f539906bbb4f8108485",
+      "mode": "vendored",
+      "destination": "verification/common/sim/tb_boundary_fwd.v"
+    },
+    {
+      "path": "sim/tb_ctrl_route.v",
+      "sha256": "a1c6a55b773c1510d980f5d1ff88ba79e509db1b7b64c4e4be229d26c869f603",
+      "mode": "vendored",
+      "destination": "verification/common/sim/tb_ctrl_route.v"
+    },
+    {
+      "path": "sim/tb_logic_tile.v",
+      "sha256": "3f90296942e63a59f55db70dd657025d90d91f9452577a07fbddef35a15c3603",
+      "mode": "vendored",
+      "destination": "verification/common/sim/tb_logic_tile.v"
+    },
+    {
+      "path": "sim/tb_logic_tile_bitstream.v",
+      "sha256": "20b42058541902130769c0e4791462fc585e4edcd7632a2b0635ebd20d43e1f9",
+      "mode": "vendored",
+      "destination": "verification/common/sim/tb_logic_tile_bitstream.v"
+    },
+    {
+      "path": "sim/tb_logic_tile_gapfill.v",
+      "sha256": "014a86edb1f21d3c8a90e22650bcec720d45832c468145aa635bb2e90f6b7b2e",
+      "mode": "vendored",
+      "destination": "verification/common/sim/tb_logic_tile_gapfill.v"
+    },
+    {
+      "path": "sim/tb_logic_tile_routed.v",
+      "sha256": "cad2f85b85ebc037e87efdf39ed5ef1002cfa65a66b565b1cf731b74e3c4f30f",
+      "mode": "vendored",
+      "destination": "verification/common/sim/tb_logic_tile_routed.v"
+    },
+    {
+      "path": "sim/tb_lut4_slice.v",
+      "sha256": "ca664daecc674501368ed17d2aacf84eff52486dbfeea81f19db81f33efb382f",
+      "mode": "vendored",
+      "destination": "verification/common/sim/tb_lut4_slice.v"
+    },
+    {
+      "path": "sim/tb_lut_basis.v",
+      "sha256": "45a7d48b418e09ce2264a8cbce20cfb757fff9140ee5369aa0b347a7913fdfd8",
+      "mode": "vendored",
+      "destination": "verification/common/sim/tb_lut_basis.v"
+    },
+    {
+      "path": "sim/tb_output_route.v",
+      "sha256": "ca6245b6c413371fe90f75eb1d134c9e8ebc154ccd6710a1a3736ef6817972b8",
+      "mode": "vendored",
+      "destination": "verification/common/sim/tb_output_route.v"
+    },
+    {
+      "path": "sim/tb_route_diag.v",
+      "sha256": "5500be2c541dbaa48f990a2c431222237d104b58dcb06b3c4cd1b3145cb7214a",
+      "mode": "vendored",
+      "destination": "verification/common/sim/tb_route_diag.v"
+    },
+    {
+      "path": "sim/tb_switch_matrix.v",
+      "sha256": "f8843679a8e444429696f5d9c481ac5220bc6971c09d3ad751bb1751a7ff968a",
+      "mode": "vendored",
+      "destination": "verification/common/sim/tb_switch_matrix.v"
+    }
+  ]
+}
