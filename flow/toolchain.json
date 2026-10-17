@@ -1,0 +1,27 @@
+{
+  "klayout-tools": {
+    "commit": "7ee09483b74867a47a05eb353015c2cf5ca33ef3",
+    "reported_version": "0.7.1.dev1743+g7ee09483b748",
+    "source": "uv tool receipt (uv-receipt.toml) of the host install: git+https://github.com/2AMLogic/klayout-tools.git?rev=<commit>",
+    "reproduce": "uvx --from 'git+https://github.com/2AMLogic/klayout-tools.git@7ee09483b74867a47a05eb353015c2cf5ca33ef3' klt ..."
+  },
+  "yosys": {
+    "version": "0.67+post",
+    "build": "git sha1 b8e7da6f40ae8f552c116bf6c359b07c6533e159",
+    "used_by": ["klt synthesize"]
+  },
+  "openroad": {
+    "version": "26Q3-1510-g6cb3f2b704",
+    "distribution": "docker image openroad/orfs@sha256:bb7f31697fb8466ab61852fc796376cc16d9df38f762ccb733218b8a5e55824b via the ~/.local/bin/openroad wrapper",
+    "used_by": ["klt place-and-route", "klt sta"]
+  },
+  "klayout": {
+    "version": "0.30.12",
+    "used_by": ["klt drc", "klt extract", "klt lvs", "klt erc"]
+  },
+  "icarus-verilog": {
+    "version": "13.0",
+    "used_by": [],
+    "note": "Recorded for the pin only; the smoke run does not simulate."
+  }
+}

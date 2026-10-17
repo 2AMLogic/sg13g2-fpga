@@ -1,0 +1,7 @@
+{
+  "engine": "yosys",
+  "sources": ["counter.v"],
+  "hdl_toplevel": "counter",
+  "pdk": {"cell_library": "sg13g2_stdcell", "corner": "typ_1p20V_25C"},
+  "constraints": {"clock_port": "clk", "clock_period_ns": 10.0}
+}
