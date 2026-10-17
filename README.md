@@ -47,25 +47,28 @@ library, the metal stack and the rule deck change.
 - **Timing is re-earned.** No sky130 timing number transfers. Every timing
   claim here comes from characterized SG13G2 data at its own corners.
 
-## Target specification (DRAFT — engineering to ratify, see issue #1)
+## Target specification (ratified — see [`spec/target-spec.md`](spec/target-spec.md), [ADR-0001](spec/decisions/0001-ratify-target-spec.md), issue #2)
 
-Port parity: the architectural rows are `sky130-fpga`'s ratified tile spec,
+Rows needing a measurement are ratified as target/fallback/stretch with the evidence that will back them, not as numbers. Port parity: the architectural rows are `sky130-fpga`'s ratified tile spec,
 unchanged. The physical and timing rows are re-derived here.
 
 | Parameter | Fallback | Target | Stretch |
 |---|---|---|---|
 | Logic tile | 4× LUT4 + 1 FF per LUT, no carry (inherited) | same | carry chain as a later tile revision |
-| Routing | 4 tracks/edge, FABulous-style switch matrix (inherited) | same | — |
-| Demonstration fabric | 2×2 tiles | 2×2 to 4×4, single tile type | — |
+| Routing (architecture) | 4 tracks/edge, FABulous-style switch matrix (inherited) | same | — |
 | Bitstream | open, documented, FABulous-generated (inherited) | same | — |
-| Tile physical design | DRC clean, LVS gaps attributed to filed deck issues | DRC/LVS clean, routed on Metal1–Metal5 | — |
-| Timing | setup/hold-clean at all library corners at a relaxed clock | setup/hold-clean at all library corners, Fmax reported from characterized data | SDF-annotated gate-level re-simulation |
+| Library, supply, corners | `sg13g2_stdcell`, 1.2 V core, the three 1.2 V core liberty corners | same, plus the 1.5 V-class corners reported as information | — |
+| Routing layers | Metal1–Metal5 signal, TopMetal1/TopMetal2 reserved for power | same | TopMetal signal use only by a later decision record |
+| Tile area / aspect | abuts in a grid; area reported, no figure ratified | measured figure ratified by a later decision record | — |
+| Demonstration fabric | 2×2 tiles | 2×2 to 4×4, single logic tile type | — |
+| Timing | setup/hold-clean at a stated period at every claim corner | same, period fixed before measurement; Fmax only if derived from characterized data | SDF-annotated gate-level re-simulation |
+| Signoff | DRC clean, LVS gaps attributed to filed deck issues | DRC/LVS clean on the tile and the assembled fabric | — |
 
 Maturity ladder: framework and port plan → tile spec ratified → tile RTL
 and fabric description passing bitstream-level tests → tile layout
 DRC/LVS-clean → tile timing characterized → demonstration fabric assembled
 and re-verified → shuttle seat → measured silicon.
-**Current position: pre-spec.**
+**Current position: spec ratified (ADR-0001); tile RTL and fabric description stamped, not yet re-verified here.**
 
 ## Tool flow
 
