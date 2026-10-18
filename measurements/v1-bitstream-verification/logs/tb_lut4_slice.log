@@ -1,0 +1,2 @@
+PASS: tb_lut4_slice -- 79 checks, 0 failures
+/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/verification/common/sim/tb_lut4_slice.v:152: $finish called at 156000 (1ps)

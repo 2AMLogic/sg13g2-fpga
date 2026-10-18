@@ -1,0 +1,17 @@
+warning: Some design elements have no explicit time unit and/or
+       : time precision. This may cause confusing timing results.
+       : Affected design elements are:
+       :   -- module LOGIC4 declared here: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/LOGIC4/LOGIC4.v:1
+       :   -- module LOGIC4_ConfigMem declared here: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/LOGIC4/LOGIC4_ConfigMem.v:1
+       :   -- module LOGIC4_switch_matrix declared here: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/LOGIC4/LOGIC4_switch_matrix.v:2
+       :   -- module clk_buf declared here: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Fabric/models_pack.v:28
+       :   -- module config_latch declared here: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Fabric/models_pack.v:4
+       :   -- module cus_mux161 declared here: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Fabric/models_pack.v:112
+       :   -- module cus_mux21 declared here: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Fabric/models_pack.v:51
+       :   -- module cus_mux41 declared here: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Fabric/models_pack.v:35
+       :   -- module cus_mux81 declared here: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Fabric/models_pack.v:60
+       :   -- module lut4_ff_bel declared here: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/LOGIC4/lut4_ff_bel.v:34
+       :   -- module my_buf declared here: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Fabric/models_pack.v:21
+warning: Found both default and explicit timescale based delays. Use
+       : -Wtimescale to find the design element(s) with no explicit
+       : timescale.

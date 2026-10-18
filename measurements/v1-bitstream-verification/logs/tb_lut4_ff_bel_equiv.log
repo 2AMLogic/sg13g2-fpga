@@ -1,0 +1,2 @@
+PASS: lut4_ff_bel == lut4_slice over 20000 random cycles
+/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/verification/common/fabulous/tb_lut4_ff_bel_equiv.v:26: $finish called at 200000000 (1ps)

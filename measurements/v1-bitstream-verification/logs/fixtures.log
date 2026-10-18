@@ -1,0 +1,118 @@
+Warning: Feature 'write_xaiger2' is experimental.
+Info: Reading BELs file: /.FABulous/bel.v3.txt
+Info: Reading PIPs file: /.FABulous/pips.txt
+
+Info: constrained 'a' to bel 'X1Y0/A'
+Info: constrained 'b' to bel 'X1Y0/B'
+Info: constrained 'c' to bel 'X1Y0/C'
+Info: constrained 'd' to bel 'X1Y0/D'
+Info: constrained 'y' to bel 'X1Y2/A'
+Info: constrained 'w' to bel 'X1Y2/B'
+Info: Finished applying constraints from '/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/rtl/common/fabulous/nextpnr/top_io.pcf'
+Info: Checksum: 0x578601d3
+
+Info: Device utilisation:
+Info: 	IO_1_bidirectional_frame_config_pass:       6/      8    75%
+Info: 	        Global_Clock:       0/      1     0%
+Info: 	         lut4_ff_bel:       2/      4    50%
+
+Info: Placed 6 cells based on constraints.
+Info: Creating initial analytic placement for 2 cells, random placement wirelen = 6.
+Info:     at initial placer iter 0, wirelen = 4
+Info:     at initial placer iter 1, wirelen = 4
+Info:     at initial placer iter 2, wirelen = 4
+Info:     at initial placer iter 3, wirelen = 4
+Info: Running main analytical placer, max placement attempts per cell = 10000.
+Info:     at iteration #1, type lut4_ff_bel: wirelen solved = 4, spread = 4, legal = 6; time = 0.00s
+Info:     at iteration #2, type lut4_ff_bel: wirelen solved = 4, spread = 4, legal = 6; time = 0.00s
+Info:     at iteration #3, type lut4_ff_bel: wirelen solved = 4, spread = 4, legal = 6; time = 0.00s
+Info:     at iteration #4, type lut4_ff_bel: wirelen solved = 4, spread = 4, legal = 6; time = 0.00s
+Info:     at iteration #5, type lut4_ff_bel: wirelen solved = 4, spread = 4, legal = 6; time = 0.00s
+Info:     at iteration #6, type lut4_ff_bel: wirelen solved = 4, spread = 4, legal = 6; time = 0.00s
+Info: HeAP Placer Time: 0.00s
+Info:   of which solving equations: 0.00s
+Info:   of which spreading cells: 0.00s
+Info:   of which strict legalisation: 0.00s
+
+Info: Running simulated annealing placer for refinement.
+Info:   at iteration #1: temp = 0.000000, timing cost = 0, wirelen = 6
+Info:   at iteration #2: temp = 0.000000, timing cost = 0, wirelen = 6 
+Info: SA placement time 0.00s
+
+Info: No Fmax available; no interior timing paths found in design.
+Info: Checksum: 0x3c2c8f68
+
+Info: Routing..
+Info: Setting up routing queue.
+Info: Routing 9 arcs.
+Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
+Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
+Info:          9 |        0          9 |    0     9 |         0|       0.00       0.00|
+Info: Routing complete.
+Info: Router1 time 0.00s
+Info: Checksum: 0xe1a64537
+
+Info: No Fmax available; no interior timing paths found in design.
+
+Info: Program finished normally.
+Warning: Feature 'write_xaiger2' is experimental.
+Info: Reading BELs file: /.FABulous/bel.v3.txt
+Info: Reading PIPs file: /.FABulous/pips.txt
+
+Info: constrained 'a' to bel 'X1Y0/A'
+Info: constrained 'b' to bel 'X1Y0/B'
+Info: constrained 'c' to bel 'X1Y0/C'
+Info: constrained 'en' to bel 'X1Y2/A'
+Info: constrained 'rst' to bel 'X1Y2/B'
+Info: constrained 'q' to bel 'X1Y2/C'
+Info: Finished applying constraints from '/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/rtl/common/fabulous/nextpnr/top_reg.pcf'
+Info: Checksum: 0xe51a2d15
+
+Info: Device utilisation:
+Info: 	IO_1_bidirectional_frame_config_pass:       6/      8    75%
+Info: 	        Global_Clock:       0/      1     0%
+Info: 	         lut4_ff_bel:       2/      4    50%
+
+Info: Placed 6 cells based on constraints.
+Info: Creating initial analytic placement for 2 cells, random placement wirelen = 6.
+Info:     at initial placer iter 0, wirelen = 4
+Info:     at initial placer iter 1, wirelen = 4
+Info:     at initial placer iter 2, wirelen = 4
+Info:     at initial placer iter 3, wirelen = 4
+Info: Running main analytical placer, max placement attempts per cell = 10000.
+Info:     at iteration #1, type lut4_ff_bel: wirelen solved = 4, spread = 4, legal = 6; time = 0.00s
+Info:     at iteration #2, type lut4_ff_bel: wirelen solved = 4, spread = 4, legal = 6; time = 0.00s
+Info:     at iteration #3, type lut4_ff_bel: wirelen solved = 4, spread = 4, legal = 6; time = 0.00s
+Info:     at iteration #4, type lut4_ff_bel: wirelen solved = 4, spread = 4, legal = 6; time = 0.00s
+Info:     at iteration #5, type lut4_ff_bel: wirelen solved = 4, spread = 4, legal = 6; time = 0.00s
+Info:     at iteration #6, type lut4_ff_bel: wirelen solved = 4, spread = 4, legal = 6; time = 0.00s
+Info: HeAP Placer Time: 0.00s
+Info:   of which solving equations: 0.00s
+Info:   of which spreading cells: 0.00s
+Info:   of which strict legalisation: 0.00s
+
+Info: Running simulated annealing placer for refinement.
+Info:   at iteration #1: temp = 0.000000, timing cost = 0, wirelen = 6
+Info:   at iteration #2: temp = 0.000000, timing cost = 0, wirelen = 6 
+Info: SA placement time 0.00s
+
+Info: No Fmax available; no interior timing paths found in design.
+Info: Checksum: 0xe4b84688
+
+Info: Routing..
+Info: Setting up routing queue.
+Info: Routing 7 arcs.
+Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
+Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
+Info:          9 |        2          7 |    2     7 |         0|       0.00       0.00|
+Info: Routing complete.
+Info: Router1 time 0.00s
+Info: Checksum: 0x8f23b7c0
+
+Info: No Fmax available; no interior timing paths found in design.
+
+Info: Program finished normally.
+assembled top_io.fasm: 23 FASM lines = 6 zero-bit pad pips (cross-checked against the routed netlist) + lines expanding to 43 logic-tile and 4 cap/wire spec features; 21 cfg bits set; 504 bytes
+bit_gen genBitstream output is byte-identical to the assembler's top_io.bin
+assembled top_reg.fasm: 34 FASM lines = 6 zero-bit pad pips (cross-checked against the routed netlist) + lines expanding to 49 logic-tile and 9 cap/wire spec features; 27 cfg bits set; 504 bytes
+bit_gen genBitstream output is byte-identical to the assembler's top_reg.bin

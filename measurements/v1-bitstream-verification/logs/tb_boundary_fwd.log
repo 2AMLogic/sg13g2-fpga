@@ -1,0 +1,6 @@
+COVERAGE: UserCLKo 106 rising and 106 falling edges followed
+COVERAGE: FrameData_O 32/32 bits forwarded at both levels
+COVERAGE: FrameStrobe_O 20/20 bits forwarded at both levels
+PORTFAIL: UserCLKo=0 FrameData_O=0 FrameStrobe_O=0
+PASS: tb_boundary_fwd[fwd] (1554 checks, 0 failures; UserCLKo + FrameData_O[31:0] + FrameStrobe_O[19:0])
+/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/verification/common/sim/tb_boundary_fwd.v:201: $finish called at 518000 (1ps)

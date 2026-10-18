@@ -1,0 +1,2 @@
+PASS: tb_switch_matrix -- 469 checks, 0 failures
+/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/verification/common/sim/tb_switch_matrix.v:120: $finish called at 444000 (1ps)
