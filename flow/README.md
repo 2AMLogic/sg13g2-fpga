@@ -37,7 +37,11 @@ envelope per step, `<step>.rc` with its exit code, and `<step>.not-run` with a
 reason for any step that could not run. Scratch output goes to the gitignored
 `flow/build/`. Single local `klt` runs only; no corner or Monte Carlo grids.
 
-Two environment traps found while bringing this up, both handled in `run.sh`:
+Both `flow/smoke/run.sh` and `layout/run.sh` are thin wrappers that set the per-design
+variables (top, sources, request/record dirs, STA on/off) and exec the shared runner
+`flow/klt-flow.sh`.
+
+Two environment traps found while bringing this up, both handled in `flow/klt-flow.sh`:
 
 - `~/.local/bin/openroad` is a docker wrapper that mounts only `$PWD` and the
   PDK root. Run from the repo root, and export `PDK_ROOT` explicitly: with it
