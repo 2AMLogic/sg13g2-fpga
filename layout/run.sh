@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 # Synthesize / place-and-route / DRC / LVS / ERC of the stamped tile
 # (rtl/common/rtl/logic_tile_routed.v) on IHP SG13G2 (issue #9).
-# No STA (timing is #10). Single local klt runs only; no corner/MC grids.
+# Timing (issue #10): klt extract --parasitics -> SPEF, then one klt sta request
+# over the routed DEF at the corners in layout/requests/sta*.json (period and
+# constraints: layout/timing-period.md). Single local klt runs only.
 #
 # Usage: layout/run.sh [--pdk-root DIR]
 #   --pdk-root  IHP-Open-PDK install root (default: klt's own resolution).
@@ -86,6 +88,29 @@ else notrun lvs "place-and-route produced no gds_path/verilog_path"; fi
 if [[ -n "$GDS" ]]; then
   step erc $KLT erc "$(rel "$GDS")" "$B/erc-spec.json" --top logic_tile_routed --deck sg13g2 --format json
 else notrun erc "place-and-route produced no gds_path"; fi
+
+# 6. parasitics: SPEF from the routed GDS, net names and pins from the routed DEF
+#    so that OpenSTA can correlate the *D_NET blocks with the linked design.
+if [[ -n "$GDS" && -n "$DEF" ]]; then
+  step extract-parasitics $KLT extract "$(rel "$GDS")" --deck sg13g2 --top logic_tile_routed \
+      --abstract-cells 'sg13g2_*' --def-net-names --parasitics --spef "$B/logic_tile_routed.spef" \
+      --def-net-connections "$(rel "$DEF")" --def-pins "$(rel "$DEF")" \
+      --no-netlist --format json
+else notrun extract-parasitics "place-and-route produced no gds_path/def_path"; fi
+
+# 7. STA: one request, one routed DEF, N corners. sta = the 1.2 V claim corners;
+#    sta-info = the 1.5 V-class corners, information only. The envelope names the
+#    deck, not the Liberty file (klayout-tools#3785), so the generated .klt/sta
+#    scripts (whose read_liberty lines are the evidence) are kept per request.
+for req in sta sta-info; do
+  if [[ -n "$DEF" && -s "$B/logic_tile_routed.spef" ]]; then
+    jq --arg d "$(rel "$DEF")" --arg s "$B/logic_tile_routed.spef" '.def=$d | .spef=$s' \
+       "$HERE/requests/$req.json" >"$B/$req.json"
+    step "$req" $KLT sta "$B/$req.json" "${PDK_ARGS[@]}" --format json
+    mkdir -p "$REC/$req.tcl"; cp "$B"/.klt/sta/*.tcl "$REC/$req.tcl/" 2>/dev/null
+    rm -rf "$B/.klt/sta"
+  else notrun "$req" "no routed DEF or no SPEF from extract-parasitics"; fi
+done
 
 # Consistency checks on the envelopes just written (cheap mode: re-hash inputs).
 for c in drc lvs erc; do
