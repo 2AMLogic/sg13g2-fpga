@@ -214,6 +214,18 @@
       "destination": "rtl/common/rtl/lut4_slice.v"
     },
     {
+      "path": "flow/fasm_to_bitstream.py",
+      "sha256": "b3d51401f465ba5694c755607caa5ec9615816eea1d92d84ce51658e437b386a",
+      "mode": "vendored",
+      "destination": "verification/common/flow/fasm_to_bitstream.py"
+    },
+    {
+      "path": "flow/nextpnr_io_overlay.py",
+      "sha256": "a6ce95fe8b6d393e73a744ca2dc8314198bcc5ec348e23bf5e48b876d0e46c9c",
+      "mode": "vendored",
+      "destination": "verification/common/flow/nextpnr_io_overlay.py"
+    },
+    {
       "path": "sim/switch_matrix_tb_gen.vh",
       "sha256": "42d60d50e22d50d30590dec8f5454fa5dab1e8dcd19612ac17b5fdafc935b7df",
       "mode": "vendored",
