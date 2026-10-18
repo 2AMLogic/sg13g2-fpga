@@ -1,0 +1,150 @@
+[1mINFO[0m | [1mResolved yosys path: /home/ubuntu/.local/bin/yosys[0m
+[1mINFO[0m | [1mResolved sta path: None[0m
+[33m[1mWARNING[0m | [33m[1msta not found in PATH during settings initialisation. Some features may be unavailable.[0m
+[1mINFO[0m | [1mResolved nextpnr-generic path: None[0m
+[33m[1mWARNING[0m | [33m[1mnextpnr-generic not found in PATH during settings initialisation. Some features may be unavailable.[0m
+[1mINFO[0m | [1mResolved iverilog path: /home/ubuntu/.local/bin/iverilog[0m
+[1mINFO[0m | [1mResolved vvp path: /home/ubuntu/.local/bin/vvp[0m
+[1mINFO[0m | [1mResolved ghdl path: None[0m
+[33m[1mWARNING[0m | [33m[1mghdl not found in PATH during settings initialisation. Some features may be unavailable.[0m
+[1mINFO[0m | [1mResolved klayout path: /usr/bin/klayout[0m
+[1mINFO[0m | [1mResolved openroad path: /home/ubuntu/.local/bin/openroad[0m
+[1mINFO[0m | [1mUsing models pack at: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Fabric/models_pack.v[0m
+[33m[1mWARNING[0m | [33m[1mPDK_root or PDK is not set. Back-end GDS features may be unavailable.[0m
+[1mINFO[0m | [1mRunning at: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run[0m
+[1mINFO[0m | [1mLoading fabric[0m
+[1mINFO[0m | [1mFound fabric.csv in the project directory loading that file as the definition of the fabric[0m
+[1mINFO[0m | [1mReading tile configuration: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/fabric.csv[0m
+[1mINFO[0m | [1mReading supertile configuration: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/fabric.csv[0m
+[1mINFO[0m | [1mReading tile configuration: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/LOGIC4/LOGIC4.csv[0m
+[1mINFO[0m | [1mReading tile configuration: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/CAP_N/CAP_N.csv[0m
+[1mINFO[0m | [1mReading tile configuration: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/CAP_S/CAP_S.csv[0m
+[1mINFO[0m | [1mReading tile configuration: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/CAP_E/CAP_E.csv[0m
+[1mINFO[0m | [1mReading tile configuration: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/CAP_W/CAP_W.csv[0m
+[1mINFO[0m | [1mComplete[0m
+[1mINFO[0m | [1mExecute TCL script /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/FABulous.tcl[0m
+[1mINFO[0m | [1mLoading fabric[0m
+[1mINFO[0m | [1mFound fabric.csv in the project directory loading that file as the definition of the fabric[0m
+[1mINFO[0m | [1mReading tile configuration: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/fabric.csv[0m
+[1mINFO[0m | [1mReading supertile configuration: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/fabric.csv[0m
+[1mINFO[0m | [1mReading tile configuration: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/LOGIC4/LOGIC4.csv[0m
+[1mINFO[0m | [1mReading tile configuration: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/CAP_N/CAP_N.csv[0m
+[1mINFO[0m | [1mReading tile configuration: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/CAP_S/CAP_S.csv[0m
+[1mINFO[0m | [1mReading tile configuration: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/CAP_E/CAP_E.csv[0m
+[1mINFO[0m | [1mReading tile configuration: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/CAP_W/CAP_W.csv[0m
+[1mINFO[0m | [1mComplete[0m
+[33m[1mWARNING[0m | [33m[1mThe 'run_FABulous_fabric' command is deprecated. Use 'run_fab' instead.[0m
+[1mINFO[0m | [1mRunning FABulous[0m
+[1mINFO[0m | [1mGenerating fabric eFPGA[0m
+[1mINFO[0m | [1mGenerating all tiles[0m
+[1mINFO[0m | [1mGenerating tile CAP_N LOGIC4 CAP_S CAP_E CAP_W[0m
+[1mINFO[0m | [1mGenerating switch matrix for CAP_N[0m
+[1mINFO[0m | [1mGenerating switch matrix for CAP_N[0m
+[1mINFO[0m | [1mOutput file: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/CAP_N/CAP_N_switch_matrix.v[0m
+[1mINFO[0m | [1mGenerate switch matrix debug signals: False[0m
+[1mINFO[0m | [1mSwitch matrix generation complete[0m
+[1mINFO[0m | [1mGenerating Config Memory for CAP_N[0m
+[1mINFO[0m | [1mGenerating configMem for CAP_N[0m
+[1mINFO[0m | [1mOutput file: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/CAP_N/CAP_N_ConfigMem.v[0m
+[1mINFO[0m | [1mNo config bits defined and no bitstream mapping file provided for CAP_N[0m
+[1mINFO[0m | [1mConfigMem generation complete[0m
+[1mINFO[0m | [1mGenerating tile CAP_N[0m
+[1mINFO[0m | [1mOutput file: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/CAP_N/CAP_N.v[0m
+[1mINFO[0m | [1mGenerated tile CAP_N[0m
+[1mINFO[0m | [1mGenerating switch matrix for LOGIC4[0m
+[1mINFO[0m | [1mGenerating switch matrix for LOGIC4[0m
+[1mINFO[0m | [1mOutput file: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/LOGIC4/LOGIC4_switch_matrix.v[0m
+[1mINFO[0m | [1mGenerate switch matrix debug signals: False[0m
+[1mINFO[0m | [1mSwitch matrix generation complete[0m
+[1mINFO[0m | [1mGenerating Config Memory for LOGIC4[0m
+[1mINFO[0m | [1mGenerating configMem for LOGIC4[0m
+[1mINFO[0m | [1mOutput file: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/LOGIC4/LOGIC4_ConfigMem.v[0m
+[1mINFO[0m | [1mLOGIC4_configMem.csv does not exist[0m
+[1mINFO[0m | [1mGenerating a default configMem for LOGIC4[0m
+[1mINFO[0m | [1mParsing LOGIC4_configMem.csv[0m
+[1mINFO[0m | [1mFound 5 config memory entries in LOGIC4_configMem.csv with a total of 158 bits[0m
+[1mINFO[0m | [1mLOGIC4 has 158 global config bits[0m
+[1mINFO[0m | [1mGenerating /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/LOGIC4/LOGIC4_ConfigMem.v for LOGIC4[0m
+[1mINFO[0m | [1mConfigMem generation complete[0m
+[1mINFO[0m | [1mGenerating tile LOGIC4[0m
+[1mINFO[0m | [1mOutput file: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/LOGIC4/LOGIC4.v[0m
+[1mINFO[0m | [1mGenerated tile LOGIC4[0m
+[1mINFO[0m | [1mGenerating switch matrix for CAP_S[0m
+[1mINFO[0m | [1mGenerating switch matrix for CAP_S[0m
+[1mINFO[0m | [1mOutput file: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/CAP_S/CAP_S_switch_matrix.v[0m
+[1mINFO[0m | [1mGenerate switch matrix debug signals: False[0m
+[1mINFO[0m | [1mSwitch matrix generation complete[0m
+[1mINFO[0m | [1mGenerating Config Memory for CAP_S[0m
+[1mINFO[0m | [1mGenerating configMem for CAP_S[0m
+[1mINFO[0m | [1mOutput file: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/CAP_S/CAP_S_ConfigMem.v[0m
+[1mINFO[0m | [1mNo config bits defined and no bitstream mapping file provided for CAP_S[0m
+[1mINFO[0m | [1mConfigMem generation complete[0m
+[1mINFO[0m | [1mGenerating tile CAP_S[0m
+[1mINFO[0m | [1mOutput file: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/CAP_S/CAP_S.v[0m
+[1mINFO[0m | [1mGenerated tile CAP_S[0m
+[1mINFO[0m | [1mGenerating switch matrix for CAP_E[0m
+[1mINFO[0m | [1mGenerating switch matrix for CAP_E[0m
+[1mINFO[0m | [1mOutput file: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/CAP_E/CAP_E_switch_matrix.v[0m
+[1mINFO[0m | [1mGenerate switch matrix debug signals: False[0m
+[1mINFO[0m | [1mSwitch matrix generation complete[0m
+[1mINFO[0m | [1mGenerating Config Memory for CAP_E[0m
+[1mINFO[0m | [1mGenerating configMem for CAP_E[0m
+[1mINFO[0m | [1mOutput file: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/CAP_E/CAP_E_ConfigMem.v[0m
+[1mINFO[0m | [1mNo config bits defined and no bitstream mapping file provided for CAP_E[0m
+[1mINFO[0m | [1mConfigMem generation complete[0m
+[1mINFO[0m | [1mGenerating tile CAP_E[0m
+[1mINFO[0m | [1mOutput file: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/CAP_E/CAP_E.v[0m
+[1mINFO[0m | [1mGenerated tile CAP_E[0m
+[1mINFO[0m | [1mGenerating switch matrix for CAP_W[0m
+[1mINFO[0m | [1mGenerating switch matrix for CAP_W[0m
+[1mINFO[0m | [1mOutput file: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/CAP_W/CAP_W_switch_matrix.v[0m
+[1mINFO[0m | [1mGenerate switch matrix debug signals: False[0m
+[1mINFO[0m | [1mSwitch matrix generation complete[0m
+[1mINFO[0m | [1mGenerating Config Memory for CAP_W[0m
+[1mINFO[0m | [1mGenerating configMem for CAP_W[0m
+[1mINFO[0m | [1mOutput file: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/CAP_W/CAP_W_ConfigMem.v[0m
+[1mINFO[0m | [1mNo config bits defined and no bitstream mapping file provided for CAP_W[0m
+[1mINFO[0m | [1mConfigMem generation complete[0m
+[1mINFO[0m | [1mGenerating tile CAP_W[0m
+[1mINFO[0m | [1mOutput file: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/CAP_W/CAP_W.v[0m
+[1mINFO[0m | [1mGenerated tile CAP_W[0m
+[1mINFO[0m | [1mTile generation complete[0m
+[1mINFO[0m | [1mAll tiles generation complete[0m
+[1mINFO[0m | [1mOutput file: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Fabric/eFPGA.v[0m
+[1mINFO[0m | [1mFabric generation complete[0m
+[1mINFO[0m | [1mGenerating bitstream specification[0m
+[1mINFO[0m | [1mConfigMemPath: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/CAP_N/CAP_N_ConfigMem.csv[0m
+[1mINFO[0m | [1mNo config memory for CAP_N.[0m
+[1mINFO[0m | [1mNo config memory for X1Y0_CAP_N.[0m
+[1mINFO[0m | [1mConfigMemPath: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/CAP_W/CAP_W_ConfigMem.csv[0m
+[1mINFO[0m | [1mNo config memory for CAP_W.[0m
+[1mINFO[0m | [1mNo config memory for X0Y1_CAP_W.[0m
+[1mINFO[0m | [1mConfigMemPath: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/LOGIC4/LOGIC4_ConfigMem.csv[0m
+[1mINFO[0m | [1mConfigMemPath: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/CAP_E/CAP_E_ConfigMem.csv[0m
+[1mINFO[0m | [1mNo config memory for CAP_E.[0m
+[1mINFO[0m | [1mNo config memory for X2Y1_CAP_E.[0m
+[1mINFO[0m | [1mConfigMemPath: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Tile/CAP_S/CAP_S_ConfigMem.csv[0m
+[1mINFO[0m | [1mNo config memory for CAP_S.[0m
+[1mINFO[0m | [1mNo config memory for X1Y2_CAP_S.[0m
+[1mINFO[0m | [1moutput file: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/.FABulous/bitStreamSpec.bin[0m
+[1mINFO[0m | [1moutput file: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/.FABulous/bitStreamSpec.csv[0m
+[1mINFO[0m | [1mBitstream specification generation complete[0m
+[1mINFO[0m | [1mGenerating top wrapper[0m
+[1mINFO[0m | [1mOutput file: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/Fabric/eFPGA_top.v[0m
+[1mINFO[0m | [1mTop wrapper generation complete[0m
+[1mINFO[0m | [1mGenerating npnr model[0m
+[1mINFO[0m | [1moutput file: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/.FABulous/pips.txt[0m
+[1mINFO[0m | [1moutput file: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/.FABulous/bel.txt[0m
+[1mINFO[0m | [1moutput file: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/.FABulous/bel.v2.txt[0m
+[1mINFO[0m | [1moutput file: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/.FABulous/bel.v3.txt[0m
+[1mINFO[0m | [1moutput file: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/.FABulous/template.pcf[0m
+[1mINFO[0m | [1moutput file: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/.FABulous/placement_estimate.txt[0m
+[1mINFO[0m | [1mGenerated npnr model[0m
+[1mINFO[0m | [1mGenerating geometry for eFPGA[0m
+[1mINFO[0m | [1mOutput file: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/eFPGA_geometry.csv[0m
+[1mINFO[0m | [1mGenerating geometry csv file for eFPGA # file name: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/eFPGA_geometry.csv[0m
+[1mINFO[0m | [1mGeometry generation complete[0m
+[1mINFO[0m | [1m/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/eFPGA_geometry.csv can now be imported into FABulator[0m
+[1mINFO[0m | [1mFABulous fabric flow complete[0m
+[1mINFO[0m | [1mTCL script executed[0m
+[1mINFO[0m | [1mTCL script /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/flow/build/fabulous-run/FABulous.tcl executed successfully[0m

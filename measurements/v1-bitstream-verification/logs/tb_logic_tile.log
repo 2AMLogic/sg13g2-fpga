@@ -1,0 +1,2 @@
+PASS: tb_logic_tile -- 4 checks, 0 failures
+/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/verification/common/sim/tb_logic_tile.v:111: $finish called at 26000 (1ps)

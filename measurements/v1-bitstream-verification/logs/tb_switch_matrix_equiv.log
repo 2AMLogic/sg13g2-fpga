@@ -1,0 +1,2 @@
+PASS: switch_matrix_fabulous_equiv -- 1343744 checks (1024 select>=fan-in cases: repo==0, FABulous==X), 0 failures
+/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/verification/common/fabulous/tb_switch_matrix_equiv.v:225: $finish called at 6713600000 (1ps)

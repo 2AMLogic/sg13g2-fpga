@@ -1,0 +1,36 @@
+# verification/run.sh summary
+run: 2026-10-18T03:07:05Z at dcca7fa16c52934252b3b4e2fea9ecb467c4927f
+iverilog: Icarus Verilog version 13.0 (stable) (v13_0)
+yosys: Yosys 0.69+260 (git sha1 dcd59343b, Release, Clang /usr/bin/clang++ 21.1.8)
+nextpnr-generic: "nextpnr-generic" -- Next Generation Place and Route (Version nextpnr-0.11.1-54-g861c57be)
+FABulous: FABulous CLI 2.2.0
+
+bench                                        verdict  detail
+tb_lut4_slice                                PASS     PASS: tb_lut4_slice -- 79 checks, 0 failures
+tb_logic_tile                                PASS     PASS: tb_logic_tile -- 4 checks, 0 failures
+tb_switch_matrix                             PASS     PASS: tb_switch_matrix -- 469 checks, 0 failures
+tb_logic_tile_routed                         PASS     PASS: tb_logic_tile_routed (1046 checks, 0 failures)
+tb_logic_tile_gapfill                        PASS     PASS: tb_logic_tile_gapfill -- 256 checks, 0 failures
+gen_switch_matrix_drift                      PASS     stamped RTL and bench include equal the stamped generator's output
+fabulous_generate                            PASS     FABulous 2.2.0 generated the stamped description (exit 0)
+tb_lut4_ff_bel_equiv                         PASS     PASS: lut4_ff_bel == lut4_slice over 20000 random cycles
+tb_switch_matrix_equiv                       PASS     PASS: switch_matrix_fabulous_equiv -- 1343744 checks (1024 select>=fan-in cases: repo==0, FABulous==X), 0 failures
+tb_boundary_fwd                              PASS     PASS: tb_boundary_fwd[fwd] (1554 checks, 0 failures; UserCLKo + FrameData_O[31:0] + FrameStrobe_O[19:0])
+fixtures_regenerate                          PASS     top_io, top_reg mapped (yosys+nextpnr), assembled; assembler output byte-identical to FABulous bit_gen
+fixtures_match_committed                     PASS     regenerated fixtures byte-identical to verification/bitstream/
+assembler_reproduce                          PASS     assembler re-derives every fixture in verification/bitstream/ from its FASM byte-for-byte
+tb_logic_tile_bitstream_comb (+mutate)       PASS     PASS: tb_logic_tile_bitstream[comb] (5409 checks, 0 failures; 26/26 perturbations detected)
+tb_logic_tile_bitstream_comb_cfg_crosscheck  PASS     simulation loader == python decoder == recorded cfg
+tb_logic_tile_bitstream_comb_expect_reject   PASS     loader rejected 11/11 malformed streams
+tb_logic_tile_bitstream_reg (+mutate)        PASS     PASS: tb_logic_tile_bitstream[reg] (139651 checks, 0 failures; 27/27 perturbations detected)
+tb_logic_tile_bitstream_reg_cfg_crosscheck   PASS     simulation loader == python decoder == recorded cfg
+tb_logic_tile_bitstream_reg_expect_reject    PASS     loader rejected 11/11 malformed streams
+tb_lut_basis                                 NOT-RUN  needs a stimulus-stream generator from the sibling's flow/ (lut_basis.py / route_diag.py / ctrl_route.py / output_route.py), which is not stamped
+tb_route_diag                                NOT-RUN  needs a stimulus-stream generator from the sibling's flow/ (lut_basis.py / route_diag.py / ctrl_route.py / output_route.py), which is not stamped
+tb_ctrl_route                                NOT-RUN  needs a stimulus-stream generator from the sibling's flow/ (lut_basis.py / route_diag.py / ctrl_route.py / output_route.py), which is not stamped
+tb_output_route                              NOT-RUN  needs a stimulus-stream generator from the sibling's flow/ (lut_basis.py / route_diag.py / ctrl_route.py / output_route.py), which is not stamped
+tb_configmem_equiv                           NOT-RUN  needs +vec= transaction vectors from the sibling's flow/configmem_frames.py, which is not stamped
+
+PASS:    19
+FAIL:    0
+NOT-RUN: 5

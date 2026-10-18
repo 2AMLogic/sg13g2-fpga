@@ -1,0 +1,3 @@
+checked top_io.fasm: reproduces .bin, .cfg, .wiring
+checked top_reg.fasm: reproduces .bin, .cfg, .wiring
+PASS: fasm_to_bitstream fixtures reproduce

@@ -1,0 +1,4 @@
+CFG=000aa00002a000c1800000034cb0000000008080
+baseline: 257 checks, 0 failures
+PASS: tb_logic_tile_bitstream[comb] (5409 checks, 0 failures; 26/26 perturbations detected)
+/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/verification/common/sim/tb_logic_tile_bitstream.v:720: $finish called at 2758000 (1ps)

@@ -1,0 +1,2 @@
+PASS: tb_logic_tile_bitstream[reg] loader rejected the malformed stream (incomplete frame set)
+/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-11/verification/common/sim/tb_logic_tile_bitstream.v:647: $finish called at 0 (1ps)
