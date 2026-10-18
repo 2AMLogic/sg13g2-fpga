@@ -1,0 +1,14 @@
+{
+  "schema": "klt.sta.request/1",
+  "def": "__ROUTED_DEF__",
+  "hdl_toplevel": "logic_tile_routed",
+  "pdk": {
+    "cell_library": "sg13g2_stdcell",
+    "corner": "typ_1p20V_25C"
+  },
+  "constraints": {
+    "clock_port": "clk",
+    "clock_period_ns": 10.0
+  },
+  "geometry_source": "routed"
+}

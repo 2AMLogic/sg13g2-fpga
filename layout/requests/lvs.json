@@ -1,0 +1,10 @@
+{
+  "layout": {"netlist": "__LAYOUT_NETLIST__", "top": "logic_tile_routed"},
+  "reference": {
+    "netlist": "__PNR_VERILOG__",
+    "top": "logic_tile_routed",
+    "form": "gate-level-verilog",
+    "library": "sg13g2_stdcell",
+    "pdk": "ihp-sg13g2"
+  }
+}
