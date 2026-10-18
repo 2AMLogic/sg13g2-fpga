@@ -4,11 +4,15 @@
   "hdl_toplevel": "logic_tile_routed",
   "pdk": {
     "cell_library": "sg13g2_stdcell",
-    "corner": "typ_1p20V_25C"
+    "corners": ["slow_1p08V_125C", "typ_1p20V_25C", "fast_1p32V_m40C"]
   },
   "constraints": {
     "clock_port": "clk",
-    "clock_period_ns": 10.0
+    "clock_period_ns": 20.0,
+    "input_delay_ns": 0.0,
+    "output_delay_ns": 0.0,
+    "propagated_clock": true
   },
+  "spef": "__SPEF__",
   "geometry_source": "routed"
 }
