@@ -23,5 +23,18 @@
     "version": "13.0",
     "used_by": [],
     "note": "Recorded for the pin only; the smoke run does not simulate."
+  },
+  "fabulous": {
+    "version": "2.2.0",
+    "reported_version": "FABulous CLI 2.2.0",
+    "source": "PyPI fabulous-fpga==2.2.0 (tag v2.2.0, 432bb2873b83585d5178a8ba411f38254387ce94, per the sky130-fpga flow/tool_versions.sh pin; the commit was not re-verified here)",
+    "obtained": "throwaway venv, never a host-wide install: uv venv --python 3.12 .venv-fab && uv pip install --python .venv-fab/bin/python fabulous-fpga==2.2.0",
+    "used_by": ["measurements/g1-fabulous-generation"]
+  },
+  "nextpnr-generic": {
+    "version": "nextpnr-0.11.1-54-g861c57be",
+    "yosys_for_this_stage": "0.69+260 (git sha1 dcd59343b), from the same suite; the host yosys above is not used for synth_fabulous",
+    "obtained": "YosysHQ OSS CAD Suite 2026-10-08, oss-cad-suite-linux-x64-20261008.tgz, sha256 8fa59d93d6cadbbee352077c059f2c5b72cda301e4508d9064a23d1ec11579c7, https://github.com/YosysHQ/oss-cad-suite-build/releases/download/2026-10-08/oss-cad-suite-linux-x64-20261008.tgz; bin, lib, libexec, share/yosys, share/nextpnr and etc unpacked into the untracked flow/build/oss-cad-suite, not installed on the host",
+    "used_by": ["measurements/g1-fabulous-generation"]
   }
 }
