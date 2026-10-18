@@ -12,6 +12,10 @@
 #   FLOW_SRC_DIR  directory holding the HDL sources
 #   FLOW_SOURCES  space-separated source file names (as listed in synthesize.json)
 # Optional env: FLOW_STA=1 to run the STA step (default: off),
+#   FLOW_SPEF=1 to extract a parasitics SPEF from the routed GDS first (needs
+#   the DEF) and pass it to every STA request as .spef (default: off),
+#   FLOW_STA_REQS="sta sta-info" the STA request names under FLOW_REQ_DIR to run
+#   (default: sta),
 #   KLT=<klt command> (default: klt), RECORD_ID=<id> to override the record id.
 #
 # Usage (via a wrapper): <wrapper> [--pdk-root DIR]
@@ -26,6 +30,8 @@ set -u
 
 : "${FLOW_TOP:?}" "${FLOW_BUILD:?}" "${FLOW_REQ_DIR:?}" "${FLOW_REC_DIR:?}" "${FLOW_SRC_DIR:?}" "${FLOW_SOURCES:?}"
 FLOW_STA=${FLOW_STA:-0}
+FLOW_SPEF=${FLOW_SPEF:-0}
+FLOW_STA_REQS=${FLOW_STA_REQS:-sta}
 TOP=$FLOW_TOP
 REQ="$FLOW_REQ_DIR"
 REPO="$(git -C "$(dirname "${BASH_SOURCE[0]}")" rev-parse --show-toplevel)"
@@ -99,16 +105,40 @@ if [[ -n "$GDS" ]]; then
   step erc $KLT erc "$(rel "$GDS")" "$B/erc-spec.json" --top "$TOP" --deck sg13g2 --format json
 else notrun erc "place-and-route produced no gds_path"; fi
 
-# 6. STA at one typical-corner Liberty file (FLOW_STA=1 only)
-if [[ "$FLOW_STA" == 1 ]]; then
-  if [[ -n "$DEF" ]]; then
-    jq --arg d "$(rel "$DEF")" '.def=$d' "$REQ/sta.json" >"$B/sta.json"
-    step sta $KLT sta "$B/sta.json" "${PDK_ARGS[@]}" --format json
-  else notrun sta "place-and-route produced no def_path"; fi
+# 6. parasitics (FLOW_SPEF=1 only): SPEF from the routed GDS, net names and pins
+#    from the routed DEF so that OpenSTA can correlate the *D_NET blocks with
+#    the linked design.
+if [[ "$FLOW_SPEF" == 1 ]]; then
+  if [[ -n "$GDS" && -n "$DEF" ]]; then
+    step extract-parasitics $KLT extract "$(rel "$GDS")" --deck sg13g2 --top "$TOP" \
+        --abstract-cells 'sg13g2_*' --def-net-names --parasitics --spef "$B/$TOP.spef" \
+        --def-net-connections "$(rel "$DEF")" --def-pins "$(rel "$DEF")" \
+        --no-netlist --format json
+  else notrun extract-parasitics "place-and-route produced no gds_path/def_path"; fi
+fi
 
-  # The STA envelope names the corner deck, not the Liberty path (klayout-tools
-  # #3785); keep the generated script, whose read_liberty line names the file.
-  [[ -f "$B/.klt/sta/sta_$TOP.tcl" ]] && cp "$B/.klt/sta/sta_$TOP.tcl" "$REC/sta.tcl"
+# 7. STA (FLOW_STA=1 only): one request per name in FLOW_STA_REQS, each over the
+#    routed DEF (and the SPEF when FLOW_SPEF=1). The envelope names the corner
+#    deck, not the Liberty path (klayout-tools#3785), so keep the generated
+#    script(s), whose read_liberty lines name the file: <req>.tcl/ (all scripts)
+#    when FLOW_SPEF=1, else <req>.tcl (the single typical-corner script).
+if [[ "$FLOW_STA" == 1 ]]; then
+  for req in $FLOW_STA_REQS; do
+    if [[ -z "$DEF" ]]; then notrun "$req" "place-and-route produced no def_path"; continue; fi
+    if [[ "$FLOW_SPEF" == 1 && ! -s "$B/$TOP.spef" ]]; then
+      notrun "$req" "no SPEF from extract-parasitics"; continue
+    fi
+    jq --arg d "$(rel "$DEF")" --arg s "$B/$TOP.spef" --arg on "$FLOW_SPEF" \
+       '.def=$d | if $on=="1" then .spef=$s else . end' \
+       "$REQ/$req.json" >"$B/$req.json"
+    step "$req" $KLT sta "$B/$req.json" "${PDK_ARGS[@]}" --format json
+    if [[ "$FLOW_SPEF" == 1 ]]; then
+      mkdir -p "$REC/$req.tcl"; cp "$B"/.klt/sta/*.tcl "$REC/$req.tcl/" 2>/dev/null
+    else
+      [[ -f "$B/.klt/sta/sta_$TOP.tcl" ]] && cp "$B/.klt/sta/sta_$TOP.tcl" "$REC/$req.tcl"
+    fi
+    rm -rf "$B/.klt/sta"
+  done
 fi
 
 # Consistency checks on the envelopes just written (cheap mode: re-hash inputs).

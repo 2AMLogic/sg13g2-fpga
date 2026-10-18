@@ -1,0 +1,4 @@
+report: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-10/layout/records/20261018-92a63aa/drc.json
+status: match
+  [OK] provenance.input.content_hash
+  [OK] provenance.deck.content_hash
