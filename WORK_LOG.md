@@ -19,5 +19,6 @@ Chronological record of merged PRs and closed issues, newest first. Maintained b
 
 - **PR #12**: docs(spec): ratify SG13G2 target spec, port plan and vendored sibling tile
 - **PR #7**: feat(flow): pin SG13G2 PDK and klt, add klt digital-flow smoke run
+- **PR #1**: chore(loom): Install Loom 0.19.1181
 - **Issue #5** (closed): PDK and toolchain bring-up: pin SG13G2 and klt, and commit a smoke run through synthesize, place-and-route, DRC, LVS, ERC and STA
 - **Issue #2** (closed): Draft and ratify the target spec
