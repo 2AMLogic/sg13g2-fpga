@@ -2,6 +2,11 @@
 
 Chronological record of merged PRs and closed issues, newest first. Maintained by the Guide role.
 
+### 2026-10-20
+
+- **PR #6**: ci: grade a committed klt signoff manifest and byte-diff it on every push
+- **Issue #4** (closed): T1 item 10: commit a klt signoff block manifest and a CI job that keeps it graded
+
 ### 2026-10-18
 
 - **PR #19**: refactor(flow): share one klt step runner between smoke and tile flows
