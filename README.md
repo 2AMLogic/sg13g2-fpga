@@ -90,6 +90,12 @@ layout/        tile GDS, routed DEF, DRC/LVS reports (klayout-tools driven)
 measurements/  silicon characterization (empty until tape-out)
 ```
 
+## Reproduce
+
+The block's `klt signoff` grade is committed in `manifests/` and re-checked
+by CI on every push and pull request. To regenerate it, follow
+[manifests/README.md](manifests/README.md).
+
 ## License
 
 Apache License 2.0 — see [LICENSE](LICENSE).
