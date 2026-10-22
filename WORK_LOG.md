@@ -2,6 +2,10 @@
 
 Chronological record of merged PRs and closed issues, newest first. Maintained by the Guide role.
 
+### 2026-10-21
+
+- **PR #23**: Bump Repo Skills 0.24.3 -> 0.24.7
+
 ### 2026-10-20
 
 - **PR #6**: ci: grade a committed klt signoff manifest and byte-diff it on every push
