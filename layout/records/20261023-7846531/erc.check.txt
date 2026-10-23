@@ -1,0 +1,5 @@
+report: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-27/layout/records/20261023-7846531/erc.json
+status: match
+  [OK] provenance.input.content_hash
+  [OK] provenance.spec.content_hash
+  [OK] provenance.deck.content_hash

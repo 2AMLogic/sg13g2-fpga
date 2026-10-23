@@ -1,0 +1,12 @@
+{
+  "sources": ["__NETLIST__", "__STDCELL__", "__UDP__"],
+  "hdl_toplevel": "logic_tile_routed",
+  "testbench": {
+    "module": "test_tile_sdf",
+    "search_path": "__BENCH_DIR__"
+  },
+  "options": {
+    "timescale": ["1ns", "10ps"],
+    "sdf": {"file": "__SDF__", "corner": "min"}
+  }
+}
