@@ -4,7 +4,8 @@
 
 | File | Role |
 |---|---|
-| `sg13g2-fpga.json` | Block manifest: block name, `kind: digital`, and the evidence it cites. `evidence` is empty, so every item grades `unmet` / `no_evidence` and `tier` is `null`. |
+| `sg13g2-fpga.json` | Block manifest: block name, `kind: digital`, and the evidence it cites. `evidence` cites the `layout/records/20261018-92a63aa/` envelopes, each pinned by its `provenance.input.content_hash`: item 3 (`drc.json`), item 4 (`lvs.json`), item 5 (`sta.json`) and item 11 (`erc.json`, `lvs.json`, `place-and-route.json`); item 6 by a hash-bound `not_applicable` declaration. Items 1, 2, 7, 8, 9 and 10 are uncited and grade `unmet` / `no_evidence`; `tier` is `null`. Paths resolve from the repo root. |
+| `target-spec.json`, `target-spec-na.json` | Item 6's `not_applicable` documents: the ratified spec rows (kept in step with `spec/target-spec.md`) and the statement of why none is statistical. Editing either turns item 6 `stale_evidence` until the manifest hash is updated. |
 | `sg13g2-fpga.signoff.json` | Verbatim output of `klt signoff --format json` on that manifest. Exit 3 (not yet T1) is the expected verdict while any item is unmet. |
 
 `.github/workflows/signoff.yml` re-runs the grade on every push to `main` and

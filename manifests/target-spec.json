@@ -1,0 +1,42 @@
+{
+  "status": "ratified",
+  "source": "../spec/target-spec.md",
+  "rows": [
+    {
+      "id": "arch-logic-tile",
+      "title": "Logic tile"
+    },
+    {
+      "id": "arch-routing",
+      "title": "Routing (architecture)"
+    },
+    {
+      "id": "arch-bitstream",
+      "title": "Bitstream"
+    },
+    {
+      "id": "param-1",
+      "title": "Standard-cell library, supply, corners"
+    },
+    {
+      "id": "param-2",
+      "title": "Routing layers for the switch matrix"
+    },
+    {
+      "id": "param-3",
+      "title": "Tile area budget and aspect ratio"
+    },
+    {
+      "id": "param-4",
+      "title": "Demonstration fabric size"
+    },
+    {
+      "id": "param-5",
+      "title": "Timing"
+    },
+    {
+      "id": "param-6",
+      "title": "Signoff"
+    }
+  ]
+}
