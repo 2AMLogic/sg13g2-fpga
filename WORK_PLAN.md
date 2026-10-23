@@ -31,7 +31,7 @@ _None._
 
 Issues currently being built (`loom:building`).
 
-_None._
+- **#27**: SDF-annotated gate-level re-simulation of the routed tile at the claim corners (T1 item 7)
 
 ## PRs Awaiting Review
 
@@ -43,7 +43,7 @@ _None._
 
 PRs that passed review and are queued for Champion auto-merge (`loom:pr`).
 
-_None._
+- **#30**: feat: SDF-annotated gate-level re-simulation of the routed tile at slow and fast corners
 
 ## Proposed
 
@@ -51,10 +51,11 @@ Issues carrying `loom:curated`.
 
 - **#3**: Track the gap to T1 (klayout-tools design-evidence-tiers.md) *(curated)*
 - **#14**: Tile pin placement for grid abutment once klt can constrain I/O pins *(curated)*
+- **#27**: SDF-annotated gate-level re-simulation of the routed tile at the claim corners (T1 item 7) *(curated)*
 
 ## Proposed (Architect / Hermit)
 
-_None._
+- **#28**: Remove five stamped benches this repo cannot drive (permanent NOT-RUN) *(hermit)*
 
 ## Epics
 
@@ -68,10 +69,10 @@ _None._
 | Very important | 0 |
 | Important | 0 |
 | Ready (`loom:issue`) | 0 |
-| In Progress (`loom:building`) | 0 |
+| In Progress (`loom:building`) | 1 |
 | PRs awaiting review | 0 |
-| Approved PRs awaiting merge | 0 |
-| Curated | 2 |
-| Architect / Hermit proposals | 0 |
+| Approved PRs awaiting merge | 1 |
+| Curated | 3 |
+| Architect / Hermit proposals | 1 |
 | Active epics | 0 |
 <!-- guide:plan-body:end -->
