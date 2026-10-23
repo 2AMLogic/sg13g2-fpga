@@ -4,6 +4,8 @@ Chronological record of merged PRs and closed issues, newest first. Maintained b
 
 ### 2026-10-23
 
+- **PR #30**: feat: SDF-annotated gate-level re-simulation of the routed tile at slow and fast corners
+- **Issue #27** (closed): SDF-annotated gate-level re-simulation of the routed tile at the claim corners (T1 item 7)
 - **PR #29**: feat(signoff): cite committed tile envelopes in the klt signoff manifest
 - **Issue #26** (closed): Cite the committed tile envelopes in the klt signoff manifest and regenerate the verdict record
 
