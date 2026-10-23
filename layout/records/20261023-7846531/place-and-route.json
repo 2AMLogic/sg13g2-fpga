@@ -1,0 +1,2304 @@
+{
+  "schema_version": 1,
+  "engine": "openroad",
+  "engine_version": "26Q3-1510-g6cb3f2b704",
+  "engine_logs": [
+    {
+      "invocation_id": "c3678fa2bef947b8be5e9a7b7bf191c9",
+      "script_name": "pnr_logic_tile_routed_floorplan.tcl",
+      "script_path": {
+        "path": "flow/build/tile/.klt/place-and-route/pnr_logic_tile_routed_floorplan.tcl",
+        "scope": "repo"
+      },
+      "script_sha256": "f858d4ebe9d116461b71cb1a87d6119db030300adf15430277f273be9a34cba2",
+      "metrics_path": {
+        "path": "flow/build/tile/.klt/place-and-route/logic_tile_routed_floorplan_metrics.json",
+        "scope": "repo"
+      },
+      "outcome": "exited",
+      "returncode": 0,
+      "directory": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/c3678fa2bef947b8be5e9a7b7bf191c9",
+        "scope": "repo"
+      },
+      "stdout_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/c3678fa2bef947b8be5e9a7b7bf191c9/stdout.log",
+        "scope": "repo"
+      },
+      "stderr_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/c3678fa2bef947b8be5e9a7b7bf191c9/stderr.log",
+        "scope": "repo"
+      },
+      "metadata_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/c3678fa2bef947b8be5e9a7b7bf191c9/invocation.json",
+        "scope": "repo"
+      },
+      "retention_errors": []
+    },
+    {
+      "invocation_id": "25c1f0bc875044d485225d62eaf5e0bb",
+      "script_name": "pnr_logic_tile_routed_place.tcl",
+      "script_path": {
+        "path": "flow/build/tile/.klt/place-and-route/pnr_logic_tile_routed_place.tcl",
+        "scope": "repo"
+      },
+      "script_sha256": "bd3424efd8a59d32ba2ece3d8607db1d38b8ed43457640302c0ee7fc5d8d8965",
+      "metrics_path": {
+        "path": "flow/build/tile/.klt/place-and-route/logic_tile_routed_place_metrics.json",
+        "scope": "repo"
+      },
+      "outcome": "exited",
+      "returncode": 0,
+      "directory": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/25c1f0bc875044d485225d62eaf5e0bb",
+        "scope": "repo"
+      },
+      "stdout_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/25c1f0bc875044d485225d62eaf5e0bb/stdout.log",
+        "scope": "repo"
+      },
+      "stderr_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/25c1f0bc875044d485225d62eaf5e0bb/stderr.log",
+        "scope": "repo"
+      },
+      "metadata_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/25c1f0bc875044d485225d62eaf5e0bb/invocation.json",
+        "scope": "repo"
+      },
+      "retention_errors": []
+    },
+    {
+      "invocation_id": "0eb28325eff14780a577253275b413a3",
+      "script_name": "pnr_logic_tile_routed_cts.tcl",
+      "script_path": {
+        "path": "flow/build/tile/.klt/place-and-route/pnr_logic_tile_routed_cts.tcl",
+        "scope": "repo"
+      },
+      "script_sha256": "7df6556e8cc7890db0c8e244b8a1cb16cbb96f024e99e3e985a4ca12f98a0dfd",
+      "metrics_path": {
+        "path": "flow/build/tile/.klt/place-and-route/logic_tile_routed_cts_metrics.json",
+        "scope": "repo"
+      },
+      "outcome": "exited",
+      "returncode": 0,
+      "directory": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/0eb28325eff14780a577253275b413a3",
+        "scope": "repo"
+      },
+      "stdout_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/0eb28325eff14780a577253275b413a3/stdout.log",
+        "scope": "repo"
+      },
+      "stderr_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/0eb28325eff14780a577253275b413a3/stderr.log",
+        "scope": "repo"
+      },
+      "metadata_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/0eb28325eff14780a577253275b413a3/invocation.json",
+        "scope": "repo"
+      },
+      "retention_errors": []
+    },
+    {
+      "invocation_id": "45dff9447e7345c9aa0a15bda7c0265e",
+      "script_name": "pnr_logic_tile_routed_route.tcl",
+      "script_path": {
+        "path": "flow/build/tile/.klt/place-and-route/pnr_logic_tile_routed_route.tcl",
+        "scope": "repo"
+      },
+      "script_sha256": "7a4be80e75354e7148d9311eb313ffb32b5e1c6aa9da382c563270ef5e39d843",
+      "metrics_path": {
+        "path": "flow/build/tile/.klt/place-and-route/logic_tile_routed_route_metrics.json",
+        "scope": "repo"
+      },
+      "outcome": "exited",
+      "returncode": 0,
+      "directory": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/45dff9447e7345c9aa0a15bda7c0265e",
+        "scope": "repo"
+      },
+      "stdout_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/45dff9447e7345c9aa0a15bda7c0265e/stdout.log",
+        "scope": "repo"
+      },
+      "stderr_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/45dff9447e7345c9aa0a15bda7c0265e/stderr.log",
+        "scope": "repo"
+      },
+      "metadata_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/45dff9447e7345c9aa0a15bda7c0265e/invocation.json",
+        "scope": "repo"
+      },
+      "retention_errors": []
+    },
+    {
+      "invocation_id": "70895bf3fd8a4161ac82bb49ab72e064",
+      "script_name": "pnr_logic_tile_routed_route_corners.tcl",
+      "script_path": {
+        "path": "flow/build/tile/.klt/place-and-route/pnr_logic_tile_routed_route_corners.tcl",
+        "scope": "repo"
+      },
+      "script_sha256": "d4708c7592cad34ea6ce7802e48ea675d11ecd809a9a68d727bab25e5f66eaf2",
+      "metrics_path": {
+        "path": "flow/build/tile/.klt/place-and-route/logic_tile_routed_route_corners_metrics.json",
+        "scope": "repo"
+      },
+      "outcome": "exited",
+      "returncode": 0,
+      "directory": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/70895bf3fd8a4161ac82bb49ab72e064",
+        "scope": "repo"
+      },
+      "stdout_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/70895bf3fd8a4161ac82bb49ab72e064/stdout.log",
+        "scope": "repo"
+      },
+      "stderr_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/70895bf3fd8a4161ac82bb49ab72e064/stderr.log",
+        "scope": "repo"
+      },
+      "metadata_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/70895bf3fd8a4161ac82bb49ab72e064/invocation.json",
+        "scope": "repo"
+      },
+      "retention_errors": []
+    },
+    {
+      "invocation_id": "56e74e1dbbbc436bab9cfd1108d48364",
+      "script_name": "pnr_logic_tile_routed_route_corner_fast_1p32V_m40C.tcl",
+      "script_path": {
+        "path": "flow/build/tile/.klt/place-and-route/pnr_logic_tile_routed_route_corner_fast_1p32V_m40C.tcl",
+        "scope": "repo"
+      },
+      "script_sha256": "709c75bdc470301d554be48d899976625e14c78df7d88fa594808037f898599f",
+      "metrics_path": {
+        "path": "flow/build/tile/.klt/place-and-route/logic_tile_routed_route_corner_fast_1p32V_m40C_metrics.json",
+        "scope": "repo"
+      },
+      "outcome": "exited",
+      "returncode": 0,
+      "directory": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/56e74e1dbbbc436bab9cfd1108d48364",
+        "scope": "repo"
+      },
+      "stdout_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/56e74e1dbbbc436bab9cfd1108d48364/stdout.log",
+        "scope": "repo"
+      },
+      "stderr_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/56e74e1dbbbc436bab9cfd1108d48364/stderr.log",
+        "scope": "repo"
+      },
+      "metadata_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/56e74e1dbbbc436bab9cfd1108d48364/invocation.json",
+        "scope": "repo"
+      },
+      "retention_errors": []
+    },
+    {
+      "invocation_id": "5c077809313741aaa75a68d23e6d7689",
+      "script_name": "pnr_logic_tile_routed_route_corner_fast_1p65V_m40C.tcl",
+      "script_path": {
+        "path": "flow/build/tile/.klt/place-and-route/pnr_logic_tile_routed_route_corner_fast_1p65V_m40C.tcl",
+        "scope": "repo"
+      },
+      "script_sha256": "88ae2004cd9ecc5729e8d620e6d47cedd4e2cc535d84566a663aaabe4c385706",
+      "metrics_path": {
+        "path": "flow/build/tile/.klt/place-and-route/logic_tile_routed_route_corner_fast_1p65V_m40C_metrics.json",
+        "scope": "repo"
+      },
+      "outcome": "exited",
+      "returncode": 0,
+      "directory": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/5c077809313741aaa75a68d23e6d7689",
+        "scope": "repo"
+      },
+      "stdout_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/5c077809313741aaa75a68d23e6d7689/stdout.log",
+        "scope": "repo"
+      },
+      "stderr_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/5c077809313741aaa75a68d23e6d7689/stderr.log",
+        "scope": "repo"
+      },
+      "metadata_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/5c077809313741aaa75a68d23e6d7689/invocation.json",
+        "scope": "repo"
+      },
+      "retention_errors": []
+    },
+    {
+      "invocation_id": "0475ce04d1034c5c89cab842ba8a5a94",
+      "script_name": "pnr_logic_tile_routed_route_corner_slow_1p08V_125C.tcl",
+      "script_path": {
+        "path": "flow/build/tile/.klt/place-and-route/pnr_logic_tile_routed_route_corner_slow_1p08V_125C.tcl",
+        "scope": "repo"
+      },
+      "script_sha256": "b99da6794385c887d2f68e44b7022970279263570bc5fd9d806a002505f139c8",
+      "metrics_path": {
+        "path": "flow/build/tile/.klt/place-and-route/logic_tile_routed_route_corner_slow_1p08V_125C_metrics.json",
+        "scope": "repo"
+      },
+      "outcome": "exited",
+      "returncode": 0,
+      "directory": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/0475ce04d1034c5c89cab842ba8a5a94",
+        "scope": "repo"
+      },
+      "stdout_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/0475ce04d1034c5c89cab842ba8a5a94/stdout.log",
+        "scope": "repo"
+      },
+      "stderr_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/0475ce04d1034c5c89cab842ba8a5a94/stderr.log",
+        "scope": "repo"
+      },
+      "metadata_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/0475ce04d1034c5c89cab842ba8a5a94/invocation.json",
+        "scope": "repo"
+      },
+      "retention_errors": []
+    },
+    {
+      "invocation_id": "8dd2a25ae5a94693a7ac03b62cd5647a",
+      "script_name": "pnr_logic_tile_routed_route_corner_slow_1p35V_125C.tcl",
+      "script_path": {
+        "path": "flow/build/tile/.klt/place-and-route/pnr_logic_tile_routed_route_corner_slow_1p35V_125C.tcl",
+        "scope": "repo"
+      },
+      "script_sha256": "49a112958e73c76c015e1eb88d147b4969cb3792b6ff59905534803fde6def44",
+      "metrics_path": {
+        "path": "flow/build/tile/.klt/place-and-route/logic_tile_routed_route_corner_slow_1p35V_125C_metrics.json",
+        "scope": "repo"
+      },
+      "outcome": "exited",
+      "returncode": 0,
+      "directory": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/8dd2a25ae5a94693a7ac03b62cd5647a",
+        "scope": "repo"
+      },
+      "stdout_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/8dd2a25ae5a94693a7ac03b62cd5647a/stdout.log",
+        "scope": "repo"
+      },
+      "stderr_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/8dd2a25ae5a94693a7ac03b62cd5647a/stderr.log",
+        "scope": "repo"
+      },
+      "metadata_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/8dd2a25ae5a94693a7ac03b62cd5647a/invocation.json",
+        "scope": "repo"
+      },
+      "retention_errors": []
+    },
+    {
+      "invocation_id": "06caaa49461747d3b7549b3d4d9b130c",
+      "script_name": "pnr_logic_tile_routed_route_corner_typ_1p20V_25C.tcl",
+      "script_path": {
+        "path": "flow/build/tile/.klt/place-and-route/pnr_logic_tile_routed_route_corner_typ_1p20V_25C.tcl",
+        "scope": "repo"
+      },
+      "script_sha256": "cb3edebfa4543a7f66825d1613435e00a921fe6ad7071fe245aac647745850a5",
+      "metrics_path": {
+        "path": "flow/build/tile/.klt/place-and-route/logic_tile_routed_route_corner_typ_1p20V_25C_metrics.json",
+        "scope": "repo"
+      },
+      "outcome": "exited",
+      "returncode": 0,
+      "directory": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/06caaa49461747d3b7549b3d4d9b130c",
+        "scope": "repo"
+      },
+      "stdout_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/06caaa49461747d3b7549b3d4d9b130c/stdout.log",
+        "scope": "repo"
+      },
+      "stderr_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/06caaa49461747d3b7549b3d4d9b130c/stderr.log",
+        "scope": "repo"
+      },
+      "metadata_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/06caaa49461747d3b7549b3d4d9b130c/invocation.json",
+        "scope": "repo"
+      },
+      "retention_errors": []
+    },
+    {
+      "invocation_id": "d25468b0fa5f47d2baa866d3c58f52f7",
+      "script_name": "pnr_logic_tile_routed_route_corner_typ_1p50V_25C.tcl",
+      "script_path": {
+        "path": "flow/build/tile/.klt/place-and-route/pnr_logic_tile_routed_route_corner_typ_1p50V_25C.tcl",
+        "scope": "repo"
+      },
+      "script_sha256": "5310d8e9d941540a97773a02406bf6304eb8da3423c7ad4414612811223b0b6b",
+      "metrics_path": {
+        "path": "flow/build/tile/.klt/place-and-route/logic_tile_routed_route_corner_typ_1p50V_25C_metrics.json",
+        "scope": "repo"
+      },
+      "outcome": "exited",
+      "returncode": 0,
+      "directory": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/d25468b0fa5f47d2baa866d3c58f52f7",
+        "scope": "repo"
+      },
+      "stdout_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/d25468b0fa5f47d2baa866d3c58f52f7/stdout.log",
+        "scope": "repo"
+      },
+      "stderr_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/d25468b0fa5f47d2baa866d3c58f52f7/stderr.log",
+        "scope": "repo"
+      },
+      "metadata_path": {
+        "path": "flow/build/tile/.klt/place-and-route/openroad-logs/d25468b0fa5f47d2baa866d3c58f52f7/invocation.json",
+        "scope": "repo"
+      },
+      "retention_errors": []
+    }
+  ],
+  "hdl_toplevel": "logic_tile_routed",
+  "netlist": {
+    "path": "flow/build/tile/.klt/synthesize/run-2be9377ff68a402cb22d7880e80acfc5/logic_tile_routed_synth.v",
+    "scope": "repo"
+  },
+  "status": "ok",
+  "stage_reached": "route",
+  "seed": 1,
+  "coverage": {
+    "metal_density_fill": {
+      "status": "unsupported",
+      "inserted": false,
+      "reason": "no metal density fill is inserted at any stage; standard-cell gap fillers are not metal fill"
+    },
+    "density_compliance": {
+      "status": "unsupported",
+      "evaluated": false,
+      "reason": "metal density rules are not evaluated by place-and-route; a zero route_drc_violation_count does not imply density compliance"
+    }
+  },
+  "interconnect_corner": "nom",
+  "die_area_um2": 10468.4,
+  "core_area_um2": 8491.39,
+  "utilization_pct": 43.8462,
+  "wirelength_um": 12727,
+  "worst_slack_ns": 9.57581,
+  "total_negative_slack_ns": 0,
+  "fmax_mhz": 2357.46,
+  "setup_violation_count": 0,
+  "hold_violation_count": 0,
+  "nominal_hold_slack_ns": 0.28971,
+  "antenna_violation_count": 0,
+  "route_drc_violation_count": 0,
+  "estimated_power_mw": 0.1633,
+  "clock_skew_ns": 0.0024,
+  "worst_setup_slack_ns": 9.29051,
+  "worst_hold_slack_ns": 0.14256,
+  "corners": [
+    {
+      "name": "fast_1p32V_m40C",
+      "setup_slack_ns": 9.71581,
+      "hold_slack_ns": 0.19481,
+      "total_negative_setup_slack_ns": 0,
+      "total_negative_hold_slack_ns": 0,
+      "timing_status": "constrained",
+      "max_transition_violation_count": 0,
+      "max_capacitance_violation_count": 0,
+      "max_transition_violation_count_vs_library": 0,
+      "max_capacitance_violation_count_vs_library": 0
+    },
+    {
+      "name": "fast_1p65V_m40C",
+      "setup_slack_ns": 9.80384,
+      "hold_slack_ns": 0.14256,
+      "total_negative_setup_slack_ns": 0,
+      "total_negative_hold_slack_ns": 0,
+      "timing_status": "constrained",
+      "max_transition_violation_count": 0,
+      "max_capacitance_violation_count": 0,
+      "max_transition_violation_count_vs_library": 0,
+      "max_capacitance_violation_count_vs_library": 0
+    },
+    {
+      "name": "slow_1p08V_125C",
+      "setup_slack_ns": 9.29051,
+      "hold_slack_ns": 0.46458,
+      "total_negative_setup_slack_ns": 0,
+      "total_negative_hold_slack_ns": 0,
+      "timing_status": "constrained",
+      "max_transition_violation_count": 0,
+      "max_capacitance_violation_count": 0,
+      "max_transition_violation_count_vs_library": 0,
+      "max_capacitance_violation_count_vs_library": 0
+    },
+    {
+      "name": "slow_1p35V_125C",
+      "setup_slack_ns": 9.56539,
+      "hold_slack_ns": 0.29949,
+      "total_negative_setup_slack_ns": 0,
+      "total_negative_hold_slack_ns": 0,
+      "timing_status": "constrained",
+      "max_transition_violation_count": 0,
+      "max_capacitance_violation_count": 0,
+      "max_transition_violation_count_vs_library": 0,
+      "max_capacitance_violation_count_vs_library": 0
+    },
+    {
+      "name": "typ_1p20V_25C",
+      "setup_slack_ns": 9.56552,
+      "hold_slack_ns": 0.29235,
+      "total_negative_setup_slack_ns": 0,
+      "total_negative_hold_slack_ns": 0,
+      "timing_status": "constrained",
+      "max_transition_violation_count": 0,
+      "max_capacitance_violation_count": 0,
+      "max_transition_violation_count_vs_library": 0,
+      "max_capacitance_violation_count_vs_library": 0
+    },
+    {
+      "name": "typ_1p50V_25C",
+      "setup_slack_ns": 9.7176,
+      "hold_slack_ns": 0.20028,
+      "total_negative_setup_slack_ns": 0,
+      "total_negative_hold_slack_ns": 0,
+      "timing_status": "constrained",
+      "max_transition_violation_count": 0,
+      "max_capacitance_violation_count": 0,
+      "max_transition_violation_count_vs_library": 0,
+      "max_capacitance_violation_count_vs_library": 0
+    }
+  ],
+  "congestion": {
+    "global_route": {
+      "total_overflow": 0,
+      "max_horizontal_overflow": 0,
+      "max_vertical_overflow": 0,
+      "usage_pct": 13.3,
+      "max_layer_usage_pct": 31.3,
+      "overflow_per_layer": {
+        "Metal1": {
+          "resource": 0,
+          "demand": 0,
+          "usage_pct": 0.0,
+          "max_horizontal_overflow": 0,
+          "max_vertical_overflow": 0,
+          "total_overflow": 0
+        },
+        "Metal2": {
+          "resource": 2604,
+          "demand": 815,
+          "usage_pct": 31.3,
+          "max_horizontal_overflow": 0,
+          "max_vertical_overflow": 0,
+          "total_overflow": 0
+        },
+        "Metal3": {
+          "resource": 3121,
+          "demand": 711,
+          "usage_pct": 22.78,
+          "max_horizontal_overflow": 0,
+          "max_vertical_overflow": 0,
+          "total_overflow": 0
+        },
+        "Metal4": {
+          "resource": 2604,
+          "demand": 75,
+          "usage_pct": 2.88,
+          "max_horizontal_overflow": 0,
+          "max_vertical_overflow": 0,
+          "total_overflow": 0
+        },
+        "Metal5": {
+          "resource": 3082,
+          "demand": 1,
+          "usage_pct": 0.03,
+          "max_horizontal_overflow": 0,
+          "max_vertical_overflow": 0,
+          "total_overflow": 0
+        },
+        "TopMetal1": {
+          "resource": 352,
+          "demand": 0,
+          "usage_pct": 0.0,
+          "max_horizontal_overflow": 0,
+          "max_vertical_overflow": 0,
+          "total_overflow": 0
+        },
+        "TopMetal2": {
+          "resource": 286,
+          "demand": 0,
+          "usage_pct": 0.0,
+          "max_horizontal_overflow": 0,
+          "max_vertical_overflow": 0,
+          "total_overflow": 0
+        }
+      },
+      "routed_net_count": 363,
+      "max_gcell_usage_pct": null
+    },
+    "detailed_route": {
+      "first_iteration_drc_violation_count": 164,
+      "iteration_count": 4,
+      "drc_violations_per_iteration": [
+        164,
+        162,
+        137,
+        0
+      ],
+      "converged": true
+    },
+    "completeness": {
+      "signal_net_count": 359,
+      "unrouted_net_count": 0,
+      "partially_routed_net_count": null
+    },
+    "placement": {
+      "total_routing_overflow": 0.0,
+      "overflowed_tile_count": 0,
+      "final_weighted_congestion": 0.6189
+    },
+    "null_reasons": {
+      "global_route.max_gcell_usage_pct": "OpenROAD's global router reports usage per routing layer, not per GCell",
+      "completeness.partially_routed_net_count": "OpenROAD exposes no per-net connectivity check; only nets with no routed wire at all are counted"
+    }
+  },
+  "max_transition_violation_count": 0,
+  "max_capacitance_violation_count": 0,
+  "max_transition_violation_count_vs_library": 0,
+  "max_capacitance_violation_count_vs_library": 0,
+  "timing_status": "constrained",
+  "stages": [
+    {
+      "name": "floorplan",
+      "die_area_um2": 10468.4,
+      "core_area_um2": 8491.39,
+      "utilization_pct": 41.9017,
+      "worst_slack_ns": 9.60777,
+      "total_negative_slack_ns": 0,
+      "timing_status": "constrained"
+    },
+    {
+      "name": "place",
+      "die_area_um2": 10468.4,
+      "core_area_um2": 8491.39,
+      "utilization_pct": 42.2436,
+      "worst_slack_ns": 9.59749,
+      "total_negative_slack_ns": 0,
+      "wirelength_um": 11381.5,
+      "fmax_mhz": 2484.41,
+      "estimated_power_mw": 0.1083,
+      "setup_violation_count": 0,
+      "hold_violation_count": 0,
+      "nominal_hold_slack_ns": 0.28389,
+      "timing_status": "constrained"
+    },
+    {
+      "name": "cts",
+      "die_area_um2": 10468.4,
+      "core_area_um2": 8491.39,
+      "utilization_pct": 43.8462,
+      "worst_slack_ns": 9.58141,
+      "total_negative_slack_ns": 0,
+      "wirelength_um": 11472,
+      "fmax_mhz": 2388.97,
+      "estimated_power_mw": 0.162,
+      "clock_skew_ns": 0,
+      "setup_violation_count": 0,
+      "hold_violation_count": 0,
+      "nominal_hold_slack_ns": 0.29133,
+      "timing_status": "constrained"
+    },
+    {
+      "name": "route",
+      "die_area_um2": 10468.4,
+      "core_area_um2": 8491.39,
+      "utilization_pct": 43.8462,
+      "worst_slack_ns": 9.57581,
+      "total_negative_slack_ns": 0,
+      "wirelength_um": 12727,
+      "fmax_mhz": 2357.46,
+      "estimated_power_mw": 0.1633,
+      "clock_skew_ns": 0.0024,
+      "setup_violation_count": 0,
+      "hold_violation_count": 0,
+      "nominal_hold_slack_ns": 0.28971,
+      "antenna_violation_count": 0,
+      "route_drc_violation_count": 0,
+      "worst_setup_slack_ns": 9.29051,
+      "worst_hold_slack_ns": 0.14256,
+      "corners": [
+        {
+          "name": "fast_1p32V_m40C",
+          "setup_slack_ns": 9.71581,
+          "hold_slack_ns": 0.19481,
+          "total_negative_setup_slack_ns": 0,
+          "total_negative_hold_slack_ns": 0,
+          "timing_status": "constrained",
+          "max_transition_violation_count": 0,
+          "max_capacitance_violation_count": 0,
+          "max_transition_violation_count_vs_library": 0,
+          "max_capacitance_violation_count_vs_library": 0
+        },
+        {
+          "name": "fast_1p65V_m40C",
+          "setup_slack_ns": 9.80384,
+          "hold_slack_ns": 0.14256,
+          "total_negative_setup_slack_ns": 0,
+          "total_negative_hold_slack_ns": 0,
+          "timing_status": "constrained",
+          "max_transition_violation_count": 0,
+          "max_capacitance_violation_count": 0,
+          "max_transition_violation_count_vs_library": 0,
+          "max_capacitance_violation_count_vs_library": 0
+        },
+        {
+          "name": "slow_1p08V_125C",
+          "setup_slack_ns": 9.29051,
+          "hold_slack_ns": 0.46458,
+          "total_negative_setup_slack_ns": 0,
+          "total_negative_hold_slack_ns": 0,
+          "timing_status": "constrained",
+          "max_transition_violation_count": 0,
+          "max_capacitance_violation_count": 0,
+          "max_transition_violation_count_vs_library": 0,
+          "max_capacitance_violation_count_vs_library": 0
+        },
+        {
+          "name": "slow_1p35V_125C",
+          "setup_slack_ns": 9.56539,
+          "hold_slack_ns": 0.29949,
+          "total_negative_setup_slack_ns": 0,
+          "total_negative_hold_slack_ns": 0,
+          "timing_status": "constrained",
+          "max_transition_violation_count": 0,
+          "max_capacitance_violation_count": 0,
+          "max_transition_violation_count_vs_library": 0,
+          "max_capacitance_violation_count_vs_library": 0
+        },
+        {
+          "name": "typ_1p20V_25C",
+          "setup_slack_ns": 9.56552,
+          "hold_slack_ns": 0.29235,
+          "total_negative_setup_slack_ns": 0,
+          "total_negative_hold_slack_ns": 0,
+          "timing_status": "constrained",
+          "max_transition_violation_count": 0,
+          "max_capacitance_violation_count": 0,
+          "max_transition_violation_count_vs_library": 0,
+          "max_capacitance_violation_count_vs_library": 0
+        },
+        {
+          "name": "typ_1p50V_25C",
+          "setup_slack_ns": 9.7176,
+          "hold_slack_ns": 0.20028,
+          "total_negative_setup_slack_ns": 0,
+          "total_negative_hold_slack_ns": 0,
+          "timing_status": "constrained",
+          "max_transition_violation_count": 0,
+          "max_capacitance_violation_count": 0,
+          "max_transition_violation_count_vs_library": 0,
+          "max_capacitance_violation_count_vs_library": 0
+        }
+      ],
+      "max_transition_violation_count": 0,
+      "max_capacitance_violation_count": 0,
+      "max_transition_violation_count_vs_library": 0,
+      "max_capacitance_violation_count_vs_library": 0,
+      "congestion": {
+        "global_route": {
+          "total_overflow": 0,
+          "max_horizontal_overflow": 0,
+          "max_vertical_overflow": 0,
+          "usage_pct": 13.3,
+          "max_layer_usage_pct": 31.3,
+          "overflow_per_layer": {
+            "Metal1": {
+              "resource": 0,
+              "demand": 0,
+              "usage_pct": 0.0,
+              "max_horizontal_overflow": 0,
+              "max_vertical_overflow": 0,
+              "total_overflow": 0
+            },
+            "Metal2": {
+              "resource": 2604,
+              "demand": 815,
+              "usage_pct": 31.3,
+              "max_horizontal_overflow": 0,
+              "max_vertical_overflow": 0,
+              "total_overflow": 0
+            },
+            "Metal3": {
+              "resource": 3121,
+              "demand": 711,
+              "usage_pct": 22.78,
+              "max_horizontal_overflow": 0,
+              "max_vertical_overflow": 0,
+              "total_overflow": 0
+            },
+            "Metal4": {
+              "resource": 2604,
+              "demand": 75,
+              "usage_pct": 2.88,
+              "max_horizontal_overflow": 0,
+              "max_vertical_overflow": 0,
+              "total_overflow": 0
+            },
+            "Metal5": {
+              "resource": 3082,
+              "demand": 1,
+              "usage_pct": 0.03,
+              "max_horizontal_overflow": 0,
+              "max_vertical_overflow": 0,
+              "total_overflow": 0
+            },
+            "TopMetal1": {
+              "resource": 352,
+              "demand": 0,
+              "usage_pct": 0.0,
+              "max_horizontal_overflow": 0,
+              "max_vertical_overflow": 0,
+              "total_overflow": 0
+            },
+            "TopMetal2": {
+              "resource": 286,
+              "demand": 0,
+              "usage_pct": 0.0,
+              "max_horizontal_overflow": 0,
+              "max_vertical_overflow": 0,
+              "total_overflow": 0
+            }
+          },
+          "routed_net_count": 363,
+          "max_gcell_usage_pct": null
+        },
+        "detailed_route": {
+          "first_iteration_drc_violation_count": 164,
+          "iteration_count": 4,
+          "drc_violations_per_iteration": [
+            164,
+            162,
+            137,
+            0
+          ],
+          "converged": true
+        },
+        "completeness": {
+          "signal_net_count": 359,
+          "unrouted_net_count": 0,
+          "partially_routed_net_count": null
+        },
+        "placement": {
+          "total_routing_overflow": 0.0,
+          "overflowed_tile_count": 0,
+          "final_weighted_congestion": 0.6189
+        },
+        "null_reasons": {
+          "global_route.max_gcell_usage_pct": "OpenROAD's global router reports usage per routing layer, not per GCell",
+          "completeness.partially_routed_net_count": "OpenROAD exposes no per-net connectivity check; only nets with no routed wire at all are counted"
+        }
+      },
+      "timing_status": "constrained"
+    }
+  ],
+  "macros": [],
+  "def_path": "/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-27/flow/build/tile/.klt/place-and-route/logic_tile_routed.def",
+  "pins": [
+    {
+      "name": "VDD",
+      "edge": "south",
+      "x_um": 51.12,
+      "y_um": 27.36,
+      "layer": "TopMetal2"
+    },
+    {
+      "name": "VSS",
+      "edge": "north",
+      "x_um": 51.12,
+      "y_um": 96.76,
+      "layer": "TopMetal2"
+    },
+    {
+      "name": "cfg[0]",
+      "edge": "north",
+      "x_um": 99.36,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[100]",
+      "edge": "north",
+      "x_um": 98.4,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[101]",
+      "edge": "north",
+      "x_um": 97.44,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[102]",
+      "edge": "north",
+      "x_um": 96.48,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[103]",
+      "edge": "north",
+      "x_um": 95.52,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[104]",
+      "edge": "north",
+      "x_um": 94.56,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[105]",
+      "edge": "north",
+      "x_um": 93.6,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[106]",
+      "edge": "north",
+      "x_um": 92.64,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[107]",
+      "edge": "north",
+      "x_um": 91.68,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[108]",
+      "edge": "north",
+      "x_um": 90.72,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[109]",
+      "edge": "north",
+      "x_um": 89.76,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[10]",
+      "edge": "north",
+      "x_um": 88.8,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[110]",
+      "edge": "north",
+      "x_um": 87.84,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[111]",
+      "edge": "north",
+      "x_um": 86.88,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[112]",
+      "edge": "north",
+      "x_um": 85.92,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[113]",
+      "edge": "north",
+      "x_um": 84.96,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[114]",
+      "edge": "north",
+      "x_um": 84.0,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[115]",
+      "edge": "north",
+      "x_um": 83.04,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[116]",
+      "edge": "north",
+      "x_um": 82.08,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[117]",
+      "edge": "north",
+      "x_um": 81.12,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[118]",
+      "edge": "north",
+      "x_um": 80.16,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[119]",
+      "edge": "north",
+      "x_um": 79.2,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[11]",
+      "edge": "north",
+      "x_um": 78.24,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[120]",
+      "edge": "north",
+      "x_um": 77.28,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[121]",
+      "edge": "north",
+      "x_um": 76.32,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[122]",
+      "edge": "north",
+      "x_um": 75.36,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[123]",
+      "edge": "north",
+      "x_um": 74.4,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[124]",
+      "edge": "north",
+      "x_um": 73.44,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[125]",
+      "edge": "north",
+      "x_um": 72.48,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[126]",
+      "edge": "north",
+      "x_um": 71.52,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[127]",
+      "edge": "north",
+      "x_um": 70.56,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[128]",
+      "edge": "north",
+      "x_um": 69.6,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[129]",
+      "edge": "north",
+      "x_um": 68.64,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[12]",
+      "edge": "north",
+      "x_um": 67.68,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[130]",
+      "edge": "north",
+      "x_um": 66.72,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[131]",
+      "edge": "north",
+      "x_um": 65.76,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[132]",
+      "edge": "north",
+      "x_um": 64.8,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[133]",
+      "edge": "north",
+      "x_um": 63.84,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[134]",
+      "edge": "north",
+      "x_um": 62.88,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[135]",
+      "edge": "north",
+      "x_um": 61.92,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[136]",
+      "edge": "north",
+      "x_um": 60.96,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[137]",
+      "edge": "north",
+      "x_um": 60.0,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[138]",
+      "edge": "north",
+      "x_um": 59.04,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[139]",
+      "edge": "north",
+      "x_um": 58.08,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[13]",
+      "edge": "north",
+      "x_um": 57.12,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[140]",
+      "edge": "north",
+      "x_um": 56.16,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[141]",
+      "edge": "north",
+      "x_um": 55.2,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[142]",
+      "edge": "north",
+      "x_um": 54.24,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[143]",
+      "edge": "north",
+      "x_um": 53.28,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[144]",
+      "edge": "north",
+      "x_um": 52.32,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[145]",
+      "edge": "north",
+      "x_um": 51.36,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[146]",
+      "edge": "north",
+      "x_um": 50.4,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[147]",
+      "edge": "north",
+      "x_um": 49.44,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[148]",
+      "edge": "north",
+      "x_um": 48.48,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[149]",
+      "edge": "north",
+      "x_um": 47.52,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[14]",
+      "edge": "north",
+      "x_um": 46.56,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[150]",
+      "edge": "north",
+      "x_um": 45.6,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[151]",
+      "edge": "north",
+      "x_um": 44.64,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[152]",
+      "edge": "north",
+      "x_um": 43.68,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[153]",
+      "edge": "north",
+      "x_um": 42.72,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[154]",
+      "edge": "north",
+      "x_um": 41.76,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[155]",
+      "edge": "north",
+      "x_um": 40.8,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[156]",
+      "edge": "north",
+      "x_um": 39.84,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[157]",
+      "edge": "north",
+      "x_um": 38.88,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[15]",
+      "edge": "north",
+      "x_um": 37.92,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[16]",
+      "edge": "north",
+      "x_um": 36.96,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[17]",
+      "edge": "north",
+      "x_um": 36.0,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[18]",
+      "edge": "north",
+      "x_um": 35.04,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[19]",
+      "edge": "north",
+      "x_um": 34.08,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[1]",
+      "edge": "north",
+      "x_um": 33.12,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[20]",
+      "edge": "north",
+      "x_um": 32.16,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[21]",
+      "edge": "north",
+      "x_um": 31.2,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[22]",
+      "edge": "north",
+      "x_um": 30.24,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[23]",
+      "edge": "north",
+      "x_um": 29.28,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[24]",
+      "edge": "north",
+      "x_um": 28.32,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[25]",
+      "edge": "north",
+      "x_um": 27.36,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[26]",
+      "edge": "north",
+      "x_um": 26.4,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[27]",
+      "edge": "north",
+      "x_um": 25.44,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[28]",
+      "edge": "north",
+      "x_um": 24.48,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[29]",
+      "edge": "north",
+      "x_um": 23.52,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[2]",
+      "edge": "north",
+      "x_um": 22.56,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[30]",
+      "edge": "north",
+      "x_um": 21.6,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[31]",
+      "edge": "north",
+      "x_um": 20.64,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[32]",
+      "edge": "north",
+      "x_um": 19.68,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[33]",
+      "edge": "north",
+      "x_um": 18.72,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[34]",
+      "edge": "north",
+      "x_um": 17.76,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[35]",
+      "edge": "north",
+      "x_um": 16.8,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[36]",
+      "edge": "north",
+      "x_um": 15.84,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[37]",
+      "edge": "north",
+      "x_um": 14.88,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[38]",
+      "edge": "north",
+      "x_um": 13.92,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[39]",
+      "edge": "north",
+      "x_um": 12.96,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[3]",
+      "edge": "north",
+      "x_um": 12.0,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[40]",
+      "edge": "north",
+      "x_um": 11.04,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[41]",
+      "edge": "north",
+      "x_um": 10.08,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[42]",
+      "edge": "north",
+      "x_um": 9.12,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[43]",
+      "edge": "north",
+      "x_um": 8.16,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[44]",
+      "edge": "north",
+      "x_um": 7.2,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[45]",
+      "edge": "north",
+      "x_um": 6.24,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[46]",
+      "edge": "north",
+      "x_um": 5.28,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[47]",
+      "edge": "north",
+      "x_um": 4.32,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[48]",
+      "edge": "north",
+      "x_um": 3.36,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[49]",
+      "edge": "north",
+      "x_um": 2.4,
+      "y_um": 101.955,
+      "layer": "Metal2"
+    },
+    {
+      "name": "cfg[4]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 13.86,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[50]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 50.82,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[51]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 87.78,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[52]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 70.14,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[53]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 49.14,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[54]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 52.5,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[55]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 80.22,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[56]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 54.18,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[57]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 70.98,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[58]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 45.78,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[59]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 44.94,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[5]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 53.34,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[60]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 44.1,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[61]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 71.82,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[62]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 42.42,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[63]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 81.06,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[64]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 41.58,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[65]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 40.74,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[66]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 72.66,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[67]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 55.02,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[68]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 39.06,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[69]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 81.9,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[6]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 51.66,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[70]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 73.5,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[71]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 36.54,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[72]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 85.26,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[73]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 34.86,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[74]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 56.7,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[75]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 74.34,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[76]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 33.18,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[77]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 38.22,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[78]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 61.74,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[79]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 49.98,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[7]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 75.18,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[80]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 29.82,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[81]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 58.38,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[82]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 28.98,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[83]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 28.14,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[84]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 86.94,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[85]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 76.02,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[86]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 82.74,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[87]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 25.62,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[88]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 47.46,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[89]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 60.06,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[8]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 23.94,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[90]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 30.66,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[91]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 23.1,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[92]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 60.9,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[93]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 34.02,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[94]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 22.26,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[95]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 21.42,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[96]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 76.86,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[97]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 39.9,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[98]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 31.5,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[99]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 43.26,
+      "layer": "Metal3"
+    },
+    {
+      "name": "cfg[9]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 62.58,
+      "layer": "Metal3"
+    },
+    {
+      "name": "clk",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 20.58,
+      "layer": "Metal3"
+    },
+    {
+      "name": "e_in[0]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 46.62,
+      "layer": "Metal3"
+    },
+    {
+      "name": "e_in[1]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 24.78,
+      "layer": "Metal3"
+    },
+    {
+      "name": "e_in[2]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 63.42,
+      "layer": "Metal3"
+    },
+    {
+      "name": "e_in[3]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 27.3,
+      "layer": "Metal3"
+    },
+    {
+      "name": "e_out[0]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 18.06,
+      "layer": "Metal3"
+    },
+    {
+      "name": "e_out[1]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 77.7,
+      "layer": "Metal3"
+    },
+    {
+      "name": "e_out[2]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 64.26,
+      "layer": "Metal3"
+    },
+    {
+      "name": "e_out[3]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 83.58,
+      "layer": "Metal3"
+    },
+    {
+      "name": "n_in[0]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 17.22,
+      "layer": "Metal3"
+    },
+    {
+      "name": "n_in[1]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 35.7,
+      "layer": "Metal3"
+    },
+    {
+      "name": "n_in[2]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 65.1,
+      "layer": "Metal3"
+    },
+    {
+      "name": "n_in[3]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 86.1,
+      "layer": "Metal3"
+    },
+    {
+      "name": "n_out[0]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 68.46,
+      "layer": "Metal3"
+    },
+    {
+      "name": "n_out[1]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 59.22,
+      "layer": "Metal3"
+    },
+    {
+      "name": "n_out[2]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 65.94,
+      "layer": "Metal3"
+    },
+    {
+      "name": "n_out[3]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 78.54,
+      "layer": "Metal3"
+    },
+    {
+      "name": "s_in[0]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 37.38,
+      "layer": "Metal3"
+    },
+    {
+      "name": "s_in[1]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 18.9,
+      "layer": "Metal3"
+    },
+    {
+      "name": "s_in[2]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 66.78,
+      "layer": "Metal3"
+    },
+    {
+      "name": "s_in[3]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 15.54,
+      "layer": "Metal3"
+    },
+    {
+      "name": "s_out[0]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 57.54,
+      "layer": "Metal3"
+    },
+    {
+      "name": "s_out[1]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 32.34,
+      "layer": "Metal3"
+    },
+    {
+      "name": "s_out[2]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 67.62,
+      "layer": "Metal3"
+    },
+    {
+      "name": "s_out[3]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 26.46,
+      "layer": "Metal3"
+    },
+    {
+      "name": "w_in[0]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 14.7,
+      "layer": "Metal3"
+    },
+    {
+      "name": "w_in[1]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 16.38,
+      "layer": "Metal3"
+    },
+    {
+      "name": "w_in[2]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 79.38,
+      "layer": "Metal3"
+    },
+    {
+      "name": "w_in[3]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 48.3,
+      "layer": "Metal3"
+    },
+    {
+      "name": "w_out[0]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 55.86,
+      "layer": "Metal3"
+    },
+    {
+      "name": "w_out[1]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 19.74,
+      "layer": "Metal3"
+    },
+    {
+      "name": "w_out[2]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 69.3,
+      "layer": "Metal3"
+    },
+    {
+      "name": "w_out[3]",
+      "edge": "east",
+      "x_um": 101.955,
+      "y_um": 84.42,
+      "layer": "Metal3"
+    }
+  ],
+  "unrouted_def_path": null,
+  "gds_path": "/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-27/flow/build/tile/.klt/place-and-route/logic_tile_routed.gds",
+  "layer_map": {
+    "path": "/home/ubuntu/share/pdk/ihp-sg13g2/libs.tech/klayout/tech/sg13g2.map",
+    "resolution": "family"
+  },
+  "def_net_names": {
+    "single_pin_markers": 0,
+    "unresolved_single_pin_nets": []
+  },
+  "min_area_repair": {
+    "status": "skipped",
+    "reason": "the curated deck for PDK variant 'ihp-sg13g2' carries no plain minimum-area rule on any routed-net layer",
+    "patches": 0,
+    "repaired": 0,
+    "remaining": 0,
+    "rules": [],
+    "unrepaired": []
+  },
+  "verilog_path": "/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-27/flow/build/tile/.klt/place-and-route/logic_tile_routed.v",
+  "spef_sta": null,
+  "power": {
+    "preset": "sg13g2",
+    "pdn": true,
+    "global_connect": true,
+    "power_net": "VDD",
+    "ground_net": "VSS",
+    "tapcell_master": null,
+    "endcap_master": null,
+    "tapcell_distance_um": null,
+    "filler_masters": [
+      "sg13g2_fill_1",
+      "sg13g2_fill_2"
+    ],
+    "straps": [
+      {
+        "layer": "Metal1",
+        "spacing_um": null
+      },
+      {
+        "layer": "TopMetal1",
+        "spacing_um": 4.0
+      },
+      {
+        "layer": "TopMetal2",
+        "spacing_um": 4.0
+      }
+    ],
+    "connects": [
+      {
+        "layers": [
+          "Metal1",
+          "TopMetal1"
+        ],
+        "max_columns": null,
+        "ongrid": null,
+        "split_cuts": null
+      },
+      {
+        "layers": [
+          "TopMetal1",
+          "TopMetal2"
+        ],
+        "max_columns": null,
+        "ongrid": null,
+        "split_cuts": null
+      }
+    ],
+    "row_rail": {
+      "emitted": false,
+      "layer": null,
+      "power_net": null,
+      "ground_net": null,
+      "filler_masters": []
+    },
+    "placed": {
+      "evidence": "def",
+      "def_path": "/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-27/flow/build/tile/.klt/place-and-route/logic_tile_routed.def",
+      "unavailable_reason": null,
+      "status": "complete",
+      "missing": [],
+      "components": 1544,
+      "tapcells": 0,
+      "endcaps": 0,
+      "fillers": 1356,
+      "special_nets": [
+        {
+          "name": "VDD",
+          "use": "POWER",
+          "followpin_segments": 12,
+          "stripe_segments": 63,
+          "other_segments": 12,
+          "stripe_layers": [
+            "TopMetal2",
+            "TopMetal1",
+            "Metal5",
+            "Metal4",
+            "Metal3",
+            "Metal2",
+            "Metal1"
+          ],
+          "vias": 61
+        },
+        {
+          "name": "VSS",
+          "use": "GROUND",
+          "followpin_segments": 13,
+          "stripe_segments": 138,
+          "other_segments": 26,
+          "stripe_layers": [
+            "TopMetal2",
+            "TopMetal1",
+            "Metal5",
+            "Metal4",
+            "Metal3",
+            "Metal2",
+            "Metal1"
+          ],
+          "vias": 134
+        }
+      ]
+    }
+  },
+  "warnings": [],
+  "provenance": {
+    "klt_version": "0.7.1.dev2517+g6bb7cf233677",
+    "klayout_version": "0.30.12",
+    "pdk": {
+      "name": "ihp-sg13g2",
+      "source": "PDK_ROOT environment variable",
+      "version": "fetched:0.3.0"
+    },
+    "deck": {
+      "name": "sg13g2_stdcell__typ_1p20V_25C",
+      "content_hash": "sha256:7677a8918689f452e80405ad16a83e744709342574f2aedcc507c2758986b396",
+      "released": false,
+      "path": {
+        "path": null,
+        "scope": "external"
+      }
+    },
+    "input": {
+      "content_hash": "sha256:0ce67b670de22ff545140ccc4de7a4513731b80f015b6f5efc09071c6a29429c",
+      "role": "netlist"
+    }
+  }
+}

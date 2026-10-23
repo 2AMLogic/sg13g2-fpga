@@ -14,5 +14,6 @@
     "propagated_clock": true
   },
   "spef": "__SPEF__",
-  "geometry_source": "routed"
+  "geometry_source": "routed",
+  "sdf": true
 }

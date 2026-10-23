@@ -137,6 +137,13 @@ if [[ "$FLOW_STA" == 1 ]]; then
     else
       [[ -f "$B/.klt/sta/sta_$TOP.tcl" ]] && cp "$B/.klt/sta/sta_$TOP.tcl" "$REC/$req.tcl"
     fi
+    # The as-built gate-level netlist the SDF was written against, kept next to it.
+    if [[ -n "$VLOG" && -f "$(rel "$VLOG")" ]]; then cp "$(rel "$VLOG")" "$REC/$TOP.routed.v"; fi
+    # Post-route SDF (request .sdf=true): keep one per corner in the record, so
+    # a gate-level klt functional-verification run can point options.sdf at it.
+    if compgen -G "$B/.klt/sta/*.sdf" >/dev/null; then
+      mkdir -p "$REC/$req.sdf"; cp "$B"/.klt/sta/*.sdf "$REC/$req.sdf/"
+    fi
     rm -rf "$B/.klt/sta"
   done
 fi
