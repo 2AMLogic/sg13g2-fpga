@@ -1,0 +1,49 @@
+{
+  "rows": [
+    {
+      "id": "arch-logic-tile",
+      "class": "architectural",
+      "reason": "fixed tile composition, no measured distribution"
+    },
+    {
+      "id": "arch-routing",
+      "class": "architectural",
+      "reason": "fixed track count and switch-matrix topology"
+    },
+    {
+      "id": "arch-bitstream",
+      "class": "architectural",
+      "reason": "format and generator, checked by bitstream-level tests"
+    },
+    {
+      "id": "param-1",
+      "class": "configuration",
+      "reason": "a fixed library and corner list, not a sampled quantity"
+    },
+    {
+      "id": "param-2",
+      "class": "structural",
+      "reason": "layer assignment, checked by routed-layout DRC"
+    },
+    {
+      "id": "param-3",
+      "class": "geometric",
+      "reason": "one measured layout figure, no distribution"
+    },
+    {
+      "id": "param-4",
+      "class": "structural",
+      "reason": "fabric dimensions, checked by bitstream-level tests"
+    },
+    {
+      "id": "param-5",
+      "class": "timing",
+      "reason": "corner-bounded by STA at the claim corners, not sampled"
+    },
+    {
+      "id": "param-6",
+      "class": "structural",
+      "reason": "DRC and LVS are deterministic pass/fail checks"
+    }
+  ]
+}

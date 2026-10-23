@@ -1,5 +1,46 @@
 {
   "block": "sg13g2-fpga",
   "kind": "digital",
-  "evidence": {}
+  "evidence": {
+    "3": {
+      "file": "layout/records/20261018-92a63aa/drc.json",
+      "content_hash": "sha256:8b14fbd2a7cb932abeb148a89dda73445c9f18f7174148b605ebf1c023045521"
+    },
+    "4": {
+      "file": "layout/records/20261018-92a63aa/lvs.json",
+      "content_hash": "sha256:278fd190c0996477c879e458562c908eb916df434b2d57af041b4c7dc9cb1675"
+    },
+    "5": [
+      {
+        "file": "layout/records/20261018-92a63aa/sta.json",
+        "content_hash": "sha256:cdfc6a8fd06fa44bae76d6fb3f81915a7bc73a0b6d965bf7bf51569ce3e9b802"
+      }
+    ],
+    "6": {
+      "not_applicable": {
+        "spec": {
+          "file": "manifests/target-spec.json",
+          "content_hash": "sha256:b6545e33a908e8ac60d5079b892b8d72abe9d086c4c088a5a51437a5cf68aa4b"
+        },
+        "statement": {
+          "file": "manifests/target-spec-na.json",
+          "content_hash": "sha256:7da7479e75802db9487c75f77296177b692b9b1a49aaf8960ef6c812879c2e5f"
+        }
+      }
+    },
+    "11": [
+      {
+        "file": "layout/records/20261018-92a63aa/erc.json",
+        "content_hash": "sha256:8b14fbd2a7cb932abeb148a89dda73445c9f18f7174148b605ebf1c023045521"
+      },
+      {
+        "file": "layout/records/20261018-92a63aa/lvs.json",
+        "content_hash": "sha256:278fd190c0996477c879e458562c908eb916df434b2d57af041b4c7dc9cb1675"
+      },
+      {
+        "file": "layout/records/20261018-92a63aa/place-and-route.json",
+        "content_hash": "sha256:0ce67b670de22ff545140ccc4de7a4513731b80f015b6f5efc09071c6a29429c"
+      }
+    ]
+  }
 }
