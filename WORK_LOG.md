@@ -2,6 +2,11 @@
 
 Chronological record of merged PRs and closed issues, newest first. Maintained by the Guide role.
 
+### 2026-10-23
+
+- **PR #29**: feat(signoff): cite committed tile envelopes in the klt signoff manifest
+- **Issue #26** (closed): Cite the committed tile envelopes in the klt signoff manifest and regenerate the verdict record
+
 ### 2026-10-21
 
 - **PR #23**: Bump Repo Skills 0.24.3 -> 0.24.7
