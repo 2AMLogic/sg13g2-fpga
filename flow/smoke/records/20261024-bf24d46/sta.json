@@ -1,0 +1,152 @@
+{
+  "schema_version": 2,
+  "engine": "openroad",
+  "engine_version": "26Q3-1510-g6cb3f2b704",
+  "hdl_toplevel": "counter",
+  "status": "ok",
+  "def_path": {
+    "path": "flow/build/smoke/.klt/place-and-route/counter.def",
+    "scope": "repo"
+  },
+  "verilog_path": null,
+  "geometry_source": "routed",
+  "wire_load_model": null,
+  "wire_load_mode": null,
+  "clock_mode": "ideal",
+  "spef_path": null,
+  "worst_slack_ns": 9.11496,
+  "total_negative_slack_ns": 0,
+  "worst_hold_slack_ns": 0.26571,
+  "total_negative_hold_slack_ns": 0,
+  "fmax_mhz": 1129.89,
+  "timing_status": "constrained",
+  "constraint_completeness": {
+    "status": "incomplete",
+    "unconstrained_endpoints": {
+      "status": "ok",
+      "count": 8,
+      "sample": [
+        "q[0]",
+        "q[1]",
+        "q[2]",
+        "q[3]",
+        "q[4]",
+        "q[5]",
+        "q[6]",
+        "q[7]"
+      ],
+      "truncated": false,
+      "reason": null
+    },
+    "unclocked_registers": {
+      "status": "ok",
+      "count": 0,
+      "sample": [],
+      "truncated": false,
+      "reason": null
+    },
+    "sample_limit": 20
+  },
+  "setup_violation_count": 0,
+  "hold_violation_count": 0,
+  "worst_setup_path": {
+    "status": "ok",
+    "check_type": "setup",
+    "engine_check_role": "setup",
+    "startpoint": "_49_/Q",
+    "endpoint": "_55_/D",
+    "slack_ns": 9.11496,
+    "consistent_with_aggregate": true,
+    "reason": null
+  },
+  "worst_hold_path": {
+    "status": "ok",
+    "check_type": "hold",
+    "engine_check_role": "hold",
+    "startpoint": "_50_/Q",
+    "endpoint": "_50_/D",
+    "slack_ns": 0.26571,
+    "consistent_with_aggregate": true,
+    "reason": null
+  },
+  "clock_skew_ns": 0.00205,
+  "estimated_power_mw": 0.0985,
+  "provenance": {
+    "klt_version": "0.7.1.dev2056+gbf24d463fb3f",
+    "klayout_version": "0.30.12",
+    "pdk": {
+      "name": "ihp-sg13g2",
+      "source": "PDK_ROOT environment variable",
+      "version": "fetched:0.3.0"
+    },
+    "deck": {
+      "name": "sg13g2_stdcell__typ_1p20V_25C",
+      "content_hash": "sha256:7677a8918689f452e80405ad16a83e744709342574f2aedcc507c2758986b396",
+      "released": false,
+      "path": {
+        "path": null,
+        "scope": "external"
+      }
+    },
+    "input": {
+      "content_hash": "sha256:e09bdcde608e4e3b5b880057a0228c5a8dea641c3caadff0b3a0e3ac919e8946",
+      "role": "layout"
+    }
+  },
+  "spef_annotation": null,
+  "clock_propagation": null,
+  "sdf": null,
+  "electrical_checks": {
+    "parasitics_source": "none",
+    "max_transition": {
+      "coverage": "checked",
+      "limit_source": "liberty",
+      "unit": "ns",
+      "violation_count": 0,
+      "net_count": 0,
+      "worst_excess": null,
+      "worst_pin": null
+    },
+    "max_capacitance": {
+      "coverage": "checked",
+      "limit_source": "liberty",
+      "unit": "pF",
+      "violation_count": 0,
+      "net_count": 0,
+      "worst_excess": null,
+      "worst_pin": null
+    }
+  },
+  "engine_log": {
+    "invocation_id": "1edba4b7f9464269b0502f3dc020d0ba",
+    "script_name": "sta_counter.tcl",
+    "script_path": {
+      "path": "flow/build/smoke/.klt/sta/sta_counter.tcl",
+      "scope": "repo"
+    },
+    "script_sha256": "c1291c711cf90567ad533e036278a63269bb30fae3b4e9031c6649ed72f1989a",
+    "metrics_path": {
+      "path": "flow/build/smoke/.klt/sta/counter_metrics.json",
+      "scope": "repo"
+    },
+    "outcome": "exited",
+    "returncode": 0,
+    "directory": {
+      "path": "flow/build/smoke/.klt/sta/openroad-logs/1edba4b7f9464269b0502f3dc020d0ba",
+      "scope": "repo"
+    },
+    "stdout_path": {
+      "path": "flow/build/smoke/.klt/sta/openroad-logs/1edba4b7f9464269b0502f3dc020d0ba/stdout.log",
+      "scope": "repo"
+    },
+    "stderr_path": {
+      "path": "flow/build/smoke/.klt/sta/openroad-logs/1edba4b7f9464269b0502f3dc020d0ba/stderr.log",
+      "scope": "repo"
+    },
+    "metadata_path": {
+      "path": "flow/build/smoke/.klt/sta/openroad-logs/1edba4b7f9464269b0502f3dc020d0ba/invocation.json",
+      "scope": "repo"
+    },
+    "retention_errors": []
+  }
+}

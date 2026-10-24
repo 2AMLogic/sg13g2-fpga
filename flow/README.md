@@ -10,15 +10,16 @@ in a block manifest or the spec.**
 | File | Pins |
 |---|---|
 | `pdk.json` | IHP-Open-PDK `v0.3.0`, full commit `5cccb161…bdca9e`, `sg13g2_stdcell` |
-| `toolchain.json` | klayout-tools commit `7ee09483…2ef3`, Yosys, OpenROAD, KLayout, Icarus |
+| `toolchain.json` | klayout-tools commit `bf24d463…74a8`, Yosys, OpenROAD, KLayout, Icarus |
 
 **How the pins were established.** `klt pdk find` reports only a stamp
 (`fetched:0.3.0`), not a commit, and the local bundle has no git metadata, so
 the PDK commit is the one the upstream tag `v0.3.0` points at
 (`git ls-remote`). The local bundle's sha256 is recorded beside it, but the
 bundle cannot be proven to equal that commit (klayout-tools#3786). The `klt`
-commit comes from the host install's `uv-receipt.toml`; `klt --version` alone
-(`0.7.1.dev1743+g7ee09483b748`) is only an abbreviated hash of a dev build.
+commit was first taken from the host install's `uv-receipt.toml`, then bumped for issue #14 to the commit
+containing klayout-tools#3887 (`io.pin_constraints`); `klt --version` alone
+(`0.7.1.dev2056+gbf24d463fb3f`) is only an abbreviated hash of a dev build.
 
 ## Cold start
 
@@ -28,7 +29,7 @@ ihp-sg13g2` resolves it) and `yosys`, `openroad`, `jq` on `PATH`:
 ```bash
 flow/smoke/run.sh [--pdk-root <dir containing ihp-sg13g2/>]
 # or, against the pinned klt without touching the host install:
-KLT="uvx --from git+https://github.com/2AMLogic/klayout-tools.git@7ee09483b74867a47a05eb353015c2cf5ca33ef3 klt" flow/smoke/run.sh
+KLT="uvx --from git+https://github.com/2AMLogic/klayout-tools.git@bf24d463fb3fc0f32b6f90d884086fc8946d74a8 klt" flow/smoke/run.sh
 ```
 
 The script writes a new `flow/smoke/records/<UTC date>-<short HEAD>/` (it
