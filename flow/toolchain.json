@@ -1,9 +1,9 @@
 {
   "klayout-tools": {
-    "commit": "7ee09483b74867a47a05eb353015c2cf5ca33ef3",
-    "reported_version": "0.7.1.dev1743+g7ee09483b748",
-    "source": "uv tool receipt (uv-receipt.toml) of the host install: git+https://github.com/2AMLogic/klayout-tools.git?rev=<commit>",
-    "reproduce": "uvx --from 'git+https://github.com/2AMLogic/klayout-tools.git@7ee09483b74867a47a05eb353015c2cf5ca33ef3' klt ..."
+    "commit": "bf24d463fb3fc0f32b6f90d884086fc8946d74a8",
+    "reported_version": "0.7.1.dev2056+gbf24d463fb3f",
+    "source": "bumped for issue #14 (pin_constraints, klayout-tools#3887); previous pin 7ee09483b74867a47a05eb353015c2cf5ca33ef3 came from the host uv-receipt.toml. Form: git+https://github.com/2AMLogic/klayout-tools.git?rev=<commit>",
+    "reproduce": "uvx --from 'git+https://github.com/2AMLogic/klayout-tools.git@bf24d463fb3fc0f32b6f90d884086fc8946d74a8' klt ..."
   },
   "yosys": {
     "version": "0.67+post",
