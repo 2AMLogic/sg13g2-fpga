@@ -31,7 +31,7 @@ _None._
 
 Issues currently being built (`loom:building`).
 
-- **#14**: Tile pin placement for grid abutment once klt can constrain I/O pins
+_None._
 
 ## PRs Awaiting Review
 
@@ -50,11 +50,10 @@ _None._
 Issues carrying `loom:curated`.
 
 - **#3**: Track the gap to T1 (klayout-tools design-evidence-tiers.md) *(curated)*
-- **#14**: Tile pin placement for grid abutment once klt can constrain I/O pins *(curated)*
 
 ## Proposed (Architect / Hermit)
 
-- **#28**: Remove five stamped benches this repo cannot drive (permanent NOT-RUN) *(hermit)*
+_None._
 
 ## Epics
 
@@ -68,10 +67,10 @@ _None._
 | Very important | 0 |
 | Important | 0 |
 | Ready (`loom:issue`) | 0 |
-| In Progress (`loom:building`) | 1 |
+| In Progress (`loom:building`) | 0 |
 | PRs awaiting review | 0 |
 | Approved PRs awaiting merge | 0 |
-| Curated | 2 |
-| Architect / Hermit proposals | 1 |
+| Curated | 1 |
+| Architect / Hermit proposals | 0 |
 | Active epics | 0 |
 <!-- guide:plan-body:end -->
