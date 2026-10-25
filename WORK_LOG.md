@@ -2,6 +2,12 @@
 
 Chronological record of merged PRs and closed issues, newest first. Maintained by the Guide role.
 
+### 2026-10-24
+
+- **PR #34**: feat(layout): constrain tile track pins to facing edges for abutment
+- **Issue #28** (closed): Remove five stamped benches this repo cannot drive (permanent NOT-RUN)
+- **Issue #14** (closed): Tile pin placement for grid abutment once klt can constrain I/O pins
+
 ### 2026-10-23
 
 - **PR #30**: feat: SDF-annotated gate-level re-simulation of the routed tile at slow and fast corners
