@@ -102,7 +102,12 @@ else notrun lvs "place-and-route produced no gds_path/verilog_path"; fi
 
 # 5. ERC
 if [[ -n "$GDS" ]]; then
-  step erc $KLT erc "$(rel "$GDS")" "$B/erc-spec.json" --top "$TOP" --deck sg13g2 --format json
+  # The envelope records the spec path as given; flow/build/ is untracked, so pass
+  # the committed spec (byte-identical to the build copy) by repo-relative path
+  # for `klt signoff` to re-read it from a clean checkout (item 11).
+  ERC_SPEC="$B/erc-spec.json"
+  case "$REQ" in "$REPO"/*) ERC_SPEC="${REQ#"$REPO"/}/erc-spec.json";; esac
+  step erc $KLT erc "$(rel "$GDS")" "$ERC_SPEC" --top "$TOP" --deck sg13g2 --format json
 else notrun erc "place-and-route produced no gds_path"; fi
 
 # 6. parasitics (FLOW_SPEF=1 only): SPEF from the routed GDS, net names and pins
