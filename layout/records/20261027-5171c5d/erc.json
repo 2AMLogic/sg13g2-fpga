@@ -4,7 +4,7 @@
     "path": "flow/build/tile/.klt/place-and-route/logic_tile_routed.gds",
     "scope": "repo"
   },
-  "spec": "/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-42/flow/build/tile/erc-spec.json",
+  "spec": "layout/requests/erc-spec.json",
   "pdk": null,
   "findings_only": false,
   "gate_role": "GatPoly",

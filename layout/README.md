@@ -25,9 +25,14 @@ passes in the tree that produced them.
 
 `requests/erc-spec.json` declares `VDD` and `VSS` as `kind: supply` nets (labels are on
 TopMetal2 `134/25`, set as that layer's `label_layer`) and one substrate tie (`psub`: Activ ∩ pSD
-outside NWell, to Metal1, net `VSS`). Record `20261027-79803ab` (host `klt 0.8.1.dev55`, not the
+outside NWell, to Metal1, net `VSS`). Record `20261027-5171c5d` (host `klt 0.8.1.dev55`, not the
 `bf24d463` pin above): `erc_status: clean`, `VDD` and `VSS` one island each, no
 `erc.unconnected_net`, `erc.supply_short` or `erc.missing_tie`.
+
+The `erc` envelope records its spec path verbatim, and `klt signoff` re-reads that spec to grade
+item 11, so `flow/klt-flow.sh` passes the committed `layout/requests/erc-spec.json` by
+repo-relative path; an absolute `flow/build/` path (untracked) grades `supply_spec_incomplete`
+in a clean checkout.
 
 - **n-well tap is disclosed, not declared.** SG13G2 draws no nSD (`7/0`) shape; the n-well tap is
   Activ inside NWell with no pSD over it, which `ties[].tap_requires` (intersect only) cannot

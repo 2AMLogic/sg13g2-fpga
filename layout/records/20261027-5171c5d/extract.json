@@ -10058,14 +10058,14 @@
   },
   "timing": {
     "stages": {
-      "read_layout": 0.007,
-      "device_extraction": 2.129,
+      "read_layout": 0.006,
+      "device_extraction": 1.897,
       "diagnostics": 0.0,
-      "netlist_write": 0.005,
+      "netlist_write": 0.002,
       "netlist_hash": 0.0,
-      "netlist_normalized_hash": 0.001
+      "netlist_normalized_hash": 0.002
     },
-    "total_seconds": 2.318,
-    "unattributed_seconds": 0.176
+    "total_seconds": 2.058,
+    "unattributed_seconds": 0.151
   }
 }
