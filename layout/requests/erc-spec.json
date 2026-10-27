@@ -1,21 +1,129 @@
 {
   "stackup": [
-    {"name": "GatPoly",   "layer": "5/0", "role": "gate", "active_layer": "1/0"},
-    {"name": "Metal1",    "layer": "8/0"},
-    {"name": "Metal2",    "layer": "10/0"},
-    {"name": "Metal3",    "layer": "30/0"},
-    {"name": "Metal4",    "layer": "50/0"},
-    {"name": "Metal5",    "layer": "67/0"},
-    {"name": "TopMetal1", "layer": "126/0"},
-    {"name": "TopMetal2", "layer": "134/0"}
+    {
+      "name": "GatPoly",
+      "layer": "5/0",
+      "role": "gate",
+      "active_layer": "1/0"
+    },
+    {
+      "name": "Metal1",
+      "layer": "8/0"
+    },
+    {
+      "name": "Metal2",
+      "layer": "10/0"
+    },
+    {
+      "name": "Metal3",
+      "layer": "30/0"
+    },
+    {
+      "name": "Metal4",
+      "layer": "50/0"
+    },
+    {
+      "name": "Metal5",
+      "layer": "67/0"
+    },
+    {
+      "name": "TopMetal1",
+      "layer": "126/0"
+    },
+    {
+      "name": "TopMetal2",
+      "layer": "134/0",
+      "label_layer": "134/25"
+    }
   ],
   "vias": [
-    {"name": "Cont",    "layer": "6/0",   "between": ["GatPoly", "Metal1"]},
-    {"name": "Via1",    "layer": "19/0",  "between": ["Metal1", "Metal2"]},
-    {"name": "Via2",    "layer": "29/0",  "between": ["Metal2", "Metal3"]},
-    {"name": "Via3",    "layer": "49/0",  "between": ["Metal3", "Metal4"]},
-    {"name": "Via4",    "layer": "66/0",  "between": ["Metal4", "Metal5"]},
-    {"name": "TopVia1", "layer": "125/0", "between": ["Metal5", "TopMetal1"]},
-    {"name": "TopVia2", "layer": "133/0", "between": ["TopMetal1", "TopMetal2"]}
-  ]
+    {
+      "name": "Cont",
+      "layer": "6/0",
+      "between": [
+        "GatPoly",
+        "Metal1"
+      ]
+    },
+    {
+      "name": "Via1",
+      "layer": "19/0",
+      "between": [
+        "Metal1",
+        "Metal2"
+      ]
+    },
+    {
+      "name": "Via2",
+      "layer": "29/0",
+      "between": [
+        "Metal2",
+        "Metal3"
+      ]
+    },
+    {
+      "name": "Via3",
+      "layer": "49/0",
+      "between": [
+        "Metal3",
+        "Metal4"
+      ]
+    },
+    {
+      "name": "Via4",
+      "layer": "66/0",
+      "between": [
+        "Metal4",
+        "Metal5"
+      ]
+    },
+    {
+      "name": "TopVia1",
+      "layer": "125/0",
+      "between": [
+        "Metal5",
+        "TopMetal1"
+      ]
+    },
+    {
+      "name": "TopVia2",
+      "layer": "133/0",
+      "between": [
+        "TopMetal1",
+        "TopMetal2"
+      ]
+    }
+  ],
+  "nets": [
+    {
+      "name": "VDD",
+      "kind": "supply"
+    },
+    {
+      "name": "VSS",
+      "kind": "supply"
+    }
+  ],
+  "ties": [
+    {
+      "name": "psub",
+      "well_layer": null,
+      "well_complement_of": [
+        "31/0"
+      ],
+      "tap_layer": "1/0",
+      "tap_requires": [
+        "14/0"
+      ],
+      "connect_to": "Metal1",
+      "net": "VSS"
+    }
+  ],
+  "ties_disclosure": {
+    "kind": "unexpressible",
+    "undeclared_classes": [
+      "nwell"
+    ],
+    "reason": "SG13G2 draws the n-well tap as Activ (1/0) inside NWell (31/0) with no pSD (14/0) over it; the stream has no nSD (7/0) shape, so the tap is a boolean difference (Activ minus pSD) that tap_requires, which only intersects, cannot express."
+  }
 }

@@ -1,0 +1,2770 @@
+{
+  "schema_version": 2,
+  "engine": "klayout",
+  "layout": {
+    "path": "flow/build/tile/logic_tile_routed.gate.spice",
+    "scope": "repo"
+  },
+  "reference": "/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-42/flow/build/tile/.klt/place-and-route/logic_tile_routed.v",
+  "top": "LOGIC_TILE_ROUTED",
+  "reference_top": "LOGIC_TILE_ROUTED",
+  "parameter_tolerance": null,
+  "options": {
+    "combine_devices": false,
+    "combine_devices_per_circuit": null,
+    "combine_devices_max_attempts": 5,
+    "flatten_layout": false,
+    "flatten_reference": false,
+    "netgen_setup": null,
+    "parameter_tolerance": null,
+    "compare_parameters": null,
+    "power_connectivity": null,
+    "anchor_top_level_pins": null,
+    "strict_top_level_pin_count": false,
+    "compare_mos_flavour": false,
+    "supply_nets": [
+      "GND",
+      "VCC",
+      "VDD",
+      "VGND",
+      "VPWR",
+      "VSS"
+    ],
+    "finfet_bulk": null
+  },
+  "hints_applied": null,
+  "constant_nets_applied": null,
+  "status": "match",
+  "power_connectivity": {
+    "status": "match",
+    "reason": null,
+    "power_pins": [
+      "VDD",
+      "VSS"
+    ],
+    "power_pins_derivation": {
+      "rule": "declared-by-every-instantiated-master",
+      "masters": [
+        "SG13G2_A21OI_1",
+        "SG13G2_A22OI_1",
+        "SG13G2_BUF_1",
+        "SG13G2_BUF_16",
+        "SG13G2_DFRBPQ_1",
+        "SG13G2_INV_1",
+        "SG13G2_MUX2_1",
+        "SG13G2_MUX4_1",
+        "SG13G2_NOR2B_1",
+        "SG13G2_NOR2_1",
+        "SG13G2_NOR3_1",
+        "SG13G2_TIEHI"
+      ],
+      "master_count": 12,
+      "corroborated": true,
+      "reason": null
+    },
+    "instance_count": 1543,
+    "expected_nets": null,
+    "unchecked_expected_pins": [],
+    "findings": [],
+    "finding_count": 0
+  },
+  "body_verification": {
+    "status": "unchecked",
+    "reason": "no request.layout.deck was given (the pre-extracted request.layout.netlist form), so nothing establishes this layout's substrate/well-tap convention and no synthesized body net can be told apart from a real one -- this run verified nothing about the device bodies either way",
+    "device_classes": [],
+    "device_count": 0,
+    "findings": [],
+    "finding_count": 0
+  },
+  "device_parameter_coverage": [],
+  "mismatch_count": 2,
+  "error_count": 0,
+  "category_counts": {
+    "topology.power_only_pruned": 1,
+    "topology.top_level_pins_anchored": 1
+  },
+  "category_error_counts": {},
+  "counts": {
+    "nets": {
+      "layout": 365,
+      "reference": 363,
+      "matched": 430
+    },
+    "devices": {
+      "layout": 0,
+      "reference": 0,
+      "matched": 0
+    },
+    "pins": {
+      "layout": 365,
+      "reference": 191,
+      "matched": 430
+    }
+  },
+  "device_classes": null,
+  "environment": {
+    "engine": "klayout",
+    "engine_version": "0.30.12",
+    "netgen_binary": null,
+    "layout_sha256": "3841284fcf7fca82b5641850a2a7c68d58c786f00d80e500f6487589409b01cb",
+    "reference_sha256": "ed9cc81c9c2b468b533e013cba6fbefdabee7c5ef352393863ea9e288c5edad0",
+    "extracted_netlist": null
+  },
+  "provenance": {
+    "klt_version": "0.8.1.dev55+g879d39bad82b",
+    "klayout_version": "0.30.12",
+    "pdk": {
+      "name": "ihp-sg13g2",
+      "source": "PDK_ROOT environment variable",
+      "version": "fetched:0.3.0"
+    },
+    "deck": null,
+    "input": {
+      "content_hash": "sha256:3841284fcf7fca82b5641850a2a7c68d58c786f00d80e500f6487589409b01cb",
+      "role": "netlist"
+    },
+    "klayout_version_mismatch": false,
+    "pin_order_sources": [
+      {
+        "library": "sg13g2_stdcell",
+        "path": "/home/ubuntu/share/pdk/ihp-sg13g2/libs.ref/sg13g2_stdcell/spice/sg13g2_stdcell.spice",
+        "cells": 84
+      }
+    ]
+  },
+  "mismatches": [
+    {
+      "category": "topology.power_only_pruned",
+      "severity": "warning",
+      "description": "removed layout-side circuit(s) whose every declared pin is a power/ground pin of the reference library (a pin the library declares but the gate-level-Verilog reference never carries), and every instance of them, before comparing -- 2 circuit(s): SG13G2_FILL_1, SG13G2_FILL_2 (see docs/cli/lvs.md, \"topology.power_only_pruned\")",
+      "side": "layout",
+      "net": null,
+      "device": null,
+      "property": null,
+      "details": null,
+      "circuit": null,
+      "instance": null,
+      "subcircuit": null
+    },
+    {
+      "category": "topology.top_level_pins_anchored",
+      "severity": "warning",
+      "description": "191 top-level pin name(s) declared on both sides were anchored by name before comparing (options.anchor_top_level_pins): each one's layout net is asserted to match the reference net of the same-named pin, which the comparer's own topology-only net pairing does not otherwise require. Without it, two boundary nets with identical topology (e.g. two bits of a black-box macro's bus) are interchangeable and a swap between them compares clean -- see docs/cli/lvs.md, \"Top-level pin anchoring\"",
+      "side": "both",
+      "net": null,
+      "device": null,
+      "property": null,
+      "details": {
+        "pins": [
+          "CFG[0]",
+          "CFG[100]",
+          "CFG[101]",
+          "CFG[102]",
+          "CFG[103]",
+          "CFG[104]",
+          "CFG[105]",
+          "CFG[106]",
+          "CFG[107]",
+          "CFG[108]",
+          "CFG[109]",
+          "CFG[10]",
+          "CFG[110]",
+          "CFG[111]",
+          "CFG[112]",
+          "CFG[113]",
+          "CFG[114]",
+          "CFG[115]",
+          "CFG[116]",
+          "CFG[117]"
+        ],
+        "pin_count": 191,
+        "pins_truncated": true
+      },
+      "circuit": null,
+      "instance": null,
+      "subcircuit": null
+    }
+  ],
+  "net_correspondence": [
+    {
+      "layout": "VDD",
+      "reference": null,
+      "pin": true,
+      "heuristic": true
+    },
+    {
+      "layout": "VDD",
+      "reference": null,
+      "pin": true,
+      "heuristic": true
+    },
+    {
+      "layout": "VDD",
+      "reference": null,
+      "pin": true,
+      "heuristic": true
+    },
+    {
+      "layout": "VDD",
+      "reference": null,
+      "pin": true,
+      "heuristic": true
+    },
+    {
+      "layout": "VDD",
+      "reference": null,
+      "pin": true,
+      "heuristic": true
+    },
+    {
+      "layout": "VDD",
+      "reference": null,
+      "pin": true,
+      "heuristic": true
+    },
+    {
+      "layout": "VDD",
+      "reference": null,
+      "pin": true,
+      "heuristic": true
+    },
+    {
+      "layout": "VDD",
+      "reference": null,
+      "pin": true,
+      "heuristic": true
+    },
+    {
+      "layout": "VDD",
+      "reference": null,
+      "pin": true,
+      "heuristic": true
+    },
+    {
+      "layout": "VDD",
+      "reference": null,
+      "pin": true,
+      "heuristic": true
+    },
+    {
+      "layout": "VDD",
+      "reference": null,
+      "pin": true,
+      "heuristic": true
+    },
+    {
+      "layout": "VDD",
+      "reference": null,
+      "pin": true,
+      "heuristic": true
+    },
+    {
+      "layout": "VDD",
+      "reference": null,
+      "pin": true,
+      "heuristic": true
+    },
+    {
+      "layout": "VSS",
+      "reference": null,
+      "pin": true,
+      "heuristic": true
+    },
+    {
+      "layout": "VSS",
+      "reference": null,
+      "pin": true,
+      "heuristic": true
+    },
+    {
+      "layout": "VSS",
+      "reference": null,
+      "pin": true,
+      "heuristic": true
+    },
+    {
+      "layout": "VSS",
+      "reference": null,
+      "pin": true,
+      "heuristic": true
+    },
+    {
+      "layout": "VSS",
+      "reference": null,
+      "pin": true,
+      "heuristic": true
+    },
+    {
+      "layout": "VSS",
+      "reference": null,
+      "pin": true,
+      "heuristic": true
+    },
+    {
+      "layout": "VSS",
+      "reference": null,
+      "pin": true,
+      "heuristic": true
+    },
+    {
+      "layout": "VSS",
+      "reference": null,
+      "pin": true,
+      "heuristic": true
+    },
+    {
+      "layout": "VSS",
+      "reference": null,
+      "pin": true,
+      "heuristic": true
+    },
+    {
+      "layout": "VSS",
+      "reference": null,
+      "pin": true,
+      "heuristic": true
+    },
+    {
+      "layout": "VSS",
+      "reference": null,
+      "pin": true,
+      "heuristic": true
+    },
+    {
+      "layout": "VSS",
+      "reference": null,
+      "pin": true,
+      "heuristic": true
+    },
+    {
+      "layout": "VSS",
+      "reference": null,
+      "pin": true,
+      "heuristic": true
+    },
+    {
+      "layout": "A",
+      "reference": "A",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "A",
+      "reference": "A",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "A",
+      "reference": "A",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "A",
+      "reference": "A",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "A",
+      "reference": "A",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "A",
+      "reference": "A",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "A0",
+      "reference": "A0",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "A0",
+      "reference": "A0",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "A1",
+      "reference": "A1",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "A1",
+      "reference": "A1",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "A1",
+      "reference": "A1",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "A1",
+      "reference": "A1",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "A2",
+      "reference": "A2",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "A2",
+      "reference": "A2",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "A2",
+      "reference": "A2",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "A3",
+      "reference": "A3",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "B",
+      "reference": "B",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "B",
+      "reference": "B",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "B1",
+      "reference": "B1",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "B1",
+      "reference": "B1",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "B2",
+      "reference": "B2",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "BEL_EN[0]",
+      "reference": "BEL_EN[0]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "BEL_EN[1]",
+      "reference": "BEL_EN[1]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "BEL_EN[2]",
+      "reference": "BEL_EN[2]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "BEL_EN[3]",
+      "reference": "BEL_EN[3]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "BEL_O[0]",
+      "reference": "BEL_O[0]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "BEL_O[1]",
+      "reference": "BEL_O[1]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "BEL_O[2]",
+      "reference": "BEL_O[2]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "BEL_O[3]",
+      "reference": "BEL_O[3]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "BEL_SR[0]",
+      "reference": "BEL_SR[0]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "B_N",
+      "reference": "B_N",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "C",
+      "reference": "C",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[0]",
+      "reference": "CFG[0]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[100]",
+      "reference": "CFG[100]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[101]",
+      "reference": "CFG[101]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[102]",
+      "reference": "CFG[102]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[103]",
+      "reference": "CFG[103]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[104]",
+      "reference": "CFG[104]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[105]",
+      "reference": "CFG[105]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[106]",
+      "reference": "CFG[106]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[107]",
+      "reference": "CFG[107]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[108]",
+      "reference": "CFG[108]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[109]",
+      "reference": "CFG[109]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[10]",
+      "reference": "CFG[10]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[110]",
+      "reference": "CFG[110]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[111]",
+      "reference": "CFG[111]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[112]",
+      "reference": "CFG[112]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[113]",
+      "reference": "CFG[113]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[114]",
+      "reference": "CFG[114]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[115]",
+      "reference": "CFG[115]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[116]",
+      "reference": "CFG[116]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[117]",
+      "reference": "CFG[117]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[118]",
+      "reference": "CFG[118]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[119]",
+      "reference": "CFG[119]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[11]",
+      "reference": "CFG[11]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[120]",
+      "reference": "CFG[120]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[121]",
+      "reference": "CFG[121]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[122]",
+      "reference": "CFG[122]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[123]",
+      "reference": "CFG[123]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[124]",
+      "reference": "CFG[124]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[125]",
+      "reference": "CFG[125]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[126]",
+      "reference": "CFG[126]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[127]",
+      "reference": "CFG[127]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[128]",
+      "reference": "CFG[128]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[129]",
+      "reference": "CFG[129]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[12]",
+      "reference": "CFG[12]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[130]",
+      "reference": "CFG[130]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[131]",
+      "reference": "CFG[131]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[132]",
+      "reference": "CFG[132]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[133]",
+      "reference": "CFG[133]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[134]",
+      "reference": "CFG[134]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[135]",
+      "reference": "CFG[135]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[136]",
+      "reference": "CFG[136]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[137]",
+      "reference": "CFG[137]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[138]",
+      "reference": "CFG[138]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[139]",
+      "reference": "CFG[139]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[13]",
+      "reference": "CFG[13]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[140]",
+      "reference": "CFG[140]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[141]",
+      "reference": "CFG[141]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[142]",
+      "reference": "CFG[142]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[143]",
+      "reference": "CFG[143]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[144]",
+      "reference": "CFG[144]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[145]",
+      "reference": "CFG[145]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[146]",
+      "reference": "CFG[146]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[147]",
+      "reference": "CFG[147]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[148]",
+      "reference": "CFG[148]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[149]",
+      "reference": "CFG[149]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[14]",
+      "reference": "CFG[14]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[150]",
+      "reference": "CFG[150]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[151]",
+      "reference": "CFG[151]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[152]",
+      "reference": "CFG[152]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[153]",
+      "reference": "CFG[153]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[154]",
+      "reference": "CFG[154]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[155]",
+      "reference": "CFG[155]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[156]",
+      "reference": "CFG[156]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[157]",
+      "reference": "CFG[157]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[15]",
+      "reference": "CFG[15]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[16]",
+      "reference": "CFG[16]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[17]",
+      "reference": "CFG[17]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[18]",
+      "reference": "CFG[18]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[19]",
+      "reference": "CFG[19]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[1]",
+      "reference": "CFG[1]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[20]",
+      "reference": "CFG[20]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[21]",
+      "reference": "CFG[21]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[22]",
+      "reference": "CFG[22]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[23]",
+      "reference": "CFG[23]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[24]",
+      "reference": "CFG[24]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[25]",
+      "reference": "CFG[25]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[26]",
+      "reference": "CFG[26]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[27]",
+      "reference": "CFG[27]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[28]",
+      "reference": "CFG[28]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[29]",
+      "reference": "CFG[29]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[2]",
+      "reference": "CFG[2]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[30]",
+      "reference": "CFG[30]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[31]",
+      "reference": "CFG[31]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[32]",
+      "reference": "CFG[32]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[33]",
+      "reference": "CFG[33]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[34]",
+      "reference": "CFG[34]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[35]",
+      "reference": "CFG[35]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[36]",
+      "reference": "CFG[36]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[37]",
+      "reference": "CFG[37]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[38]",
+      "reference": "CFG[38]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[39]",
+      "reference": "CFG[39]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[3]",
+      "reference": "CFG[3]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[40]",
+      "reference": "CFG[40]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[41]",
+      "reference": "CFG[41]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[42]",
+      "reference": "CFG[42]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[43]",
+      "reference": "CFG[43]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[44]",
+      "reference": "CFG[44]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[45]",
+      "reference": "CFG[45]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[46]",
+      "reference": "CFG[46]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[47]",
+      "reference": "CFG[47]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[48]",
+      "reference": "CFG[48]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[49]",
+      "reference": "CFG[49]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[4]",
+      "reference": "CFG[4]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[50]",
+      "reference": "CFG[50]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[51]",
+      "reference": "CFG[51]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[52]",
+      "reference": "CFG[52]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[53]",
+      "reference": "CFG[53]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[54]",
+      "reference": "CFG[54]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[55]",
+      "reference": "CFG[55]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[56]",
+      "reference": "CFG[56]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[57]",
+      "reference": "CFG[57]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[58]",
+      "reference": "CFG[58]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[59]",
+      "reference": "CFG[59]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[5]",
+      "reference": "CFG[5]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[60]",
+      "reference": "CFG[60]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[61]",
+      "reference": "CFG[61]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[62]",
+      "reference": "CFG[62]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[63]",
+      "reference": "CFG[63]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[64]",
+      "reference": "CFG[64]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[65]",
+      "reference": "CFG[65]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[66]",
+      "reference": "CFG[66]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[67]",
+      "reference": "CFG[67]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[68]",
+      "reference": "CFG[68]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[69]",
+      "reference": "CFG[69]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[6]",
+      "reference": "CFG[6]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[70]",
+      "reference": "CFG[70]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[71]",
+      "reference": "CFG[71]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[72]",
+      "reference": "CFG[72]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[73]",
+      "reference": "CFG[73]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[74]",
+      "reference": "CFG[74]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[75]",
+      "reference": "CFG[75]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[76]",
+      "reference": "CFG[76]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[77]",
+      "reference": "CFG[77]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[78]",
+      "reference": "CFG[78]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[79]",
+      "reference": "CFG[79]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[7]",
+      "reference": "CFG[7]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[80]",
+      "reference": "CFG[80]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[81]",
+      "reference": "CFG[81]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[82]",
+      "reference": "CFG[82]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[83]",
+      "reference": "CFG[83]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[84]",
+      "reference": "CFG[84]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[85]",
+      "reference": "CFG[85]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[86]",
+      "reference": "CFG[86]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[87]",
+      "reference": "CFG[87]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[88]",
+      "reference": "CFG[88]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[89]",
+      "reference": "CFG[89]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[8]",
+      "reference": "CFG[8]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[90]",
+      "reference": "CFG[90]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[91]",
+      "reference": "CFG[91]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[92]",
+      "reference": "CFG[92]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[93]",
+      "reference": "CFG[93]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[94]",
+      "reference": "CFG[94]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[95]",
+      "reference": "CFG[95]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[96]",
+      "reference": "CFG[96]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[97]",
+      "reference": "CFG[97]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[98]",
+      "reference": "CFG[98]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[99]",
+      "reference": "CFG[99]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CFG[9]",
+      "reference": "CFG[9]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CLK",
+      "reference": "CLK",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CLK",
+      "reference": "CLK",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CLKNET_0_CLK",
+      "reference": "CLKNET_0_CLK",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CLKNET_1_0__LEAF_CLK",
+      "reference": "CLKNET_1_0__LEAF_CLK",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "CLKNET_1_1__LEAF_CLK",
+      "reference": "CLKNET_1_1__LEAF_CLK",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "D",
+      "reference": "D",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "E_IN[0]",
+      "reference": "E_IN[0]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "E_IN[1]",
+      "reference": "E_IN[1]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "E_IN[2]",
+      "reference": "E_IN[2]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "E_IN[3]",
+      "reference": "E_IN[3]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "E_OUT[0]",
+      "reference": "E_OUT[0]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "E_OUT[1]",
+      "reference": "E_OUT[1]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "E_OUT[2]",
+      "reference": "E_OUT[2]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "E_OUT[3]",
+      "reference": "E_OUT[3]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[0]_U_SLICE/FF_Q",
+      "reference": "G_SLICE[0]_U_SLICE/FF_Q",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[0]_U_SLICE/_00_",
+      "reference": "G_SLICE[0]_U_SLICE/_00_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[0]_U_SLICE/_01_",
+      "reference": "G_SLICE[0]_U_SLICE/_01_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[0]_U_SLICE/_02_",
+      "reference": "G_SLICE[0]_U_SLICE/_02_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[0]_U_SLICE/_03_",
+      "reference": "G_SLICE[0]_U_SLICE/_03_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[0]_U_SLICE/_04_",
+      "reference": "G_SLICE[0]_U_SLICE/_04_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[0]_U_SLICE/_05_",
+      "reference": "G_SLICE[0]_U_SLICE/_05_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[0]_U_SLICE/_06_",
+      "reference": "G_SLICE[0]_U_SLICE/_06_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[0]_U_SLICE/_07_",
+      "reference": "G_SLICE[0]_U_SLICE/_07_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[0]_U_SLICE/_08_",
+      "reference": "G_SLICE[0]_U_SLICE/_08_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[1]_U_SLICE/FF_Q",
+      "reference": "G_SLICE[1]_U_SLICE/FF_Q",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[1]_U_SLICE/_00_",
+      "reference": "G_SLICE[1]_U_SLICE/_00_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[1]_U_SLICE/_01_",
+      "reference": "G_SLICE[1]_U_SLICE/_01_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[1]_U_SLICE/_02_",
+      "reference": "G_SLICE[1]_U_SLICE/_02_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[1]_U_SLICE/_03_",
+      "reference": "G_SLICE[1]_U_SLICE/_03_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[1]_U_SLICE/_04_",
+      "reference": "G_SLICE[1]_U_SLICE/_04_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[1]_U_SLICE/_05_",
+      "reference": "G_SLICE[1]_U_SLICE/_05_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[1]_U_SLICE/_06_",
+      "reference": "G_SLICE[1]_U_SLICE/_06_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[1]_U_SLICE/_07_",
+      "reference": "G_SLICE[1]_U_SLICE/_07_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[1]_U_SLICE/_08_",
+      "reference": "G_SLICE[1]_U_SLICE/_08_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[2]_U_SLICE/FF_Q",
+      "reference": "G_SLICE[2]_U_SLICE/FF_Q",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[2]_U_SLICE/_00_",
+      "reference": "G_SLICE[2]_U_SLICE/_00_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[2]_U_SLICE/_01_",
+      "reference": "G_SLICE[2]_U_SLICE/_01_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[2]_U_SLICE/_02_",
+      "reference": "G_SLICE[2]_U_SLICE/_02_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[2]_U_SLICE/_03_",
+      "reference": "G_SLICE[2]_U_SLICE/_03_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[2]_U_SLICE/_04_",
+      "reference": "G_SLICE[2]_U_SLICE/_04_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[2]_U_SLICE/_05_",
+      "reference": "G_SLICE[2]_U_SLICE/_05_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[2]_U_SLICE/_06_",
+      "reference": "G_SLICE[2]_U_SLICE/_06_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[2]_U_SLICE/_07_",
+      "reference": "G_SLICE[2]_U_SLICE/_07_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[2]_U_SLICE/_08_",
+      "reference": "G_SLICE[2]_U_SLICE/_08_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[3]_U_SLICE/FF_Q",
+      "reference": "G_SLICE[3]_U_SLICE/FF_Q",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[3]_U_SLICE/_00_",
+      "reference": "G_SLICE[3]_U_SLICE/_00_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[3]_U_SLICE/_01_",
+      "reference": "G_SLICE[3]_U_SLICE/_01_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[3]_U_SLICE/_02_",
+      "reference": "G_SLICE[3]_U_SLICE/_02_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[3]_U_SLICE/_03_",
+      "reference": "G_SLICE[3]_U_SLICE/_03_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[3]_U_SLICE/_04_",
+      "reference": "G_SLICE[3]_U_SLICE/_04_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[3]_U_SLICE/_05_",
+      "reference": "G_SLICE[3]_U_SLICE/_05_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[3]_U_SLICE/_06_",
+      "reference": "G_SLICE[3]_U_SLICE/_06_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[3]_U_SLICE/_07_",
+      "reference": "G_SLICE[3]_U_SLICE/_07_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "G_SLICE[3]_U_SLICE/_08_",
+      "reference": "G_SLICE[3]_U_SLICE/_08_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "LUT_IN[0]",
+      "reference": "LUT_IN[0]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "LUT_IN[10]",
+      "reference": "LUT_IN[10]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "LUT_IN[11]",
+      "reference": "LUT_IN[11]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "LUT_IN[12]",
+      "reference": "LUT_IN[12]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "LUT_IN[13]",
+      "reference": "LUT_IN[13]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "LUT_IN[14]",
+      "reference": "LUT_IN[14]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "LUT_IN[15]",
+      "reference": "LUT_IN[15]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "LUT_IN[1]",
+      "reference": "LUT_IN[1]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "LUT_IN[2]",
+      "reference": "LUT_IN[2]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "LUT_IN[3]",
+      "reference": "LUT_IN[3]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "LUT_IN[4]",
+      "reference": "LUT_IN[4]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "LUT_IN[5]",
+      "reference": "LUT_IN[5]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "LUT_IN[6]",
+      "reference": "LUT_IN[6]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "LUT_IN[7]",
+      "reference": "LUT_IN[7]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "LUT_IN[8]",
+      "reference": "LUT_IN[8]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "LUT_IN[9]",
+      "reference": "LUT_IN[9]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "L_HI",
+      "reference": "L_HI",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "N_IN[0]",
+      "reference": "N_IN[0]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "N_IN[1]",
+      "reference": "N_IN[1]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "N_IN[2]",
+      "reference": "N_IN[2]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "N_IN[3]",
+      "reference": "N_IN[3]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "N_OUT[0]",
+      "reference": "N_OUT[0]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "N_OUT[1]",
+      "reference": "N_OUT[1]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "N_OUT[2]",
+      "reference": "N_OUT[2]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "N_OUT[3]",
+      "reference": "N_OUT[3]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "Q",
+      "reference": "Q",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "RESET_B",
+      "reference": "RESET_B",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "S",
+      "reference": "S",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "S0",
+      "reference": "S0",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "S1",
+      "reference": "S1",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "S_IN[0]",
+      "reference": "S_IN[0]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "S_IN[1]",
+      "reference": "S_IN[1]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "S_IN[2]",
+      "reference": "S_IN[2]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "S_IN[3]",
+      "reference": "S_IN[3]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "S_OUT[0]",
+      "reference": "S_OUT[0]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "S_OUT[1]",
+      "reference": "S_OUT[1]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "S_OUT[2]",
+      "reference": "S_OUT[2]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "S_OUT[3]",
+      "reference": "S_OUT[3]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/NET13",
+      "reference": "U_SM/NET13",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/NET14",
+      "reference": "U_SM/NET14",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/NET15",
+      "reference": "U_SM/NET15",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/NET16",
+      "reference": "U_SM/NET16",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/NET17",
+      "reference": "U_SM/NET17",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/NET18",
+      "reference": "U_SM/NET18",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/NET19",
+      "reference": "U_SM/NET19",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/NET20",
+      "reference": "U_SM/NET20",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_000_",
+      "reference": "U_SM/_000_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_002_",
+      "reference": "U_SM/_002_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_003_",
+      "reference": "U_SM/_003_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_005_",
+      "reference": "U_SM/_005_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_008_",
+      "reference": "U_SM/_008_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_009_",
+      "reference": "U_SM/_009_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_010_",
+      "reference": "U_SM/_010_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_011_",
+      "reference": "U_SM/_011_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_012_",
+      "reference": "U_SM/_012_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_013_",
+      "reference": "U_SM/_013_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_014_",
+      "reference": "U_SM/_014_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_015_",
+      "reference": "U_SM/_015_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_016_",
+      "reference": "U_SM/_016_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_017_",
+      "reference": "U_SM/_017_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_018_",
+      "reference": "U_SM/_018_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_019_",
+      "reference": "U_SM/_019_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_020_",
+      "reference": "U_SM/_020_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_021_",
+      "reference": "U_SM/_021_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_022_",
+      "reference": "U_SM/_022_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_023_",
+      "reference": "U_SM/_023_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_024_",
+      "reference": "U_SM/_024_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_025_",
+      "reference": "U_SM/_025_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_026_",
+      "reference": "U_SM/_026_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_027_",
+      "reference": "U_SM/_027_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_028_",
+      "reference": "U_SM/_028_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_029_",
+      "reference": "U_SM/_029_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_030_",
+      "reference": "U_SM/_030_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_031_",
+      "reference": "U_SM/_031_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_032_",
+      "reference": "U_SM/_032_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_033_",
+      "reference": "U_SM/_033_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_034_",
+      "reference": "U_SM/_034_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_035_",
+      "reference": "U_SM/_035_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_036_",
+      "reference": "U_SM/_036_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_037_",
+      "reference": "U_SM/_037_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_038_",
+      "reference": "U_SM/_038_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_039_",
+      "reference": "U_SM/_039_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_040_",
+      "reference": "U_SM/_040_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_041_",
+      "reference": "U_SM/_041_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_042_",
+      "reference": "U_SM/_042_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_043_",
+      "reference": "U_SM/_043_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_044_",
+      "reference": "U_SM/_044_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_045_",
+      "reference": "U_SM/_045_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_046_",
+      "reference": "U_SM/_046_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_047_",
+      "reference": "U_SM/_047_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_048_",
+      "reference": "U_SM/_048_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_049_",
+      "reference": "U_SM/_049_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_050_",
+      "reference": "U_SM/_050_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_051_",
+      "reference": "U_SM/_051_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_052_",
+      "reference": "U_SM/_052_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_053_",
+      "reference": "U_SM/_053_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_054_",
+      "reference": "U_SM/_054_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_055_",
+      "reference": "U_SM/_055_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_056_",
+      "reference": "U_SM/_056_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_057_",
+      "reference": "U_SM/_057_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_058_",
+      "reference": "U_SM/_058_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_059_",
+      "reference": "U_SM/_059_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_060_",
+      "reference": "U_SM/_060_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_061_",
+      "reference": "U_SM/_061_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_062_",
+      "reference": "U_SM/_062_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_063_",
+      "reference": "U_SM/_063_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_064_",
+      "reference": "U_SM/_064_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_065_",
+      "reference": "U_SM/_065_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_066_",
+      "reference": "U_SM/_066_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_067_",
+      "reference": "U_SM/_067_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_068_",
+      "reference": "U_SM/_068_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_069_",
+      "reference": "U_SM/_069_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_070_",
+      "reference": "U_SM/_070_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_071_",
+      "reference": "U_SM/_071_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_072_",
+      "reference": "U_SM/_072_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_073_",
+      "reference": "U_SM/_073_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_074_",
+      "reference": "U_SM/_074_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_075_",
+      "reference": "U_SM/_075_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_076_",
+      "reference": "U_SM/_076_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_077_",
+      "reference": "U_SM/_077_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_078_",
+      "reference": "U_SM/_078_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_079_",
+      "reference": "U_SM/_079_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_080_",
+      "reference": "U_SM/_080_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_081_",
+      "reference": "U_SM/_081_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_082_",
+      "reference": "U_SM/_082_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_083_",
+      "reference": "U_SM/_083_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_084_",
+      "reference": "U_SM/_084_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_085_",
+      "reference": "U_SM/_085_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_086_",
+      "reference": "U_SM/_086_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_087_",
+      "reference": "U_SM/_087_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_088_",
+      "reference": "U_SM/_088_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_089_",
+      "reference": "U_SM/_089_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_090_",
+      "reference": "U_SM/_090_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_091_",
+      "reference": "U_SM/_091_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_092_",
+      "reference": "U_SM/_092_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_093_",
+      "reference": "U_SM/_093_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_094_",
+      "reference": "U_SM/_094_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_095_",
+      "reference": "U_SM/_095_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_096_",
+      "reference": "U_SM/_096_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_097_",
+      "reference": "U_SM/_097_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_098_",
+      "reference": "U_SM/_098_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "U_SM/_099_",
+      "reference": "U_SM/_099_",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "W_IN[0]",
+      "reference": "W_IN[0]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "W_IN[1]",
+      "reference": "W_IN[1]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "W_IN[2]",
+      "reference": "W_IN[2]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "W_IN[3]",
+      "reference": "W_IN[3]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "W_OUT[0]",
+      "reference": "W_OUT[0]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "W_OUT[1]",
+      "reference": "W_OUT[1]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "W_OUT[2]",
+      "reference": "W_OUT[2]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "W_OUT[3]",
+      "reference": "W_OUT[3]",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "X",
+      "reference": "X",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "X",
+      "reference": "X",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "X",
+      "reference": "X",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "X",
+      "reference": "X",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "Y",
+      "reference": "Y",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "Y",
+      "reference": "Y",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "Y",
+      "reference": "Y",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "Y",
+      "reference": "Y",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "Y",
+      "reference": "Y",
+      "pin": true,
+      "heuristic": false
+    },
+    {
+      "layout": "Y",
+      "reference": "Y",
+      "pin": true,
+      "heuristic": false
+    }
+  ]
+}

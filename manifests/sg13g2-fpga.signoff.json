@@ -54,12 +54,12 @@
       "reason": null,
       "graded_by_build": true,
       "citation": {
-        "file": "layout/records/20261018-92a63aa/drc.json",
+        "file": "layout/records/20261027-79803ab/drc.json",
         "command": null,
         "kind": "drc",
         "check_status": "clean",
-        "content_hash": "sha256:8b14fbd2a7cb932abeb148a89dda73445c9f18f7174148b605ebf1c023045521",
-        "input_verified": null,
+        "content_hash": "sha256:339931777dce865e60e70c49dbc431aedf92e879b353c34180b5b2c417970bfa",
+        "input_verified": true,
         "exit_status": 0,
         "coverage": {
           "layers_in_stream_without_rules": [
@@ -67,17 +67,21 @@
             "8/25",
             "10/2",
             "10/25",
-            "14/0",
             "30/2",
             "30/25",
-            "31/0",
             "134/2",
             "134/25",
             "189/4"
           ],
           "rules_skipped": [
             "metal5.enclosing.mim.1",
-            "mim.enclosing.topvia1.1"
+            "mim.enclosing.topvia1.1",
+            "nwell.enclosing.nactiv.1",
+            "nwell.enclosing.nactiv.dig.1",
+            "nwell.enclosing.nactiv.hv.1",
+            "nwell.space.nactiv.1",
+            "nwell.space.nactiv.dig.1",
+            "nwell.space.nactiv.hv.1"
           ],
           "deck_scope": [
             "Act",
@@ -89,6 +93,7 @@
             "M4",
             "M5",
             "MIM",
+            "NW",
             "TM1",
             "TM2",
             "TV1",
@@ -96,7 +101,8 @@
             "V1",
             "V2",
             "V3",
-            "V4"
+            "V4",
+            "pSD"
           ]
         }
       }
@@ -112,12 +118,12 @@
       "reason": null,
       "graded_by_build": true,
       "citation": {
-        "file": "layout/records/20261018-92a63aa/lvs.json",
+        "file": "layout/records/20261027-79803ab/lvs.json",
         "command": null,
         "kind": "lvs",
         "check_status": "match",
-        "content_hash": "sha256:278fd190c0996477c879e458562c908eb916df434b2d57af041b4c7dc9cb1675",
-        "input_verified": null,
+        "content_hash": "sha256:3841284fcf7fca82b5641850a2a7c68d58c786f00d80e500f6487589409b01cb",
+        "input_verified": true,
         "exit_status": 0
       }
     },
@@ -134,29 +140,29 @@
       "reason": null,
       "graded_by_build": true,
       "citation": {
-        "file": "layout/records/20261018-92a63aa/sta.json",
+        "file": "layout/records/20261027-79803ab/sta.json",
         "command": null,
         "kind": "sta",
         "check_status": "ok",
-        "content_hash": "sha256:cdfc6a8fd06fa44bae76d6fb3f81915a7bc73a0b6d965bf7bf51569ce3e9b802",
-        "input_verified": null,
+        "content_hash": "sha256:2fc468bddfb88dc2612e5bf12565fd4de03a143bc0c216272061a64728738a64",
+        "input_verified": true,
         "exit_status": 0
       },
       "citations_graded": [
         {
-          "citation": "layout/records/20261018-92a63aa/sta.json",
+          "citation": "layout/records/20261027-79803ab/sta.json",
           "status": "met",
           "reason": null
         }
       ],
       "citations": [
         {
-          "file": "layout/records/20261018-92a63aa/sta.json",
+          "file": "layout/records/20261027-79803ab/sta.json",
           "command": null,
           "kind": "sta",
           "check_status": "ok",
-          "content_hash": "sha256:cdfc6a8fd06fa44bae76d6fb3f81915a7bc73a0b6d965bf7bf51569ce3e9b802",
-          "input_verified": null,
+          "content_hash": "sha256:2fc468bddfb88dc2612e5bf12565fd4de03a143bc0c216272061a64728738a64",
+          "input_verified": true,
           "exit_status": 0
         }
       ]
@@ -293,7 +299,7 @@
         "**Port accessibility \u2014 PROVISIONAL, not yet in force** (issue #2839; operator ruling 2AMLogic/product#134, amendment text drafted in 2AMLogic/product PR #168 and awaiting the two-key ratification). Every supply the cited `klt erc` spec declares must be published as an **edge-accessible boundary port** and named in a **machine-readable abstract**: (1) a `klt socket-check` envelope whose `power_ports` facts show, for each declared supply, a `POWER`/`GROUND` pin of that name with drawn conductor under its label lying within the edge band of a counted outline edge with a clear approach channel (no other conductor on its layer between it and the edge), on an allowed layer; and (2) a `klt lef-abstract` envelope whose LEF carries a `PIN` of the same name with `USE POWER`/`USE GROUND` matching the port, a drawn `PORT` on the same layer touching the port, and a `SIZE` equal to the outline. Parameters, with their provisional defaults, are set per block in the `klt signoff` manifest's `power_ports` object: the edge band (`edge_band_um`, default `0` \u2014 the port must touch the outline; the draft proposes one minimum metal pitch), the counted edges (all four), and the allowed layers (default: any layer that resolves to a LEF routing layer, the draft's recommendation). Until ratification `klt signoff` grades this clause only for a block that opts in (`power_ports.required: true`, or port evidence cited in item 11's list), after the ERC/LVS rules above are proven, rendering `power_port_unproven`, `no_edge_power_port`, `power_port_interior_only`, `power_port_layer_disallowed`, `lef_power_pin_missing` or `lef_power_pin_mismatch` when it fails \u2014 see `docs/cli/signoff.md` \u2192 \"Item 11 port accessibility\". Not graded yet: one port per declared island of a multi-island supply."
       ],
       "status": "unmet",
-      "reason": "supply_spec_incomplete",
+      "reason": "no_pdn",
       "graded_by_build": true,
       "citation": null
     },
