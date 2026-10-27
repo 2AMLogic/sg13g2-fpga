@@ -2,6 +2,11 @@
 
 Chronological record of merged PRs and closed issues, newest first. Maintained by the Guide role.
 
+### 2026-10-27
+
+- **PR #43**: feat(erc): declare VDD/VSS supplies and substrate tie in ERC spec, re-cite item 11
+- **Issue #42** (closed): T1 item 11 (power delivery): add nets[]/ties[] to the ERC supply spec and resolve tapcell_master null
+
 ### 2026-10-24
 
 - **PR #34**: feat(layout): constrain tile track pins to facing edges for abutment
