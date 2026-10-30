@@ -17,7 +17,11 @@ KLT="uvx --from git+https://github.com/2AMLogic/klayout-tools.git@bf24d463fb3fc0
 
 Requirements and traps are those of [`flow/README.md`](../flow/README.md) (docker `openroad`
 wrapper mounts only `$PWD`; run from the repo, `PDK_ROOT` is exported by the script). Scratch
-output goes to the gitignored `flow/build/tile/`. Interpretation of each record lives in
+output goes to the gitignored `flow/build/tile/`. The routed stream is also copied into each
+record as `logic_tile_routed.gds` (about 0.5 MB), committed so T1 item 2 can attest it
+(`manifests/item-2.attestation.json`); the P&R flow is byte-deterministic (a re-run of
+`20261030-09fa1bd` reproduced the `20261027-5171c5d` stream hash). The LVS envelope's
+`environment.layout_sha256` is the hash of the extracted gate-level netlist, not of the GDS. Interpretation of each record lives in
 [`measurements/`](../measurements/); envelopes embed absolute worktree paths and `--check` only
 passes in the tree that produced them.
 

@@ -5,18 +5,18 @@
   "tier": null,
   "t1_item_count": 11,
   "build_t1_item_count": 11,
-  "t1_met_count": 3,
+  "t1_met_count": 4,
   "t1_not_applicable_count": 1,
   "source_doc": "docs/design-evidence-tiers.md",
   "source_doc_content_hash": "sha256:a26b90262320d0fbd32b3f549a02b6300832706041797a559d8bf6bdb62efdc7",
   "build": {
-    "version": "0.8.0",
-    "package_version": "0.8.0",
-    "git_commit": "c572046be644e0407f693f2410f3abb799d68a3a",
-    "git_tag": "v0.8.0",
+    "version": "0.8.1.dev70+gce6583fe1e8f",
+    "package_version": "0.8.1.dev70+gce6583fe1e8f",
+    "git_commit": "ce6583fe1e8ffc01c8e47731a19f5e8abc217f15",
+    "git_tag": null,
     "dirty": false,
-    "is_release": true,
-    "grading_ruleset_id": "sha256:46c446d84423b7399ee1cf957b3d49801ae4f42a0bda53da92f435776cf977c4"
+    "is_release": false,
+    "grading_ruleset_id": "sha256:f037335b6097bc130c7509b7f3a4e68b1ac59e1e422f361294cb8e4eb626b01e"
   },
   "items": [
     {
@@ -38,10 +38,35 @@
       "partition": null,
       "text": "committed routed GDS/OASIS from place-and-route, reproducibly generated from the gate-level netlist (P&R script/flow committed, not a one-off hand edit). For the same full-custom sub-case, this item is satisfied instead by the Analog column's artifact: committed GDS/OASIS, reproducibly generated or with documented provenance \u2014 hand-drawn layout, not P&R output.",
       "notes": [],
-      "status": "unmet",
-      "reason": "no_evidence",
+      "status": "met",
+      "reason": null,
       "graded_by_build": true,
-      "citation": null
+      "citation": {
+        "file": "manifests/item-2.attestation.json",
+        "command": null,
+        "kind": "generic",
+        "check_status": "pass",
+        "content_hash": "sha256:339931777dce865e60e70c49dbc431aedf92e879b353c34180b5b2c417970bfa",
+        "input_verified": true,
+        "exit_status": 0,
+        "artifact_binding": {
+          "t1_item": 2,
+          "path": {
+            "path": "layout/records/20261030-09fa1bd/logic_tile_routed.gds",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:339931777dce865e60e70c49dbc431aedf92e879b353c34180b5b2c417970bfa",
+          "input_verified": true,
+          "summary": "T1 item 2 (Layout): 3/3 attestation checks passed (klt signoff --attest)",
+          "source": "layout/records/20261030-09fa1bd/logic_tile_routed.gds",
+          "attestation": {
+            "producer": "klt signoff --attest",
+            "inventory_schema_version": null,
+            "check_count": 3,
+            "passed_count": 3
+          }
+        }
+      }
     },
     {
       "tier": "T1",
@@ -54,12 +79,12 @@
       "reason": null,
       "graded_by_build": true,
       "citation": {
-        "file": "layout/records/20261027-5171c5d/drc.json",
+        "file": "layout/records/20261030-09fa1bd/drc.json",
         "command": null,
         "kind": "drc",
         "check_status": "clean",
         "content_hash": "sha256:339931777dce865e60e70c49dbc431aedf92e879b353c34180b5b2c417970bfa",
-        "input_verified": null,
+        "input_verified": true,
         "exit_status": 0,
         "coverage": {
           "layers_in_stream_without_rules": [
@@ -118,12 +143,12 @@
       "reason": null,
       "graded_by_build": true,
       "citation": {
-        "file": "layout/records/20261027-5171c5d/lvs.json",
+        "file": "layout/records/20261030-09fa1bd/lvs.json",
         "command": null,
         "kind": "lvs",
         "check_status": "match",
         "content_hash": "sha256:3841284fcf7fca82b5641850a2a7c68d58c786f00d80e500f6487589409b01cb",
-        "input_verified": null,
+        "input_verified": true,
         "exit_status": 0
       }
     },
@@ -142,7 +167,7 @@
       "citation": null,
       "citations_graded": [
         {
-          "citation": "layout/records/20261027-5171c5d/sta.json",
+          "citation": "layout/records/20261030-09fa1bd/sta.json",
           "status": "met",
           "reason": null
         }

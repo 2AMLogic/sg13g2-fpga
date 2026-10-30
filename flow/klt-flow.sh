@@ -22,7 +22,7 @@
 #   --pdk-root  IHP-Open-PDK install root (default: klt's own resolution).
 #
 # Writes one envelope per step to <FLOW_REC_DIR>/records/<id>/<step>.json plus
-# <step>.rc (the exit code). A step that cannot run is recorded as
+# <step>.rc (the exit code), and the routed stream as <top>.gds. A step that cannot run is recorded as
 # <step>.not-run with the reason; nothing is omitted. Never overwrites an
 # existing record directory (records are append-only). Single local klt runs
 # only; no corner/MC grids.
@@ -84,6 +84,9 @@ if [[ -n "$NETLIST" ]]; then
 else notrun place-and-route "synthesize produced no netlist_path"; fi
 GDS=$(field place-and-route '.gds_path'); DEF=$(field place-and-route '.def_path')
 VLOG=$(field place-and-route '.verilog_path')
+# Keep the routed stream in the record: the DRC/LVS/ERC envelopes pin it by
+# content hash, and flow/build/ is untracked (T1 item 2 needs it committed).
+if [[ -n "$GDS" && -f "$(rel "$GDS")" ]]; then cp "$(rel "$GDS")" "$REC/$TOP.gds"; fi
 
 # 3. DRC
 if [[ -n "$GDS" ]]; then
