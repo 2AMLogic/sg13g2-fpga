@@ -28,6 +28,10 @@
         }
       }
     },
+    "9": {
+      "file": "manifests/item-9.attestation.json",
+      "content_hash": "sha256:8dbac0f0968d22c57ccf053f13925c30efb57d5667b27a9bcbeb2b5805f8a2da"
+    },
     "10": {
       "file": "manifests/item-10.attestation.json",
       "content_hash": "sha256:03da77f0629a4961467cd580d9696a12d5d72c7bfca845b7173c224c3cb2bf5d"
