@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "kind": "generic",
+  "status": "pass",
+  "t1_item": 1,
+  "summary": "T1 item 1 (Design sources): 5/5 attestation checks passed (klt signoff --attest)",
+  "source": "manifests/inventories/item-1.json",
+  "attestation": {
+    "producer": "klt signoff --attest",
+    "inventory_schema_version": 1,
+    "hash_algorithm": "sha256-raw-bytes",
+    "check_count": 5,
+    "passed_count": 5,
+    "checks": [
+      {
+        "check": "present",
+        "role": "source",
+        "path": "rtl/common/rtl/logic_tile_routed.v",
+        "passed": true,
+        "content_hash": "sha256:6f5c0fee5e882ecff60851c8d9daf6a86486abab6eb0da3e82b45ff143670fd0"
+      },
+      {
+        "check": "present",
+        "role": "source",
+        "path": "rtl/common/rtl/logic_tile_switch_matrix.v",
+        "passed": true,
+        "content_hash": "sha256:34f38f5837b7384e919dc4e21081124786600638aba41159379d95262636eb65"
+      },
+      {
+        "check": "present",
+        "role": "source",
+        "path": "rtl/common/rtl/lut4_slice.v",
+        "passed": true,
+        "content_hash": "sha256:670559dfb7e57cb8b9b636a211187406e9c9f6e09a9b5ff2c044024030a7a4aa"
+      },
+      {
+        "check": "present",
+        "role": "derived",
+        "path": "layout/records/20261027-5171c5d/logic_tile_routed_synth.v",
+        "passed": true,
+        "content_hash": "sha256:0ce67b670de22ff545140ccc4de7a4513731b80f015b6f5efc09071c6a29429c"
+      },
+      {
+        "check": "command",
+        "role": "freshness",
+        "target": "layout/records/20261027-5171c5d/logic_tile_routed_synth.v",
+        "generator": "klt synthesize layout/requests/synthesize.json (layout/run.sh)",
+        "argv": [
+          "layout/check-synth-fresh.sh",
+          "--skip-deck"
+        ],
+        "cwd": ".",
+        "exit_status": 0,
+        "passed": true
+      }
+    ]
+  },
+  "provenance": {
+    "klt_version": "0.8.1.dev148+g11ed44ef56f8",
+    "klayout_version": null,
+    "pdk": null,
+    "deck": null,
+    "input": {
+      "path": {
+        "path": "manifests/inventories/item-1.json",
+        "scope": "repo"
+      },
+      "content_hash": "sha256:7450a89aa53d395a1b580897660ab9954c4ac3b8dd4474c7b58b238cf533b56d"
+    }
+  }
+}

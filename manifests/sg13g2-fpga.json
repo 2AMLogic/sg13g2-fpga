@@ -2,6 +2,10 @@
   "block": "sg13g2-fpga",
   "kind": "digital",
   "evidence": {
+    "1": {
+      "file": "manifests/item-1.attestation.json",
+      "content_hash": "sha256:7450a89aa53d395a1b580897660ab9954c4ac3b8dd4474c7b58b238cf533b56d"
+    },
     "2": {
       "file": "manifests/item-2.attestation.json",
       "content_hash": "sha256:339931777dce865e60e70c49dbc431aedf92e879b353c34180b5b2c417970bfa"
@@ -31,6 +35,9 @@
           "content_hash": "sha256:7da7479e75802db9487c75f77296177b692b9b1a49aaf8960ef6c812879c2e5f"
         }
       }
+    },
+    "7": {
+      "file": "layout/records/20261027-5171c5d/functional-verification-sdf-slow.json"
     },
     "10": {
       "file": "manifests/item-10.attestation.json",

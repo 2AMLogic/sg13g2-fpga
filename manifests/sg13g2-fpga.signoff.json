@@ -5,18 +5,18 @@
   "tier": null,
   "t1_item_count": 11,
   "build_t1_item_count": 11,
-  "t1_met_count": 4,
+  "t1_met_count": 6,
   "t1_not_applicable_count": 1,
   "source_doc": "docs/design-evidence-tiers.md",
   "source_doc_content_hash": "sha256:a26b90262320d0fbd32b3f549a02b6300832706041797a559d8bf6bdb62efdc7",
   "build": {
-    "version": "0.8.1.dev70+gce6583fe1e8f",
-    "package_version": "0.8.1.dev70+gce6583fe1e8f",
-    "git_commit": "ce6583fe1e8ffc01c8e47731a19f5e8abc217f15",
+    "version": "0.8.1.dev148+g11ed44ef56f8",
+    "package_version": "0.8.1.dev148+g11ed44ef56f8",
+    "git_commit": "11ed44ef56f88ca130fc185bf45fb9f5a6fb1a40",
     "git_tag": null,
     "dirty": false,
     "is_release": false,
-    "grading_ruleset_id": "sha256:f037335b6097bc130c7509b7f3a4e68b1ac59e1e422f361294cb8e4eb626b01e"
+    "grading_ruleset_id": "sha256:2ab7ecb81eaa189cdf4c256727ee948931860fd329c9386effc5082c0a95cf74"
   },
   "items": [
     {
@@ -26,10 +26,35 @@
       "partition": null,
       "text": "committed RTL sources plus the synthesized gate-level netlist derived from them, regenerated on design change. For a hand-captured full-custom digital partition (no RTL, no synthesis step \u2014 see \"Full-custom digital sub-case\" above), this item is satisfied instead by the Analog column's artifact: committed schematic sources (or generator) plus the netlist derived from them, regenerated on design change, with every logic gate captured as a schematic exactly like an analog partition's.",
       "notes": [],
-      "status": "unmet",
-      "reason": "no_evidence",
+      "status": "met",
+      "reason": null,
       "graded_by_build": true,
-      "citation": null
+      "citation": {
+        "file": "manifests/item-1.attestation.json",
+        "command": null,
+        "kind": "generic",
+        "check_status": "pass",
+        "content_hash": "sha256:7450a89aa53d395a1b580897660ab9954c4ac3b8dd4474c7b58b238cf533b56d",
+        "input_verified": true,
+        "exit_status": 0,
+        "artifact_binding": {
+          "t1_item": 1,
+          "path": {
+            "path": "manifests/inventories/item-1.json",
+            "scope": "repo"
+          },
+          "content_hash": "sha256:7450a89aa53d395a1b580897660ab9954c4ac3b8dd4474c7b58b238cf533b56d",
+          "input_verified": true,
+          "summary": "T1 item 1 (Design sources): 5/5 attestation checks passed (klt signoff --attest)",
+          "source": "manifests/inventories/item-1.json",
+          "attestation": {
+            "producer": "klt signoff --attest",
+            "inventory_schema_version": 1,
+            "check_count": 5,
+            "passed_count": 5
+          }
+        }
+      }
     },
     {
       "tier": "T1",
@@ -258,10 +283,18 @@
       "notes": [
         "A `klt pex` citation is only as good as the **device-body bias** of the netlist it ran on (#1983). A device body left on an anonymous, deck-synthesized net has no DC bias path at all, which makes a resimulation of that extracted netlist *physically wrong, not merely imprecise* (`docs/cli/extract.md` \u2192 \"Coverage\") \u2014 the run converges and reports numbers, and those numbers are not comparable to the schematic leg they are being diffed against. A `klt pex` report states the condition in its own `body_bias` block (`docs/cli/pex.md`), and `klt signoff` surfaces it verbatim on this item's citation (`citation.body_bias`). **It does not grade on it**: an item-7 citation whose `body_bias.status` is `\"unbiased\"` still renders `met`, because the condition is a deck-coverage property some PDKs produce on every layout they extract, not a defect this command can adjudicate. So a claim citing item 7 must read that field and state whether its post-layout numbers were measured on a properly-biased netlist \u2014 claimant-enforced, exactly like item 3's DRC-coverage disclosure. The same discipline applies upstream at item 4: `klt lvs`'s `body_verification` block says whether the compare verified the body ties at all, and `\"unchecked\"` (a pre-extracted netlist) is not `\"verified\"`."
       ],
-      "status": "unmet",
-      "reason": "no_evidence",
+      "status": "met",
+      "reason": null,
       "graded_by_build": true,
-      "citation": null
+      "citation": {
+        "file": "layout/records/20261027-5171c5d/functional-verification-sdf-slow.json",
+        "command": null,
+        "kind": "functional-verification",
+        "check_status": "pass",
+        "content_hash": null,
+        "input_verified": null,
+        "exit_status": 0
+      }
     },
     {
       "tier": "T1",

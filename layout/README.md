@@ -6,6 +6,7 @@ Place-and-route of the stamped tile `logic_tile_routed` (issue #9).
 |---|---|
 | `requests/` | `klt` request documents: `synthesize`, `place-and-route`, `lvs`, `erc-spec` (`__PLACEHOLDERS__` are filled in by the runner) |
 | `run.sh` | wrapper over the shared `flow/klt-flow.sh`: synthesize → place-and-route → DRC → extract/LVS → ERC for the tile; single local flow, no STA (timing is #10) |
+| `check-synth-fresh.sh` | cheap freshness check (no Yosys): re-hashes `rtl/common/rtl/*` and the record's committed `logic_tile_routed_synth.v` against its `synthesize.json` (T1 item 1; exit 3 = RTL edited without re-synthesis). `run.sh` copies the netlist into each record and runs the same check |
 | `check-pin-abutment.py` | checks facing track pins from a `place-and-route.json` `pins[]` (`--self-test` for the negative cases); see `measurements/20261024-tile-pin-placement.md` |
 | `records/<UTC date>-<short HEAD>/` | One envelope per step plus `<step>.rc`; append-only, never overwritten |
 

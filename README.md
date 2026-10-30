@@ -107,8 +107,9 @@ Each step is a single local run; the toolchain pins are in `flow/`.
 - **SDF-annotated gate-level re-simulation** of the routed tile:
   `layout/sdf-verify.sh <record-id>`, on a record made by `layout/run.sh`.
 - **The `klt signoff` re-grade** is committed in `manifests/` and re-checked
-  by CI on every push and pull request, together with the T1 item-10
-  attestation (`manifests/inventories/item-10.json`). To regenerate either,
+  by CI on every push and pull request, together with the T1 item-1 and
+  item-10 attestations (`manifests/inventories/item-1.json`,
+  `manifests/inventories/item-10.json`). To regenerate any of them,
   follow [manifests/README.md](manifests/README.md).
 
 ## License
