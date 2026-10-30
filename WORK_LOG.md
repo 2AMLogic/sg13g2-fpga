@@ -2,6 +2,11 @@
 
 Chronological record of merged PRs and closed issues, newest first. Maintained by the Guide role.
 
+### 2026-10-30
+
+- **PR #46**: ci(signoff): bump klt pin to v0.8.0, attest T1 item 10, refresh README status
+- **Issue #36** (closed): T1 item 10 (repo hygiene): bump the signoff klt pin (attest and SDF support), fix README status, attest item 10
+
 ### 2026-10-27
 
 - **PR #43**: feat(erc): declare VDD/VSS supplies and substrate tie in ERC spec, re-cite item 11
