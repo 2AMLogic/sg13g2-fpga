@@ -76,6 +76,10 @@ field() { jq -r "$2 | if type==\"object\" then .path else . end // empty" "$REC/
 # 1. synthesize
 step synthesize $KLT synthesize "$B/synthesize.json" "${PDK_ARGS[@]}" --format json
 NETLIST=$(field synthesize '.netlist_path')
+# Keep the synthesized (pre-P&R) netlist next to its envelope: flow/build/ is
+# untracked, and `klt synthesize --check --netlist` re-hashes this copy against
+# the envelope's netlist_sha256 (T1 item 1, layout/check-synth-fresh.sh).
+if [[ -n "$NETLIST" && -f "$(rel "$NETLIST")" ]]; then cp "$(rel "$NETLIST")" "$REC/${TOP}_synth.v"; fi
 
 # 2. place-and-route (with a power grid)
 if [[ -n "$NETLIST" ]]; then
@@ -154,6 +158,11 @@ if [[ "$FLOW_STA" == 1 ]]; then
 fi
 
 # Consistency checks on the envelopes just written (cheap mode: re-hash inputs).
+if [[ -s "$REC/synthesize.json" && -s "$REC/${TOP}_synth.v" ]]; then
+  $KLT synthesize "$B/synthesize.json" "${PDK_ARGS[@]}" --check "$REC/synthesize.json" \
+      --netlist "$REC/${TOP}_synth.v" >"$REC/synthesize.check.txt" 2>&1; echo "$?" >"$REC/synthesize.check.rc"
+  echo "== synthesize --check: exit $(cat "$REC/synthesize.check.rc")"
+fi
 for c in drc lvs erc; do
   [[ -s "$REC/$c.json" ]] || continue
   $KLT $c --check "$REC/$c.json" >"$REC/$c.check.txt" 2>&1; echo "$?" >"$REC/$c.check.rc"
