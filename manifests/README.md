@@ -27,6 +27,11 @@ uvx --from "klayout-tools @ git+https://github.com/2AMLogic/klayout-tools@$SHA" 
   > manifests/sg13g2-fpga.signoff.json   # exit 3 is expected
 ```
 
+Run it from a clean checkout (or a fresh clone), not a working tree that still has
+`flow/build/`: the DRC and LVS envelopes name gitignored `flow/build/...` inputs, and
+when those files exist locally `input_verified` becomes `true` where CI, which does not
+have them, reports `null`.
+
 ## Rules
 
 - A klt pin bump in `signoff.yml` lands in the same change as a regenerated

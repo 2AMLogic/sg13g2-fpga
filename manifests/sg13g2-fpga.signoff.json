@@ -84,7 +84,7 @@
         "kind": "drc",
         "check_status": "clean",
         "content_hash": "sha256:339931777dce865e60e70c49dbc431aedf92e879b353c34180b5b2c417970bfa",
-        "input_verified": true,
+        "input_verified": null,
         "exit_status": 0,
         "coverage": {
           "layers_in_stream_without_rules": [
@@ -148,7 +148,7 @@
         "kind": "lvs",
         "check_status": "match",
         "content_hash": "sha256:3841284fcf7fca82b5641850a2a7c68d58c786f00d80e500f6487589409b01cb",
-        "input_verified": true,
+        "input_verified": null,
         "exit_status": 0
       }
     },
