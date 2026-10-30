@@ -11,8 +11,8 @@
 # build.grading_ruleset_id) and a floating install would churn it. This is the
 # single place the pin is recorded. Bump it deliberately, together with a
 # regenerated manifests/sg13g2-fpga.signoff.json (see manifests/README.md).
-# Pinned commit: 7755612adb513f00ec61e7a77ff7091aee7630f5, "feat(signoff): item
-# 6 not_applicable outcome"; the same grader sky130-fpga is pinned to.
+# Pinned commit: c572046be644e0407f693f2410f3abb799d68a3a, the klt v0.8.0
+# release (first with `klt signoff --attest` and `sdf` on `klt sta`).
 
 name: signoff
 
@@ -36,7 +36,7 @@ jobs:
 
       - name: Install the pinned klt (klayout-tools)
         run: |
-          uv tool install "klayout-tools @ git+https://github.com/2AMLogic/klayout-tools@7755612adb513f00ec61e7a77ff7091aee7630f5"
+          uv tool install "klayout-tools @ git+https://github.com/2AMLogic/klayout-tools@c572046be644e0407f693f2410f3abb799d68a3a"
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
       - name: Re-run klt signoff and diff against the committed report
@@ -56,3 +56,8 @@ jobs:
             exit 1
           fi
           echo "signoff report reproduced (klt exit $rc)"
+
+      - name: Re-attest T1 item 10 and diff against the committed envelope
+        run: |
+          klt signoff --attest 10 --inventory manifests/inventories/item-10.json \
+            --check manifests/item-10.attestation.json

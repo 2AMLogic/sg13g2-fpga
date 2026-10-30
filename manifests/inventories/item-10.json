@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "kind": "t1-attestation-inventory",
+  "t1_item": 10,
+  "description": "Repo hygiene: README, license, and the CI workflow that keeps the evidence formats valid.",
+  "hygiene": ["README.md", "LICENSE", ".github/workflows/signoff.yml"],
+  "checks": [
+    {
+      "name": "pin-abutment-self-test",
+      "argv": ["python3", "layout/check-pin-abutment.py", "--self-test", "layout/records/20261027-5171c5d/place-and-route.json"]
+    },
+    {
+      "name": "manifest-json-valid",
+      "argv": ["python3", "-m", "json.tool", "manifests/sg13g2-fpga.json"]
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "kind": "generic",
+  "status": "pass",
+  "t1_item": 10,
+  "summary": "T1 item 10 (Repo hygiene): 5/5 attestation checks passed (klt signoff --attest)",
+  "source": "manifests/inventories/item-10.json",
+  "attestation": {
+    "producer": "klt signoff --attest",
+    "inventory_schema_version": 1,
+    "hash_algorithm": "sha256-raw-bytes",
+    "check_count": 5,
+    "passed_count": 5,
+    "checks": [
+      {
+        "check": "present",
+        "role": "hygiene",
+        "path": ".github/workflows/signoff.yml",
+        "passed": true,
+        "content_hash": "sha256:8cedcaeaec3b6a431199bdda23cdb73aef74fe0a7700aebfefac09146b258728"
+      },
+      {
+        "check": "present",
+        "role": "hygiene",
+        "path": "LICENSE",
+        "passed": true,
+        "content_hash": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      {
+        "check": "present",
+        "role": "hygiene",
+        "path": "README.md",
+        "passed": true,
+        "content_hash": "sha256:2e2ad12f7230df181f48e649501b2a7ae899928b72bee9e088334495aab3c515"
+      },
+      {
+        "check": "command",
+        "role": "audit",
+        "name": "pin-abutment-self-test",
+        "argv": [
+          "python3",
+          "layout/check-pin-abutment.py",
+          "--self-test",
+          "layout/records/20261027-5171c5d/place-and-route.json"
+        ],
+        "cwd": ".",
+        "exit_status": 0,
+        "passed": true
+      },
+      {
+        "check": "command",
+        "role": "audit",
+        "name": "manifest-json-valid",
+        "argv": [
+          "python3",
+          "-m",
+          "json.tool",
+          "manifests/sg13g2-fpga.json"
+        ],
+        "cwd": ".",
+        "exit_status": 0,
+        "passed": true
+      }
+    ]
+  },
+  "provenance": {
+    "klt_version": "0.8.0",
+    "klayout_version": null,
+    "pdk": null,
+    "deck": null,
+    "input": {
+      "path": {
+        "path": "manifests/inventories/item-10.json",
+        "scope": "repo"
+      },
+      "content_hash": "sha256:03da77f0629a4961467cd580d9696a12d5d72c7bfca845b7173c224c3cb2bf5d"
+    }
+  }
+}
