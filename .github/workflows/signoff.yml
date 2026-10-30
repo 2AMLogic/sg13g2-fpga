@@ -12,7 +12,8 @@
 # single place the pin is recorded. Bump it deliberately, together with a
 # regenerated manifests/sg13g2-fpga.signoff.json (see manifests/README.md).
 # Pinned commit: 11ed44ef56f88ca130fc185bf45fb9f5a6fb1a40, klayout-tools main with
-# `klt synthesize --check --netlist --skip-deck` (the item-1 freshness check).
+# `klt synthesize --check --netlist --skip-deck` (the item-1 freshness check) and
+# item-2 `--attest 2 --input STREAM` (klayout-tools#4188, merged before it).
 
 name: signoff
 
@@ -61,6 +62,11 @@ jobs:
         run: |
           klt signoff --attest 10 --inventory manifests/inventories/item-10.json \
             --check manifests/item-10.attestation.json
+
+      - name: Re-attest T1 item 2 and diff against the committed envelope
+        run: |
+          klt signoff --attest 2 --input layout/records/20261030-09fa1bd/logic_tile_routed.gds \
+            --check manifests/item-2.attestation.json
 
       - name: Re-attest T1 item 1 (RTL to synthesized netlist freshness)
         run: |
