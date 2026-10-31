@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "kind": "generic",
+  "status": "pass",
+  "t1_item": 8,
+  "summary": "T1 item 8 (Characterization report): one row per ratified spec row from layout/records/20261027-5171c5d; rows 4 and the fabric half of row 6 are recorded as no evidence; power is a default-activity estimate; no Fmax claimed",
+  "source": "measurements/characterization.md",
+  "provenance": {
+    "klt_version": "0.8.0",
+    "klayout_version": null,
+    "pdk": null,
+    "deck": null,
+    "input": {
+      "path": {
+        "path": "measurements/characterization.md",
+        "scope": "repo"
+      },
+      "content_hash": "sha256:02e219d83ee50f937f6191fe0e0f03a61049b4f474c79ecd0f9b8edd3fee3bef"
+    }
+  }
+}
