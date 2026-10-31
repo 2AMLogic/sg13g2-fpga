@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "kind": "generic",
+  "status": "pass",
+  "t1_item": 9,
+  "summary": "T1 item 9 (Testbenches shipped): 19/19 attestation checks passed (klt signoff --attest)",
+  "source": "manifests/inventories/item-9.json",
+  "attestation": {
+    "producer": "klt signoff --attest",
+    "inventory_schema_version": 1,
+    "hash_algorithm": "sha256-raw-bytes",
+    "check_count": 19,
+    "passed_count": 19,
+    "checks": [
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "flow/klt-flow.sh",
+        "passed": true,
+        "content_hash": "sha256:1bb8bc70287a1092a9a176761d207e1b23a156f1c3503e8a9ab284876fe51b52"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "layout/run.sh",
+        "passed": true,
+        "content_hash": "sha256:addc2174b3e868156071a3457580ab6ecfc1300b41da6d4d308c477371456e8d"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "layout/sdf-verify.sh",
+        "passed": true,
+        "content_hash": "sha256:bf96e6d8048aeee9557d921572fb8aa3d23c4775e4eaf1d7fdd45e0f6b10d5ab"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/bitstream_corrupt.py",
+        "passed": true,
+        "content_hash": "sha256:0084b51cc05eb63ffe9bbe8f262a7eb0a69eec1cf93f0fac14f465bb22d727bb"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/common/fabulous/tb_lut4_ff_bel_equiv.v",
+        "passed": true,
+        "content_hash": "sha256:d76678ab028ac0f5c564b8c3e6449354d2265d7c90c8ec7642554158008c0035"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/common/fabulous/tb_switch_matrix_equiv.v",
+        "passed": true,
+        "content_hash": "sha256:089505e1b25d60010c53f37faf985f98a40bfda4a39f7ab7247fb29a104565f0"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/common/sim/switch_matrix_tb_gen.vh",
+        "passed": true,
+        "content_hash": "sha256:42d60d50e22d50d30590dec8f5454fa5dab1e8dcd19612ac17b5fdafc935b7df"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/common/sim/tb_boundary_fwd.v",
+        "passed": true,
+        "content_hash": "sha256:fdcc61136469c2f11f563947cf726a64da712c99c93d5f539906bbb4f8108485"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/common/sim/tb_logic_tile.v",
+        "passed": true,
+        "content_hash": "sha256:3f90296942e63a59f55db70dd657025d90d91f9452577a07fbddef35a15c3603"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/common/sim/tb_logic_tile_bitstream.v",
+        "passed": true,
+        "content_hash": "sha256:20b42058541902130769c0e4791462fc585e4edcd7632a2b0635ebd20d43e1f9"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/common/sim/tb_logic_tile_gapfill.v",
+        "passed": true,
+        "content_hash": "sha256:014a86edb1f21d3c8a90e22650bcec720d45832c468145aa635bb2e90f6b7b2e"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/common/sim/tb_logic_tile_routed.v",
+        "passed": true,
+        "content_hash": "sha256:cad2f85b85ebc037e87efdf39ed5ef1002cfa65a66b565b1cf731b74e3c4f30f"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/common/sim/tb_lut4_slice.v",
+        "passed": true,
+        "content_hash": "sha256:ca664daecc674501368ed17d2aacf84eff52486dbfeea81f19db81f33efb382f"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/common/sim/tb_switch_matrix.v",
+        "passed": true,
+        "content_hash": "sha256:f8843679a8e444429696f5d9c481ac5220bc6971c09d3ad751bb1751a7ff968a"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/gatelevel/test_tile_sdf.py",
+        "passed": true,
+        "content_hash": "sha256:af5a92d2dd3751680692a258bc4c0d45ec52e03d5d95b6d8295a9f7a9ae256b8"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/run.sh",
+        "passed": true,
+        "content_hash": "sha256:3c00f77ab61d1e59906edc0517a1a443d781568b477f5277b141c8297f8d2edd"
+      },
+      {
+        "check": "command",
+        "role": "cold_start",
+        "argv": [
+          "verification/cold-start.sh"
+        ],
+        "cwd": ".",
+        "exit_status": 0,
+        "passed": true,
+        "local_only": true
+      },
+      {
+        "check": "pin",
+        "role": "pdk",
+        "passed": true,
+        "value": {
+          "name": "IHP-Open-PDK ihp-sg13g2 v0.3.0",
+          "revision": "5cccb161f7492697cfa52eb14dc03beb00bdca9e"
+        }
+      },
+      {
+        "check": "pin",
+        "role": "tools",
+        "passed": true,
+        "value": {
+          "fabulous": "2.2.0",
+          "icarus-verilog": "13.0",
+          "klayout": "0.30.12",
+          "klayout-tools": "0.7.1.dev2056+gbf24d463fb3f",
+          "nextpnr-generic": "nextpnr-0.11.1-54-g861c57be",
+          "openroad": "26Q3-1510-g6cb3f2b704",
+          "yosys": "0.67+post"
+        }
+      }
+    ]
+  },
+  "provenance": {
+    "klt_version": "0.8.1.dev148+g11ed44ef56f8",
+    "klayout_version": null,
+    "pdk": null,
+    "deck": null,
+    "input": {
+      "path": {
+        "path": "manifests/inventories/item-9.json",
+        "scope": "repo"
+      },
+      "content_hash": "sha256:8dbac0f0968d22c57ccf053f13925c30efb57d5667b27a9bcbeb2b5805f8a2da"
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "t1-attestation-inventory",
+  "t1_item": 9,
+  "description": "Testbenches behind the claims in verification/README.md and the layout/records/20261027-5171c5d envelopes. The NOT-RUN benches (tb_lut_basis, tb_route_diag, tb_ctrl_route, tb_output_route, tb_configmem_equiv) are deliberately absent. Pins copy flow/pdk.json and flow/toolchain.json.",
+  "testbenches": [
+    "verification/common/sim/tb_lut4_slice.v",
+    "verification/common/sim/tb_logic_tile.v",
+    "verification/common/sim/tb_switch_matrix.v",
+    "verification/common/sim/switch_matrix_tb_gen.vh",
+    "verification/common/sim/tb_logic_tile_routed.v",
+    "verification/common/sim/tb_logic_tile_gapfill.v",
+    "verification/common/sim/tb_boundary_fwd.v",
+    "verification/common/sim/tb_logic_tile_bitstream.v",
+    "verification/common/fabulous/tb_lut4_ff_bel_equiv.v",
+    "verification/common/fabulous/tb_switch_matrix_equiv.v",
+    "verification/bitstream_corrupt.py",
+    "verification/gatelevel/test_tile_sdf.py",
+    "verification/run.sh",
+    "layout/run.sh",
+    "layout/sdf-verify.sh",
+    "flow/klt-flow.sh"
+  ],
+  "cold_start": {
+    "argv": [
+      "verification/cold-start.sh"
+    ],
+    "local_only": true
+  },
+  "pins": {
+    "pdk": {
+      "name": "IHP-Open-PDK ihp-sg13g2 v0.3.0",
+      "revision": "5cccb161f7492697cfa52eb14dc03beb00bdca9e"
+    },
+    "tools": {
+      "klayout-tools": "0.7.1.dev2056+gbf24d463fb3f",
+      "yosys": "0.67+post",
+      "openroad": "26Q3-1510-g6cb3f2b704",
+      "klayout": "0.30.12",
+      "icarus-verilog": "13.0",
+      "fabulous": "2.2.0",
+      "nextpnr-generic": "nextpnr-0.11.1-54-g861c57be"
+    }
+  }
+}
