@@ -39,6 +39,10 @@
     "7": {
       "file": "layout/records/20261027-5171c5d/functional-verification-sdf-slow.json"
     },
+    "8": {
+      "file": "manifests/characterization.json",
+      "content_hash": "sha256:02e219d83ee50f937f6191fe0e0f03a61049b4f474c79ecd0f9b8edd3fee3bef"
+    },
     "10": {
       "file": "manifests/item-10.attestation.json",
       "content_hash": "sha256:03da77f0629a4961467cd580d9696a12d5d72c7bfca845b7173c224c3cb2bf5d"
