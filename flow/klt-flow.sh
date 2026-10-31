@@ -22,7 +22,7 @@
 #   --pdk-root  IHP-Open-PDK install root (default: klt's own resolution).
 #
 # Writes one envelope per step to <FLOW_REC_DIR>/records/<id>/<step>.json plus
-# <step>.rc (the exit code). A step that cannot run is recorded as
+# <step>.rc (the exit code), and the routed stream as <top>.gds. A step that cannot run is recorded as
 # <step>.not-run with the reason; nothing is omitted. Never overwrites an
 # existing record directory (records are append-only). Single local klt runs
 # only; no corner/MC grids.
@@ -76,6 +76,10 @@ field() { jq -r "$2 | if type==\"object\" then .path else . end // empty" "$REC/
 # 1. synthesize
 step synthesize $KLT synthesize "$B/synthesize.json" "${PDK_ARGS[@]}" --format json
 NETLIST=$(field synthesize '.netlist_path')
+# Keep the synthesized (pre-P&R) netlist next to its envelope: flow/build/ is
+# untracked, and `klt synthesize --check --netlist` re-hashes this copy against
+# the envelope's netlist_sha256 (T1 item 1, layout/check-synth-fresh.sh).
+if [[ -n "$NETLIST" && -f "$(rel "$NETLIST")" ]]; then cp "$(rel "$NETLIST")" "$REC/${TOP}_synth.v"; fi
 
 # 2. place-and-route (with a power grid)
 if [[ -n "$NETLIST" ]]; then
@@ -84,6 +88,9 @@ if [[ -n "$NETLIST" ]]; then
 else notrun place-and-route "synthesize produced no netlist_path"; fi
 GDS=$(field place-and-route '.gds_path'); DEF=$(field place-and-route '.def_path')
 VLOG=$(field place-and-route '.verilog_path')
+# Keep the routed stream in the record: the DRC/LVS/ERC envelopes pin it by
+# content hash, and flow/build/ is untracked (T1 item 2 needs it committed).
+if [[ -n "$GDS" && -f "$(rel "$GDS")" ]]; then cp "$(rel "$GDS")" "$REC/$TOP.gds"; fi
 
 # 3. DRC
 if [[ -n "$GDS" ]]; then
@@ -154,6 +161,11 @@ if [[ "$FLOW_STA" == 1 ]]; then
 fi
 
 # Consistency checks on the envelopes just written (cheap mode: re-hash inputs).
+if [[ -s "$REC/synthesize.json" && -s "$REC/${TOP}_synth.v" ]]; then
+  $KLT synthesize "$B/synthesize.json" "${PDK_ARGS[@]}" --check "$REC/synthesize.json" \
+      --netlist "$REC/${TOP}_synth.v" >"$REC/synthesize.check.txt" 2>&1; echo "$?" >"$REC/synthesize.check.rc"
+  echo "== synthesize --check: exit $(cat "$REC/synthesize.check.rc")"
+fi
 for c in drc lvs erc; do
   [[ -s "$REC/$c.json" ]] || continue
   $KLT $c --check "$REC/$c.json" >"$REC/$c.check.txt" 2>&1; echo "$?" >"$REC/$c.check.rc"

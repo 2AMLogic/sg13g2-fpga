@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "engine": "icarus",
+  "hdl_toplevel": "logic_tile_routed",
+  "testbench": "test_tile_sdf",
+  "status": "pass",
+  "test_count": 2,
+  "passed_count": 2,
+  "failed_count": 0,
+  "skipped_count": 0,
+  "tests": [
+    {
+      "name": "routed_combinational",
+      "status": "passed",
+      "sim_time_ns": 1280.0,
+      "real_time_s": 0.049
+    },
+    {
+      "name": "routed_registered",
+      "status": "passed",
+      "sim_time_ns": 100.0,
+      "real_time_s": 0.002
+    }
+  ],
+  "coverage": null,
+  "trace": null,
+  "environment": {
+    "engine": "icarus",
+    "engine_version": "13.0",
+    "cocotb_version": "2.1.0",
+    "results_xml": "/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-39/flow/build/sdf-verify/slow.out/results_icarus.xml",
+    "test_log": "/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-39/flow/build/sdf-verify/slow.out/test_icarus.log",
+    "build_log": "/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-39/flow/build/sdf-verify/slow.out/build_icarus.log",
+    "random_seed": 1793401598,
+    "source_defines": {},
+    "initial_state": null,
+    "sdf": {
+      "file": "/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-39/layout/records/20261027-5171c5d/sta.sdf/logic_tile_routed.slow_1p08V_125C.sdf",
+      "corner": "max",
+      "entries": "all",
+      "annotated": true,
+      "partial": true,
+      "dropped": {
+        "timingcheck": {
+          "count": 4,
+          "reason": "Icarus Verilog implements SDF delay annotation (IOPATH/INTERCONNECT) but not SDF TIMINGCHECK -- every TIMINGCHECK section in the SDF is dropped, so $setup/$hold/$width checks run against the cell library's own placeholder timing, not the characterised limits in the SDF"
+        },
+        "zero_delay_bus_port_source_interconnect": {
+          "count": 370,
+          "reason": "Icarus Verilog can fail to insert an intermodpath for an INTERCONNECT entry whose source is a bit-selected top-level input port -- such an entry fails with 'Could not find intermodpath!'. Entries whose every min:typ:max delay value is zero model no delay at any corner, so they are removed before annotation and counted here instead of failing the run -- a non-zero-delay entry on the same source is left in place and still fails loudly"
+        }
+      },
+      "renamed": [
+        {
+          "from": "g_slice[0].u_slice/_09_",
+          "to": "g_slice_0__u_slice__09_"
+        },
+        {
+          "from": "g_slice[0].u_slice/_10_",
+          "to": "g_slice_0__u_slice__10_"
+        },
+        {
+          "from": "g_slice[0].u_slice/_11_",
+          "to": "g_slice_0__u_slice__11_"
+        },
+        {
+          "from": "g_slice[0].u_slice/_12_",
+          "to": "g_slice_0__u_slice__12_"
+        },
+        {
+          "from": "g_slice[0].u_slice/_13_",
+          "to": "g_slice_0__u_slice__13_"
+        },
+        {
+          "from": "g_slice[0].u_slice/_14_",
+          "to": "g_slice_0__u_slice__14_"
+        },
+        {
+          "from": "g_slice[0].u_slice/_15_",
+          "to": "g_slice_0__u_slice__15_"
+        },
+        {
+          "from": "g_slice[0].u_slice/_16_",
+          "to": "g_slice_0__u_slice__16_"
+        },
+        {
+          "from": "g_slice[0].u_slice/_17_",
+          "to": "g_slice_0__u_slice__17_"
+        },
+        {
+          "from": "g_slice[0].u_slice/_18_",
+          "to": "g_slice_0__u_slice__18_"
+        },
+        {
+          "from": "g_slice[0].u_slice/_19_",
+          "to": "g_slice_0__u_slice__19_"
+        },
+        {
+          "from": "g_slice[1].u_slice/_09_",
+          "to": "g_slice_1__u_slice__09_"
+        },
+        {
+          "from": "g_slice[1].u_slice/_10_",
+          "to": "g_slice_1__u_slice__10_"
+        },
+        {
+          "from": "g_slice[1].u_slice/_11_",
+          "to": "g_slice_1__u_slice__11_"
+        },
+        {
+          "from": "g_slice[1].u_slice/_12_",
+          "to": "g_slice_1__u_slice__12_"
+        },
+        {
+          "from": "g_slice[1].u_slice/_13_",
+          "to": "g_slice_1__u_slice__13_"
+        },
+        {
+          "from": "g_slice[1].u_slice/_14_",
+          "to": "g_slice_1__u_slice__14_"
+        },
+        {
+          "from": "g_slice[1].u_slice/_15_",
+          "to": "g_slice_1__u_slice__15_"
+        },
+        {
+          "from": "g_slice[1].u_slice/_16_",
+          "to": "g_slice_1__u_slice__16_"
+        },
+        {
+          "from": "g_slice[1].u_slice/_17_",
+          "to": "g_slice_1__u_slice__17_"
+        },
+        {
+          "from": "g_slice[1].u_slice/_18_",
+          "to": "g_slice_1__u_slice__18_"
+        },
+        {
+          "from": "g_slice[1].u_slice/_19_",
+          "to": "g_slice_1__u_slice__19_"
+        },
+        {
+          "from": "g_slice[2].u_slice/_09_",
+          "to": "g_slice_2__u_slice__09_"
+        },
+        {
+          "from": "g_slice[2].u_slice/_10_",
+          "to": "g_slice_2__u_slice__10_"
+        },
+        {
+          "from": "g_slice[2].u_slice/_11_",
+          "to": "g_slice_2__u_slice__11_"
+        },
+        {
+          "from": "g_slice[2].u_slice/_12_",
+          "to": "g_slice_2__u_slice__12_"
+        },
+        {
+          "from": "g_slice[2].u_slice/_13_",
+          "to": "g_slice_2__u_slice__13_"
+        },
+        {
+          "from": "g_slice[2].u_slice/_14_",
+          "to": "g_slice_2__u_slice__14_"
+        },
+        {
+          "from": "g_slice[2].u_slice/_15_",
+          "to": "g_slice_2__u_slice__15_"
+        },
+        {
+          "from": "g_slice[2].u_slice/_16_",
+          "to": "g_slice_2__u_slice__16_"
+        },
+        {
+          "from": "g_slice[2].u_slice/_17_",
+          "to": "g_slice_2__u_slice__17_"
+        },
+        {
+          "from": "g_slice[2].u_slice/_18_",
+          "to": "g_slice_2__u_slice__18_"
+        },
+        {
+          "from": "g_slice[2].u_slice/_19_",
+          "to": "g_slice_2__u_slice__19_"
+        },
+        {
+          "from": "g_slice[3].u_slice/_09_",
+          "to": "g_slice_3__u_slice__09_"
+        },
+        {
+          "from": "g_slice[3].u_slice/_10_",
+          "to": "g_slice_3__u_slice__10_"
+        },
+        {
+          "from": "g_slice[3].u_slice/_11_",
+          "to": "g_slice_3__u_slice__11_"
+        },
+        {
+          "from": "g_slice[3].u_slice/_12_",
+          "to": "g_slice_3__u_slice__12_"
+        },
+        {
+          "from": "g_slice[3].u_slice/_13_",
+          "to": "g_slice_3__u_slice__13_"
+        },
+        {
+          "from": "g_slice[3].u_slice/_14_",
+          "to": "g_slice_3__u_slice__14_"
+        },
+        {
+          "from": "g_slice[3].u_slice/_15_",
+          "to": "g_slice_3__u_slice__15_"
+        },
+        {
+          "from": "g_slice[3].u_slice/_16_",
+          "to": "g_slice_3__u_slice__16_"
+        },
+        {
+          "from": "g_slice[3].u_slice/_17_",
+          "to": "g_slice_3__u_slice__17_"
+        },
+        {
+          "from": "g_slice[3].u_slice/_18_",
+          "to": "g_slice_3__u_slice__18_"
+        },
+        {
+          "from": "g_slice[3].u_slice/_19_",
+          "to": "g_slice_3__u_slice__19_"
+        }
+      ]
+    }
+  }
+}

@@ -17,7 +17,7 @@
         "role": "testbench",
         "path": "flow/klt-flow.sh",
         "passed": true,
-        "content_hash": "sha256:2d28d51487c7032e60525dda2e28dca6aa26909c04117d3f42163650d52480f0"
+        "content_hash": "sha256:1bb8bc70287a1092a9a176761d207e1b23a156f1c3503e8a9ab284876fe51b52"
       },
       {
         "check": "present",
@@ -161,7 +161,7 @@
     ]
   },
   "provenance": {
-    "klt_version": "0.8.0",
+    "klt_version": "0.8.1.dev863+g1ec94239442e",
     "klayout_version": null,
     "pdk": null,
     "deck": null,

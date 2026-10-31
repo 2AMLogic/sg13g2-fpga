@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "kind": "t1-attestation-inventory",
+  "t1_item": 1,
+  "description": "Design sources: the stamped tile RTL and the gate-level netlist klt synthesize derived from it, with the cheap re-hash freshness check.",
+  "sources": [
+    "rtl/common/rtl/lut4_slice.v",
+    "rtl/common/rtl/logic_tile_switch_matrix.v",
+    "rtl/common/rtl/logic_tile_routed.v"
+  ],
+  "derived": [
+    {
+      "path": "layout/records/20261027-5171c5d/logic_tile_routed_synth.v",
+      "generator": "klt synthesize layout/requests/synthesize.json (layout/run.sh)",
+      "check": {"argv": ["layout/check-synth-fresh.sh", "--skip-deck"]}
+    }
+  ]
+}

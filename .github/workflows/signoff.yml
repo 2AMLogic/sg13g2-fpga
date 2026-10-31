@@ -11,8 +11,9 @@
 # build.grading_ruleset_id) and a floating install would churn it. This is the
 # single place the pin is recorded. Bump it deliberately, together with a
 # regenerated manifests/sg13g2-fpga.signoff.json (see manifests/README.md).
-# Pinned commit: c572046be644e0407f693f2410f3abb799d68a3a, the klt v0.8.0
-# release (first with `klt signoff --attest` and `sdf` on `klt sta`).
+# Pinned commit: 11ed44ef56f88ca130fc185bf45fb9f5a6fb1a40, klayout-tools main with
+# `klt synthesize --check --netlist --skip-deck` (the item-1 freshness check) and
+# item-2 `--attest 2 --input STREAM` (klayout-tools#4188, merged before it).
 
 name: signoff
 
@@ -36,7 +37,7 @@ jobs:
 
       - name: Install the pinned klt (klayout-tools)
         run: |
-          uv tool install "klayout-tools @ git+https://github.com/2AMLogic/klayout-tools@c572046be644e0407f693f2410f3abb799d68a3a"
+          uv tool install "klayout-tools @ git+https://github.com/2AMLogic/klayout-tools@11ed44ef56f88ca130fc185bf45fb9f5a6fb1a40"
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
       - name: Re-run klt signoff and diff against the committed report
@@ -66,3 +67,13 @@ jobs:
         run: |
           klt signoff --attest 9 --inventory manifests/inventories/item-9.json \
             --check manifests/item-9.attestation.json
+
+      - name: Re-attest T1 item 2 and diff against the committed envelope
+        run: |
+          klt signoff --attest 2 --input layout/records/20261030-09fa1bd/logic_tile_routed.gds \
+            --check manifests/item-2.attestation.json
+
+      - name: Re-attest T1 item 1 (RTL to synthesized netlist freshness)
+        run: |
+          klt signoff --attest 1 --inventory manifests/inventories/item-1.json \
+            --check manifests/item-1.attestation.json

@@ -11,7 +11,8 @@ OpenROAD flow.
 
 **Status: the logic tile is placed, routed, DRC/LVS-clean and STA-closed**
 at the three 1.2 V core corners (records in
-[`layout/records/20261027-5171c5d/`](layout/records/20261027-5171c5d/); see
+[`layout/records/20261030-09fa1bd/`](layout/records/20261030-09fa1bd/), which
+also commits the routed GDS; see
 [`measurements/`](measurements/)). The demonstration fabric is not yet
 assembled, and not every T1 evidence item is met: the committed grade is in
 [`manifests/`](manifests/).
@@ -106,8 +107,9 @@ Each step is a single local run; the toolchain pins are in `flow/`.
 - **SDF-annotated gate-level re-simulation** of the routed tile:
   `layout/sdf-verify.sh <record-id>`, on a record made by `layout/run.sh`.
 - **The `klt signoff` re-grade** is committed in `manifests/` and re-checked
-  by CI on every push and pull request, together with the T1 item-10
-  attestation (`manifests/inventories/item-10.json`). To regenerate either,
+  by CI on every push and pull request, together with the T1 item-1 and
+  item-10 attestations (`manifests/inventories/item-1.json`,
+  `manifests/inventories/item-10.json`). To regenerate any of them,
   follow [manifests/README.md](manifests/README.md).
 
 ## License
