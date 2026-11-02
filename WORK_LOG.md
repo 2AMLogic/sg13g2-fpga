@@ -4,6 +4,10 @@ Chronological record of merged PRs and closed issues, newest first. Maintained b
 
 ### 2026-10-30
 
+- **PR #50**: feat(signoff): attest T1 item 1 with committed synthesized netlist and freshness check
+- **PR #48**: feat(signoff): cite SDF-annotated gate-level re-run as T1 item 7
+- **Issue #39** (closed): T1 item 7 (post-layout): cite the SDF-annotated klt functional-verification runs, all items from one record
+- **Issue #37** (closed): T1 item 1 (design sources): commit the tile's synthesized netlist in the cited record and klt signoff --attest 1
 - **PR #46**: ci(signoff): bump klt pin to v0.8.0, attest T1 item 10, refresh README status
 - **Issue #36** (closed): T1 item 10 (repo hygiene): bump the signoff klt pin (attest and SDF support), fix README status, attest item 10
 
