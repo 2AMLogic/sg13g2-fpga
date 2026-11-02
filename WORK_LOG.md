@@ -2,8 +2,26 @@
 
 Chronological record of merged PRs and closed issues, newest first. Maintained by the Guide role.
 
+### 2026-11-02
+
+- **Issue #55** (closed): main red: committed signoff report stale after #50 (t1_met_count 4 vs 5)
+
+### 2026-11-01
+
+- **PR #57**: Bump Repo Skills 0.24.7 -> 0.25.1
+
+### 2026-10-31
+
+- **PR #53**: docs(measurements): add tile characterization report and cite it as T1 item 8
+- **PR #51**: feat(manifests): attest T1 item 9 with a testbench inventory
+- **Issue #52** (closed): manifests/README.md still lists T1 item 1 as uncited
+- **Issue #41** (closed): T1 item 9 (testbenches shipped): testbench inventory and klt signoff --attest 9
+- **Issue #40** (closed): T1 item 8 (characterization): aggregated characterization report with area, timing and power per corner
+
 ### 2026-10-30
 
+- **PR #49**: feat(layout): commit routed tile GDS and attest T1 item 2
+- **Issue #38** (closed): T1 item 2 (layout): commit the routed logic_tile GDS (it is only in flow/build today) and attest it
 - **PR #50**: feat(signoff): attest T1 item 1 with committed synthesized netlist and freshness check
 - **PR #48**: feat(signoff): cite SDF-annotated gate-level re-run as T1 item 7
 - **Issue #39** (closed): T1 item 7 (post-layout): cite the SDF-annotated klt functional-verification runs, all items from one record
