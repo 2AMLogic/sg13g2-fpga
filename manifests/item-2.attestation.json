@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "generic",
+  "status": "pass",
+  "t1_item": 2,
+  "summary": "T1 item 2 (Layout): 3/3 attestation checks passed (klt signoff --attest)",
+  "source": "layout/records/20261030-09fa1bd/logic_tile_routed.gds",
+  "attestation": {
+    "producer": "klt signoff --attest",
+    "hash_algorithm": "sha256-raw-bytes",
+    "check_count": 3,
+    "passed_count": 3,
+    "checks": [
+      {
+        "check": "stream_readable",
+        "role": "layout",
+        "passed": true,
+        "content_hash": "sha256:339931777dce865e60e70c49dbc431aedf92e879b353c34180b5b2c417970bfa"
+      },
+      {
+        "check": "top_cell_non_empty",
+        "role": "layout",
+        "passed": true,
+        "top_cells": [
+          "logic_tile_routed"
+        ]
+      },
+      {
+        "check": "dbu_on_grid",
+        "role": "layout",
+        "passed": true,
+        "dbu": 0.001
+      }
+    ]
+  },
+  "provenance": {
+    "klt_version": "0.8.1.dev70+gce6583fe1e8f",
+    "klayout_version": "0.30.12",
+    "pdk": null,
+    "deck": null,
+    "input": {
+      "path": {
+        "path": "layout/records/20261030-09fa1bd/logic_tile_routed.gds",
+        "scope": "repo"
+      },
+      "content_hash": "sha256:339931777dce865e60e70c49dbc431aedf92e879b353c34180b5b2c417970bfa"
+    }
+  }
+}

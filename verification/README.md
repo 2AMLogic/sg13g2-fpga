@@ -8,6 +8,7 @@ RTL in `rtl/common/rtl/`. The benches are self-checking Verilog stamped under
 ## Cold start
 
 ```bash
+verification/cold-start.sh         # the next two lines in one command (the T1 item-9 cold start)
 verification/run.sh --setup        # once: fetch the pinned OSS CAD Suite + FABulous venv into flow/build/ (nothing host-wide)
 verification/run.sh                # run everything; logs in flow/build/verification/
 verification/run.sh --out measurements/<new-id>   # keep a record (refuses a non-empty dir)

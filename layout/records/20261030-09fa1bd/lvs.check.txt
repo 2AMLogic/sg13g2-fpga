@@ -1,0 +1,4 @@
+report: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-38/layout/records/20261030-09fa1bd/lvs.json
+status: match
+  [OK] environment.layout_sha256
+  [OK] environment.reference_sha256
