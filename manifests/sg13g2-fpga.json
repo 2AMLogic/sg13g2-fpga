@@ -22,6 +22,12 @@
       {
         "file": "layout/records/20261030-09fa1bd/sta.json",
         "content_hash": "sha256:2fc468bddfb88dc2612e5bf12565fd4de03a143bc0c216272061a64728738a64"
+      },
+      {
+        "file": "layout/records/20261030-09fa1bd/functional-verification-sdf-slow.json"
+      },
+      {
+        "file": "layout/records/20261030-09fa1bd/functional-verification-sdf-fast.json"
       }
     ],
     "6": {
@@ -37,7 +43,7 @@
       }
     },
     "7": {
-      "file": "layout/records/20261027-5171c5d/functional-verification-sdf-slow.json"
+      "file": "layout/records/20261030-09fa1bd/functional-verification-sdf-slow.json"
     },
     "8": {
       "file": "manifests/characterization.json",

@@ -225,22 +225,64 @@
       "notes": [
         "Both require the spec table itself to be ratified \u2014 verdicts against a draft spec are provisional by construction."
       ],
-      "status": "unmet",
-      "reason": "partial_coverage",
+      "status": "met",
+      "reason": null,
       "graded_by_build": true,
-      "citation": null,
+      "citation": {
+        "file": "layout/records/20261030-09fa1bd/sta.json",
+        "command": null,
+        "kind": "sta",
+        "check_status": "ok",
+        "content_hash": "sha256:2fc468bddfb88dc2612e5bf12565fd4de03a143bc0c216272061a64728738a64",
+        "input_verified": null,
+        "exit_status": 0
+      },
       "citations_graded": [
         {
           "citation": "layout/records/20261030-09fa1bd/sta.json",
           "status": "met",
           "reason": null
+        },
+        {
+          "citation": "layout/records/20261030-09fa1bd/functional-verification-sdf-slow.json",
+          "status": "met",
+          "reason": null
+        },
+        {
+          "citation": "layout/records/20261030-09fa1bd/functional-verification-sdf-fast.json",
+          "status": "met",
+          "reason": null
         }
       ],
-      "detail": {
-        "missing_kinds": [
-          "functional-verification"
-        ]
-      }
+      "citations": [
+        {
+          "file": "layout/records/20261030-09fa1bd/sta.json",
+          "command": null,
+          "kind": "sta",
+          "check_status": "ok",
+          "content_hash": "sha256:2fc468bddfb88dc2612e5bf12565fd4de03a143bc0c216272061a64728738a64",
+          "input_verified": null,
+          "exit_status": 0
+        },
+        {
+          "file": "layout/records/20261030-09fa1bd/functional-verification-sdf-slow.json",
+          "command": null,
+          "kind": "functional-verification",
+          "check_status": "pass",
+          "content_hash": null,
+          "input_verified": null,
+          "exit_status": 0
+        },
+        {
+          "file": "layout/records/20261030-09fa1bd/functional-verification-sdf-fast.json",
+          "command": null,
+          "kind": "functional-verification",
+          "check_status": "pass",
+          "content_hash": null,
+          "input_verified": null,
+          "exit_status": 0
+        }
+      ]
     },
     {
       "tier": "T1",
@@ -329,7 +371,7 @@
       "reason": null,
       "graded_by_build": true,
       "citation": {
-        "file": "layout/records/20261027-5171c5d/functional-verification-sdf-slow.json",
+        "file": "layout/records/20261030-09fa1bd/functional-verification-sdf-slow.json",
         "command": null,
         "kind": "functional-verification",
         "check_status": "pass",
