@@ -2,6 +2,11 @@
 
 Chronological record of merged PRs and closed issues, newest first. Maintained by the Guide role.
 
+### 2026-11-05
+
+- **PR #62**: feat(signoff): cite SDF functional-verification runs under T1 item 5
+- **Issue #60** (closed): Cite a klt functional-verification run under item 5 (all evidence from record 20261030-09fa1bd)
+
 ### 2026-11-02
 
 - **Issue #55** (closed): main red: committed signoff report stale after #50 (t1_met_count 4 vs 5)
