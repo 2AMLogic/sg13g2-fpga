@@ -4,8 +4,10 @@ Chronological record of merged PRs and closed issues, newest first. Maintained b
 
 ### 2026-11-05
 
+- **PR #61**: chore(signoff): pin klt to v0.9.0 so item 11 grades the tapless PDN
 - **PR #62**: feat(signoff): cite SDF functional-verification runs under T1 item 5
 - **Issue #60** (closed): Cite a klt functional-verification run under item 5 (all evidence from record 20261030-09fa1bd)
+- **Issue #59** (closed): Bump the signoff klt pin past klayout-tools#4250 so item 11 grades the tapless PDN
 
 ### 2026-11-02
 
