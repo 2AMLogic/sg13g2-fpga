@@ -31,7 +31,7 @@ _None._
 
 Issues currently being built (`loom:building`).
 
-_None._
+- **#59**: Bump the signoff klt pin past klayout-tools#4250 so item 11 grades the tapless PDN
 
 ## PRs Awaiting Review
 
@@ -43,13 +43,14 @@ _None._
 
 PRs that passed review and are queued for Champion auto-merge (`loom:pr`).
 
-_None._
+- **#61**: chore(signoff): pin klt to v0.9.0 so item 11 grades the tapless PDN
 
 ## Proposed
 
 Issues carrying `loom:curated`.
 
 - **#3**: Track the gap to T1 (klayout-tools design-evidence-tiers.md) *(curated)*
+- **#59**: Bump the signoff klt pin past klayout-tools#4250 so item 11 grades the tapless PDN *(curated)*
 
 ## Proposed (Architect / Hermit)
 
@@ -67,10 +68,10 @@ _None._
 | Very important | 0 |
 | Important | 0 |
 | Ready (`loom:issue`) | 0 |
-| In Progress (`loom:building`) | 0 |
+| In Progress (`loom:building`) | 1 |
 | PRs awaiting review | 0 |
-| Approved PRs awaiting merge | 0 |
-| Curated | 1 |
+| Approved PRs awaiting merge | 1 |
+| Curated | 2 |
 | Architect / Hermit proposals | 0 |
 | Active epics | 0 |
 <!-- guide:plan-body:end -->
