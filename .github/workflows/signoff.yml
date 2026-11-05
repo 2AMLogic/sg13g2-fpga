@@ -11,9 +11,12 @@
 # build.grading_ruleset_id) and a floating install would churn it. This is the
 # single place the pin is recorded. Bump it deliberately, together with a
 # regenerated manifests/sg13g2-fpga.signoff.json (see manifests/README.md).
-# Pinned commit: 11ed44ef56f88ca130fc185bf45fb9f5a6fb1a40, klayout-tools main with
-# `klt synthesize --check --netlist --skip-deck` (the item-1 freshness check) and
-# item-2 `--attest 2 --input STREAM` (klayout-tools#4188, merged before it).
+# Pinned commit: 5dbbad05ff42265c92a6f3d2f20d1bbcd2957d49 (klayout-tools v0.9.0 release merge, CI green), a
+# descendant of b31f0aa (klayout-tools#4250), so `klt signoff` item 11 reads the
+# `power.tapless` field instead of grading a tapless library `no_pdn`
+# (klayout-tools#4199). It keeps `klt synthesize --check --netlist --skip-deck`
+# (the item-1 freshness check) and item-2 `--attest 2 --input STREAM`
+# (klayout-tools#4188).
 
 name: signoff
 
@@ -37,7 +40,7 @@ jobs:
 
       - name: Install the pinned klt (klayout-tools)
         run: |
-          uv tool install "klayout-tools @ git+https://github.com/2AMLogic/klayout-tools@11ed44ef56f88ca130fc185bf45fb9f5a6fb1a40"
+          uv tool install "klayout-tools @ git+https://github.com/2AMLogic/klayout-tools@5dbbad05ff42265c92a6f3d2f20d1bbcd2957d49"
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
       - name: Re-run klt signoff and diff against the committed report
