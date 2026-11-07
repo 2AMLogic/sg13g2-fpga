@@ -2,6 +2,10 @@
 
 Chronological record of merged PRs and closed issues, newest first. Maintained by the Guide role.
 
+### 2026-11-07
+
+- **PR #67**: Bump Repo Skills 0.25.1 -> 0.25.10
+
 ### 2026-11-05
 
 - **PR #61**: chore(signoff): pin klt to v0.9.0 so item 11 grades the tapless PDN
