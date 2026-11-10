@@ -31,13 +31,13 @@ _None._
 
 Issues currently being built (`loom:building`).
 
-_None._
+- **#68**: Five vendored testbenches (~1,900 LOC) are permanently NOT-RUN: vendor their generators or drop them
 
 ## PRs Awaiting Review
 
 PRs waiting on Judge (`loom:review-requested`).
 
-_None._
+- **#71**: test: vendor bench stimulus generators and run the five stream benches
 
 ## Approved (Awaiting Merge)
 
@@ -51,10 +51,11 @@ Issues carrying `loom:curated`.
 
 - **#3**: Track the gap to T1 (klayout-tools design-evidence-tiers.md) *(curated)*
 - **#65**: Generate a 2×2 LOGIC4 fabric with the pinned FABulous and run an inter-tile bitstream test *(curated)*
+- **#68**: Five vendored testbenches (~1,900 LOC) are permanently NOT-RUN: vendor their generators or drop them *(curated)*
 
 ## Proposed (Architect / Hermit)
 
-- **#68**: Five vendored testbenches (~1,900 LOC) are permanently NOT-RUN: vendor their generators or drop them *(hermit)*
+_None._
 
 ## Epics
 
@@ -68,10 +69,10 @@ _None._
 | Very important | 0 |
 | Important | 0 |
 | Ready (`loom:issue`) | 0 |
-| In Progress (`loom:building`) | 0 |
-| PRs awaiting review | 0 |
+| In Progress (`loom:building`) | 1 |
+| PRs awaiting review | 1 |
 | Approved PRs awaiting merge | 0 |
-| Curated | 2 |
-| Architect / Hermit proposals | 1 |
+| Curated | 3 |
+| Architect / Hermit proposals | 0 |
 | Active epics | 0 |
 <!-- guide:plan-body:end -->
