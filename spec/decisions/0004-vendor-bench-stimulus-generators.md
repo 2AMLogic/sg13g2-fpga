@@ -36,9 +36,13 @@ them dormant.
    for a missing prerequisite (no fixtures, or `fabulous_generate` not run).
 3. No vendored file is modified, so this is not a divergence. A generator that
    later needs editing needs its own decision record.
-4. The item-9 evidence inventory (`manifests/inventories/item-9.json`) is
-   unchanged: these benches are not added to it, so no re-attestation is made
-   here. Adding them is a separate step.
+4. The item-9 evidence inventory (`manifests/inventories/item-9.json`) gains
+   the five benches and the five vendored generators. They now run and record
+   PASS/FAIL, so the item-9 claim set includes them; the inventory's
+   `description` no longer lists them as deliberately absent. Because
+   `verification/run.sh` is itself inventoried and was rewritten here, item 9
+   is re-attested (`manifests/item-9.attestation.json`) and the committed
+   signoff report refreshed in the same change.
 
 ## Consequences
 

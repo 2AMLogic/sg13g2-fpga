@@ -41,7 +41,7 @@ run on streams from the vendored generators in `common/flow/`, and
 `tb_configmem_equiv` on vectors from `common/flow/configmem_frames.py`
 (ADR-0004, which supersedes the ADR-0002 deferral). The four stream benches use
 the repository composition (flat cfg port); the sibling's `-DGEN_TILE`
-configuration is not exercised. They are not in the item-9 evidence inventory.
+configuration is not exercised. They are in the item-9 evidence inventory.
 
 Sibling `*results*.txt` files are not evidence here; only runs made in this
 repo count. Records are in `measurements/`.

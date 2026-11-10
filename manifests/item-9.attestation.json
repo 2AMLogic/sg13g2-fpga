@@ -3,14 +3,14 @@
   "kind": "generic",
   "status": "pass",
   "t1_item": 9,
-  "summary": "T1 item 9 (Testbenches shipped): 19/19 attestation checks passed (klt signoff --attest)",
+  "summary": "T1 item 9 (Testbenches shipped): 29/29 attestation checks passed (klt signoff --attest)",
   "source": "manifests/inventories/item-9.json",
   "attestation": {
     "producer": "klt signoff --attest",
     "inventory_schema_version": 1,
     "hash_algorithm": "sha256-raw-bytes",
-    "check_count": 19,
-    "passed_count": 19,
+    "check_count": 29,
+    "passed_count": 29,
     "checks": [
       {
         "check": "present",
@@ -43,6 +43,13 @@
       {
         "check": "present",
         "role": "testbench",
+        "path": "verification/common/fabulous/tb_configmem_equiv.v",
+        "passed": true,
+        "content_hash": "sha256:613e07b2367ad773a1104460eedbc9cae57697b9d8f26d41d54247dfe46e0fde"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
         "path": "verification/common/fabulous/tb_lut4_ff_bel_equiv.v",
         "passed": true,
         "content_hash": "sha256:d76678ab028ac0f5c564b8c3e6449354d2265d7c90c8ec7642554158008c0035"
@@ -57,6 +64,41 @@
       {
         "check": "present",
         "role": "testbench",
+        "path": "verification/common/flow/configmem_frames.py",
+        "passed": true,
+        "content_hash": "sha256:c1a2b5aca673dbfada8d57617d49ce22393c0144636b925fa6f4db5e43f4bb3c"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/common/flow/ctrl_route.py",
+        "passed": true,
+        "content_hash": "sha256:e56c65945c2ded40a561fa514e738ef988775423369561d3716b46eb2683474f"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/common/flow/lut_basis.py",
+        "passed": true,
+        "content_hash": "sha256:4cba671bfb7bc25882b131e87882eaf843e1be34c05a9d54e3ec421327a5ea50"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/common/flow/output_route.py",
+        "passed": true,
+        "content_hash": "sha256:7070ad5d4154612ef5bc4be18ed517f2ff63a812cb30df18b7e2f007386e320b"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/common/flow/route_diag.py",
+        "passed": true,
+        "content_hash": "sha256:4d9a109cfb66c064d1f2051a0e754b8656909f70d985689e9921667ce03663ce"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
         "path": "verification/common/sim/switch_matrix_tb_gen.vh",
         "passed": true,
         "content_hash": "sha256:42d60d50e22d50d30590dec8f5454fa5dab1e8dcd19612ac17b5fdafc935b7df"
@@ -67,6 +109,13 @@
         "path": "verification/common/sim/tb_boundary_fwd.v",
         "passed": true,
         "content_hash": "sha256:fdcc61136469c2f11f563947cf726a64da712c99c93d5f539906bbb4f8108485"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/common/sim/tb_ctrl_route.v",
+        "passed": true,
+        "content_hash": "sha256:a1c6a55b773c1510d980f5d1ff88ba79e509db1b7b64c4e4be229d26c869f603"
       },
       {
         "check": "present",
@@ -106,6 +155,27 @@
       {
         "check": "present",
         "role": "testbench",
+        "path": "verification/common/sim/tb_lut_basis.v",
+        "passed": true,
+        "content_hash": "sha256:45a7d48b418e09ce2264a8cbce20cfb757fff9140ee5369aa0b347a7913fdfd8"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/common/sim/tb_output_route.v",
+        "passed": true,
+        "content_hash": "sha256:ca6245b6c413371fe90f75eb1d134c9e8ebc154ccd6710a1a3736ef6817972b8"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/common/sim/tb_route_diag.v",
+        "passed": true,
+        "content_hash": "sha256:5500be2c541dbaa48f990a2c431222237d104b58dcb06b3c4cd1b3145cb7214a"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
         "path": "verification/common/sim/tb_switch_matrix.v",
         "passed": true,
         "content_hash": "sha256:f8843679a8e444429696f5d9c481ac5220bc6971c09d3ad751bb1751a7ff968a"
@@ -122,7 +192,7 @@
         "role": "testbench",
         "path": "verification/run.sh",
         "passed": true,
-        "content_hash": "sha256:3c00f77ab61d1e59906edc0517a1a443d781568b477f5277b141c8297f8d2edd"
+        "content_hash": "sha256:052acccce63ea79596992f8110d26a11b33d5a3e347c48c254f754a899649592"
       },
       {
         "check": "command",
@@ -161,7 +231,7 @@
     ]
   },
   "provenance": {
-    "klt_version": "0.8.1.dev148+g11ed44ef56f8",
+    "klt_version": "0.9.0.dev1379+g5dbbad05ff42",
     "klayout_version": null,
     "pdk": null,
     "deck": null,
@@ -170,7 +240,7 @@
         "path": "manifests/inventories/item-9.json",
         "scope": "repo"
       },
-      "content_hash": "sha256:8dbac0f0968d22c57ccf053f13925c30efb57d5667b27a9bcbeb2b5805f8a2da"
+      "content_hash": "sha256:1f8115ccfb1e1a4326280524e2c9ff406a856528c7723ec80fd0ce31a3cb9b40"
     }
   }
 }
