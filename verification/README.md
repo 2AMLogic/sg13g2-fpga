@@ -36,9 +36,12 @@ same-index stand-in, not a verified Wilton-class matrix; no inter-tile routing;
 no timing; no area. Sibling gaps G5 and G6 are inherited open. Nothing here
 says the fabric is verified. The 2x2 to 4x4 demonstration fabric is untested.
 
-Benches `tb_lut_basis`, `tb_route_diag`, `tb_ctrl_route`, `tb_output_route`
-and `tb_configmem_equiv` need stream/vector generators from the sibling's
-unstamped `flow/` and are reported `NOT-RUN` (ADR-0002).
+Benches `tb_lut_basis`, `tb_route_diag`, `tb_ctrl_route` and `tb_output_route`
+run on streams from the vendored generators in `common/flow/`, and
+`tb_configmem_equiv` on vectors from `common/flow/configmem_frames.py`
+(ADR-0004, which supersedes the ADR-0002 deferral). The four stream benches use
+the repository composition (flat cfg port); the sibling's `-DGEN_TILE`
+configuration is not exercised. They are in the item-9 evidence inventory.
 
 Sibling `*results*.txt` files are not evidence here; only runs made in this
 repo count. Records are in `measurements/`.

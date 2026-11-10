@@ -13,6 +13,9 @@
 #     verification/common/flow/fasm_to_bitstream.py and cross-checked against
 #     FABulous's own `bit_gen genBitstream`. Negative paths: +mutate and
 #     +expect_reject on malformed variants (verification/bitstream_corrupt.py).
+#   * tb_lut_basis / tb_route_diag / tb_ctrl_route / tb_output_route on streams from
+#     the vendored generators (verification/common/flow/, ADR-0004), and
+#     tb_configmem_equiv on vectors from configmem_frames.py.
 #   * A bench that cannot run is listed NOT-RUN with its reason, never omitted.
 #
 # What this does NOT claim: see verification/README.md. Single LOGIC4 harness,
@@ -316,10 +319,43 @@ else
     fi
 fi
 
-# ------------------------------------------------- stamped benches this run cannot drive
-reason_gen="needs a stimulus-stream generator from the sibling's flow/ (lut_basis.py / route_diag.py / ctrl_route.py / output_route.py), which is not stamped"
-for b in tb_lut_basis tb_route_diag tb_ctrl_route tb_output_route; do record "$b" NOT-RUN "$reason_gen"; done
-record tb_configmem_equiv NOT-RUN "needs +vec= transaction vectors from the sibling's flow/configmem_frames.py, which is not stamped"
+# ------------------------------------------------- stream-driven benches (ADR-0004)
+# Stimulus streams come from the vendored generators in verification/common/flow/
+# (assembler-generated through fasm_to_bitstream.py, not mapper output), built
+# from the committed snapshot in verification/bitstream/. Four benches run the
+# repository composition (logic_tile_routed through its flat cfg port); a
+# generator or compile failure, or a missing PASS line, is a FAIL with its log.
+if [[ ! -f "$FIXDIR/fabric_spec.json" || ! -f "$FIXDIR/logic4_configmem.map" ]]; then
+    for b in tb_lut_basis tb_route_diag tb_ctrl_route tb_output_route tb_configmem_equiv; do
+        record "$b" NOT-RUN "no fabric_spec.json / logic4_configmem.map in verification/bitstream/ and none regenerated"; done
+else
+    for entry in tb_lut_basis:lut_basis:basis.wiring tb_route_diag:route_diag:route.wiring \
+                 tb_ctrl_route:ctrl_route:ctrl.wiring tb_output_route:output_route:out.wiring; do
+        IFS=: read -r b gen wiring <<< "$entry"
+        SD="$OUT/logs/${b}_streams"
+        if ! python3 -I "$VCOMMON/flow/$gen.py" "$SD" --snapshot "$FIXDIR/fabric_spec.json" > "$OUT/logs/${b}.gen.log" 2>&1; then
+            record "$b" FAIL "stimulus generator $gen.py failed (logs/$b.gen.log)"; continue; fi
+        if ! compile "$b" -g2012 -Wall -I "$S" -o "$OUT/logs/$b.vvp" "$RTL/lut4_slice.v" "$RTL/logic_tile_switch_matrix.v" "$RTL/logic_tile_routed.v" "$S/$b.v"; then
+            record "$b" FAIL "iverilog compile failed (logs/$b.compile.log)"; continue; fi
+        run_vvp "$b" "$OUT/logs/$b.vvp" +dir="$SD" +list="$SD/cases.txt" +wiring="$SD/$wiring" +map="$FIXDIR/logic4_configmem.map"
+        v="$(verdict_of "$b" "^PASS: $b\\[")"
+        record "$b" "${v%%|*}" "${v#*|}"
+    done
+    # ConfigMem differential bench: needs the FABulous-generated ConfigMem and
+    # the frame-write vectors sliced from the committed streams.
+    b=tb_configmem_equiv
+    if [[ "$GEN_OK" -ne 1 ]]; then
+        record "$b" NOT-RUN "needs the FABulous-generated LOGIC4_ConfigMem.v; fabulous_generate did not complete"
+    elif ! python3 -I "$VCOMMON/flow/configmem_frames.py" "$FIXDIR" > "$OUT/logs/$b.vec" 2> "$OUT/logs/$b.gen.log"; then
+        record "$b" FAIL "vector generator configmem_frames.py failed (logs/$b.gen.log)"
+    elif ! compile "$b" -g2005 -o "$OUT/logs/$b.vvp" "$VCOMMON/fabulous/$b.v" "$G/LOGIC4_ConfigMem.v" "$GENDIR/Fabric/models_pack.v"; then
+        record "$b" FAIL "iverilog compile failed (logs/$b.compile.log)"
+    else
+        run_vvp "$b" "$OUT/logs/$b.vvp" +map="$FIXDIR/logic4_configmem.map" +vec="$OUT/logs/$b.vec"
+        v="$(verdict_of "$b" '^PASS: configmem_fabulous_equiv')"
+        record "$b" "${v%%|*}" "${v#*|}"
+    fi
+fi
 
 # ------------------------------------------------- summary
 {

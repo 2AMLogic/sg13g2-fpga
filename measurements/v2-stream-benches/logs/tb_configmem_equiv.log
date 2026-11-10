@@ -1,0 +1,2 @@
+PASS: configmem_fabulous_equiv -- 7693 checks, 2 baseline streams, 0 failures; transparent-open: 5 frames, 158/158 mapped bits changed under asserted strobe, 385 settled changes, 430 checks, 0 failures
+/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-68/verification/common/fabulous/tb_configmem_equiv.v:403: $finish called at 32490000 (1ps)

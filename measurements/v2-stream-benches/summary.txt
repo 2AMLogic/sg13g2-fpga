@@ -1,0 +1,36 @@
+# verification/run.sh summary
+run: 2026-11-10T21:31:10Z at 48fb53cbd956e2659c21a52bb078242ebeb7ad50
+iverilog: Icarus Verilog version 13.0 (stable) (v13_0)
+yosys: Yosys 0.69+260 (git sha1 dcd59343b, Release, Clang /usr/bin/clang++ 21.1.8)
+nextpnr-generic: "nextpnr-generic" -- Next Generation Place and Route (Version nextpnr-0.11.1-54-g861c57be)
+FABulous: FABulous CLI 2.2.0
+
+bench                                        verdict  detail
+tb_lut4_slice                                PASS     PASS: tb_lut4_slice -- 79 checks, 0 failures
+tb_logic_tile                                PASS     PASS: tb_logic_tile -- 4 checks, 0 failures
+tb_switch_matrix                             PASS     PASS: tb_switch_matrix -- 469 checks, 0 failures
+tb_logic_tile_routed                         PASS     PASS: tb_logic_tile_routed (1046 checks, 0 failures)
+tb_logic_tile_gapfill                        PASS     PASS: tb_logic_tile_gapfill -- 256 checks, 0 failures
+gen_switch_matrix_drift                      PASS     stamped RTL and bench include equal the stamped generator's output
+fabulous_generate                            PASS     FABulous 2.2.0 generated the stamped description (exit 0)
+tb_lut4_ff_bel_equiv                         PASS     PASS: lut4_ff_bel == lut4_slice over 20000 random cycles
+tb_switch_matrix_equiv                       PASS     PASS: switch_matrix_fabulous_equiv -- 1343744 checks (1024 select>=fan-in cases: repo==0, FABulous==X), 0 failures
+tb_boundary_fwd                              PASS     PASS: tb_boundary_fwd[fwd] (1554 checks, 0 failures; UserCLKo + FrameData_O[31:0] + FrameStrobe_O[19:0])
+fixtures_regenerate                          PASS     top_io, top_reg mapped (yosys+nextpnr), assembled; assembler output byte-identical to FABulous bit_gen
+fixtures_match_committed                     PASS     regenerated fixtures byte-identical to verification/bitstream/
+assembler_reproduce                          PASS     assembler re-derives every fixture in verification/bitstream/ from its FASM byte-for-byte
+tb_logic_tile_bitstream_comb (+mutate)       PASS     PASS: tb_logic_tile_bitstream[comb] (5409 checks, 0 failures; 26/26 perturbations detected)
+tb_logic_tile_bitstream_comb_cfg_crosscheck  PASS     simulation loader == python decoder == recorded cfg
+tb_logic_tile_bitstream_comb_expect_reject   PASS     loader rejected 11/11 malformed streams
+tb_logic_tile_bitstream_reg (+mutate)        PASS     PASS: tb_logic_tile_bitstream[reg] (139651 checks, 0 failures; 27/27 perturbations detected)
+tb_logic_tile_bitstream_reg_cfg_crosscheck   PASS     simulation loader == python decoder == recorded cfg
+tb_logic_tile_bitstream_reg_expect_reject    PASS     loader rejected 11/11 malformed streams
+tb_lut_basis                                 PASS     PASS: tb_lut_basis[basis] (28032 checks, 0 failures; 73/73 cases)
+tb_route_diag                                PASS     PASS: tb_route_diag[route] (24576 checks, 0 failures; 64/64 cases)
+tb_ctrl_route                                PASS     PASS: tb_ctrl_route[ctrl] (1296 checks, 0 failures; 20/20 cases)
+tb_output_route                              PASS     PASS: tb_output_route[outroute] (1376256 checks, 0 failures; 112/112 cases)
+tb_configmem_equiv                           PASS     PASS: configmem_fabulous_equiv -- 7693 checks, 2 baseline streams, 0 failures; transparent-open: 5 frames, 158/158 mapped bits changed under asserted strobe, 385 settled changes, 430 checks, 0 failures
+
+PASS:    24
+FAIL:    0
+NOT-RUN: 0

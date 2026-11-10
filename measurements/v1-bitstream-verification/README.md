@@ -51,3 +51,10 @@ is untested. No sibling result file is cited.
 None on the testbenches or the description, FABulous, nextpnr or `klt`; no
 issue filed on `sky130-fpga` or `klayout-tools`. Not exercised: the sibling's
 `-DGEN_TILE` configuration of `tb_logic_tile_bitstream`.
+
+## Later note (2026-11-10, issue #68)
+
+The five NOT-RUN rows above are history and are not rewritten. ADR-0004 vendors
+their stimulus generators; the benches are run in
+`measurements/v2-stream-benches/`. "No decision yet to vendor these" above is
+superseded by ADR-0004.

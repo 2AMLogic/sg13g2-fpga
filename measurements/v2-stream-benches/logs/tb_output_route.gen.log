@@ -1,0 +1,1 @@
+output_route: 112 streams = 16 output tracks x 7 sources, every one a pip of the frozen model, all 16 tracks and 4 BELs reprogrammed in each, assembled through flow/fasm_to_bitstream.py; required set read from the snapshot

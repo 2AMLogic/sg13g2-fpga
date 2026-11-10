@@ -1,0 +1,131 @@
+CFG R_A_I0_N 00000000000000d630000000000000000000aaaa
+CFG R_B_I0_N 00000000000000d6300000000000000155540000
+CFG R_C_I0_N 00000000000000d6300000000002aaa800000000
+CFG R_D_I0_N 00000000000000d6300000055550000000000000
+CFG R_A_I1_N 00000000000000d630000000000000000000cccc
+CFG R_B_I1_N 00000000000000d6300000000000000199980000
+CFG R_C_I1_N 00000000000000d6300000000003333000000000
+CFG R_D_I1_N 00000000000000d6300000066660000000000000
+CFG R_A_I2_N 00000000000000d630000000000000000000f0f0
+CFG R_B_I2_N 00000000000000d63000000000000001e1e00000
+CFG R_C_I2_N 00000000000000d6300000000003c3c000000000
+CFG R_D_I2_N 00000000000000d6300000078780000000000000
+CFG R_A_I3_N 00000000000000d630000000000000000000ff00
+CFG R_B_I3_N 00000000000000d63000000000000001fe000000
+CFG R_C_I3_N 00000000000000d6300000000003fc0000000000
+CFG R_D_I3_N 00000000000000d630000007f800000000000000
+CFG R_A_I0_E 00000000001000d630000000000000000000aaaa
+CFG R_B_I0_E 00000000100000d6300000000000000155540000
+CFG R_C_I0_E 00000010000000d6300000000002aaa800000000
+CFG R_D_I0_E 00001000000000d6300000055550000000000000
+CFG R_A_I1_E 00000000004000d630000000000000000000cccc
+CFG R_B_I1_E 00000000400000d6300000000000000199980000
+CFG R_C_I1_E 00000040000000d6300000000003333000000000
+CFG R_D_I1_E 00004000000000d6300000066660000000000000
+CFG R_A_I2_E 00000000010000d630000000000000000000f0f0
+CFG R_B_I2_E 00000001000000d63000000000000001e1e00000
+CFG R_C_I2_E 00000100000000d6300000000003c3c000000000
+CFG R_D_I2_E 00010000000000d6300000078780000000000000
+CFG R_A_I3_E 00000000040000d630000000000000000000ff00
+CFG R_B_I3_E 00000004000000d63000000000000001fe000000
+CFG R_C_I3_E 00000400000000d6300000000003fc0000000000
+CFG R_D_I3_E 00040000000000d630000007f800000000000000
+CFG R_A_I0_S 00000000002000d630000000000000000000aaaa
+CFG R_B_I0_S 00000000200000d6300000000000000155540000
+CFG R_C_I0_S 00000020000000d6300000000002aaa800000000
+CFG R_D_I0_S 00002000000000d6300000055550000000000000
+CFG R_A_I1_S 00000000008000d630000000000000000000cccc
+CFG R_B_I1_S 00000000800000d6300000000000000199980000
+CFG R_C_I1_S 00000080000000d6300000000003333000000000
+CFG R_D_I1_S 00008000000000d6300000066660000000000000
+CFG R_A_I2_S 00000000020000d630000000000000000000f0f0
+CFG R_B_I2_S 00000002000000d63000000000000001e1e00000
+CFG R_C_I2_S 00000200000000d6300000000003c3c000000000
+CFG R_D_I2_S 00020000000000d6300000078780000000000000
+CFG R_A_I3_S 00000000080000d630000000000000000000ff00
+CFG R_B_I3_S 00000008000000d63000000000000001fe000000
+CFG R_C_I3_S 00000800000000d6300000000003fc0000000000
+CFG R_D_I3_S 00080000000000d630000007f800000000000000
+CFG R_A_I0_W 00000000003000d630000000000000000000aaaa
+CFG R_B_I0_W 00000000300000d6300000000000000155540000
+CFG R_C_I0_W 00000030000000d6300000000002aaa800000000
+CFG R_D_I0_W 00003000000000d6300000055550000000000000
+CFG R_A_I1_W 0000000000c000d630000000000000000000cccc
+CFG R_B_I1_W 00000000c00000d6300000000000000199980000
+CFG R_C_I1_W 000000c0000000d6300000000003333000000000
+CFG R_D_I1_W 0000c000000000d6300000066660000000000000
+CFG R_A_I2_W 00000000030000d630000000000000000000f0f0
+CFG R_B_I2_W 00000003000000d63000000000000001e1e00000
+CFG R_C_I2_W 00000300000000d6300000000003c3c000000000
+CFG R_D_I2_W 00030000000000d6300000078780000000000000
+CFG R_A_I3_W 000000000c0000d630000000000000000000ff00
+CFG R_B_I3_W 0000000c000000d63000000000000001fe000000
+CFG R_C_I3_W 00000c00000000d6300000000003fc0000000000
+CFG R_D_I3_W 000c0000000000d630000007f800000000000000
+COVERAGE: ROUTE A 0 N: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE A 0 E: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE A 0 S: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE A 0 W: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE A 1 N: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE A 1 E: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE A 1 S: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE A 1 W: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE A 2 N: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE A 2 E: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE A 2 S: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE A 2 W: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE A 3 N: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE A 3 E: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE A 3 S: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE A 3 W: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE B 0 N: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE B 0 E: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE B 0 S: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE B 0 W: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE B 1 N: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE B 1 E: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE B 1 S: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE B 1 W: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE B 2 N: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE B 2 E: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE B 2 S: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE B 2 W: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE B 3 N: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE B 3 E: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE B 3 S: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE B 3 W: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE C 0 N: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE C 0 E: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE C 0 S: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE C 0 W: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE C 1 N: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE C 1 E: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE C 1 S: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE C 1 W: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE C 2 N: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE C 2 E: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE C 2 S: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE C 2 W: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE C 3 N: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE C 3 E: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE C 3 S: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE C 3 W: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE D 0 N: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE D 0 E: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE D 0 S: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE D 0 W: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE D 1 N: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE D 1 E: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE D 1 S: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE D 1 W: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE D 2 N: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE D 2 E: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE D 2 S: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE D 2 W: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE D 3 N: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE D 3 E: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE D 3 S: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: ROUTE D 3 W: selected track toggled, 8 unselected-track combinations x 6 environments x 4 BEL outputs
+COVERAGE: 64/64 routes (4 BELs x 4 pins x 4 edges); 64 cases loaded in sequence into one live tile; 768 adversarial selected-vs-all-unselected-disagree checks; 0 duplicate case ids
+PASS: tb_route_diag[route] (24576 checks, 0 failures; 64/64 cases)
+/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-68/verification/common/sim/tb_route_diag.v:336: $finish called at 6144000 (1ps)

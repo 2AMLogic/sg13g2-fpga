@@ -1,0 +1,1 @@
+route_diag: 64 streams = 4 BELs x 4 pins x 4 edges, every one a pip of the frozen model, assembled through flow/fasm_to_bitstream.py; required set read from the snapshot

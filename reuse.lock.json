@@ -214,16 +214,46 @@
       "destination": "rtl/common/rtl/lut4_slice.v"
     },
     {
+      "path": "flow/configmem_frames.py",
+      "sha256": "c1a2b5aca673dbfada8d57617d49ce22393c0144636b925fa6f4db5e43f4bb3c",
+      "mode": "vendored",
+      "destination": "verification/common/flow/configmem_frames.py"
+    },
+    {
+      "path": "flow/ctrl_route.py",
+      "sha256": "e56c65945c2ded40a561fa514e738ef988775423369561d3716b46eb2683474f",
+      "mode": "vendored",
+      "destination": "verification/common/flow/ctrl_route.py"
+    },
+    {
       "path": "flow/fasm_to_bitstream.py",
       "sha256": "b3d51401f465ba5694c755607caa5ec9615816eea1d92d84ce51658e437b386a",
       "mode": "vendored",
       "destination": "verification/common/flow/fasm_to_bitstream.py"
     },
     {
+      "path": "flow/lut_basis.py",
+      "sha256": "4cba671bfb7bc25882b131e87882eaf843e1be34c05a9d54e3ec421327a5ea50",
+      "mode": "vendored",
+      "destination": "verification/common/flow/lut_basis.py"
+    },
+    {
       "path": "flow/nextpnr_io_overlay.py",
       "sha256": "a6ce95fe8b6d393e73a744ca2dc8314198bcc5ec348e23bf5e48b876d0e46c9c",
       "mode": "vendored",
       "destination": "verification/common/flow/nextpnr_io_overlay.py"
+    },
+    {
+      "path": "flow/output_route.py",
+      "sha256": "7070ad5d4154612ef5bc4be18ed517f2ff63a812cb30df18b7e2f007386e320b",
+      "mode": "vendored",
+      "destination": "verification/common/flow/output_route.py"
+    },
+    {
+      "path": "flow/route_diag.py",
+      "sha256": "4d9a109cfb66c064d1f2051a0e754b8656909f70d985689e9921667ce03663ce",
+      "mode": "vendored",
+      "destination": "verification/common/flow/route_diag.py"
     },
     {
       "path": "sim/switch_matrix_tb_gen.vh",
