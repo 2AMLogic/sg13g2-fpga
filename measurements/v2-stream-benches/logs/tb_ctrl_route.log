@@ -1,0 +1,43 @@
+CFG C_EN_A_N 0e100000000000d63000000fffffffffffffffff
+CFG C_EN_B_N 0c600000000000d63000000fffffffffffffffff
+CFG C_EN_C_N 02600000000000d63000000fffffffffffffffff
+CFG C_EN_D_N 0e600000000000d63000000fffffffffffffffff
+CFG C_EN_A_E 13600000000000d63000000fffffffffffffffff
+CFG C_EN_B_E 11b00000000000d63000000fffffffffffffffff
+CFG C_EN_C_E 17b00000000000d63000000fffffffffffffffff
+CFG C_EN_D_E 13b00000000000d63000000fffffffffffffffff
+CFG C_EN_A_S 24b00000000000d63000000fffffffffffffffff
+CFG C_EN_B_S 26c00000000000d63000000fffffffffffffffff
+CFG C_EN_C_S 28c00000000000d63000000fffffffffffffffff
+CFG C_EN_D_S 24c00000000000d63000000fffffffffffffffff
+CFG C_EN_A_W 39c00000000000d63000000fffffffffffffffff
+CFG C_EN_B_W 3b100000000000d63000000fffffffffffffffff
+CFG C_EN_C_W 3d100000000000d63000000fffffffffffffffff
+CFG C_EN_D_W 39100000000000d63000000fffffffffffffffff
+CFG C_SR_N 0e400000000000d63000000fffffffffffffffff
+CFG C_SR_E 13900000000000d63000000fffffffffffffffff
+CFG C_SR_S 24e00000000000d63000000fffffffffffffffff
+CFG C_SR_W 39300000000000d63000000fffffffffffffffff
+COVERAGE: ROUTE EN A N: enable toggled on the selected track against disagreeing unselected tracks; checked on BEL A and the 3 other BELs
+COVERAGE: ROUTE EN A E: enable toggled on the selected track against disagreeing unselected tracks; checked on BEL A and the 3 other BELs
+COVERAGE: ROUTE EN A S: enable toggled on the selected track against disagreeing unselected tracks; checked on BEL A and the 3 other BELs
+COVERAGE: ROUTE EN A W: enable toggled on the selected track against disagreeing unselected tracks; checked on BEL A and the 3 other BELs
+COVERAGE: ROUTE EN B N: enable toggled on the selected track against disagreeing unselected tracks; checked on BEL B and the 3 other BELs
+COVERAGE: ROUTE EN B E: enable toggled on the selected track against disagreeing unselected tracks; checked on BEL B and the 3 other BELs
+COVERAGE: ROUTE EN B S: enable toggled on the selected track against disagreeing unselected tracks; checked on BEL B and the 3 other BELs
+COVERAGE: ROUTE EN B W: enable toggled on the selected track against disagreeing unselected tracks; checked on BEL B and the 3 other BELs
+COVERAGE: ROUTE EN C N: enable toggled on the selected track against disagreeing unselected tracks; checked on BEL C and the 3 other BELs
+COVERAGE: ROUTE EN C E: enable toggled on the selected track against disagreeing unselected tracks; checked on BEL C and the 3 other BELs
+COVERAGE: ROUTE EN C S: enable toggled on the selected track against disagreeing unselected tracks; checked on BEL C and the 3 other BELs
+COVERAGE: ROUTE EN C W: enable toggled on the selected track against disagreeing unselected tracks; checked on BEL C and the 3 other BELs
+COVERAGE: ROUTE EN D N: enable toggled on the selected track against disagreeing unselected tracks; checked on BEL D and the 3 other BELs
+COVERAGE: ROUTE EN D E: enable toggled on the selected track against disagreeing unselected tracks; checked on BEL D and the 3 other BELs
+COVERAGE: ROUTE EN D S: enable toggled on the selected track against disagreeing unselected tracks; checked on BEL D and the 3 other BELs
+COVERAGE: ROUTE EN D W: enable toggled on the selected track against disagreeing unselected tracks; checked on BEL D and the 3 other BELs
+COVERAGE: ROUTE SR - N: reset toggled on the selected track against disagreeing unselected tracks; checked on all 4 BELs
+COVERAGE: ROUTE SR - E: reset toggled on the selected track against disagreeing unselected tracks; checked on all 4 BELs
+COVERAGE: ROUTE SR - S: reset toggled on the selected track against disagreeing unselected tracks; checked on all 4 BELs
+COVERAGE: ROUTE SR - W: reset toggled on the selected track against disagreeing unselected tracks; checked on all 4 BELs
+COVERAGE: 20/20 routes (16 enable = 4 BELs x 4 edges, 4 shared-reset edges); 20 cases loaded in sequence into one live tile; 172 phases; 140 full-disagreement phases (all unselected candidates opposite the selected control); 0 duplicate case ids
+PASS: tb_ctrl_route[ctrl] (1296 checks, 0 failures; 20/20 cases)
+/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-68/verification/common/sim/tb_ctrl_route.v:441: $finish called at 516000 (1ps)

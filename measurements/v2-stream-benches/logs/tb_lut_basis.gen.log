@@ -1,0 +1,1 @@
+lut_basis: 73 streams (64 one-hot = 4 BELs x 16 addresses, 4 all-ones, 5 all-zero) assembled through flow/fasm_to_bitstream.py; shared route set of 36 pips, all in the frozen pip model; wiring traced from the FASM
