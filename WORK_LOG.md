@@ -2,6 +2,11 @@
 
 Chronological record of merged PRs and closed issues, newest first. Maintained by the Guide role.
 
+### 2026-11-10
+
+- **PR #71**: test: vendor bench stimulus generators and run the five stream benches
+- **Issue #68** (closed): Five vendored testbenches (~1,900 LOC) are permanently NOT-RUN: vendor their generators or drop them
+
 ### 2026-11-07
 
 - **PR #67**: Bump Repo Skills 0.25.1 -> 0.25.10
