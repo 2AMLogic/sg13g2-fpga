@@ -2,6 +2,10 @@
 
 Chronological record of merged PRs and closed issues, newest first. Maintained by the Guide role.
 
+### 2026-11-12
+
+- **PR #75**: Bump Repo Skills 0.25.10 -> 0.26.1
+
 ### 2026-11-10
 
 - **PR #71**: test: vendor bench stimulus generators and run the five stream benches
