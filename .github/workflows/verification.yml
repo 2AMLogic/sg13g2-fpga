@@ -1,0 +1,159 @@
+# Re-run the bench suite on every change that can invalidate it (issue #81).
+#
+# signoff.yml re-grades the *committed* evidence; nothing re-ran the benches
+# behind it, so an edit under rtl/ or verification/ could break a bench with
+# every check still green. This job runs verification/cold-start.sh — the same
+# one-command cold start a third party runs, named by
+# manifests/inventories/item-9.json — and fails on any FAIL or NOT-RUN.
+#
+# This is not, and must not be made, a required status check: it is
+# path-filtered, so it does not run at all on a docs- or layout-only pull
+# request and a required check would block those on a run that never reports.
+#
+# Two things this job must build rather than install:
+#   * iverilog. verification/run.sh's preflight is an exact-equality gate
+#     against the icarus-verilog pin in flow/toolchain.json (13.0); the
+#     Ubuntu 24.04 apt candidate is 12.0, so `apt-get install iverilog` exits
+#     1 in preflight before a single bench runs. The pinned version is built
+#     from the upstream tag and cached. Using the iverilog bundled in the OSS
+#     CAD Suite instead would swap the stable v13_0 the committed record was
+#     measured with (measurements/v2-stream-benches/env.txt) for an unpinned
+#     snapshot, so it is deliberately not used here.
+#   * The OSS CAD Suite (yosys + nextpnr-generic). run.sh --setup fetches and
+#     sha256-checks the pinned tarball itself; this job only caches the
+#     extracted result, so the checksum still runs on every cache miss.
+
+name: verification
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'rtl/**'
+      - 'verification/**'
+      - 'flow/toolchain.json'
+      - '.github/workflows/verification.yml'
+  pull_request:
+    paths:
+      - 'rtl/**'
+      - 'verification/**'
+      - 'flow/toolchain.json'
+      - '.github/workflows/verification.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  benches:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Read the toolchain pins
+        id: pins
+        run: |
+          ICARUS="$(python3 -I -c 'import json; print(json.load(open("flow/toolchain.json"))["icarus-verilog"]["version"])')"
+          echo "icarus=$ICARUS" >> "$GITHUB_OUTPUT"
+          # Upstream tags the release as v<major>_<minor>: 13.0 -> v13_0.
+          echo "icarus_tag=v${ICARUS//./_}" >> "$GITHUB_OUTPUT"
+
+      - name: Restore the pinned iverilog
+        id: icarus-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/icarus
+          key: icarus-${{ runner.os }}-${{ steps.pins.outputs.icarus }}
+
+      - name: Build the pinned iverilog from source
+        if: steps.icarus-cache.outputs.cache-hit != 'true'
+        env:
+          ICARUS_TAG: ${{ steps.pins.outputs.icarus_tag }}
+        run: |
+          set -euo pipefail
+          # gperf generates lexor_keyword.cc during the build (it is not shipped
+          # pre-generated); flex/bison/g++/make are the rest of the toolchain.
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends autoconf gperf flex bison g++ make
+          git clone --depth 1 --branch "$ICARUS_TAG" https://github.com/steveicarus/iverilog.git "$RUNNER_TEMP/iverilog"
+          cd "$RUNNER_TEMP/iverilog"
+          # Deliberately NOT running ./autoconf.sh: the release tag ships a
+          # generated ./configure as a *tracked* file, and regenerating it
+          # leaves the tree dirty, which Makefile.in folds into the version
+          # banner via `git describe --always --dirty`. That yields
+          # "version 13.0 (stable) (v13_0-dirty)" instead of the "(v13_0)" the
+          # committed record was measured with
+          # (measurements/v2-stream-benches/env.txt). run.sh's preflight only
+          # compares the numeric 13.0 either way, but the artifact's env.txt
+          # should match the recorded evidence exactly.
+          ./configure --prefix="$HOME/.local/icarus"
+          make -j"$(nproc)"
+          make install
+
+      - name: Put the pinned iverilog on PATH and confirm it matches the pin
+        env:
+          ICARUS_PIN: ${{ steps.pins.outputs.icarus }}
+        run: |
+          set -euo pipefail
+          echo "$HOME/.local/icarus/bin" >> "$GITHUB_PATH"
+          BANNER="$("$HOME/.local/icarus/bin/iverilog" -V 2>&1 | sed -n 1p)"
+          echo "$BANNER"
+          # Same extraction verification/run.sh's preflight uses, so this check
+          # can never disagree with it; it just fails earlier and more clearly.
+          ICV="$(printf '%s\n' "$BANNER" | sed -E 's/.*version ([0-9.]+).*/\1/')"
+          if [ "$ICV" != "$ICARUS_PIN" ]; then
+            echo "::error::built iverilog is $ICV, flow/toolchain.json pins $ICARUS_PIN"
+            exit 1
+          fi
+          echo "iverilog matches the $ICARUS_PIN pin"
+
+      # Keyed on verification/run.sh as well as the pin file: the tarball URL
+      # and its sha256 are literals in run.sh (OSS_URL, OSS_SHA), not read from
+      # flow/toolchain.json, so a bump in either place must miss the cache.
+      # flow/build/fab-venv is deliberately not cached - `uv pip install
+      # fabulous-fpga` is cheap next to the suite, and a cached venv would pin
+      # absolute paths to an interpreter that is not in the same cache.
+      - name: Restore the extracted OSS CAD Suite
+        uses: actions/cache@v4
+        with:
+          path: flow/build/oss-cad-suite
+          key: oss-cad-suite-${{ runner.os }}-${{ hashFiles('flow/toolchain.json', 'verification/run.sh') }}
+
+      - name: Run the cold start (fetch the pinned toolchain, run every bench)
+        run: verification/cold-start.sh
+
+      # if: always() - a red run is exactly when the per-bench verdicts are
+      # worth having, so the artifact must not be conditional on success.
+      - name: Upload summary.txt and results.tsv
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verification-results
+          path: |
+            flow/build/verification/summary.txt
+            flow/build/verification/results.tsv
+          if-no-files-found: error
+
+      # cold-start.sh exits nonzero only on FAIL; verification/run.sh records a
+      # bench it could not run as NOT-RUN and says so explicitly in its header
+      # ("NOT-RUN entries do not change it"). A bench that cannot run must not
+      # look like one that passed, so gate on the results file as well.
+      - name: Fail on any NOT-RUN bench
+        if: always()
+        run: |
+          set -euo pipefail
+          TSV=flow/build/verification/results.tsv
+          if [ ! -f "$TSV" ]; then
+            echo "::error::$TSV is missing - the bench suite did not run to completion"
+            exit 1
+          fi
+          if grep -q $'\tNOT-RUN\t' "$TSV"; then
+            echo "::error::a bench was NOT-RUN (cold-start.sh's exit status alone does not catch this)"
+            grep $'\tNOT-RUN\t' "$TSV"
+            exit 1
+          fi
+          echo "no NOT-RUN benches"
