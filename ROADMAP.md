@@ -4,7 +4,8 @@
 carries it up the README's maturity ladder, with every claim backed by a
 committed record.
 
-Status as of 2026-11-13, `main` @ `266c56a`; tracker as read that day.
+Status as of 2026-11-13, `main` @ `266c56a`; Now/Blocked tracker links
+synced 2026-11-14.
 `WORK_PLAN.md` is the generated label-state view; this file says where the
 work stands and what comes next.
 
@@ -69,11 +70,11 @@ Startable today, one pull request each.
    generated-file hashes, a design with a net between two `LOGIC4` tiles
    reaches FASM through nextpnr, and FABulous `bit_gen` emits a reference
    bitstream whose hash is recorded.
-3. **Run the bench suite in CI** (#81). `.github/workflows/` has only
-   `signoff.yml`, so nothing re-runs `verification/cold-start.sh` on a pull
-   request.
-   Done when: a workflow runs it with the pinned toolchain cached, fails on
-   any FAIL row, and T1 item 10 is re-attested with the new workflow listed.
+3. **Run the bench suite in CI** (#81) — done: PR #85 added
+   `.github/workflows/verification.yml`, which re-runs
+   `verification/cold-start.sh` on pushes and pull requests that touch
+   `rtl/`, `verification/` or `flow/toolchain.json` and fails on any FAIL or
+   NOT-RUN row; T1 item 10 is re-attested with the new workflow listed.
 4. **Correct stale documentation** (#82). `measurements/README.md` and
    `rtl/README.md` say "Empty until the first work lands here"; the README
    layout block calls `measurements/` "empty until tape-out";
