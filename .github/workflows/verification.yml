@@ -46,7 +46,13 @@ permissions:
 jobs:
   benches:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    # Measured on this workflow, not guessed: 4m57s for a full green run on a
+    # cold cache (iverilog built from source, tarball downloaded, 2.3 GB cache
+    # saved); 28s for a warm-cache run. 20 minutes is ~4x the cold run - enough
+    # headroom for a slow runner or an added bench, and far below the 6 h
+    # default, which matters because run.sh's own bounds (600 s per vvp, 24
+    # benches, plus 600 s for fabulous_generate) put its worst case in hours.
+    timeout-minutes: 20
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
@@ -171,13 +177,25 @@ jobs:
       # bench it could not run as NOT-RUN and says so explicitly in its header
       # ("NOT-RUN entries do not change it"). A bench that cannot run must not
       # look like one that passed, so gate on the results file as well.
-      - name: Fail on any NOT-RUN bench
+      - name: Gate on the recorded results (NOT-RUN, truncated run)
         if: always()
         run: |
           set -euo pipefail
-          TSV=flow/build/verification/results.tsv
+          OUT=flow/build/verification
+          TSV="$OUT/results.tsv"
           if [ ! -f "$TSV" ]; then
-            echo "::error::$TSV is missing - the bench suite did not run to completion"
+            echo "::error::$TSV is missing - the bench suite did not run at all"
+            exit 1
+          fi
+          # run.sh writes results.tsv first and summary.txt last, so a missing
+          # summary means it aborted mid-suite and the remaining benches have
+          # no verdict at all - which must not be mistaken for a pass. Observed
+          # for real: on a corrupted fixture, `set -e` plus a failing
+          # `py_cfg="$(... decode ...)"` command substitution ends the script
+          # before the summary is written.
+          if [ ! -f "$OUT/summary.txt" ]; then
+            echo "::error::summary.txt is missing - run.sh aborted before the end of the suite; results.tsv below shows how far it got"
+            cat "$TSV"
             exit 1
           fi
           if grep -q $'\tNOT-RUN\t' "$TSV"; then
