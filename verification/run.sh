@@ -52,11 +52,21 @@ NSRC="$REPO/rtl/common/fabulous/nextpnr"
 SIM_TIMEOUT_SECONDS="${SIM_TIMEOUT_SECONDS:-600}"
 SIM_KILL_AFTER_SECONDS="${SIM_KILL_AFTER_SECONDS:-10}"
 
-pin() { python3 -I -c 'import json,sys; d=json.load(open(sys.argv[1])); print(d[sys.argv[2]][sys.argv[3]])' "$REPO/flow/toolchain.json" "$1" "$2"; }
+# Every pin below is read from flow/toolchain.json -- that manifest is the only
+# copy, including the suite tarball's URL and sha256 (issue #88). Takes a key
+# path, so nested pins work: `pin nextpnr-generic tarball sha256`.
+pin() { python3 -I -c 'import json,sys
+d = json.load(open(sys.argv[1]))
+for k in sys.argv[2:]:
+    if not isinstance(d, dict) or k not in d:
+        sys.exit("flow/toolchain.json: no pin " + ".".join(sys.argv[2:]))
+    d = d[k]
+print(d)' "$REPO/flow/toolchain.json" "$@"; }
 ICARUS_PIN="$(pin icarus-verilog version)"
 FAB_PIN="$(pin fabulous version)"
-OSS_URL="https://github.com/YosysHQ/oss-cad-suite-build/releases/download/2026-10-08/oss-cad-suite-linux-x64-20261008.tgz"
-OSS_SHA="8fa59d93d6cadbbee352077c059f2c5b72cda301e4508d9064a23d1ec11579c7"
+NEXTPNR_PIN="$(pin nextpnr-generic version)"
+OSS_URL="$(pin nextpnr-generic tarball url)"
+OSS_SHA="$(pin nextpnr-generic tarball sha256)"
 
 if [[ "${1:-}" == "--setup" ]]; then
     mkdir -p "$BUILD/dl"
@@ -149,6 +159,7 @@ if [[ "$HAVE_TOOLS" -eq 1 ]]; then
         echo "FABulous: $("$VENV/bin/FABulous" --version 2>&1 | sed -n "\$p")"
     } >> "$OUT/env.txt"
     grep -q "FABulous CLI $FAB_PIN" "$OUT/env.txt" || { echo "error: FABulous version is not the pinned $FAB_PIN" >&2; exit 1; }
+    grep -q "^nextpnr-generic: .*$NEXTPNR_PIN" "$OUT/env.txt" || { echo "error: nextpnr-generic is not the pinned $NEXTPNR_PIN" >&2; exit 1; }
 fi
 NOTOOLS="pinned toolchain not present under flow/build/ (run verification/run.sh --setup)"
 
