@@ -1,9 +1,9 @@
 {
   "klayout-tools": {
-    "commit": "bf24d463fb3fc0f32b6f90d884086fc8946d74a8",
-    "reported_version": "0.7.1.dev2056+gbf24d463fb3f",
-    "source": "bumped for issue #14 (pin_constraints, klayout-tools#3887); previous pin 7ee09483b74867a47a05eb353015c2cf5ca33ef3 came from the host uv-receipt.toml. Form: git+https://github.com/2AMLogic/klayout-tools.git?rev=<commit>",
-    "reproduce": "uvx --from 'git+https://github.com/2AMLogic/klayout-tools.git@bf24d463fb3fc0f32b6f90d884086fc8946d74a8' klt ..."
+    "release": "v0.9.0",
+    "reported_version": "0.9.0",
+    "source": "the same commit as .github/workflows/signoff.yml, which is the pin's only home (manifests/README.md, Rules: the pin lives only in signoff.yml, do not repeat the SHA elsewhere). The annotated tag v0.9.0 dereferences to that commit. Previous pin bf24d463fb3fc0f32b6f90d884086fc8946d74a8 (0.7.1.dev2056+gbf24d463fb3f, bumped for issue #14 / klayout-tools#3887, itself from the host uv-receipt.toml).",
+    "reproduce": "uvx --from klayout-tools@git+https://github.com/2AMLogic/klayout-tools@v0.9.0 klt ..."
   },
   "yosys": {
     "version": "0.67+post",

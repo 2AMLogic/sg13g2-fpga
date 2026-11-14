@@ -13,7 +13,7 @@ Place-and-route of the stamped tile `logic_tile_routed` (issue #9).
 Re-run against the pinned `klt` without touching the host install:
 
 ```bash
-KLT="uvx --from git+https://github.com/2AMLogic/klayout-tools.git@bf24d463fb3fc0f32b6f90d884086fc8946d74a8 klt" layout/run.sh
+KLT="uvx --from klayout-tools@git+https://github.com/2AMLogic/klayout-tools@v0.9.0 klt" layout/run.sh
 ```
 
 Requirements and traps are those of [`flow/README.md`](../flow/README.md) (docker `openroad`
