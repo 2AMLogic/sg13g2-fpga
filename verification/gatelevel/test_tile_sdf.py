@@ -15,6 +15,7 @@ ones 5 ns after the rising edge; a delay beyond that fails the bench.
 
 import cocotb
 from cocotb.triggers import Timer
+from cocotb.utils import get_sim_time
 
 PERIOD_NS = 20
 COMB_SETTLE_NS = 10
@@ -55,11 +56,26 @@ def outs(dut):
     return [int(dut.n_out.value), int(dut.e_out.value), int(dut.s_out.value), int(dut.w_out.value)]
 
 
+_last_rise_ns = None
+
+
 async def clock_edge(dut):
-    """One full period starting low: rise at +PERIOD/2, fall at +PERIOD."""
+    """One full PERIOD_NS period, returning CLK_Q_NS after the rising edge so
+    the caller can sample Q at the documented offset: holds out the rest of
+    the previous high phase, falls, stays low for PERIOD_NS // 2, then rises
+    (asserting the realized rise-to-rise period against PERIOD_NS)."""
+    global _last_rise_ns
+    await Timer(PERIOD_NS // 2 - CLK_Q_NS, unit="ns")
     dut.clk.value = 0
     await Timer(PERIOD_NS // 2, unit="ns")
     dut.clk.value = 1
+    rise = get_sim_time(unit="ns")
+    if _last_rise_ns is not None:
+        period = rise - _last_rise_ns
+        assert period == PERIOD_NS, (
+            f"realized clock period is {period} ns, expected {PERIOD_NS} ns"
+        )
+    _last_rise_ns = rise
     await Timer(CLK_Q_NS, unit="ns")
 
 
@@ -116,24 +132,18 @@ async def routed_registered(dut):
     await clock_edge(dut)
     assert outs(dut)[3] == 0b0000, f"reset clears FF: w_out={outs(dut)[3]:04b}"
 
-    dut.clk.value = 0
-    await Timer(PERIOD_NS // 2, unit="ns")
     tin[2] = 0b0000
     tin[0] = 0b0001                       # data 1, all EN
     drive(dut, tin)
     await clock_edge(dut)
     assert outs(dut)[3] == 0b1111, f"capture 1: w_out={outs(dut)[3]:04b}"
 
-    dut.clk.value = 0
-    await Timer(PERIOD_NS // 2, unit="ns")
     tin[0] = 0b0000                       # data 0, BEL1 gated off
     tin[1] = 0b1101
     drive(dut, tin)
     await clock_edge(dut)
     assert outs(dut)[3] == 0b0010, f"EN=0 holds BEL1: w_out={outs(dut)[3]:04b}"
 
-    dut.clk.value = 0
-    await Timer(PERIOD_NS // 2, unit="ns")
     tin[2] = 0b0001                       # SR beats EN
     drive(dut, tin)
     await clock_edge(dut)
