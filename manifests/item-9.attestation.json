@@ -192,7 +192,7 @@
         "role": "testbench",
         "path": "verification/run.sh",
         "passed": true,
-        "content_hash": "sha256:052acccce63ea79596992f8110d26a11b33d5a3e347c48c254f754a899649592"
+        "content_hash": "sha256:9d2b562a6a545d9737bb9e5b4dd3a09eff9da369dd2634267536e3a6101176b4"
       },
       {
         "check": "command",
@@ -231,7 +231,7 @@
     ]
   },
   "provenance": {
-    "klt_version": "0.9.0.dev1379+g5dbbad05ff42",
+    "klt_version": "0.9.0",
     "klayout_version": null,
     "pdk": null,
     "deck": null,

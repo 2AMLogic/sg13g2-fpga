@@ -129,27 +129,25 @@ jobs:
           path: flow/build/oss-cad-suite
           key: oss-cad-suite-${{ runner.os }}-${{ hashFiles('flow/toolchain.json', 'verification/run.sh') }}
 
-      # PATH ordering here is load-bearing, in both directions.
-      #
-      # Appended last: FABulous shells out to a bare `yosys` (its YosysJson
-      # reader) while generating the fabric, and verification/run.sh only puts
-      # the suite on PATH inside a later subshell - so on a machine with no
-      # host-wide yosys, fabulous_generate FAILs with
-      # "FileNotFoundError: 'yosys'" and cascades NOT-RUN onto the five benches
-      # that need the generated tile (16 PASS / 1 FAIL / 5 NOT-RUN). A GitHub
-      # runner is exactly that machine. flow/toolchain.json already names the
-      # suite's yosys as the one for this stage, so making it visible is the
-      # documented configuration, not a workaround for a wrong tool.
-      #
-      # Prepended first: the suite also bundles its own iverilog, and it is
-      # 14.0 (devel) - putting the suite ahead of the pinned build would make
-      # run.sh's preflight compare 14.0 against the 13.0 pin and exit 1. The
-      # pinned iverilog must therefore stay ahead of the suite, and the suite
-      # must stay behind everything else.
+      # The pinned iverilog stays on PATH; the OSS CAD Suite must not be.
+      # run.sh gives FABulous the suite's yosys explicitly (FAB_YOSYS_PATH) and
+      # already puts the suite on PATH inside its mapping subshell, so nothing
+      # here needs the suite's bin -- and putting it on PATH would let its
+      # bundled iverilog 14.0 (devel) shadow the 13.0 pin the preflight
+      # compares against.
       - name: Run the cold start (fetch the pinned toolchain, run every bench)
         run: |
           set -euo pipefail
-          export PATH="$HOME/.local/icarus/bin:$PATH:$GITHUB_WORKSPACE/flow/build/oss-cad-suite/bin"
+          export PATH="$HOME/.local/icarus/bin:$PATH"
+          # Self-containment check (#86): the suite's bin is deliberately NOT
+          # on PATH. If a host-wide yosys or nextpnr-generic is visible, this
+          # job cannot prove the cold start resolves them from flow/build/.
+          for t in yosys nextpnr-generic; do
+            if command -v "$t" > /dev/null; then
+              echo "::error::$t is on PATH ($(command -v "$t")); the cold start must resolve it from flow/build/"
+              exit 1
+            fi
+          done
           verification/cold-start.sh
 
       # if: always() - a red run is exactly when the per-bench verdicts are
