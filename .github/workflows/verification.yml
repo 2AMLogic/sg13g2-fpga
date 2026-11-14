@@ -123,11 +123,37 @@ jobs:
           path: flow/build/oss-cad-suite
           key: oss-cad-suite-${{ runner.os }}-${{ hashFiles('flow/toolchain.json', 'verification/run.sh') }}
 
+      # PATH ordering here is load-bearing, in both directions.
+      #
+      # Appended last: FABulous shells out to a bare `yosys` (its YosysJson
+      # reader) while generating the fabric, and verification/run.sh only puts
+      # the suite on PATH inside a later subshell - so on a machine with no
+      # host-wide yosys, fabulous_generate FAILs with
+      # "FileNotFoundError: 'yosys'" and cascades NOT-RUN onto the five benches
+      # that need the generated tile (16 PASS / 1 FAIL / 5 NOT-RUN). A GitHub
+      # runner is exactly that machine. flow/toolchain.json already names the
+      # suite's yosys as the one for this stage, so making it visible is the
+      # documented configuration, not a workaround for a wrong tool.
+      #
+      # Prepended first: the suite also bundles its own iverilog, and it is
+      # 14.0 (devel) - putting the suite ahead of the pinned build would make
+      # run.sh's preflight compare 14.0 against the 13.0 pin and exit 1. The
+      # pinned iverilog must therefore stay ahead of the suite, and the suite
+      # must stay behind everything else.
       - name: Run the cold start (fetch the pinned toolchain, run every bench)
-        run: verification/cold-start.sh
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.local/icarus/bin:$PATH:$GITHUB_WORKSPACE/flow/build/oss-cad-suite/bin"
+          verification/cold-start.sh
 
       # if: always() - a red run is exactly when the per-bench verdicts are
       # worth having, so the artifact must not be conditional on success.
+      # The per-bench text logs go up too: summary.txt names the log a failing
+      # bench wrote ("see logs/fabulous-generate.log") and without them a red
+      # run cannot be diagnosed from the artifact alone. Only *.log and
+      # *.failures - the compiled .vvp images and the generated stimulus
+      # streams in the same directory are ~5 MB of the 5.5 MB and are
+      # reproducible from the inputs.
       - name: Upload summary.txt and results.tsv
         if: always()
         uses: actions/upload-artifact@v4
@@ -136,6 +162,9 @@ jobs:
           path: |
             flow/build/verification/summary.txt
             flow/build/verification/results.tsv
+            flow/build/verification/env.txt
+            flow/build/verification/logs/**/*.log
+            flow/build/verification/logs/**/*.failures
           if-no-files-found: error
 
       # cold-start.sh exits nonzero only on FAIL; verification/run.sh records a
