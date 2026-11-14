@@ -1,0 +1,33 @@
+# G2 demonstration fabric: 4x4 grid with a 2x2 LOGIC4 core inside a CAP_* ring
+# (issue #80). LOGIC4 is the only logic tile; CAP_* are non-logic boundary
+# terminators that FABulous 2.2.0's nextpnr-model step requires. Corners are
+# unused. Logic tiles sit at X1Y1, X2Y1, X1Y2, X2Y2.
+#
+# The only change from the stamped 3x3 harness in rtl/common/fabulous/fabric.csv
+# is the FabricBegin..FabricEnd grid: the ParametersBegin..ParametersEnd block
+# and the five Tile, lines are carried over byte-for-byte, and every ./Tile/...
+# path still resolves because this description is overlaid into a copy of the
+# stamped project (see rtl/fabric-2x2/README.md).
+#
+# CAP_N/CAP_S declare only NORTH/SOUTH wires and CAP_E/CAP_W only EAST/WEST, so
+# they are position-agnostic single-axis terminators: two of the same cap tile
+# side by side along the edge it terminates is well-formed.
+FabricBegin,,,,,,,,,,,,,,,,,
+NULL,CAP_N,CAP_N,NULL,,,,,,,,,,,,,,,,,
+CAP_W,LOGIC4,LOGIC4,CAP_E,,,,,,,,,,,,,,,,,
+CAP_W,LOGIC4,LOGIC4,CAP_E,,,,,,,,,,,,,,,,,
+NULL,CAP_S,CAP_S,NULL,,,,,,,,,,,,,,,,,
+FabricEnd,,,,,,,,,,,,,,,,,
+
+ParametersBegin,,,,,,,,,,,,,,,,,
+ConfigBitMode,frame_based,,,,,,,,,,,,,,,,,
+GenerateDelayInSwitchMatrix,80,,,,,,,,,,,,,,,,,
+MultiplexerStyle,generic,,,,,,,,,,,,,,,,,
+SuperTileEnable,FALSE,,,,,,,,,,,,,,,,,
+
+Tile,./Tile/LOGIC4/LOGIC4.csv,,,,,,,,,,,,,,,,,
+Tile,./Tile/CAP_N/CAP_N.csv,,,,,,,,,,,,,,,,,
+Tile,./Tile/CAP_S/CAP_S.csv,,,,,,,,,,,,,,,,,
+Tile,./Tile/CAP_E/CAP_E.csv,,,,,,,,,,,,,,,,,
+Tile,./Tile/CAP_W/CAP_W.csv,,,,,,,,,,,,,,,,,
+ParametersEnd,,,,,,,,,,,,,,,,,
