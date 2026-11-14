@@ -1,0 +1,784 @@
+# yosys:           Yosys 0.69+260 (git sha1 dcd59343b, Release, Clang /usr/bin/clang++ 21.1.8)
+# nextpnr-generic: "nextpnr-generic" -- Next Generation Place and Route (Version nextpnr-0.11.1-54-g861c57be)
+# FABulous:        FABulous CLI 2.2.0
+
+$ yosys -p 'synth_fabulous -top top -noiopad -extra-plib prims.v -json cross_tile.json' cross_tile.v
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.69+260 (git sha1 dcd59343b, Release, Clang /usr/bin/clang++ 21.1.8)
+
+-- Parsing `cross_tile.v' using frontend ` -vlog2k' --
+
+1. Executing Verilog-2005 frontend: cross_tile.v
+Parsing Verilog input from `cross_tile.v' to AST representation.
+Storing AST representation for module `$abstract\top'.
+Successfully finished Verilog frontend.
+
+-- Running command `synth_fabulous -top top -noiopad -extra-plib prims.v -json cross_tile.json' --
+
+2. Executing SYNTH_FABULOUS pass.
+
+2.1. Executing Verilog-2005 frontend: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/fabulous/cells_bb.v
+Parsing Verilog input from `/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/fabulous/cells_bb.v' to AST representation.
+Generating RTLIL representation for module `$__FABULOUS_IBUF'.
+Generating RTLIL representation for module `$__FABULOUS_OBUF'.
+Generating RTLIL representation for module `$__FABULOUS_TBUF'.
+Generating RTLIL representation for module `$__FABULOUS_IOBUF'.
+Successfully finished Verilog frontend.
+
+2.2. Executing Verilog-2005 frontend: prims.v
+Parsing Verilog input from `prims.v' to AST representation.
+Generating RTLIL representation for module `\lut4_ff_bel'.
+Successfully finished Verilog frontend.
+
+2.3. Executing HIERARCHY pass (managing design hierarchy).
+
+2.4. Executing AST frontend in derive mode using pre-parsed AST for module `\top'.
+Generating RTLIL representation for module `\top'.
+
+2.4.1. Analyzing design hierarchy..
+Top module:  \top
+
+2.4.2. Analyzing design hierarchy..
+Top module:  \top
+Removing unused module `$abstract\top'.
+Removed 1 unused modules.
+
+2.5. Executing PROC pass (convert processes to netlists).
+
+2.5.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.5.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+2.5.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+2.5.4. Executing PROC_INIT pass (extract init attributes).
+
+2.5.5. Executing PROC_ARST pass (detect async resets in processes).
+
+2.5.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+2.5.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+2.5.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+2.5.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+2.5.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+2.5.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.5.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+
+2.6. Executing CHECK pass (checking for obvious problems).
+Checking module top...
+Found and reported 0 problems.
+
+2.7. Executing FLATTEN pass (flatten design).
+
+2.8. Executing TRIBUF pass.
+
+2.9. Executing DEMINOUT pass (demote inout ports to input or output).
+
+2.10. Executing TRIBUF pass.
+
+2.11. Executing DEMINOUT pass (demote inout ports to input or output).
+
+2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+
+2.13. Executing CHECK pass (checking for obvious problems).
+Checking module top...
+Found and reported 0 problems.
+
+2.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+
+2.15. Executing OPT pass (performing simple optimizations).
+
+2.15.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+
+2.15.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\top'.
+Computing hashes of 6 cells of `\top'.
+Finding duplicate cells in `\top'.
+Removed a total of 0 cells.
+
+2.15.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+2.15.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \top.
+Performed a total of 0 changes.
+
+2.15.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\top'.
+Computing hashes of 6 cells of `\top'.
+Finding duplicate cells in `\top'.
+Removed a total of 0 cells.
+
+2.15.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.15.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+
+2.15.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+
+2.15.9. Finished fast OPT passes. (There is nothing left to do.)
+
+2.16. Executing FSM pass (extract and optimize FSM).
+
+2.16.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+2.16.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+2.16.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+2.16.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+
+2.16.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+2.16.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+2.16.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+2.16.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+2.17. Executing OPT pass (performing simple optimizations).
+
+2.17.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+
+2.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\top'.
+Computing hashes of 6 cells of `\top'.
+Finding duplicate cells in `\top'.
+Removed a total of 0 cells.
+
+2.17.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+2.17.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \top.
+Performed a total of 0 changes.
+
+2.17.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\top'.
+Computing hashes of 6 cells of `\top'.
+Finding duplicate cells in `\top'.
+Removed a total of 0 cells.
+
+2.17.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.17.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+
+2.17.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+
+2.17.9. Finished fast OPT passes. (There is nothing left to do.)
+
+2.18. Executing WREDUCE pass (reducing word size of cells).
+
+2.19. Executing PEEPOPT pass (run peephole optimizers).
+
+2.20. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+
+2.21. Executing TECHMAP pass (map to technology primitives).
+
+2.21.1. Executing Verilog-2005 frontend: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/cmp2lut.v
+Parsing Verilog input from `/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/cmp2lut.v' to AST representation.
+Generating RTLIL representation for module `\_90_lut_cmp_'.
+Successfully finished Verilog frontend.
+
+2.21.2. Executing Verilog-2005 frontend: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/cmp2lcu.v
+Parsing Verilog input from `/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/cmp2lcu.v' to AST representation.
+Generating RTLIL representation for module `\_80_lcu_cmp_'.
+Generating RTLIL representation for module `$__CMP2LCU'.
+Successfully finished Verilog frontend.
+
+2.21.3. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~7 debug messages>
+
+2.22. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module top:
+  created 0 $alu and 0 $macc cells.
+
+2.23. Executing SHARE pass (SAT-based resource sharing).
+
+2.24. Executing OPT pass (performing simple optimizations).
+
+2.24.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+
+2.24.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\top'.
+Computing hashes of 6 cells of `\top'.
+Finding duplicate cells in `\top'.
+Removed a total of 0 cells.
+
+2.24.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+2.24.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \top.
+Performed a total of 0 changes.
+
+2.24.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\top'.
+Computing hashes of 6 cells of `\top'.
+Finding duplicate cells in `\top'.
+Removed a total of 0 cells.
+
+2.24.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.24.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+
+2.24.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+
+2.24.9. Finished fast OPT passes. (There is nothing left to do.)
+
+2.25. Executing MEMORY pass.
+
+2.25.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+2.25.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+2.25.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+2.25.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+2.25.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+2.25.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+
+2.25.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+2.25.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+2.25.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+
+2.25.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+2.26. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+
+2.27. Executing OPT pass (performing simple optimizations).
+
+2.27.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+
+2.27.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\top'.
+Computing hashes of 6 cells of `\top'.
+Finding duplicate cells in `\top'.
+Removed a total of 0 cells.
+
+2.27.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.27.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+
+2.27.5. Finished fast OPT passes.
+
+2.28. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+2.29. Executing OPT pass (performing simple optimizations).
+
+2.29.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+
+2.29.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\top'.
+Computing hashes of 6 cells of `\top'.
+Finding duplicate cells in `\top'.
+Removed a total of 0 cells.
+
+2.29.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+2.29.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \top.
+Performed a total of 0 changes.
+
+2.29.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\top'.
+Computing hashes of 6 cells of `\top'.
+Finding duplicate cells in `\top'.
+Removed a total of 0 cells.
+
+2.29.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.29.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+
+2.29.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+
+2.29.9. Finished fast OPT passes. (There is nothing left to do.)
+
+2.30. Executing OPT pass (performing simple optimizations).
+
+2.30.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+
+2.30.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\top'.
+Computing hashes of 6 cells of `\top'.
+Finding duplicate cells in `\top'.
+Removed a total of 0 cells.
+
+2.30.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+2.30.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \top.
+Performed a total of 0 changes.
+
+2.30.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\top'.
+Computing hashes of 6 cells of `\top'.
+Finding duplicate cells in `\top'.
+Removed a total of 0 cells.
+
+2.30.6. Executing OPT_SHARE pass.
+
+2.30.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.30.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+
+2.30.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+
+2.30.10. Finished fast OPT passes. (There is nothing left to do.)
+
+2.31. Executing TECHMAP pass (map to technology primitives).
+
+2.31.1. Executing Verilog-2005 frontend: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/techmap.v
+Parsing Verilog input from `/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+2.31.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~77 debug messages>
+
+2.32. Executing OPT pass (performing simple optimizations).
+
+2.32.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+
+2.32.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\top'.
+Computing hashes of 6 cells of `\top'.
+Finding duplicate cells in `\top'.
+Removed a total of 0 cells.
+
+2.32.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.32.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+
+2.32.5. Finished fast OPT passes.
+
+2.33. Executing CHECK pass (checking for obvious problems).
+Checking module top...
+Found and reported 0 problems.
+
+2.34. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\top'.
+Computing hashes of 6 cells of `\top'.
+Finding duplicate cells in `\top'.
+Removed a total of 0 cells.
+
+2.35. Executing SIMPLEMAP pass (map simple cells to gate primitives).
+
+2.36. Executing ABC9 pass.
+
+2.36.1. Executing ABC9_OPS pass (helper functions for ABC9).
+
+2.36.2. Executing ABC9_OPS pass (helper functions for ABC9).
+
+2.36.3. Executing SCC pass (detecting logic loops).
+Found 0 SCCs in module top.
+Found 0 SCCs.
+
+2.36.4. Executing ABC9_OPS pass (helper functions for ABC9).
+
+2.36.5. Executing TECHMAP pass (map to technology primitives).
+
+2.36.5.1. Executing Verilog-2005 frontend: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/techmap.v
+Parsing Verilog input from `/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+2.36.5.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~83 debug messages>
+
+2.36.6. Executing OPT pass (performing simple optimizations).
+
+2.36.6.1. Executing OPT_EXPR pass (perform const folding).
+
+2.36.6.2. Executing OPT_MERGE pass (detect identical cells).
+Removed a total of 0 cells.
+
+2.36.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Removed 0 multiplexer ports.
+
+2.36.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+Performed a total of 0 changes.
+
+2.36.6.5. Executing OPT_MERGE pass (detect identical cells).
+Removed a total of 0 cells.
+
+2.36.6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+2.36.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+
+2.36.6.8. Executing OPT_EXPR pass (perform const folding).
+
+2.36.6.9. Finished fast OPT passes. (There is nothing left to do.)
+
+2.36.7. Executing TECHMAP pass (map to technology primitives).
+
+2.36.7.1. Executing Verilog-2005 frontend: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/abc9_map.v
+Parsing Verilog input from `/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/abc9_map.v' to AST representation.
+Lexer warning: The SystemVerilog keyword `bit' (at /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/abc9_map.v:35) is not recognized unless read_verilog is called with -sv!
+Generating RTLIL representation for module `$__ABC9_BARRIER_MAP'.
+Successfully finished Verilog frontend.
+
+2.36.7.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~3 debug messages>
+
+2.36.8. Executing Verilog-2005 frontend: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/abc9_model.v
+Parsing Verilog input from `/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/abc9_model.v' to AST representation.
+Generating RTLIL representation for module `$__ABC9_DELAY'.
+Generating RTLIL representation for module `$__ABC9_BARRIER'.
+Generating RTLIL representation for module `$__ABC9_SCC_BREAKER'.
+Generating RTLIL representation for module `$__DFF_N__$abc9_flop'.
+Generating RTLIL representation for module `$__DFF_P__$abc9_flop'.
+Successfully finished Verilog frontend.
+
+2.36.9. Executing ABC9_OPS pass (helper functions for ABC9).
+
+2.36.10. Executing ABC9_OPS pass (helper functions for ABC9).
+<suppressed ~2 debug messages>
+
+2.36.11. Executing AIGMAP pass (map logic to AIG).
+Module top: replaced 0 cells with 0 new cells, skipped 6 cells.
+  not replaced 1 cell types:
+       6 lut4_ff_bel
+
+2.36.11.1. Executing ABC9_OPS pass (helper functions for ABC9).
+Warning: Feature 'write_xaiger2' is experimental.
+
+2.36.11.2. Executing XAIGER2 backend.
+<suppressed ~22 debug messages>
+Extracted 7 AND gates and 0 wires from module `top' to a netlist network with 6 inputs and 11 outputs.
+
+2.36.11.3. Executing ABC9_EXE pass (technology mapping using ABC9).
+
+2.36.11.4. Executing ABC9.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_lut <abc-temp-dir>/lutdefs.txt 
+ABC: + read_box <abc-temp-dir>/input.box 
+ABC: + &read <abc-temp-dir>/input.xaig 
+ABC: + &ps 
+ABC: <abc-temp-dir>/input : i/o =      6/     11  and =       0  lev =    0 (0.00)  mem = 0.00 MB  box = 0  bb = 0
+ABC: + &scorr 
+ABC: Warning: The network is combinational.
+ABC: + &sweep 
+ABC: + &dc2 
+ABC: + &dch -f -r 
+ABC: + &ps 
+ABC: <abc-temp-dir>/input : i/o =      6/     11  and =       0  lev =    0 (0.00)  mem = 0.00 MB  ch =    0  box = 0  bb = 0
+ABC: cst =       0  cls =      0  lit =       0  unused =       6  proof =     0
+ABC: + &if -v 
+ABC: K = 4. Memory (bytes): Truth =    0. Cut =   64. Obj =  144. Set =  672. CutMin = no
+ABC: Node =       0.  Ch =     0.  Total mem =    0.00 MB. Peak cut mem =    0.00 MB.
+ABC: P:  Del =    0.00.  Ar =       0.0.  Edge =        0.  Cut =        0.  T =     0.00 sec
+ABC: P:  Del =    0.00.  Ar =       0.0.  Edge =        0.  Cut =        0.  T =     0.00 sec
+ABC: P:  Del =    0.00.  Ar =       0.0.  Edge =        0.  Cut =        0.  T =     0.00 sec
+ABC: F:  Del =    0.00.  Ar =       0.0.  Edge =        0.  Cut =        0.  T =     0.00 sec
+ABC: A:  Del =    0.00.  Ar =       0.0.  Edge =        0.  Cut =        0.  T =     0.00 sec
+ABC: A:  Del =    0.00.  Ar =       0.0.  Edge =        0.  Cut =        0.  T =     0.00 sec
+ABC: Total time =     0.00 sec
+ABC: + &write -n <abc-temp-dir>/output.aig 
+ABC: + &mfs 
+ABC: The network is not changed by "&mfs".
+ABC: + &ps -l 
+ABC: <abc-temp-dir>/input : i/o =      6/     11  and =       0  lev =    0 (0.00)  mem = 0.00 MB  box = 0  bb = 0
+ABC: Mapping (K=0)  :  lut =      0  edge =       0  lev =    0 (0.00)  mem = 0.00 MB
+ABC: LUT = 0 : Ave = 0.00
+ABC: + &write -n <abc-temp-dir>/output.aig 
+ABC: + &verify 
+ABC: Networks are equivalent.  Time =     0.00 sec
+ABC: + time 
+ABC: elapse: 0.00 seconds, total: 0.00 seconds
+
+2.36.11.5. Executing AIGER frontend.
+<suppressed ~10 debug messages>
+Removed 0 unused cells and 6 unused wires.
+
+2.36.11.6. Executing ABC_OPS_REINTEGRATE pass (reintegrate ABC mapped design into module).
+ABC RESULTS:           input signals:        6
+ABC RESULTS:          output signals:        0
+<suppressed ~34 debug messages>
+Removing temp directory.
+
+2.36.12. Executing TECHMAP pass (map to technology primitives).
+
+2.36.12.1. Executing Verilog-2005 frontend: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/abc9_unmap.v
+Parsing Verilog input from `/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/abc9_unmap.v' to AST representation.
+Generating RTLIL representation for module `$__DFF_x__$abc9_flop'.
+Generating RTLIL representation for module `$__ABC9_SCC_BREAKER'.
+Generating RTLIL representation for module `$__ABC9_BARRIER'.
+Successfully finished Verilog frontend.
+
+2.36.12.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~6 debug messages>
+Removed 0 unused cells and 17 unused wires.
+
+2.37. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `top'. Setting top module to top.
+
+2.37.1. Analyzing design hierarchy..
+Top module:  \top
+
+2.37.2. Analyzing design hierarchy..
+Top module:  \top
+Removed 0 unused modules.
+
+2.38. Printing statistics.
+
+=== top ===
+
+        +----------Local Count, excluding submodules.
+        | 
+        6 wires
+        6 wire bits
+        6 public wires
+        6 public wire bits
+        6 cells
+        6   lut4_ff_bel
+
+2.39. Executing JSON backend.
+
+Warnings: 1 unique messages, 1 total
+Warnings: 1 experimental features used (not excluded with -x).
+Yosys 0.69+260 (git sha1 dcd59343b, Release, Clang /usr/bin/clang++ 21.1.8)
+
+$ FAB_ROOT=<project> nextpnr-generic --uarch fabulous --json cross_tile.json -o fasm=cross_tile.fasm
+Info: Reading BELs file: /.FABulous/bel.v3.txt
+Info: Reading PIPs file: /.FABulous/pips.txt
+
+Info: No PCF file specified, skipping constraints application.
+
+Info: Device utilisation:
+Info: 	        Global_Clock:       0/      1     0%
+Info: 	         lut4_ff_bel:       6/     16    37%
+
+Info: Placed 0 cells based on constraints.
+Info: Creating initial analytic placement for 6 cells, random placement wirelen = 3.
+Info:     at initial placer iter 0, wirelen = 0
+Info:     at initial placer iter 1, wirelen = 0
+Info:     at initial placer iter 2, wirelen = 0
+Info:     at initial placer iter 3, wirelen = 0
+Info: Running main analytical placer, max placement attempts per cell = 10000.
+Info:     at iteration #1, type lut4_ff_bel: wirelen solved = 0, spread = 4, legal = 4; time = 0.00s
+Info:     at iteration #2, type lut4_ff_bel: wirelen solved = 0, spread = 1, legal = 1; time = 0.00s
+Info:     at iteration #3, type lut4_ff_bel: wirelen solved = 0, spread = 1, legal = 1; time = 0.00s
+Info:     at iteration #4, type lut4_ff_bel: wirelen solved = 0, spread = 1, legal = 1; time = 0.00s
+Info:     at iteration #5, type lut4_ff_bel: wirelen solved = 0, spread = 1, legal = 1; time = 0.00s
+Info:     at iteration #6, type lut4_ff_bel: wirelen solved = 0, spread = 1, legal = 1; time = 0.00s
+Info:     at iteration #7, type lut4_ff_bel: wirelen solved = 0, spread = 1, legal = 1; time = 0.00s
+Info: HeAP Placer Time: 0.00s
+
+Info: Running simulated annealing placer for refinement.
+Info:   at iteration #1: temp = 0.000000, timing cost = 0, wirelen = 1
+Info:   at iteration #2: temp = 0.000000, timing cost = 0, wirelen = 1 
+
+Info: No Fmax available; no interior timing paths found in design.
+
+Info: Routing..
+Info: Setting up routing queue.
+Info: Routing 5 arcs.
+Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
+Info:          6 |        1          5 |    1     5 |         0|       0.00       0.00|
+Info: Routing complete.
+
+Info: No Fmax available; no interior timing paths found in design.
+
+
+$ bit_gen genBitstream cross_tile.fasm <project>/.FABulous/bitStreamSpec.bin cross_tile.bin
+<timestamp> | INFO     | fabulous_bit_gen.bit_gen:_build_csv_and_frame_data:434 - Border rows excluded from bitstream (default).
+
+# ---- cross_tile.fasm ----
+# routing for net '$PACKER_GND'
+
+
+# routing for net '$PACKER_VCC'
+
+
+# routing for net 'n6'
+
+
+# routing for net 'n5'
+
+X1Y0.N1END3.S1BEG0
+X1Y0.S1BEG0.S1END0
+X1Y1.LA_O.N1BEG3
+X1Y1.S1END0.LD_I0
+X1Y1.N1BEG3.N1END3
+
+# routing for net 'n4'
+
+X0Y1.W1END3.E1BEG0
+X0Y1.E1BEG0.E1END0
+X1Y1.LB_O.W1BEG3
+X1Y1.E1END0.LA_I0
+X1Y1.W1BEG3.W1END3
+
+# routing for net 'n3'
+
+X1Y1.W1END0.LB_I0
+X2Y1.LD_O.W1BEG0
+X2Y1.W1BEG0.W1END0
+
+# routing for net 'n2'
+
+X2Y1.LA_O.S1BEG0
+X2Y1.N1END0.LD_I0
+X2Y1.S1BEG0.S1END0
+X2Y2.S1END0.N1BEG0
+X2Y2.N1BEG0.N1END0
+
+# routing for net 'n1'
+
+X2Y1.LC_O.E1BEG3
+X2Y1.W1END0.LA_I0
+X2Y1.E1BEG3.E1END3
+X3Y1.E1END3.W1BEG0
+X3Y1.W1BEG0.W1END0
+
+# config for cell '$PACKER_GND_DRV'
+
+
+# config for cell '$PACKER_VCC_DRV'
+
+
+# config for cell 'u5'
+
+X1Y1.D.INIT[15:0] = 'b0110100110010110
+
+# config for cell 'u4'
+
+X1Y1.A.INIT[15:0] = 'b0110100110010110
+
+# config for cell 'u3'
+
+X1Y1.B.INIT[15:0] = 'b0110100110010110
+
+# config for cell 'u2'
+
+X2Y1.D.INIT[15:0] = 'b0110100110010110
+
+# config for cell 'u1'
+
+X2Y1.A.INIT[15:0] = 'b0110100110010110
+
+# config for cell 'u0'
+
+X2Y1.C.INIT[15:0] = 'b0110100110010110
+
