@@ -52,32 +52,34 @@ Drift picked up below:
 
 ## Now
 
-Startable today, one pull request each. None has an issue yet.
+Startable today, one pull request each.
 
 1. **Re-run the tile flow on one released klt and record what the closed
-   upstream gaps now give.** Move the `flow/toolchain.json` klt pin to the
+   upstream gaps now give** (#79). Move the `flow/toolchain.json` klt pin to the
    v0.9.0 commit CI already uses, run `layout/run.sh` and the STA/SDF steps,
    commit a new `layout/records/<id>/`.
    Done when: the record's envelopes pass `--check` and a new `measurements/`
    note states, for antenna (klayout-tools#3784), n-well tie (#4194), SPEF
    annotation (#3900) and NWell rules (#3571), whether the gap is closed,
    quoting the envelope field.
-2. **Generate a 2×2 `LOGIC4` fabric and map a cross-tile design** (the part of
-   #65 that does not need the single-tile assembler or bench).
+2. **Generate a 2×2 `LOGIC4` fabric and map a cross-tile design** (#80; the
+   part of #65 that does not need the single-tile assembler or bench).
    Done when: `rtl/fabric-2x2/fabric.csv` and a
    `measurements/g2-fabric-2x2-generation/` record are committed with
    generated-file hashes, a design with a net between two `LOGIC4` tiles
    reaches FASM through nextpnr, and FABulous `bit_gen` emits a reference
    bitstream whose hash is recorded.
-3. **Run the bench suite in CI.** `.github/workflows/` has only `signoff.yml`,
-   so nothing re-runs `verification/cold-start.sh` on a pull request.
+3. **Run the bench suite in CI** (#81). `.github/workflows/` has only
+   `signoff.yml`, so nothing re-runs `verification/cold-start.sh` on a pull
+   request.
    Done when: a workflow runs it with the pinned toolchain cached, fails on
    any FAIL row, and T1 item 10 is re-attested with the new workflow listed.
-4. **Correct stale documentation.** `measurements/README.md` says "Empty
-   until the first work lands here"; the README layout block calls
-   `measurements/` "empty until tape-out"; `layout/README.md` says item 11
-   "stays `unmet`" while the committed grade is `met`.
-   Done when: the three passages match the tree and CI stays green.
+4. **Correct stale documentation** (#82). `measurements/README.md` and
+   `rtl/README.md` say "Empty until the first work lands here"; the README
+   layout block calls `measurements/` "empty until tape-out";
+   `layout/README.md` says item 11 "stays `unmet`" while the committed grade
+   is `met`.
+   Done when: the four passages match the tree and CI stays green.
 
 ## Next
 
@@ -118,13 +120,9 @@ Startable today, one pull request each. None has an issue yet.
   `reuse.lock.json`, or ratify a local divergence with a decision record in
   `spec/decisions/`. No sibling issue existed on 2026-11-13 (Guide note on
   #65). Now 2 does not wait on this; the Next item does.
-- **#3 (gap-to-T1 tracker)** has no open child and waits on a maintainer to
-  close it; its body checklist is stale.
 - **Sibling ADR-0004/0005/0006** are inherited as *Proposed*
   (`spec/porting-plan.md`); the `CAP_*` reading follows whatever the sibling
   ratifies.
-
-The tracker has no ready (`loom:issue`) item today; the Now items need filing.
 
 ## Not planned
 
