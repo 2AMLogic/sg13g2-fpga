@@ -2,8 +2,8 @@
   "schema_version": 1,
   "kind": "t1-attestation-inventory",
   "t1_item": 10,
-  "description": "Repo hygiene: README, license, and the CI workflow that keeps the evidence formats valid.",
-  "hygiene": ["README.md", "LICENSE", ".github/workflows/signoff.yml"],
+  "description": "Repo hygiene: README, license, and the CI workflows that keep the evidence formats valid and re-run the benches behind the results.",
+  "hygiene": ["README.md", "LICENSE", ".github/workflows/signoff.yml", ".github/workflows/verification.yml"],
   "checks": [
     {
       "name": "pin-abutment-self-test",

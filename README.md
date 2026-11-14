@@ -101,6 +101,10 @@ Each step is a single local run; the toolchain pins are in `flow/`.
 
 - **Bitstream-level functional tests**: `verification/run.sh` (Icarus +
   cocotb; per-bench verdicts, see [verification/README.md](verification/README.md)).
+  `verification/cold-start.sh` fetches the pinned toolchain into `flow/build/`
+  first and then runs the same benches; CI re-runs it on every push and pull
+  request that touches `rtl/`, `verification/` or `flow/toolchain.json`, and
+  fails on any FAIL or NOT-RUN.
 - **Synthesis, place-and-route, DRC, LVS, ERC and STA** of the tile:
   `layout/run.sh`, which writes an append-only record under
   `layout/records/<id>/` (see [layout/README.md](layout/README.md)).
