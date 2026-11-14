@@ -97,13 +97,13 @@ INFO | Reading tile configuration: <project>/Tile/CAP_W/CAP_W.csv
 INFO | Reading tile configuration: <project>/Tile/LOGIC4/LOGIC4.csv
 INFO | Reading tile configuration: <project>/fabric.csv
 INFO | Resolved ghdl path: None
-INFO | Resolved iverilog path: /home/ubuntu/.local/bin/iverilog
+INFO | Resolved iverilog path: <home>/.local/bin/iverilog
 INFO | Resolved klayout path: /usr/bin/klayout
 INFO | Resolved nextpnr-generic path: None
-INFO | Resolved openroad path: /home/ubuntu/.local/bin/openroad
+INFO | Resolved openroad path: <home>/.local/bin/openroad
 INFO | Resolved sta path: None
-INFO | Resolved vvp path: /home/ubuntu/.local/bin/vvp
-INFO | Resolved yosys path: /home/ubuntu/.local/bin/yosys
+INFO | Resolved vvp path: <home>/.local/bin/vvp
+INFO | Resolved yosys path: <home>/.local/bin/yosys
 INFO | Running FABulous
 INFO | Running at: <project>
 INFO | Switch matrix generation complete

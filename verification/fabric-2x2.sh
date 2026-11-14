@@ -37,12 +37,41 @@ for f in "$OSS/bin/nextpnr-generic" "$OSS/bin/yosys" "$VENV/bin/FABulous" "$VENV
     [[ -x "$f" ]] || { echo "error: pinned toolchain not present under flow/build/ (run verification/run.sh --setup)" >&2; exit 1; }
 done
 
-# Normalize the generator log exactly as the G1 record documents: strip ANSI,
-# rewrite the scratch path to <project>, sort the hash-ordered tile-name list,
-# then sort unique. FABulous 2.2.0 emits tile names in hash order, so without
-# this the log is not reproducible run to run.
+# Host-absolute paths make a log byte-reproducible only from the directory that
+# produced it -- for a Loom worktree, one that ceases to exist when the PR
+# merges. Rewrite every prefix that varies by checkout or host to a
+# placeholder, most specific first: $OSS, $VENV, $GENDIR and $PNRDIR all live
+# under $REPO, and $REPO itself normally lives under $HOME. Applied to BOTH
+# logs, so neither reproduces from only one path on only one host (issue #80).
+HOSTPATHS=(-e "s#$OSS#<oss-cad-suite>#g" -e "s#$VENV#<fab-venv>#g" -e "s#$REPO#<repo>#g")
+[[ -n "${HOME:-}" ]] && HOSTPATHS+=(-e "s#$HOME#<home>#g")
+
+# Wall-clock fields. Each of these read 0.00 on the fast host the record was
+# first made on and flip on a slower one, so none of them is reproducible; the
+# three deletions further down (`time spent`, `Router1/SA placement/HeAP time`)
+# cover a different set of lines and miss every form below. Rewritten to <t>
+# rather than deleted, so the evidence sharing the line survives in the record:
+# ABC's equivalence verdict, the placer's wirelen/spread/legal counts and the
+# router's iteration counts are all load-bearing and all time-stamped.
+WALLCLOCK=(
+    -e 's/ T = *[0-9.]\+ sec$/ T = <t> sec/'
+    -e 's/^ABC: Total time = *[0-9.]\+ sec$/ABC: Total time = <t> sec/'
+    -e 's/ Time = *[0-9.]\+ sec$/ Time = <t> sec/'
+    -e 's/^ABC: elapse: [0-9.]\+ seconds, total: [0-9.]\+ seconds$/ABC: elapse: <t> seconds, total: <t> seconds/'
+    -e 's/; time = [0-9.]\+s$/; time = <t>s/'
+    -e 's/^Info: HeAP Placer Time: [0-9.]\+s$/Info: HeAP Placer Time: <t>s/'
+    -e 's/| *[0-9]\+\.[0-9]\+ *[0-9]\+\.[0-9]\+|$/|       <t>       <t>|/'
+)
+
+# Normalize the generator log as the G1 record documents: strip ANSI, rewrite
+# the scratch path to <project>, sort the hash-ordered tile-name list, then
+# sort unique. FABulous 2.2.0 emits tile names in hash order, so without this
+# the log is not reproducible run to run. Beyond G1, HOSTPATHS also masks the
+# host/checkout prefixes: FABulous logs the absolute path of every tool it
+# resolves, which is evidence worth keeping (see the record's Finding 4) but
+# must not pin the log to one machine.
 normalize_generator_log() {
-    sed -e 's/\x1b\[[0-9;]*m//g' -e "s#$GENDIR#<project>#g" \
+    sed -e 's/\x1b\[[0-9;]*m//g' -e "s#$GENDIR#<project>#g" "${HOSTPATHS[@]}" \
     | awk '
         /^INFO \| Generating tile / {
             n = split($0, f, " ")
@@ -117,6 +146,7 @@ fi
 # Drop the run-to-run unstable lines (checksums, wall-clock, logfile hash),
 # as the G1 nextpnr.log did, and rewrite absolute paths.
 sed -e 's/\x1b\[[0-9;]*m//g' -e "s#$GENDIR#<project>#g" -e "s#$PNRDIR/##g" -e "s#$NSRC/##g" -e "s#$SRC/##g" \
+    "${HOSTPATHS[@]}" "${WALLCLOCK[@]}" \
     -e '/^Info: Checksum:/d' -e '/time spent/Id' -e '/^Info: *of which /d' \
     -e '/^Info: \(Router1\|SA placement\|HeAP\) time /d' -e '/Logfile hash:/d' \
     -e '/^Info: Program finished normally/d' \

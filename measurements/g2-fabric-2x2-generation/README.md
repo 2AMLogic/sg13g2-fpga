@@ -25,9 +25,14 @@ exits 0.
   (the path flagged as untried; it did not need working around) and writes 984
   bytes, sha256
   `e4a0ff127ce7602e8f20dbe7dcba5dbf89a2aa547ef84f3ae16bc121c3f5fbf2`.
-- Reproducible: a second clean run reproduces `generator.log`,
-  `nextpnr.log` and `generated-files.sha256` **byte-identically** after the
-  documented normalization.
+- Reproducible, with a stated boundary: two further clean runs on this host
+  reproduce `generator.log`, `nextpnr.log` and `generated-files.sha256`
+  **byte-identically** after the documented normalization. The two **logs** also
+  reproduce byte-identically from a different checkout path and a different
+  `$HOME` (measured — see Findings). The **manifest** does not: two of its 37
+  generated files embed the absolute project path, and one of them also embeds
+  the version string of the yosys that generated it. Findings 3 and 4 give both
+  in full.
 
 No vendored file was edited: all 54 `reuse.lock.json` destinations still hash
 to their recorded sha256, so no decision record is required.
@@ -57,11 +62,21 @@ to their recorded sha256, so no decision record is required.
 | Tool | Version | Obtained |
 |---|---|---|
 | FABulous | 2.2.0 (`FABulous CLI 2.2.0`) | `fabulous-fpga==2.2.0` in a throwaway venv (`flow/build/fab-venv`, untracked) |
-| yosys (this stage) | 0.69+260 (`dcd59343b`) | YosysHQ OSS CAD Suite 2026-10-08, sha256-verified, unpacked under untracked `flow/build/oss-cad-suite` |
+| yosys (**mapping** stage) | 0.69+260 (`dcd59343b`) | YosysHQ OSS CAD Suite 2026-10-08, sha256-verified, unpacked under untracked `flow/build/oss-cad-suite` |
 | nextpnr-generic | nextpnr-0.11.1-54-g861c57be | same suite |
+| yosys (**generation** stage) | 0.67+post (`b8e7da6f4`) | the **host** `~/.local/bin/yosys`, resolved from `PATH` by FABulous — not the suite above |
 
 Fetched by `verification/run.sh --setup` into the `flow/build/` tree ignored at
 `.gitignore:22`. Nothing was installed host-wide.
+
+**The two stages do not use the same yosys**, and the generation stage's one is
+not the suite's: `verification/fabric-2x2.sh:113` prepends `flow/build/oss-cad-suite/bin`
+to `PATH` only *after* generation has already run, so FABulous resolves
+`yosys`, `iverilog`, `vvp` and `openroad` from the host (`generator.log:99-106`
+records exactly what it resolved). Both yosys builds *are* pinned in
+`flow/toolchain.json` — but under `yosys`, whose `used_by` list says only
+`klt synthesize` and so does not mention this generation stage. Measured
+consequence, not a hypothesis: see Finding 4.
 
 ## Commands
 
@@ -179,16 +194,32 @@ a non-result.
 
 ## Files
 
-- `generator.log` — normalized generator log, 127 lines (ANSI stripped, the
+- `generator.log` — normalized generator log, 127 lines: ANSI stripped, the
   scratch path rewritten to `<project>`, the hash-ordered tile-name list on the
-  `Generating tile …` line sorted, then sorted unique). FABulous 2.2.0 emits
-  tile names in hash order, so this normalization is what makes the log
-  reproducible; it is the same normalization the G1 record documents.
+  `Generating tile …` line sorted, then sorted unique. FABulous 2.2.0 emits tile
+  names in hash order, so that sort is what makes the log reproducible; it is
+  the same normalization the G1 record documents. Beyond G1, every
+  checkout- and host-dependent prefix is rewritten to a placeholder —
+  `<oss-cad-suite>`, `<fab-venv>`, `<repo>`, `<home>` — so the log carries no
+  absolute path from the machine that produced it. `/usr/bin/klayout` is left
+  as-is: it is a fixed system path, neither checkout- nor `$HOME`-dependent, and
+  it is part of the tool-resolution evidence discussed under Finding 4.
 - `nextpnr.log` — tool versions, the three commands, yosys/nextpnr/`bit_gen`
-  output, and the full `cross_tile.fasm` inline. Run-to-run unstable lines are
-  dropped (nextpnr `Checksum:`, wall-clock/`time spent` lines, yosys `Logfile
-  hash:`) and `bit_gen`'s per-line wall-clock stamp is rewritten to
-  `<timestamp>`.
+  output, and the full `cross_tile.fasm` inline. Three classes are normalized:
+  - **dropped**, as G1 did: nextpnr `Checksum:`, `time spent` / `Info: of which`
+    / `Info: {Router1,SA placement,HeAP} time` lines, yosys `Logfile hash:`,
+    `Info: Program finished normally`;
+  - **wall-clock rewritten to `<t>`** — 20 fields across 18 lines that the
+    deletions above do not match: ABC's six `T = … sec` rows, `ABC: Total
+    time`, `ABC: Networks are equivalent.  Time`, `ABC: elapse: … seconds,
+    total: … seconds`, the seven HeAP `; time = …s` iterations,
+    `Info: HeAP Placer Time`, and the router table's `batch(sec) total(sec)`
+    columns. These are substituted rather than deleted because each shares its
+    line with load-bearing evidence (ABC's equivalence verdict, the placer's
+    wirelen/spread/legal counts, the router's iteration counts);
+  - **paths rewritten** to `<project>`, `<oss-cad-suite>`, `<fab-venv>`,
+    `<repo>`, `<home>`, and `bit_gen`'s per-line wall-clock stamp to
+    `<timestamp>`.
 - `generated-files.sha256` — 40 files: the 37 of the generated project tree
   (the same selection rule the G1 record used — everything except the fabric
   description, the TCL script and the `nextpnr/` source overlay), plus the three
@@ -197,20 +228,60 @@ a non-result.
 
 ## Findings
 
-Two artifacts are genuinely **not** reproducible run to run. Both are recorded
-here rather than excluded silently, and neither is a fabric artifact:
+Four things are genuinely **not** byte-stable. All four are recorded here
+rather than excluded silently, and none is a fabric artifact. Items 1 and 2 are
+normalized or excluded; items 3 and 4 are **live limits on the manifest** and
+are not fixed by this record.
 
 1. **`.FABulous/.fabulous_history`** — the FABulous CLI's own shell-history
    file, xz-compressed, whose bytes differ on every run. It is excluded from
    `generated-files.sha256` by name. (The G1 record's 37-file manifest does not
    contain it either.)
-2. **`bit_gen`'s log timestamp** — `bit_gen` prefixes each log line with a
-   wall-clock ISO timestamp (`… | INFO | …:434 - Border rows excluded from
-   bitstream (default).`). Normalized to `<timestamp>`, the same class as the
-   checksum and wall-clock lines the G1 `nextpnr.log` already dropped.
+2. **Wall-clock, in two places.** `bit_gen` prefixes each log line with a
+   wall-clock ISO timestamp, normalized to `<timestamp>`; and nextpnr/ABC emit
+   20 further timing fields across 18 lines, normalized to `<t>` (listed under
+   Files above).
+   All of these read `0.00` on this host and do flip on a slower one — a
+   re-run elsewhere measured `ABC: elapse: 0.03` where this host gives `0.00`
+   — so none of them is reproducible and all are rewritten, not trusted.
+3. **`generated-files.sha256` is specific to the checkout path.** Two of its 37
+   generated files embed the absolute path of the scratch project tree, so the
+   manifest only reproduces byte-identically from the same directory:
+   - `eFPGA_geometry.csv` — its `Src,…` / `Csv,…` rows name each switch-matrix
+     file absolutely. Masking the project path makes it identical.
+   - `Tile/LOGIC4/lut4_ff_bel.json` — yosys records an absolute `src` for every
+     cell and wire.
 
-Everything else, including the bitstream itself, is byte-stable: four clean runs
-produced the same `cross_tile.bin` sha256.
+   This is inside hashed *generated* files, so no log normalization can reach
+   it; fixing it means changing what FABulous and yosys are asked to emit.
+   Unlike the logs (which were measured to reproduce from a simulated different
+   path and `$HOME`), the manifest was **not** shown to be path-independent,
+   and is not claimed to be. Filed as issue #94.
+4. **Generation depends on a host-resolved yosys — measured, not assumed.**
+   `generator.log:99-106` shows FABulous resolving `yosys`, `iverilog`, `vvp`
+   and `openroad` from the host, because `verification/fabric-2x2.sh:113` adds
+   the pinned suite to `PATH` only after generation. The open question was
+   whether generation merely *probes* those binaries or actually *uses* one.
+   It uses one: re-running generation with `~/.local/bin` off `PATH` (so
+   FABulous resolves the suite's yosys 0.69+260 instead of the host's
+   0.67+post) still exits 0 and reproduces 36 of the 37 generated files
+   byte-for-byte, but `Tile/LOGIC4/lut4_ff_bel.json` changes — its `"creator"`
+   field is the version string of whichever yosys ran. So one entry of
+   `generated-files.sha256` is a function of the host's `~/.local/bin/yosys`.
+   Both yosys builds are pinned in `flow/toolchain.json`, so the version is
+   recorded; what is inaccurate there is only the `used_by` list, which
+   attributes `yosys` 0.67+post to `klt synthesize` alone. Making the
+   generation stage use the pinned suite is a change to the flow that would
+   rewrite this record's artifacts, so it is **not** done here — it is filed as
+   follow-up issue #94, together with item 3.
+
+Everything else, including the bitstream itself, is byte-stable. The fabric
+result does not depend on either wobble above: mapping and assembling against
+the item-4 tree — generated by the *other* yosys — produces a `cross_tile.fasm`
+byte-identical to this record's and the same 984-byte `cross_tile.bin`,
+sha256 `e4a0ff127ce7602e8f20dbe7dcba5dbf89a2aa547ef84f3ae16bc121c3f5fbf2`. The
+generation-stage yosys changes one `"creator"` string in a generated JSON and
+nothing that reaches the bitstream.
 
 Other observations, not defects:
 
@@ -224,7 +295,9 @@ Other observations, not defects:
   (`expected exactly one LOGIC4 tile`). It needed no workaround, so criterion
   7 did not apply. `bit_gen` notes `Border rows excluded from bitstream
   (default)`, i.e. it drops the `CAP_*` ring itself.
-- No defect found in FABulous, yosys, nextpnr or `klt` by this record.
+- No defect found in FABulous, yosys, nextpnr or `klt` by this record. The two
+  manifest limits in Findings 3 and 4 are properties of this flow's wiring and
+  of what yosys chooses to embed, not tool defects.
 
 ## Regression
 

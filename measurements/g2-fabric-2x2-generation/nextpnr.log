@@ -22,8 +22,8 @@ Successfully finished Verilog frontend.
 
 2. Executing SYNTH_FABULOUS pass.
 
-2.1. Executing Verilog-2005 frontend: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/fabulous/cells_bb.v
-Parsing Verilog input from `/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/fabulous/cells_bb.v' to AST representation.
+2.1. Executing Verilog-2005 frontend: <oss-cad-suite>/lib/../share/yosys/fabulous/cells_bb.v
+Parsing Verilog input from `<oss-cad-suite>/lib/../share/yosys/fabulous/cells_bb.v' to AST representation.
 Generating RTLIL representation for module `$__FABULOUS_IBUF'.
 Generating RTLIL representation for module `$__FABULOUS_OBUF'.
 Generating RTLIL representation for module `$__FABULOUS_TBUF'.
@@ -207,13 +207,13 @@ Finding unused cells or wires in module \top..
 
 2.21. Executing TECHMAP pass (map to technology primitives).
 
-2.21.1. Executing Verilog-2005 frontend: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/cmp2lut.v
-Parsing Verilog input from `/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/cmp2lut.v' to AST representation.
+2.21.1. Executing Verilog-2005 frontend: <oss-cad-suite>/lib/../share/yosys/cmp2lut.v
+Parsing Verilog input from `<oss-cad-suite>/lib/../share/yosys/cmp2lut.v' to AST representation.
 Generating RTLIL representation for module `\_90_lut_cmp_'.
 Successfully finished Verilog frontend.
 
-2.21.2. Executing Verilog-2005 frontend: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/cmp2lcu.v
-Parsing Verilog input from `/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/cmp2lcu.v' to AST representation.
+2.21.2. Executing Verilog-2005 frontend: <oss-cad-suite>/lib/../share/yosys/cmp2lcu.v
+Parsing Verilog input from `<oss-cad-suite>/lib/../share/yosys/cmp2lcu.v' to AST representation.
 Generating RTLIL representation for module `\_80_lcu_cmp_'.
 Generating RTLIL representation for module `$__CMP2LCU'.
 Successfully finished Verilog frontend.
@@ -393,8 +393,8 @@ Optimizing module top.
 
 2.31. Executing TECHMAP pass (map to technology primitives).
 
-2.31.1. Executing Verilog-2005 frontend: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/techmap.v
-Parsing Verilog input from `/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/techmap.v' to AST representation.
+2.31.1. Executing Verilog-2005 frontend: <oss-cad-suite>/lib/../share/yosys/techmap.v
+Parsing Verilog input from `<oss-cad-suite>/lib/../share/yosys/techmap.v' to AST representation.
 Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
 Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
 Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
@@ -470,8 +470,8 @@ Found 0 SCCs.
 
 2.36.5. Executing TECHMAP pass (map to technology primitives).
 
-2.36.5.1. Executing Verilog-2005 frontend: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/techmap.v
-Parsing Verilog input from `/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/techmap.v' to AST representation.
+2.36.5.1. Executing Verilog-2005 frontend: <oss-cad-suite>/lib/../share/yosys/techmap.v
+Parsing Verilog input from `<oss-cad-suite>/lib/../share/yosys/techmap.v' to AST representation.
 Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
 Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
 Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
@@ -529,9 +529,9 @@ Removed a total of 0 cells.
 
 2.36.7. Executing TECHMAP pass (map to technology primitives).
 
-2.36.7.1. Executing Verilog-2005 frontend: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/abc9_map.v
-Parsing Verilog input from `/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/abc9_map.v' to AST representation.
-Lexer warning: The SystemVerilog keyword `bit' (at /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/abc9_map.v:35) is not recognized unless read_verilog is called with -sv!
+2.36.7.1. Executing Verilog-2005 frontend: <oss-cad-suite>/lib/../share/yosys/abc9_map.v
+Parsing Verilog input from `<oss-cad-suite>/lib/../share/yosys/abc9_map.v' to AST representation.
+Lexer warning: The SystemVerilog keyword `bit' (at <oss-cad-suite>/lib/../share/yosys/abc9_map.v:35) is not recognized unless read_verilog is called with -sv!
 Generating RTLIL representation for module `$__ABC9_BARRIER_MAP'.
 Successfully finished Verilog frontend.
 
@@ -539,8 +539,8 @@ Successfully finished Verilog frontend.
 No more expansions possible.
 <suppressed ~3 debug messages>
 
-2.36.8. Executing Verilog-2005 frontend: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/abc9_model.v
-Parsing Verilog input from `/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/abc9_model.v' to AST representation.
+2.36.8. Executing Verilog-2005 frontend: <oss-cad-suite>/lib/../share/yosys/abc9_model.v
+Parsing Verilog input from `<oss-cad-suite>/lib/../share/yosys/abc9_model.v' to AST representation.
 Generating RTLIL representation for module `$__ABC9_DELAY'.
 Generating RTLIL representation for module `$__ABC9_BARRIER'.
 Generating RTLIL representation for module `$__ABC9_SCC_BREAKER'.
@@ -586,13 +586,13 @@ ABC: cst =       0  cls =      0  lit =       0  unused =       6  proof =     0
 ABC: + &if -v 
 ABC: K = 4. Memory (bytes): Truth =    0. Cut =   64. Obj =  144. Set =  672. CutMin = no
 ABC: Node =       0.  Ch =     0.  Total mem =    0.00 MB. Peak cut mem =    0.00 MB.
-ABC: P:  Del =    0.00.  Ar =       0.0.  Edge =        0.  Cut =        0.  T =     0.00 sec
-ABC: P:  Del =    0.00.  Ar =       0.0.  Edge =        0.  Cut =        0.  T =     0.00 sec
-ABC: P:  Del =    0.00.  Ar =       0.0.  Edge =        0.  Cut =        0.  T =     0.00 sec
-ABC: F:  Del =    0.00.  Ar =       0.0.  Edge =        0.  Cut =        0.  T =     0.00 sec
-ABC: A:  Del =    0.00.  Ar =       0.0.  Edge =        0.  Cut =        0.  T =     0.00 sec
-ABC: A:  Del =    0.00.  Ar =       0.0.  Edge =        0.  Cut =        0.  T =     0.00 sec
-ABC: Total time =     0.00 sec
+ABC: P:  Del =    0.00.  Ar =       0.0.  Edge =        0.  Cut =        0.  T = <t> sec
+ABC: P:  Del =    0.00.  Ar =       0.0.  Edge =        0.  Cut =        0.  T = <t> sec
+ABC: P:  Del =    0.00.  Ar =       0.0.  Edge =        0.  Cut =        0.  T = <t> sec
+ABC: F:  Del =    0.00.  Ar =       0.0.  Edge =        0.  Cut =        0.  T = <t> sec
+ABC: A:  Del =    0.00.  Ar =       0.0.  Edge =        0.  Cut =        0.  T = <t> sec
+ABC: A:  Del =    0.00.  Ar =       0.0.  Edge =        0.  Cut =        0.  T = <t> sec
+ABC: Total time = <t> sec
 ABC: + &write -n <abc-temp-dir>/output.aig 
 ABC: + &mfs 
 ABC: The network is not changed by "&mfs".
@@ -602,9 +602,9 @@ ABC: Mapping (K=0)  :  lut =      0  edge =       0  lev =    0 (0.00)  mem = 0.
 ABC: LUT = 0 : Ave = 0.00
 ABC: + &write -n <abc-temp-dir>/output.aig 
 ABC: + &verify 
-ABC: Networks are equivalent.  Time =     0.00 sec
+ABC: Networks are equivalent.  Time = <t> sec
 ABC: + time 
-ABC: elapse: 0.00 seconds, total: 0.00 seconds
+ABC: elapse: <t> seconds, total: <t> seconds
 
 2.36.11.5. Executing AIGER frontend.
 <suppressed ~10 debug messages>
@@ -618,8 +618,8 @@ Removing temp directory.
 
 2.36.12. Executing TECHMAP pass (map to technology primitives).
 
-2.36.12.1. Executing Verilog-2005 frontend: /home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/abc9_unmap.v
-Parsing Verilog input from `/home/ubuntu/GitHub/sg13g2-fpga/.loom/worktrees/issue-80/flow/build/oss-cad-suite/lib/../share/yosys/abc9_unmap.v' to AST representation.
+2.36.12.1. Executing Verilog-2005 frontend: <oss-cad-suite>/lib/../share/yosys/abc9_unmap.v
+Parsing Verilog input from `<oss-cad-suite>/lib/../share/yosys/abc9_unmap.v' to AST representation.
 Generating RTLIL representation for module `$__DFF_x__$abc9_flop'.
 Generating RTLIL representation for module `$__ABC9_SCC_BREAKER'.
 Generating RTLIL representation for module `$__ABC9_BARRIER'.
@@ -676,14 +676,14 @@ Info:     at initial placer iter 1, wirelen = 0
 Info:     at initial placer iter 2, wirelen = 0
 Info:     at initial placer iter 3, wirelen = 0
 Info: Running main analytical placer, max placement attempts per cell = 10000.
-Info:     at iteration #1, type lut4_ff_bel: wirelen solved = 0, spread = 4, legal = 4; time = 0.00s
-Info:     at iteration #2, type lut4_ff_bel: wirelen solved = 0, spread = 1, legal = 1; time = 0.00s
-Info:     at iteration #3, type lut4_ff_bel: wirelen solved = 0, spread = 1, legal = 1; time = 0.00s
-Info:     at iteration #4, type lut4_ff_bel: wirelen solved = 0, spread = 1, legal = 1; time = 0.00s
-Info:     at iteration #5, type lut4_ff_bel: wirelen solved = 0, spread = 1, legal = 1; time = 0.00s
-Info:     at iteration #6, type lut4_ff_bel: wirelen solved = 0, spread = 1, legal = 1; time = 0.00s
-Info:     at iteration #7, type lut4_ff_bel: wirelen solved = 0, spread = 1, legal = 1; time = 0.00s
-Info: HeAP Placer Time: 0.00s
+Info:     at iteration #1, type lut4_ff_bel: wirelen solved = 0, spread = 4, legal = 4; time = <t>s
+Info:     at iteration #2, type lut4_ff_bel: wirelen solved = 0, spread = 1, legal = 1; time = <t>s
+Info:     at iteration #3, type lut4_ff_bel: wirelen solved = 0, spread = 1, legal = 1; time = <t>s
+Info:     at iteration #4, type lut4_ff_bel: wirelen solved = 0, spread = 1, legal = 1; time = <t>s
+Info:     at iteration #5, type lut4_ff_bel: wirelen solved = 0, spread = 1, legal = 1; time = <t>s
+Info:     at iteration #6, type lut4_ff_bel: wirelen solved = 0, spread = 1, legal = 1; time = <t>s
+Info:     at iteration #7, type lut4_ff_bel: wirelen solved = 0, spread = 1, legal = 1; time = <t>s
+Info: HeAP Placer Time: <t>s
 
 Info: Running simulated annealing placer for refinement.
 Info:   at iteration #1: temp = 0.000000, timing cost = 0, wirelen = 1
@@ -695,7 +695,7 @@ Info: Routing..
 Info: Setting up routing queue.
 Info: Routing 5 arcs.
 Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
-Info:          6 |        1          5 |    1     5 |         0|       0.00       0.00|
+Info:          6 |        1          5 |    1     5 |         0|       <t>       <t>|
 Info: Routing complete.
 
 Info: No Fmax available; no interior timing paths found in design.
