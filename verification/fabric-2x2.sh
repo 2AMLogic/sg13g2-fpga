@@ -258,9 +258,25 @@ echo "== bit_gen bitstream: $BIN_SHA  ($(stat -c%s "$PNRDIR/cross_tile.bin") byt
 # outputs are appended under a nextpnr-2x2/ prefix so criterion 4's bitstream
 # sha256 lives in the same manifest.
 #
-# Three of the 40 embed checkout-absolute paths, so they are hashed from a
-# path-masked copy via mask_paths and excluded from the raw find/sha256sum
-# lists below -- those lists and MASKED_FILES must stay in step (issue #94):
+# Three generated files embed checkout-absolute paths, so they are hashed from
+# a path-masked copy via mask_paths and excluded from the raw find/sha256sum
+# lists below. The masked set is declared exactly once, in the MASKED_BASE /
+# MASKED_PATH parallel arrays: every find exclusion, every masked hash and the
+# summary line is derived from that one declaration, and two assertions over
+# the written manifest enforce what the original comment could only admonish
+# ("must stay in step", issue #94 -- the assertions are issue #107):
+# - no filename may appear twice. A file covered by both a raw list and the
+#   declaration would otherwise land in the manifest twice -- once
+#   path-dependent raw, once masked -- because the sort below is deliberately
+#   not `sort -u`;
+# - every declared masked entry must appear in the finished manifest. An edit
+#   that drops an entry from the hashing paths must fail the run, not surface
+#   later as a missing line a human happens to notice in a re-recorded record.
+# Each entry carries its base directory: GENDIR members are excluded from the
+# raw find and hashed from a masked copy under $GENDIR; the PNRDIR member is
+# hashed from a masked copy under $PNRDIR and manifest-named under its
+# basename, like the raw mapping outputs. Why these three, and not the whole
+# tree:
 # - `Tile/LOGIC4/lut4_ff_bel.json` -- yosys records an absolute `src` for every
 #   cell and wire, and (since FAB_YOSYS_PATH above) its `creator` is the pinned
 #   suite yosys rather than the host's;
@@ -275,23 +291,66 @@ echo "== bit_gen bitstream: $BIN_SHA  ($(stat -c%s "$PNRDIR/cross_tile.bin") byt
 # never touch. Consequence, stated in the record's ## Files: a masked entry
 # cannot be checked with `sha256sum -c` against a raw generated tree; re-run
 # this script and diff the manifest instead.
-MASKED_FILES=(Tile/LOGIC4/lut4_ff_bel.json eFPGA_geometry.csv)
+MASKED_BASE=(GENDIR GENDIR PNRDIR)
+MASKED_PATH=(Tile/LOGIC4/lut4_ff_bel.json eFPGA_geometry.csv cross_tile.json)
+PNRSUB="$(basename "$PNRDIR")"
+
+# Derived from the declaration alone: the raw find's exclusion predicates
+# (GENDIR members only -- that find walks $GENDIR) and each member's manifest
+# name, reused by the hashing loop, the summary line and the assertions.
+FIND_EXCL=()
+MASKED_NAMES=()
+for i in "${!MASKED_PATH[@]}"; do
+    if [[ "${MASKED_BASE[i]}" == GENDIR ]]; then
+        FIND_EXCL+=('!' -path "./${MASKED_PATH[i]}")
+        MASKED_NAMES+=("${MASKED_PATH[i]}")
+    else
+        MASKED_NAMES+=("$PNRSUB/${MASKED_PATH[i]}")
+    fi
+done
+
+# Assert one written manifest is drift-free: no duplicated filename (a raw
+# list and the masked declaration both covering a file), and no declared
+# masked entry missing (an exclusion or hashing edit that silently drops it).
+# Names are parsed against sha256sum's two-space separator, so a space inside
+# a filename does not misalign the extracted field.
+assert_manifest_consistent() {
+    local manifest="$1" name dup
+    dup="$(awk -F'  ' '{print $2}' "$manifest" | LC_ALL=C sort | uniq -d)"
+    if [[ -n "$dup" ]]; then
+        echo "error: generated-files manifest lists a file more than once:" >&2
+        while IFS= read -r line; do echo "       duplicated: $line" >&2; done <<< "$dup"
+        echo "       a raw list and the masked declaration both cover it; the masked" >&2
+        echo "       hash would sit beside a path-dependent raw hash (issue #107)" >&2
+        return 1
+    fi
+    for name in "${MASKED_NAMES[@]}"; do
+        if ! awk -F'  ' -v n="$name" '$2 == n { f = 1 } END { if (f) exit 0; exit 1 }' "$manifest"; then
+            echo "error: masked entry missing from the generated-files manifest: $name" >&2
+            echo "       the raw lists and the MASKED_BASE/MASKED_PATH declaration" >&2
+            echo "       disagree; the record would lose a generated artifact (issue #107)" >&2
+            return 1
+        fi
+    done
+}
+
 {
     ( cd "$GENDIR" && find . -type f \
         ! -path './fabric.csv' ! -path './FABulous.tcl' ! -path './nextpnr/*' \
         ! -path './.FABulous/.fabulous_history' \
-        ! -path './Tile/LOGIC4/lut4_ff_bel.json' ! -path './eFPGA_geometry.csv' \
+        "${FIND_EXCL[@]}" \
         -printf '%P\0' | xargs -0 sha256sum )
-    for f in "${MASKED_FILES[@]}"; do
-        [[ -f "$GENDIR/$f" ]] || { echo "error: masked-file allowlist entry missing: $f" >&2; exit 1; }
-        printf '%s  %s\n' "$(mask_paths < "$GENDIR/$f" | sha256sum | cut -d' ' -f1)" "$f"
+    for i in "${!MASKED_PATH[@]}"; do
+        f="${MASKED_PATH[i]}"
+        d="$GENDIR"; [[ "${MASKED_BASE[i]}" == PNRDIR ]] && d="$PNRDIR"
+        [[ -f "$d/$f" ]] || { echo "error: masked-file allowlist entry missing: ${MASKED_NAMES[i]}" >&2; exit 1; }
+        printf '%s  %s\n' "$(mask_paths < "$d/$f" | sha256sum | cut -d' ' -f1)" "${MASKED_NAMES[i]}"
     done
     ( cd "$PNRDIR" && sha256sum cross_tile.fasm cross_tile.bin \
         | sed -E 's#^([0-9a-f]+)  #\1  nextpnr-2x2/#' )
-    printf '%s  nextpnr-2x2/%s\n' \
-        "$(mask_paths < "$PNRDIR/cross_tile.json" | sha256sum | cut -d' ' -f1)" cross_tile.json
 } | LC_ALL=C sort -k2 > "$BUILD/g2-generated-files.sha256"
-echo "== hashed $(wc -l < "$BUILD/g2-generated-files.sha256") generated files (3 path-masked: ${MASKED_FILES[*]} nextpnr-2x2/cross_tile.json)"
+assert_manifest_consistent "$BUILD/g2-generated-files.sha256"
+echo "== hashed $(wc -l < "$BUILD/g2-generated-files.sha256") generated files (${#MASKED_NAMES[@]} path-masked: ${MASKED_NAMES[*]})"
 
 if [[ "$RECORD" -eq 1 ]]; then
     mkdir -p "$REC"
