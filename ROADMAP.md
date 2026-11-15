@@ -48,9 +48,9 @@ Drift picked up below:
   item-10 inventories still cite record `20261027-5171c5d`; the report also
   cites the V1 bench record (5 NOT-RUN). The rest of the manifest cites
   `20261030-09fa1bd`, and V2 has no NOT-RUN row.
-- Three klt pins are in use: `flow/toolchain.json` names `bf24d46`
-  (0.7.1.dev), the cited record was produced by `0.8.1.dev849`, and CI grades
-  with v0.9.0.
+- Two klt pins are in use: `flow/toolchain.json` names the `v0.9.0` release
+  CI grades with (#99), and the cited record was produced by
+  `0.8.1.dev849` — recorded provenance, not drift.
 - Every klayout-tools issue this repo cites as an open gap is now closed
   upstream (#3571, #3784, #3785, #3786, #3900, #4083, #4194, #4199), but the
   records and READMEs still describe several as open.
