@@ -335,18 +335,28 @@ else
             run_vvp "$tag" "$OUT/logs/$B.vvp" +bin="$FIXDIR/$st.bin" +map="$FIXDIR/logic4_configmem.map" +wiring="$FIXDIR/$st.wiring" +design="$dn" +mutate
             v="$(verdict_of "$tag" "^PASS: ${B}\\[${dn}\\]")"
             record "$tag (+mutate)" "${v%%|*}" "${v#*|}"
-            # three independent reads of the same stream must agree on the tile vector
+            # three independent reads of the same stream must agree on the tile
+            # vector. A failing decode or an unreadable .cfg is a FAIL for the
+            # cfg_crosscheck bench (with its log) and the suite moves on: under
+            # set -e a bare command substitution here would end the whole run
+            # and leave every later bench without a verdict.
             sim_cfg="$(grep -o '^CFG=[0-9a-f]*' "$OUT/logs/$tag.log" | cut -d= -f2 || true)"
-            py_cfg="$(python3 -I "$TOOL" decode "$FIXDIR/$st.bin" --snapshot "$FIXDIR/fabric_spec.json")"
-            rec_cfg="$(tr -d '\n' < "$FIXDIR/$st.cfg")"
-            if [[ -n "$sim_cfg" && "$sim_cfg" == "$py_cfg" && "$sim_cfg" == "$rec_cfg" ]]; then
+            if ! py_cfg="$(python3 -I "$TOOL" decode "$FIXDIR/$st.bin" --snapshot "$FIXDIR/fabric_spec.json" 2> "$OUT/logs/${tag}_decode.log")"; then
+                record "${tag}_cfg_crosscheck" FAIL "python decode of $st.bin failed (logs/${tag}_decode.log)"
+            elif ! rec_cfg="$(tr -d '\n' 2> "$OUT/logs/${tag}_recfg.log" < "$FIXDIR/$st.cfg")"; then
+                record "${tag}_cfg_crosscheck" FAIL "cannot read $st.cfg (logs/${tag}_recfg.log)"
+            elif [[ -n "$sim_cfg" && "$sim_cfg" == "$py_cfg" && "$sim_cfg" == "$rec_cfg" ]]; then
                 record "${tag}_cfg_crosscheck" PASS "simulation loader == python decoder == recorded cfg"
             else
                 record "${tag}_cfg_crosscheck" FAIL "sim=$sim_cfg python=$py_cfg recorded=$rec_cfg"
             fi
-            # malformed streams must be rejected by the loader
+            # malformed streams must be rejected by the loader. If the generator
+            # itself fails, that is a FAIL for this bench (with its log) and the
+            # reject loop is skipped: with $BAD absent the glob would not expand
+            # and the bench would record a misleading 1/1 rejection count.
             BAD="$OUT/logs/bad_$dn"
-            python3 -I "$REPO/verification/bitstream_corrupt.py" "$FIXDIR/$st.bin" "$FIXDIR/logic4_configmem.map" "$FIXDIR/$st.wiring" "$BAD" > /dev/null
+            if ! python3 -I "$REPO/verification/bitstream_corrupt.py" "$FIXDIR/$st.bin" "$FIXDIR/logic4_configmem.map" "$FIXDIR/$st.wiring" "$BAD" > "$OUT/logs/${tag}_corrupt.log" 2>&1; then
+                record "${tag}_expect_reject" FAIL "malformed-stream generator bitstream_corrupt.py failed (logs/${tag}_corrupt.log)"; continue; fi
             nbad=0; nrej=0
             for bad in "$BAD"/*.bin; do
                 nbad=$((nbad + 1)); btag="bad_$dn/$(basename "${bad%.bin}")"
