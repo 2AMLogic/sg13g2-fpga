@@ -119,11 +119,16 @@ normalize_generator_log < "$BUILD/g1-generator.raw.log" > "$BUILD/g1-generator.l
 # the override is not an existing file, and then logs "Resolved yosys path:".
 # That silently swaps the host yosys back in -- a FAIL, not a fall-back. The
 # suite's binary was already checked executable above, so a hit here means the
-# override was ignored or the validator changed (issue #94). Grep the RAW log:
-# this record's documented normalization drops the Resolved-* lines, so the
-# normalized log cannot carry the evidence.
-if sed -e 's/\x1b\[[0-9;]*m//g' "$BUILD/g1-generator.raw.log" | grep -q 'Resolved yosys path:'; then
-    echo "error: FABulous ignored FAB_YOSYS_PATH and resolved yosys from PATH ($(sed -e 's/\x1b\[[0-9;]*m//g' "$BUILD/g1-generator.raw.log" | sed -n 's/.*Resolved yosys path: //p' | head -1))." >&2
+# override was ignored or the validator changed (issue #94). This record's
+# documented normalization drops the Resolved-* lines, so the normalized log
+# cannot carry the evidence: strip ANSI codes once into a scratch file and grep
+# THAT FILE. Grepping the raw log through a pipe is fail-open here -- `grep -q`
+# exits at the first match and sed's SIGPIPE (141) then becomes the pipeline's
+# status under pipefail, so the guard would take its else branch on a match.
+ANSI_LOG="$BUILD/g1-generator.ansi.log"
+sed -e 's/\x1b\[[0-9;]*m//g' "$BUILD/g1-generator.raw.log" > "$ANSI_LOG"
+if grep -q 'Resolved yosys path:' "$ANSI_LOG"; then
+    echo "error: FABulous ignored FAB_YOSYS_PATH and resolved yosys from PATH ($(sed -n 's/.*Resolved yosys path: //p' "$ANSI_LOG" | head -1))." >&2
     echo "       the generated tree's creator string would depend on the host again" >&2
     echo "       (issue #94); refusing to record it. Check that $OSS/bin/yosys" >&2
     echo "       exists and rerun." >&2
