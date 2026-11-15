@@ -185,7 +185,7 @@
         "role": "testbench",
         "path": "verification/gatelevel/test_tile_sdf.py",
         "passed": true,
-        "content_hash": "sha256:400245e05838be133d89be31b5f96ca4b668c1fe9c1c3c3a5884267861a6dd9d"
+        "content_hash": "sha256:9feebeae252c2ffc8762e17e7285035b825a20357a41d8a1e17d87d655d58126"
       },
       {
         "check": "present",
@@ -222,7 +222,7 @@
           "fabulous": "2.2.0",
           "icarus-verilog": "13.0",
           "klayout": "0.30.12",
-          "klayout-tools": "0.7.1.dev2056+gbf24d463fb3f",
+          "klayout-tools": "0.9.0",
           "nextpnr-generic": "nextpnr-0.11.1-54-g861c57be",
           "openroad": "26Q3-1510-g6cb3f2b704",
           "yosys": "0.67+post"
@@ -231,7 +231,7 @@
     ]
   },
   "provenance": {
-    "klt_version": "0.9.0",
+    "klt_version": "0.9.3.dev3+gd5d57daf9a14",
     "klayout_version": null,
     "pdk": null,
     "deck": null,
@@ -240,7 +240,7 @@
         "path": "manifests/inventories/item-9.json",
         "scope": "repo"
       },
-      "content_hash": "sha256:1f8115ccfb1e1a4326280524e2c9ff406a856528c7723ec80fd0ce31a3cb9b40"
+      "content_hash": "sha256:371ce91e452201830fd56cef5cc2c1710253cd19bf2edcb5968982b4e0c67ed6"
     }
   }
 }

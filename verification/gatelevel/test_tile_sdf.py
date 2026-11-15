@@ -56,27 +56,32 @@ def outs(dut):
     return [int(dut.n_out.value), int(dut.e_out.value), int(dut.s_out.value), int(dut.w_out.value)]
 
 
-_last_rise_ns = None
+def make_clock_edge(dut):
+    """Return a clock_edge() bound to one test: each call is a full PERIOD_NS
+    period, returning CLK_Q_NS after the rising edge so the caller can sample
+    Q at the documented offset: holds out the rest of the previous high phase,
+    falls, stays low for PERIOD_NS // 2, then rises (asserting the realized
+    rise-to-rise period against PERIOD_NS). The last-rise time is closed over
+    per test, not held in module state, so skipping the first edge means
+    first-edge-of-this-test and no state survives across cocotb tests."""
+    last_rise_ns = None
 
+    async def clock_edge():
+        nonlocal last_rise_ns
+        await Timer(PERIOD_NS // 2 - CLK_Q_NS, unit="ns")
+        dut.clk.value = 0
+        await Timer(PERIOD_NS // 2, unit="ns")
+        dut.clk.value = 1
+        rise = get_sim_time(unit="ns")
+        if last_rise_ns is not None:
+            period = rise - last_rise_ns
+            assert period == PERIOD_NS, (
+                f"realized clock period is {period} ns, expected {PERIOD_NS} ns"
+            )
+        last_rise_ns = rise
+        await Timer(CLK_Q_NS, unit="ns")
 
-async def clock_edge(dut):
-    """One full PERIOD_NS period, returning CLK_Q_NS after the rising edge so
-    the caller can sample Q at the documented offset: holds out the rest of
-    the previous high phase, falls, stays low for PERIOD_NS // 2, then rises
-    (asserting the realized rise-to-rise period against PERIOD_NS)."""
-    global _last_rise_ns
-    await Timer(PERIOD_NS // 2 - CLK_Q_NS, unit="ns")
-    dut.clk.value = 0
-    await Timer(PERIOD_NS // 2, unit="ns")
-    dut.clk.value = 1
-    rise = get_sim_time(unit="ns")
-    if _last_rise_ns is not None:
-        period = rise - _last_rise_ns
-        assert period == PERIOD_NS, (
-            f"realized clock period is {period} ns, expected {PERIOD_NS} ns"
-        )
-    _last_rise_ns = rise
-    await Timer(CLK_Q_NS, unit="ns")
+    return clock_edge
 
 
 @cocotb.test()
@@ -127,24 +132,25 @@ async def routed_registered(dut):
     drive(dut, tin)
     await Timer(COMB_SETTLE_NS, unit="ns")
 
+    clock_edge = make_clock_edge(dut)
     tin[2] = 0b0001                       # reset all
     drive(dut, tin)
-    await clock_edge(dut)
+    await clock_edge()
     assert outs(dut)[3] == 0b0000, f"reset clears FF: w_out={outs(dut)[3]:04b}"
 
     tin[2] = 0b0000
     tin[0] = 0b0001                       # data 1, all EN
     drive(dut, tin)
-    await clock_edge(dut)
+    await clock_edge()
     assert outs(dut)[3] == 0b1111, f"capture 1: w_out={outs(dut)[3]:04b}"
 
     tin[0] = 0b0000                       # data 0, BEL1 gated off
     tin[1] = 0b1101
     drive(dut, tin)
-    await clock_edge(dut)
+    await clock_edge()
     assert outs(dut)[3] == 0b0010, f"EN=0 holds BEL1: w_out={outs(dut)[3]:04b}"
 
     tin[2] = 0b0001                       # SR beats EN
     drive(dut, tin)
-    await clock_edge(dut)
+    await clock_edge()
     assert outs(dut)[3] == 0b0000, f"SR priority over EN: w_out={outs(dut)[3]:04b}"
