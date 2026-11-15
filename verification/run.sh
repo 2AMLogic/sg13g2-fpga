@@ -343,7 +343,7 @@ else
             sim_cfg="$(grep -o '^CFG=[0-9a-f]*' "$OUT/logs/$tag.log" | cut -d= -f2 || true)"
             if ! py_cfg="$(python3 -I "$TOOL" decode "$FIXDIR/$st.bin" --snapshot "$FIXDIR/fabric_spec.json" 2> "$OUT/logs/${tag}_decode.log")"; then
                 record "${tag}_cfg_crosscheck" FAIL "python decode of $st.bin failed (logs/${tag}_decode.log)"
-            elif ! rec_cfg="$(tr -d '\n' < "$FIXDIR/$st.cfg" 2> "$OUT/logs/${tag}_recfg.log")"; then
+            elif ! rec_cfg="$(tr -d '\n' 2> "$OUT/logs/${tag}_recfg.log" < "$FIXDIR/$st.cfg")"; then
                 record "${tag}_cfg_crosscheck" FAIL "cannot read $st.cfg (logs/${tag}_recfg.log)"
             elif [[ -n "$sim_cfg" && "$sim_cfg" == "$py_cfg" && "$sim_cfg" == "$rec_cfg" ]]; then
                 record "${tag}_cfg_crosscheck" PASS "simulation loader == python decoder == recorded cfg"
