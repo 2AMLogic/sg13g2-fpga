@@ -50,18 +50,14 @@ for f in "$OSS/bin/yosys" "$VENV/bin/FABulous"; do
 done
 
 # Host-absolute paths make a log byte-reproducible only from the directory that
-# produced it, and make a manifest reproduce only from one checkout. Rewrite
-# every prefix that varies by checkout or host to a placeholder, most specific
-# first: $GENDIR lives under $REPO, and $REPO itself normally lives under $HOME
-# (the same PATHMASK verification/fabric-2x2.sh uses, issue #94).
-HOSTPATHS=(-e "s#$OSS#<oss-cad-suite>#g" -e "s#$VENV#<fab-venv>#g" -e "s#$REPO#<repo>#g")
-[[ -n "${HOME:-}" ]] && HOSTPATHS+=(-e "s#$HOME#<home>#g")
-
-# The path rewrites proper, shared by the log normalizer and by the masked
-# hashing below. Content rewrites only; never applied to a binary -- the
-# hashed masked set is the explicit two-file allowlist at the hashing site.
-PATHMASK=(-e "s#$GENDIR#<project>#g" "${HOSTPATHS[@]}")
-mask_paths() { sed "${PATHMASK[@]}"; }
+# produced it, and make a manifest reproduce only from one checkout. The rule
+# itself -- rewrite every prefix that varies by checkout or host to a
+# placeholder, most specific first -- is shared with fabric-2x2.sh via
+# verification/manifest-mask.sh (issue #122; it was the same PATHMASK, #94).
+# Content rewrites only; never applied to a binary -- the hashed masked set is
+# the explicit two-file allowlist at the hashing site.
+source "$REPO/verification/manifest-mask.sh"
+manifest_mask_init "$REPO" "$OSS" "$VENV" "$GENDIR"
 
 # Normalize the generator log exactly as the record documents (ANSI stripped,
 # scratch path rewritten to <project>, tool-probe lines dropped, sorted unique
@@ -157,11 +153,10 @@ echo "   generation yosys: $("$OSS/bin/yosys" -V)"
 # script and diff the manifest instead.
 #
 # The masked set is declared ONCE, here, and the find exclusion for it is
-# derived from this array -- fabric-2x2.sh names its set three times in three
-# syntaxes with nothing tying them together, and a forgotten exclusion there
-# hashes a file twice under one name (issue #107); G1's driver must not inherit
-# that. The duplicate check below turns any residual drift into a loud failure
-# rather than a doubled manifest entry.
+# derived from this array -- a forgotten exclusion hashes a file twice under
+# one name (issue #107). The shared duplicate guard below
+# (assert_no_duplicate_names, verification/manifest-mask.sh, issue #122) turns
+# any residual drift into a loud failure rather than a doubled manifest entry.
 MASKED_FILES=(Tile/LOGIC4/lut4_ff_bel.json eFPGA_geometry.csv)
 MASKED_EXCLUDES=()
 for f in "${MASKED_FILES[@]}"; do MASKED_EXCLUDES+=(! -path "./$f"); done
@@ -176,11 +171,7 @@ for f in "${MASKED_FILES[@]}"; do MASKED_EXCLUDES+=(! -path "./$f"); done
         printf '%s  %s\n' "$(mask_paths < "$GENDIR/$f" | sha256sum | cut -d' ' -f1)" "$f"
     done
 } | LC_ALL=C sort -k2 > "$BUILD/g1-generated-files.sha256"
-DUPS="$(awk '{print $2}' "$BUILD/g1-generated-files.sha256" | LC_ALL=C sort | uniq -d)"
-if [[ -n "$DUPS" ]]; then
-    echo "error: manifest lists a file more than once (raw and masked?): $DUPS" >&2
-    exit 1
-fi
+assert_no_duplicate_names "$BUILD/g1-generated-files.sha256"
 echo "== hashed $(wc -l < "$BUILD/g1-generated-files.sha256") generated files (${#MASKED_FILES[@]} path-masked: ${MASKED_FILES[*]})"
 
 if [[ "$RECORD" -eq 1 ]]; then

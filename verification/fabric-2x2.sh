@@ -45,23 +45,15 @@ done
 
 # Host-absolute paths make a log byte-reproducible only from the directory that
 # produced it -- for a Loom worktree, one that ceases to exist when the PR
-# merges. Rewrite every prefix that varies by checkout or host to a
-# placeholder, most specific first: $OSS, $VENV, $GENDIR and $PNRDIR all live
-# under $REPO, and $REPO itself normally lives under $HOME. Applied to BOTH
-# logs, so neither reproduces from only one path on only one host (issue #80),
-# and -- since issue #94 -- to the hashed copies of the three generated files
-# that embed absolute paths, so generated-files.sha256 reproduces from any
-# checkout too.
-HOSTPATHS=(-e "s#$OSS#<oss-cad-suite>#g" -e "s#$VENV#<fab-venv>#g" -e "s#$REPO#<repo>#g")
-[[ -n "${HOME:-}" ]] && HOSTPATHS+=(-e "s#$HOME#<home>#g")
-
-# The path rewrites proper, shared by the log normalizers and by the masked
-# hashing below: $GENDIR first (most specific -- it is under $REPO), then
-# $OSS/$VENV/$REPO/$HOME. Content rewrites only; never applied to a binary --
-# the hashed masked set is the explicit three-file allowlist at the hashing
-# site.
-PATHMASK=(-e "s#$GENDIR#<project>#g" "${HOSTPATHS[@]}")
-mask_paths() { sed "${PATHMASK[@]}"; }
+# merges. The rule itself -- rewrite every prefix that varies by checkout or
+# host to a placeholder, most specific first -- is shared with
+# fabulous-generation.sh via verification/manifest-mask.sh (issue #122), so the
+# two drivers cannot spell it differently again. Applied to BOTH logs, so
+# neither reproduces from only one path on only one host (issue #80), and --
+# since issue #94 -- to the hashed copies of the generated files that embed
+# absolute paths, so generated-files.sha256 reproduces from any checkout.
+source "$REPO/verification/manifest-mask.sh"
+manifest_mask_init "$REPO" "$OSS" "$VENV" "$GENDIR"
 
 # Wall-clock fields. Each of these read 0.00 on the fast host the record was
 # first made on and flip on a slower one, so none of them is reproducible; the
@@ -309,21 +301,13 @@ for i in "${!MASKED_PATH[@]}"; do
     fi
 done
 
-# Assert one written manifest is drift-free: no duplicated filename (a raw
-# list and the masked declaration both covering a file), and no declared
-# masked entry missing (an exclusion or hashing edit that silently drops it).
-# Names are parsed against sha256sum's two-space separator, so a space inside
-# a filename does not misalign the extracted field.
+# Assert one written manifest is drift-free: no duplicated filename (checked
+# by the shared guard in verification/manifest-mask.sh, issue #122), and no
+# declared masked entry missing (an exclusion or hashing edit that silently
+# drops it).
 assert_manifest_consistent() {
-    local manifest="$1" name dup
-    dup="$(awk -F'  ' '{print $2}' "$manifest" | LC_ALL=C sort | uniq -d)"
-    if [[ -n "$dup" ]]; then
-        echo "error: generated-files manifest lists a file more than once:" >&2
-        while IFS= read -r line; do echo "       duplicated: $line" >&2; done <<< "$dup"
-        echo "       a raw list and the masked declaration both cover it; the masked" >&2
-        echo "       hash would sit beside a path-dependent raw hash (issue #107)" >&2
-        return 1
-    fi
+    local manifest="$1" name
+    assert_no_duplicate_names "$manifest"
     for name in "${MASKED_NAMES[@]}"; do
         if ! awk -F'  ' -v n="$name" '$2 == n { f = 1 } END { if (f) exit 0; exit 1 }' "$manifest"; then
             echo "error: masked entry missing from the generated-files manifest: $name" >&2
