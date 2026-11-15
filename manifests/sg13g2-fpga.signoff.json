@@ -244,12 +244,12 @@
           "reason": null
         },
         {
-          "citation": "layout/records/20261030-09fa1bd/functional-verification-sdf-slow.json",
+          "citation": "layout/records/20261024-bf24d46/functional-verification-sdf-slow.json",
           "status": "met",
           "reason": null
         },
         {
-          "citation": "layout/records/20261030-09fa1bd/functional-verification-sdf-fast.json",
+          "citation": "layout/records/20261024-bf24d46/functional-verification-sdf-fast.json",
           "status": "met",
           "reason": null
         }
@@ -265,7 +265,7 @@
           "exit_status": 0
         },
         {
-          "file": "layout/records/20261030-09fa1bd/functional-verification-sdf-slow.json",
+          "file": "layout/records/20261024-bf24d46/functional-verification-sdf-slow.json",
           "command": null,
           "kind": "functional-verification",
           "check_status": "pass",
@@ -274,7 +274,7 @@
           "exit_status": 0
         },
         {
-          "file": "layout/records/20261030-09fa1bd/functional-verification-sdf-fast.json",
+          "file": "layout/records/20261024-bf24d46/functional-verification-sdf-fast.json",
           "command": null,
           "kind": "functional-verification",
           "check_status": "pass",
@@ -371,7 +371,7 @@
       "reason": null,
       "graded_by_build": true,
       "citation": {
-        "file": "layout/records/20261030-09fa1bd/functional-verification-sdf-slow.json",
+        "file": "layout/records/20261024-bf24d46/functional-verification-sdf-slow.json",
         "command": null,
         "kind": "functional-verification",
         "check_status": "pass",

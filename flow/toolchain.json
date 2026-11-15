@@ -2,7 +2,7 @@
   "klayout-tools": {
     "release": "v0.9.0",
     "reported_version": "0.9.0",
-    "source": "the same commit as .github/workflows/signoff.yml, which is the pin's only home (manifests/README.md, Rules: the pin lives only in signoff.yml, do not repeat the SHA elsewhere). The annotated tag v0.9.0 dereferences to that commit. Previous pin bf24d463fb3fc0f32b6f90d884086fc8946d74a8 (0.7.1.dev2056+gbf24d463fb3f, bumped for issue #14 / klayout-tools#3887, itself from the host uv-receipt.toml).",
+    "source": "the same commit as .github/workflows/signoff.yml, which is the pin's only home (manifests/README.md, Rules: the pin lives only in signoff.yml, do not repeat the SHA elsewhere). The tag-agreement step in .github/workflows/signoff.yml checks on every run that this tag dereferences to that commit, failing the job on a mismatch, an absent tag or an unreachable remote. Previous pin bf24d463fb3fc0f32b6f90d884086fc8946d74a8 (0.7.1.dev2056+gbf24d463fb3f, bumped for issue #14 / klayout-tools#3887, itself from the host uv-receipt.toml).",
     "reproduce": "uvx --from klayout-tools@git+https://github.com/2AMLogic/klayout-tools@v0.9.0 klt ..."
   },
   "yosys": {
