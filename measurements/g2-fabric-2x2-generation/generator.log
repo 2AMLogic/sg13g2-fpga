@@ -103,7 +103,6 @@ INFO | Resolved nextpnr-generic path: None
 INFO | Resolved openroad path: <home>/.local/bin/openroad
 INFO | Resolved sta path: None
 INFO | Resolved vvp path: <home>/.local/bin/vvp
-INFO | Resolved yosys path: <home>/.local/bin/yosys
 INFO | Running FABulous
 INFO | Running at: <project>
 INFO | Switch matrix generation complete
