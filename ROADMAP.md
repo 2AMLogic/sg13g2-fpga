@@ -4,8 +4,8 @@
 carries it up the README's maturity ladder, with every claim backed by a
 committed record.
 
-Status as of 2026-11-13, `main` @ `266c56a`; Now/Blocked tracker links
-synced 2026-11-14.
+Status as of 2026-11-15, `main` @ `2ebcdaf`; Now/Blocked tracker links
+synced 2026-11-15.
 `WORK_PLAN.md` is the generated label-state view; this file says where the
 work stands and what comes next.
 
@@ -21,7 +21,7 @@ at the claim corners; demonstration fabric not yet assembled.**
 | Tile RTL and fabric description pass bitstream-level tests | done for the single-tile harness | `measurements/v2-stream-benches/summary.txt`: 24 PASS, 0 FAIL, 0 NOT-RUN (#11, #68, PR #71) |
 | Tile layout DRC/LVS-clean | done | `layout/records/20261030-09fa1bd/` (`drc.json`, `lvs.json`, committed GDS) |
 | Tile timing characterized | done at a 20.0 ns period | same record, `sta.json` (three claim corners), `sta-info.json`, SDF re-runs (#10, #27) |
-| Demonstration fabric assembled and re-verified | **not started**; spec rows 4 and the fabric half of row 6 have no evidence | #65, parked |
+| Demonstration fabric assembled and re-verified | **in progress** — the 2×2 `LOGIC4` description is generated, a cross-tile design places, routes and assembles a reference bitstream (#80); the inter-tile bitstream-level *test* (#65, parked) and the 2×2 *layout* are still missing, so spec rows 4 and the fabric half of row 6 stay without evidence | `measurements/g2-fabric-2x2-generation/`; #65, parked |
 | Shuttle seat, measured silicon | not started | none |
 
 Evidence grade: `manifests/sg13g2-fpga.signoff.json` (klt v0.9.0 grader,
@@ -32,8 +32,12 @@ Not covered by that grade, per the records:
 - The switch matrix is the sibling's same-index stand-in, not a verified
   Wilton-class matrix; sibling gaps G5 and G6 are inherited open
   (`verification/README.md`).
-- No inter-tile routing has been simulated; the only fabric is the 3×3
-  single-`LOGIC4` harness in `rtl/common/fabulous/fabric.csv`.
+- No inter-tile routing has been simulated: the 2×2 record covers generation,
+  placement, routing and bitstream assembly only, not a bitstream-level test
+  (#65, parked).
+- Fabric descriptions on `main` are the 3×3 single-`LOGIC4` harness in
+  `rtl/common/fabulous/fabric.csv` and the generated 2×2 `LOGIC4` fabric in
+  `rtl/fabric-2x2/fabric.csv`.
 - ERC antenna is `unchecked` in the cited record; metal density is
   `unsupported`; power is a default-activity estimate; no Fmax is claimed
   (`measurements/characterization.md`, Disclosures).
@@ -44,27 +48,44 @@ Drift picked up below:
   item-10 inventories still cite record `20261027-5171c5d`; the report also
   cites the V1 bench record (5 NOT-RUN). The rest of the manifest cites
   `20261030-09fa1bd`, and V2 has no NOT-RUN row.
-- Three klt pins are in use: `flow/toolchain.json` names `bf24d46`
-  (0.7.1.dev), the cited record was produced by `0.8.1.dev849`, and CI grades
-  with v0.9.0.
+- Two klt pins are in use: `flow/toolchain.json` names the `v0.9.0` release
+  CI grades with (#99), and the cited record was produced by
+  `0.8.1.dev849` — recorded provenance, not drift.
 - Every klayout-tools issue this repo cites as an open gap is now closed
   upstream (#3571, #3784, #3785, #3786, #3900, #4083, #4194, #4199), but the
   records and READMEs still describe several as open.
 
 ## Now
 
-Startable today, one pull request each.
+One pull request each. None startable today — item 1 is parked with its
+block named below, and items 2, 3 and 4 are done (kept annotated, numbers
+stable for the cross-references in Next).
 
 1. **Re-run the tile flow on one released klt and record what the closed
-   upstream gaps now give** (#79). Move the `flow/toolchain.json` klt pin to the
-   v0.9.0 commit CI already uses, run `layout/run.sh` and the STA/SDF steps,
-   commit a new `layout/records/<id>/`.
+   upstream gaps now give** (#79). The pin half is already on `main` — #99
+   moved `flow/toolchain.json` to the v0.9.0 release tag CI grades with and
+   named it in the `flow/README.md` / `layout/README.md` reproduce commands;
+   what remains is the `flow/klt-flow.sh` erc-args fix, `layout/run.sh` and
+   the STA/SDF steps, and a new `layout/records/<id>/`.
+   **Parked — not startable today.** klt's `DEFAULT_YOSYS_TIMEOUT_S = 300.0` in
+   `synthesize.py` has no CLI/request/env override, and the `layout/run.sh`
+   synthesize step does not fit it on a co-tenanted worker (measured: ABC on
+   `logic_tile_switch_matrix` >25 min; the identical script fit 300 s on
+   2026-10-30) — it needs an off-peak window or a drained worker. Resume state:
+   the pin bump is on `main` (#99); the `flow/klt-flow.sh` erc-args fix is
+   still only on `feature/issue-79` @ `369906e`; the flow record is not yet
+   made.
    Done when: the record's envelopes pass `--check` and a new `measurements/`
    note states, for antenna (klayout-tools#3784), n-well tie (#4194), SPEF
    annotation (#3900) and NWell rules (#3571), whether the gap is closed,
    quoting the envelope field.
 2. **Generate a 2×2 `LOGIC4` fabric and map a cross-tile design** (#80; the
-   part of #65 that does not need the single-tile assembler or bench).
+   part of #65 that does not need the single-tile assembler or bench) —
+   done: PR #87 committed the 2×2 `rtl/fabric-2x2/fabric.csv`, the
+   `cross_tile.v` design and the `measurements/g2-fabric-2x2-generation/`
+   record with generated-file hashes; nextpnr placed the six-BEL chain across
+   two `LOGIC4` tiles and routed all 5 arcs, and FABulous `bit_gen` assembled
+   a 984-byte reference bitstream.
    Done when: `rtl/fabric-2x2/fabric.csv` and a
    `measurements/g2-fabric-2x2-generation/` record are committed with
    generated-file hashes, a design with a net between two `LOGIC4` tiles
