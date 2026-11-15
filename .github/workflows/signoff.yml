@@ -31,16 +31,53 @@ permissions:
 jobs:
   grade:
     runs-on: ubuntu-latest
+    env:
+      # The single place the pin is recorded (see the file header); the
+      # install step and the tag-agreement check below both consume it.
+      KLT_PIN: 5dbbad05ff42265c92a6f3d2f20d1bbcd2957d49
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
+
+      - name: Check the tag in flow/toolchain.json dereferences to the pin
+        run: |
+          REMOTE="https://github.com/2AMLogic/klayout-tools"
+          REL="$(python3 -I -c 'import json; print(json.load(open("flow/toolchain.json"))["klayout-tools"].get("release", ""))')"
+          if [ -z "$REL" ]; then
+            echo "::error::flow/toolchain.json declares no klayout-tools.release tag to check against the pin"
+            exit 1
+          fi
+          # Ask for the bare tag and its ^{} peel together and take the last
+          # line: ^{} resolves annotated tags only (a lightweight tag yields
+          # nothing), and refname ordering puts the peeled line last. An
+          # absent tag answers empty at exit 0, so emptiness is a failure of
+          # its own, not a match.
+          set +e
+          LSOUT="$(git ls-remote "$REMOTE" "refs/tags/$REL" "refs/tags/$REL^{}")"
+          rc=$?
+          set -e
+          if [ "$rc" -ne 0 ]; then
+            echo "::error::could not reach $REMOTE to resolve tag $REL (git ls-remote exit $rc)"
+            exit 1
+          fi
+          RESOLVED="$(printf '%s\n' "$LSOUT" | tail -n1 | cut -f1)"
+          if [ -z "$RESOLVED" ]; then
+            echo "::error::tag $REL not found on $REMOTE"
+            exit 1
+          fi
+          if [ "$RESOLVED" != "$KLT_PIN" ]; then
+            echo "::error::tag $REL dereferences to $RESOLVED, not the installed pin $KLT_PIN"
+            echo "::error::bump flow/toolchain.json's klayout-tools.release together with the signoff.yml pin (manifests/README.md, Rules)"
+            exit 1
+          fi
+          echo "tag $REL resolves to $RESOLVED, equal to the installed pin"
 
       - name: Install uv
         uses: astral-sh/setup-uv@v5
 
       - name: Install the pinned klt (klayout-tools)
         run: |
-          uv tool install "klayout-tools @ git+https://github.com/2AMLogic/klayout-tools@5dbbad05ff42265c92a6f3d2f20d1bbcd2957d49"
+          uv tool install "klayout-tools @ git+https://github.com/2AMLogic/klayout-tools@${KLT_PIN}"
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
       - name: Re-run klt signoff and diff against the committed report

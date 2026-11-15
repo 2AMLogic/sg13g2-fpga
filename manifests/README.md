@@ -47,5 +47,9 @@ have them, reports `null`.
 
 - A klt pin bump in `signoff.yml` lands in the same change as a regenerated
   report; the report's `build.git_commit` must equal the pin.
+- A pin bump also moves `flow/toolchain.json`'s `klayout-tools.release` to the
+  tag naming the new commit: the tag-agreement step in `signoff.yml` checks the
+  tag dereferences to the pin, so a bump that moves only one of the two files
+  fails CI.
 - A manifest edit lands together with a regenerated report.
 - The pin lives only in `signoff.yml`; do not repeat the SHA elsewhere.
