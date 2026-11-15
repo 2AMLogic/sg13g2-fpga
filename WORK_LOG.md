@@ -4,6 +4,10 @@ Chronological record of merged PRs and closed issues, newest first. Maintained b
 
 ### 2026-11-15
 
+- **PR #104**: ci: correct the OSS cache-key rationale and key the iverilog cache on its build recipe
+- **Issue #96** (closed): verification.yml:120-122 states a reason for the OSS cache key that #88 removed
+- **PR #112**: fix(flow): pin klayout-tools to the v0.9.0 release tag, matching signoff.yml
+- **Issue #99** (closed): Bump the klayout-tools pin: the pinned klt (bf24d463) refuses every routed-tile SDF that layout/sdf-verify.sh needs to annotate
 - **PR #106**: fix: pin generation-stage yosys and mask checkout paths in the G2 manifest
 - **PR #102**: docs: correct four stale status passages and regenerate the item-10 attestation
 - **PR #93**: chore: delete the no-op npm scaffolding manifest, pin it against resync
