@@ -4,7 +4,7 @@
 carries it up the README's maturity ladder, with every claim backed by a
 committed record.
 
-Status as of 2026-11-15, `main` @ `e1fcfef`; Now/Blocked tracker links
+Status as of 2026-11-15, `main` @ `5bafa8f`; Now/Blocked tracker links
 synced 2026-11-15.
 `WORK_PLAN.md` is the generated label-state view; this file says where the
 work stands and what comes next.
@@ -57,21 +57,24 @@ Drift picked up below:
 
 ## Now
 
-One pull request each. Startable today: item 4 only — item 1 is parked with
-its block named below, and items 2 and 3 are done (kept annotated, numbers
+One pull request each. None startable today — item 1 is parked with its
+block named below, and items 2, 3 and 4 are done (kept annotated, numbers
 stable for the cross-references in Next).
 
 1. **Re-run the tile flow on one released klt and record what the closed
-   upstream gaps now give** (#79). Move the `flow/toolchain.json` klt pin to the
-   v0.9.0 commit CI already uses, run `layout/run.sh` and the STA/SDF steps,
-   commit a new `layout/records/<id>/`.
+   upstream gaps now give** (#79). The pin half is already on `main` — #99
+   moved `flow/toolchain.json` to the v0.9.0 release tag CI grades with and
+   named it in the `flow/README.md` / `layout/README.md` reproduce commands;
+   what remains is the `flow/klt-flow.sh` erc-args fix, `layout/run.sh` and
+   the STA/SDF steps, and a new `layout/records/<id>/`.
    **Parked — not startable today.** klt's `DEFAULT_YOSYS_TIMEOUT_S = 300.0` in
    `synthesize.py` has no CLI/request/env override, and the `layout/run.sh`
    synthesize step does not fit it on a co-tenanted worker (measured: ABC on
    `logic_tile_switch_matrix` >25 min; the identical script fit 300 s on
    2026-10-30) — it needs an off-peak window or a drained worker. Resume state:
-   the pin bump and the `flow/klt-flow.sh` erc-args fix are pushed on
-   `feature/issue-79` @ `369906e`; the flow record is not yet made.
+   the pin bump is on `main` (#99); the `flow/klt-flow.sh` erc-args fix is
+   still only on `feature/issue-79` @ `369906e`; the flow record is not yet
+   made.
    Done when: the record's envelopes pass `--check` and a new `measurements/`
    note states, for antenna (klayout-tools#3784), n-well tie (#4194), SPEF
    annotation (#3900) and NWell rules (#3571), whether the gap is closed,
