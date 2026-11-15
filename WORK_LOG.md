@@ -4,6 +4,8 @@ Chronological record of merged PRs and closed issues, newest first. Maintained b
 
 ### 2026-11-15
 
+- **PR #109**: fix: scope SDF bench rise-to-rise period state per test, not per module
+- **Issue #101** (closed): SDF bench: the rise-to-rise period assert leaks state across cocotb tests (_last_rise_ns is never reset)
 - **PR #104**: ci: correct the OSS cache-key rationale and key the iverilog cache on its build recipe
 - **Issue #96** (closed): verification.yml:120-122 states a reason for the OSS cache key that #88 removed
 - **PR #112**: fix(flow): pin klayout-tools to the v0.9.0 release tag, matching signoff.yml
