@@ -13,8 +13,21 @@ Place-and-route of the stamped tile `logic_tile_routed` (issue #9).
 Re-run against the pinned `klt` without touching the host install:
 
 ```bash
-KLT="uvx --from git+https://github.com/2AMLogic/klayout-tools.git@bf24d463fb3fc0f32b6f90d884086fc8946d74a8 klt" layout/run.sh
+KLT="uvx --from klayout-tools@git+https://github.com/2AMLogic/klayout-tools@v0.9.0 klt" layout/run.sh
 ```
+
+SDF reports (`functional-verification-sdf-*.json`) committed in the records
+above predate the `v0.9.0` bump (issue #99): the former `bf24d463` pin could
+not annotate this netlist at all — its `functional-verification` rejected the
+escaped-divider INTERCONNECT entries, narrowed upstream in klayout-tools#2897 —
+so those runs used the host `klt`, not the declared pin, and the results stay
+attributed to the klt that produced them (per-record attribution below; no
+committed report is rewritten). `layout/sdf-verify.sh` runs cleanly under the
+`v0.9.0` pin on a scratch copy of a record (with the
+`klayout-tools[functional-verification]` extra, which the cocotb bench needs —
+`uvx --from klayout-tools@git+…@v0.9.0` without the extra is enough for
+`run.sh`/`smoke` verbs); the pin bump does not retroactively re-pin any
+recorded result.
 
 Requirements and traps are those of [`flow/README.md`](../flow/README.md) (docker `openroad`
 wrapper mounts only `$PWD`; run from the repo, `PDK_ROOT` is exported by the script). Scratch
@@ -30,8 +43,8 @@ passes in the tree that produced them.
 
 `requests/erc-spec.json` declares `VDD` and `VSS` as `kind: supply` nets (labels are on
 TopMetal2 `134/25`, set as that layer's `label_layer`) and one substrate tie (`psub`: Activ ∩ pSD
-outside NWell, to Metal1, net `VSS`). Record `20261030-09fa1bd` (host `klt 0.8.1.dev849`, not the
-`bf24d463` pin above): `erc_status: clean`, `VDD` and `VSS` one island each, no
+outside NWell, to Metal1, net `VSS`). Record `20261030-09fa1bd` (host `klt 0.8.1.dev849`, not the then-pinned `bf24d463`,
+which the `v0.9.0` bump has since superseded): `erc_status: clean`, `VDD` and `VSS` one island each, no
 `erc.unconnected_net`, `erc.supply_short` or `erc.missing_tie`.
 
 The `erc` envelope records its spec path verbatim, and `klt signoff` re-reads that spec to grade

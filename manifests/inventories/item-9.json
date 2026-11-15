@@ -43,7 +43,7 @@
       "revision": "5cccb161f7492697cfa52eb14dc03beb00bdca9e"
     },
     "tools": {
-      "klayout-tools": "0.7.1.dev2056+gbf24d463fb3f",
+      "klayout-tools": "0.9.0",
       "yosys": "0.67+post",
       "openroad": "26Q3-1510-g6cb3f2b704",
       "klayout": "0.30.12",
