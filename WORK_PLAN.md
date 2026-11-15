@@ -32,7 +32,7 @@ _None._
 
 Issues currently being built (`loom:building`).
 
-- **#121**: manifests/README.md's item-5 row still states `tier` is `null` while the committed report grades `tier: T1`
+_None._
 
 ## PRs Awaiting Review
 
@@ -53,7 +53,6 @@ Issues carrying `loom:curated`.
 - **#65**: Generate a 2×2 LOGIC4 fabric with the pinned FABulous and run an inter-tile bitstream test *(curated)*
 - **#79**: Re-run the tile flow on klt v0.9.0 and record what the closed upstream gaps now report *(curated)*
 - **#94**: fabric-2x2: generated-files.sha256 is not reproducible across hosts or checkout paths *(curated)*
-- **#121**: manifests/README.md's item-5 row still states `tier` is `null` while the committed report grades `tier: T1` *(curated)*
 
 ## Proposed (Architect / Hermit)
 
@@ -71,10 +70,10 @@ _None._
 | Very important | 0 |
 | Important | 2 |
 | Ready (`loom:issue`) | 0 |
-| In Progress (`loom:building`) | 1 |
+| In Progress (`loom:building`) | 0 |
 | PRs awaiting review | 0 |
 | Approved PRs awaiting merge | 0 |
-| Curated | 4 |
+| Curated | 3 |
 | Architect / Hermit proposals | 0 |
 | Active epics | 0 |
 <!-- guide:plan-body:end -->

@@ -4,6 +4,8 @@ Chronological record of merged PRs and closed issues, newest first. Maintained b
 
 ### 2026-11-15
 
+- **PR #123**: docs: correct stale below-T1 grade prose in manifests README and signoff.yml header
+- **Issue #121** (closed): manifests/README.md's item-5 row still states `tier` is `null` while the committed report grades `tier: T1`
 - **PR #125**: refactor: share the mask rule and duplicate guard between generation drivers
 - **Issue #122** (closed): Consolidate the checkout-path masking rule shared by fabric-2x2.sh and fabulous-generation.sh
 - **PR #120**: refactor: single-source the G2 manifest masked set and assert its consistency
