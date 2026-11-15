@@ -13,13 +13,15 @@ _None._
 
 `loom:very-important` (one counts per workspace); every stage takes these first.
 
-_None._
+- **#80**: Generate a 2x2 LOGIC4 fabric with the pinned FABulous and map a cross-tile design to FASM
 
 ## Important
 
 `loom:important`; taken before unlabelled work.
 
 - **#65**: Generate a 2×2 LOGIC4 fabric with the pinned FABulous and run an inter-tile bitstream test
+- **#79**: Re-run the tile flow on klt v0.9.0 and record what the closed upstream gaps now report
+- **#81**: Run verification/cold-start.sh in CI so the bench suite is re-checked on every pull request
 
 ## Ready
 
@@ -37,7 +39,7 @@ _None._
 
 PRs waiting on Judge (`loom:review-requested`).
 
-_None._
+- **#78**: docs: roadmap as of 2026-11-13
 
 ## Approved (Awaiting Merge)
 
@@ -49,7 +51,6 @@ _None._
 
 Issues carrying `loom:curated`.
 
-- **#3**: Track the gap to T1 (klayout-tools design-evidence-tiers.md) *(curated)*
 - **#65**: Generate a 2×2 LOGIC4 fabric with the pinned FABulous and run an inter-tile bitstream test *(curated)*
 
 ## Proposed (Architect / Hermit)
@@ -65,13 +66,13 @@ _None._
 | Bucket | Count |
 |------|-------|
 | Operator merge-risk holds | 0 |
-| Very important | 0 |
-| Important | 1 |
+| Very important | 1 |
+| Important | 3 |
 | Ready (`loom:issue`) | 0 |
 | In Progress (`loom:building`) | 0 |
-| PRs awaiting review | 0 |
+| PRs awaiting review | 1 |
 | Approved PRs awaiting merge | 0 |
-| Curated | 2 |
+| Curated | 1 |
 | Architect / Hermit proposals | 0 |
 | Active epics | 0 |
 <!-- guide:plan-body:end -->

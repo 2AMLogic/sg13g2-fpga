@@ -2,6 +2,10 @@
 
 Chronological record of merged PRs and closed issues, newest first. Maintained by the Guide role.
 
+### 2026-11-14
+
+- **Issue #3** (closed): Track the gap to T1 (klayout-tools design-evidence-tiers.md)
+
 ### 2026-11-12
 
 - **PR #75**: Bump Repo Skills 0.25.10 -> 0.26.1
