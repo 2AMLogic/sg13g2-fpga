@@ -4,6 +4,18 @@ Chronological record of merged PRs and closed issues, newest first. Maintained b
 
 ### 2026-11-15
 
+- **PR #120**: refactor: single-source the G2 manifest masked set and assert its consistency
+- **PR #119**: fix(manifests): cite item 7/item 5 SDF evidence from the record the committed bench reproduces
+- **PR #118**: ci: check the klt tag in flow/toolchain.json dereferences to the signoff.yml pin
+- **PR #111**: fix: record bitstream bench step failures as per-bench FAILs instead of aborting verification/run.sh mid-suite
+- **PR #110**: verification: add the G1 generation driver, re-record its manifest path-masked
+- **PR #103**: docs: re-snapshot ROADMAP.md status against main at e1fcfef
+- **Issue #115** (closed): item 7 cites an SDF record whose routed_registered duration no longer reproduces from the committed bench
+- **Issue #113** (closed): flow/toolchain.json names a mutable tag (v0.9.0) for the klt pin, and nothing checks it still dereferences to the signoff.yml commit
+- **Issue #107** (closed): fabric-2x2.sh: the masked-file allowlist and the find exclusion list can drift silently
+- **Issue #105** (closed): G1 record: generated-files.sha256 has the same path-dependent entries #94 fixed in G2
+- **Issue #97** (closed): Annotate ROADMAP.md Now 1 and Now 2 for main as merged after 2026-11-14 20:14Z
+- **Issue #95** (closed): verification/run.sh dies mid-suite on a failing command substitution: the remaining benches get no verdict and summary.txt is never written
 - **PR #109**: fix: scope SDF bench rise-to-rise period state per test, not per module
 - **Issue #101** (closed): SDF bench: the rise-to-rise period assert leaks state across cocotb tests (_last_rise_ns is never reset)
 - **PR #104**: ci: correct the OSS cache-key rationale and key the iverilog cache on its build recipe
