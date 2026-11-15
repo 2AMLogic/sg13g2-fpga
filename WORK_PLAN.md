@@ -26,23 +26,19 @@ _None._
 
 Human-approved issues ready for implementation (`loom:issue`).
 
-- **#113**: flow/toolchain.json names a mutable tag (v0.9.0) for the klt pin, and nothing checks it still dereferences to the signoff.yml commit
-- **#115**: item 7 cites an SDF record whose routed_registered duration no longer reproduces from the committed bench
+_None._
 
 ## In Progress
 
 Issues currently being built (`loom:building`).
 
-- **#95**: verification/run.sh dies mid-suite on a failing command substitution: the remaining benches get no verdict and summary.txt is never written
-- **#97**: Annotate ROADMAP.md Now 1 and Now 2 for main as merged after 2026-11-14 20:14Z
-- **#105**: G1 record: generated-files.sha256 has the same path-dependent entries #94 fixed in G2
+- **#121**: manifests/README.md's item-5 row still states `tier` is `null` while the committed report grades `tier: T1`
 
 ## PRs Awaiting Review
 
 PRs waiting on Judge (`loom:review-requested`).
 
-- **#110**: verification: add the G1 generation driver, re-record its manifest path-masked
-- **#111**: fix: record bitstream bench step failures as per-bench FAILs instead of aborting verification/run.sh mid-suite
+_None._
 
 ## Approved (Awaiting Merge)
 
@@ -57,12 +53,7 @@ Issues carrying `loom:curated`.
 - **#65**: Generate a 2×2 LOGIC4 fabric with the pinned FABulous and run an inter-tile bitstream test *(curated)*
 - **#79**: Re-run the tile flow on klt v0.9.0 and record what the closed upstream gaps now report *(curated)*
 - **#94**: fabric-2x2: generated-files.sha256 is not reproducible across hosts or checkout paths *(curated)*
-- **#95**: verification/run.sh dies mid-suite on a failing command substitution: the remaining benches get no verdict and summary.txt is never written *(curated)*
-- **#97**: Annotate ROADMAP.md Now 1 and Now 2 for main as merged after 2026-11-14 20:14Z *(curated)*
-- **#105**: G1 record: generated-files.sha256 has the same path-dependent entries #94 fixed in G2 *(curated)*
-- **#107**: fabric-2x2.sh: the masked-file allowlist and the find exclusion list can drift silently *(curated)*
-- **#113**: flow/toolchain.json names a mutable tag (v0.9.0) for the klt pin, and nothing checks it still dereferences to the signoff.yml commit *(curated)*
-- **#115**: item 7 cites an SDF record whose routed_registered duration no longer reproduces from the committed bench *(curated)*
+- **#121**: manifests/README.md's item-5 row still states `tier` is `null` while the committed report grades `tier: T1` *(curated)*
 
 ## Proposed (Architect / Hermit)
 
@@ -79,11 +70,11 @@ _None._
 | Operator merge-risk holds | 0 |
 | Very important | 0 |
 | Important | 2 |
-| Ready (`loom:issue`) | 2 |
-| In Progress (`loom:building`) | 3 |
-| PRs awaiting review | 2 |
+| Ready (`loom:issue`) | 0 |
+| In Progress (`loom:building`) | 1 |
+| PRs awaiting review | 0 |
 | Approved PRs awaiting merge | 0 |
-| Curated | 9 |
+| Curated | 4 |
 | Architect / Hermit proposals | 0 |
 | Active epics | 0 |
 <!-- guide:plan-body:end -->

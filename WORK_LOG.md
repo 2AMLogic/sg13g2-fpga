@@ -4,6 +4,8 @@ Chronological record of merged PRs and closed issues, newest first. Maintained b
 
 ### 2026-11-15
 
+- **PR #125**: refactor: share the mask rule and duplicate guard between generation drivers
+- **Issue #122** (closed): Consolidate the checkout-path masking rule shared by fabric-2x2.sh and fabulous-generation.sh
 - **PR #120**: refactor: single-source the G2 manifest masked set and assert its consistency
 - **PR #119**: fix(manifests): cite item 7/item 5 SDF evidence from the record the committed bench reproduces
 - **PR #118**: ci: check the klt tag in flow/toolchain.json dereferences to the signoff.yml pin
