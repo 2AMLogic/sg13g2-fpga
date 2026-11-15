@@ -13,8 +13,21 @@ Place-and-route of the stamped tile `logic_tile_routed` (issue #9).
 Re-run against the pinned `klt` without touching the host install:
 
 ```bash
-KLT="uvx --from git+https://github.com/2AMLogic/klayout-tools.git@bf24d463fb3fc0f32b6f90d884086fc8946d74a8 klt" layout/run.sh
+KLT="uvx --from klayout-tools@git+https://github.com/2AMLogic/klayout-tools@v0.9.0 klt" layout/run.sh
 ```
+
+SDF reports (`functional-verification-sdf-*.json`) committed in the records
+above predate the `v0.9.0` bump (issue #99): the former `bf24d463` pin could
+not annotate this netlist at all — its `functional-verification` rejected the
+escaped-divider INTERCONNECT entries, narrowed upstream in klayout-tools#2897 —
+so those runs used the host `klt`, not the declared pin, and the results stay
+attributed to the klt that produced them (per-record attribution below; no
+committed report is rewritten). `layout/sdf-verify.sh` runs cleanly under the
+`v0.9.0` pin on a scratch copy of a record (with the
+`klayout-tools[functional-verification]` extra, which the cocotb bench needs —
+`uvx --from klayout-tools@git+…@v0.9.0` without the extra is enough for
+`run.sh`/`smoke` verbs); the pin bump does not retroactively re-pin any
+recorded result.
 
 Requirements and traps are those of [`flow/README.md`](../flow/README.md) (docker `openroad`
 wrapper mounts only `$PWD`; run from the repo, `PDK_ROOT` is exported by the script). Scratch
@@ -30,8 +43,8 @@ passes in the tree that produced them.
 
 `requests/erc-spec.json` declares `VDD` and `VSS` as `kind: supply` nets (labels are on
 TopMetal2 `134/25`, set as that layer's `label_layer`) and one substrate tie (`psub`: Activ ∩ pSD
-outside NWell, to Metal1, net `VSS`). Record `20261027-5171c5d` (host `klt 0.8.1.dev55`, not the
-`bf24d463` pin above): `erc_status: clean`, `VDD` and `VSS` one island each, no
+outside NWell, to Metal1, net `VSS`). Record `20261030-09fa1bd` (host `klt 0.8.1.dev849`, not the then-pinned `bf24d463`,
+which the `v0.9.0` bump has since superseded): `erc_status: clean`, `VDD` and `VSS` one island each, no
 `erc.unconnected_net`, `erc.supply_short` or `erc.missing_tie`.
 
 The `erc` envelope records its spec path verbatim, and `klt signoff` re-reads that spec to grade
@@ -42,9 +55,15 @@ in a clean checkout.
 - **n-well tap is disclosed, not declared.** SG13G2 draws no nSD (`7/0`) shape; the n-well tap is
   Activ inside NWell with no pSD over it, which `ties[].tap_requires` (intersect only) cannot
   express. It is listed in `ties_disclosure.undeclared_classes` (`ties_disclosed_unexpressible`).
-  Tracked at `2AMLogic/klayout-tools#4194`.
-- **`tapcell_master: null` is by klt's own design.** klt documents `sg13g2_stdcell` as tapless and
-  rejects a `power.tapcell` override (`docs/cli/place-and-route.md`, "Power delivery"), so the
-  request cannot name one. The pinned grader (`7755612`) still requires it and grades item 11
-  `unmet` / `no_pdn` for a built PDN (`pdn: true`). Filed as `2AMLogic/klayout-tools#4199`.
-  Item 11 stays `unmet` until those are resolved upstream; it is not waived here.
+  Filed as `2AMLogic/klayout-tools#4194` (closed upstream); the disclosure stays regardless — it
+  is in the committed record and still surfaces in the item-11 citation as
+  `disclosed_undeclared_tie_classes`.
+- **`tapcell_master: null` is by klt's own design, and item 11 grades `met` on it.** klt documents
+  `sg13g2_stdcell` as tapless and rejects a `power.tapcell` override
+  (`docs/cli/place-and-route.md`, "Power delivery"), so the request cannot name one. The grader
+  changed, not the layout: the `klt` pinned in `.github/workflows/signoff.yml` (klt v0.9.0; that
+  workflow is the pin's only home, per `manifests/README.md` § "Rules") reads `power.tapless` —
+  `true` here — instead of grading a built PDN on a tapless library as a missing grid
+  (klayout-tools#4250, closing #4199). The committed grade
+  (`manifests/sg13g2-fpga.signoff.json`) is `met` on this record (`pdn: true`, `tapless: true`,
+  `power_connectivity_status: "match"`); the layout and the ERC run are unchanged.

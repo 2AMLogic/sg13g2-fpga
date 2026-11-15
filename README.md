@@ -90,9 +90,11 @@ and re-verified → shuttle seat → measured silicon.
 ```
 spec/          ratified spec + decision records + porting plan
 rtl/           tile RTL + fabric description (shared material under rtl/common/)
-verification/  cocotb bitstream-level testbenches + results
+verification/  cocotb bitstream-level testbenches
+flow/          pinned toolchain + shared klt flow scripts + smoke-run records
 layout/        tile GDS, routed DEF, DRC/LVS reports (klayout-tools driven)
-measurements/  silicon characterization (empty until tape-out)
+measurements/  recorded results: characterization report + dated run records (append-only)
+manifests/     block manifest, T1 attestations and the committed signoff grade
 ```
 
 ## Reproduce

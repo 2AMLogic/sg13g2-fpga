@@ -93,12 +93,9 @@ stable for the cross-references in Next).
    `verification/cold-start.sh` on pushes and pull requests that touch
    `rtl/`, `verification/` or `flow/toolchain.json` and fails on any FAIL or
    NOT-RUN row; T1 item 10 is re-attested with the new workflow listed.
-4. **Correct stale documentation** (#82). `measurements/README.md` and
-   `rtl/README.md` say "Empty until the first work lands here"; the README
-   layout block calls `measurements/` "empty until tape-out";
-   `layout/README.md` says item 11 "stays `unmet`" while the committed grade
-   is `met`.
-   Done when: the four passages match the tree and CI stays green.
+4. **Correct stale documentation** (#82) — done: the four passages now match
+   the tree; the item-10 attestation was regenerated for the new `README.md`
+   hash and all five `signoff` workflow steps pass against the pinned `klt`.
 
 ## Next
 

@@ -1,0 +1,26 @@
+# Loom resync pin list (read by .loom/scripts/resync-installed.sh -> is_ignored,
+# and by Loom's scripts/install/migrate-consumer.sh). One installed-surface
+# path per line, relative to the repo root; `#` starts a comment.
+#
+# package.json: deliberately deleted, not missing (issue #90).
+#
+# Loom's installer ships defaults/package.json as workspace scaffolding whose
+# `test`, `check:ci`, `check:all` and `lint` scripts echo a message and
+# `exit 0`. This repo tracks no JavaScript or TypeScript, and its charter is
+# "Verification is the product: no claim without a testbench" (CLAUDE.md). A
+# root `npm test` that returns 0 having compiled, simulated and checked
+# nothing is a false verification entry point -- and Loom's Auditor role
+# probes for package.json by name as a build+test entry point
+# (.claude/commands/loom/auditor.md), so an agent following that documented
+# discovery path would find it before the real entry points
+# (verification/run.sh, layout/run.sh, layout/sdf-verify.sh; README.md).
+#
+# `.loom/install-metadata.json` still lists package.json as an installed
+# surface, so this pin keeps a future resync or re-install from writing the
+# stub back. Note that `resync-installed.sh` prints an advisory
+# "pin had no effect: 'package.json'" while the file is absent -- its
+# `resync_workspace_stub_version()` returns early before consulting this list
+# when there is no package.json to inspect. That line is cosmetic (it does not
+# affect the resync exit status); the pin is what makes the deletion stick if
+# the stub ever is restored.
+package.json

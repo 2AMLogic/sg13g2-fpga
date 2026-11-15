@@ -73,7 +73,11 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.local/icarus
-          key: icarus-${{ runner.os }}-${{ steps.pins.outputs.icarus }}
+          # The build recipe lives in the workflow itself ("Build the pinned
+          # iverilog from source" below), so the key hashes this file too: a
+          # recipe edit at an unchanged pin misses the cache instead of
+          # silently serving the previously built binary.
+          key: icarus-${{ runner.os }}-${{ steps.pins.outputs.icarus }}-${{ hashFiles('.github/workflows/verification.yml') }}
 
       - name: Build the pinned iverilog from source
         if: steps.icarus-cache.outputs.cache-hit != 'true'
@@ -117,9 +121,12 @@ jobs:
           fi
           echo "iverilog matches the $ICARUS_PIN pin"
 
-      # Keyed on verification/run.sh as well as the pin file: the tarball URL
-      # and its sha256 are literals in run.sh (OSS_URL, OSS_SHA), not read from
-      # flow/toolchain.json, so a bump in either place must miss the cache.
+      # Keyed on verification/run.sh as well as the pin file: the pin file
+      # carries the tarball URL and its sha256 (run.sh reads both from it),
+      # and run.sh carries the tarball extraction recipe
+      # (verification/run.sh:77-79: which oss-cad-suite/* subtrees get
+      # unpacked), so adding a subtree at an unchanged pin misses the cache
+      # instead of being served one that lacks it.
       # flow/build/fab-venv is deliberately not cached - `uv pip install
       # fabulous-fpga` is cheap next to the suite, and a cached venv would pin
       # absolute paths to an interpreter that is not in the same cache.

@@ -2,8 +2,23 @@
 
 Chronological record of merged PRs and closed issues, newest first. Maintained by the Guide role.
 
+### 2026-11-15
+
+- **PR #100**: fix: give FABulous the suite's yosys explicitly; drop the CI PATH workaround
+- **PR #98**: fix: SDF bench clock_edge drives one full PERIOD_NS period, asserted at every rise
+- **Issue #86** (closed): verification/cold-start.sh is not self-contained: fabulous_generate needs a host-wide yosys
+- **Issue #84** (closed): Fix the SDF gate-level bench clock: the split half-waveform realizes a 25 ns period, not the 20 ns PERIOD_NS claims
+
 ### 2026-11-14
 
+- **PR #89**: refactor(verification): read the suite tarball URL and sha256 from flow/toolchain.json
+- **PR #87**: feat: generate a 2x2 LOGIC4 fabric and map a cross-tile design to FASM
+- **PR #85**: ci: run the bench suite on changes to rtl/ and verification/
+- **PR #78**: docs: roadmap as of 2026-11-13
+- **Issue #92** (closed): verification.yml: the iverilog cache key omits the build recipe
+- **Issue #88** (closed): Collapse the duplicated OSS CAD Suite pin: the tarball URL and sha256 live in both flow/toolchain.json and verification/run.sh
+- **Issue #81** (closed): Run verification/cold-start.sh in CI so the bench suite is re-checked on every pull request
+- **Issue #80** (closed): Generate a 2x2 LOGIC4 fabric with the pinned FABulous and map a cross-tile design to FASM
 - **Issue #3** (closed): Track the gap to T1 (klayout-tools design-evidence-tiers.md)
 
 ### 2026-11-12

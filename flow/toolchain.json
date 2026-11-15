@@ -1,9 +1,9 @@
 {
   "klayout-tools": {
-    "commit": "bf24d463fb3fc0f32b6f90d884086fc8946d74a8",
-    "reported_version": "0.7.1.dev2056+gbf24d463fb3f",
-    "source": "bumped for issue #14 (pin_constraints, klayout-tools#3887); previous pin 7ee09483b74867a47a05eb353015c2cf5ca33ef3 came from the host uv-receipt.toml. Form: git+https://github.com/2AMLogic/klayout-tools.git?rev=<commit>",
-    "reproduce": "uvx --from 'git+https://github.com/2AMLogic/klayout-tools.git@bf24d463fb3fc0f32b6f90d884086fc8946d74a8' klt ..."
+    "release": "v0.9.0",
+    "reported_version": "0.9.0",
+    "source": "the same commit as .github/workflows/signoff.yml, which is the pin's only home (manifests/README.md, Rules: the pin lives only in signoff.yml, do not repeat the SHA elsewhere). The annotated tag v0.9.0 dereferences to that commit. Previous pin bf24d463fb3fc0f32b6f90d884086fc8946d74a8 (0.7.1.dev2056+gbf24d463fb3f, bumped for issue #14 / klayout-tools#3887, itself from the host uv-receipt.toml).",
+    "reproduce": "uvx --from klayout-tools@git+https://github.com/2AMLogic/klayout-tools@v0.9.0 klt ..."
   },
   "yosys": {
     "version": "0.67+post",
@@ -29,16 +29,16 @@
     "reported_version": "FABulous CLI 2.2.0",
     "source": "PyPI fabulous-fpga==2.2.0 (tag v2.2.0, 432bb2873b83585d5178a8ba411f38254387ce94, per the sky130-fpga flow/tool_versions.sh pin; the commit was not re-verified here)",
     "obtained": "throwaway venv, never a host-wide install: uv venv --python 3.12 .venv-fab && uv pip install --python .venv-fab/bin/python fabulous-fpga==2.2.0",
-    "used_by": ["measurements/g1-fabulous-generation", "verification/run.sh"]
+    "used_by": ["measurements/g1-fabulous-generation", "verification/run.sh", "verification/fabric-2x2.sh"]
   },
   "nextpnr-generic": {
     "version": "nextpnr-0.11.1-54-g861c57be",
-    "yosys_for_this_stage": "0.69+260 (git sha1 dcd59343b), from the same suite; the host yosys above is not used for synth_fabulous",
+    "yosys_for_this_stage": "0.69+260 (git sha1 dcd59343b), from the same suite; the host yosys above is not used for synth_fabulous, and since issue #94 that same suite yosys is also what FABulous resolves during 2x2 fabric generation (fabric-2x2.sh sets FAB_YOSYS_PATH to the suite's binary), so it generates as well as synthesizes",
     "tarball": {
       "url": "https://github.com/YosysHQ/oss-cad-suite-build/releases/download/2026-10-08/oss-cad-suite-linux-x64-20261008.tgz",
       "sha256": "8fa59d93d6cadbbee352077c059f2c5b72cda301e4508d9064a23d1ec11579c7"
     },
     "obtained": "YosysHQ OSS CAD Suite 2026-10-08, fetched and sha256-verified by verification/run.sh --setup straight from the tarball fields above (the only copy of that identity); bin, lib, libexec, share/yosys, share/nextpnr and etc unpacked into the untracked flow/build/oss-cad-suite, not installed on the host",
-    "used_by": ["measurements/g1-fabulous-generation", "verification/run.sh"]
+    "used_by": ["measurements/g1-fabulous-generation", "verification/run.sh", "verification/fabric-2x2.sh"]
   }
 }
