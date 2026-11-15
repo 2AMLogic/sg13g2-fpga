@@ -1,10 +1,10 @@
 # Re-grade this block's gap-to-T1 state from the committed signoff manifest
 # (T1 item 10, "CI keeps the harness and evidence formats valid").
 #
-# `klt signoff --manifest` exits 3 when the block is not yet T1 (some item is
-# unmet): that is a successful, expected run today. The gate is the byte diff
-# against the committed report, not the exit code; exit 0 and 3 pass,
-# everything else fails.
+# The block grades `tier: T1` and `klt signoff --manifest` exits 0 today; it
+# exits 3 while any item is unmet, so a nonzero exit is not by itself a failed
+# run. The gate is the byte diff against the committed report, not the exit
+# code; exit 0 and 3 pass, everything else fails.
 #
 # klt is pinned to the one full klayout-tools commit the committed report was
 # graded with, because the report embeds the grader build (build.git_commit,
