@@ -186,11 +186,13 @@ jobs:
             exit 1
           fi
           # run.sh writes results.tsv first and summary.txt last, so a missing
-          # summary means it aborted mid-suite and the remaining benches have
-          # no verdict at all - which must not be mistaken for a pass. Observed
-          # for real: on a corrupted fixture, `set -e` plus a failing
-          # `py_cfg="$(... decode ...)"` command substitution ends the script
-          # before the summary is written.
+          # summary means the run ended before the suite did and the remaining
+          # benches have no verdict at all - which must not be mistaken for a
+          # pass. Kept as defence in depth: run.sh now records a failing
+          # decode, an unreadable .cfg fixture or a failing corrupt-stream
+          # generator as a FAIL for the bench it belongs to and continues, so
+          # a mid-suite step failure no longer ends the script before the
+          # summary is written.
           if [ ! -f "$OUT/summary.txt" ]; then
             echo "::error::summary.txt is missing - run.sh aborted before the end of the suite; results.tsv below shows how far it got"
             cat "$TSV"
