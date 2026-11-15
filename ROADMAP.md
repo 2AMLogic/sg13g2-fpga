@@ -4,7 +4,7 @@
 carries it up the README's maturity ladder, with every claim backed by a
 committed record.
 
-Status as of 2026-11-15, `main` @ `5bafa8f`; Now/Blocked tracker links
+Status as of 2026-11-15, `main` @ `2ebcdaf`; Now/Blocked tracker links
 synced 2026-11-15.
 `WORK_PLAN.md` is the generated label-state view; this file says where the
 work stands and what comes next.
