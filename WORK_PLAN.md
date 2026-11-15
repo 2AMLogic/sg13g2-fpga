@@ -13,7 +13,7 @@ _None._
 
 `loom:very-important` (one counts per workspace); every stage takes these first.
 
-- **#80**: Generate a 2x2 LOGIC4 fabric with the pinned FABulous and map a cross-tile design to FASM
+_None._
 
 ## Important
 
@@ -21,7 +21,7 @@ _None._
 
 - **#65**: Generate a 2×2 LOGIC4 fabric with the pinned FABulous and run an inter-tile bitstream test
 - **#79**: Re-run the tile flow on klt v0.9.0 and record what the closed upstream gaps now report
-- **#81**: Run verification/cold-start.sh in CI so the bench suite is re-checked on every pull request
+- **#99**: Bump the klayout-tools pin: the pinned klt (bf24d463) refuses every routed-tile SDF that layout/sdf-verify.sh needs to annotate
 
 ## Ready
 
@@ -33,25 +33,42 @@ _None._
 
 Issues currently being built (`loom:building`).
 
-_None._
+- **#95**: verification/run.sh dies mid-suite on a failing command substitution: the remaining benches get no verdict and summary.txt is never written
+- **#96**: verification.yml:120-122 states a reason for the OSS cache key that #88 removed
+- **#97**: Annotate ROADMAP.md Now 1 and Now 2 for main as merged after 2026-11-14 20:14Z
+- **#99**: Bump the klayout-tools pin: the pinned klt (bf24d463) refuses every routed-tile SDF that layout/sdf-verify.sh needs to annotate
+- **#101**: SDF bench: the rise-to-rise period assert leaks state across cocotb tests (_last_rise_ns is never reset)
+- **#105**: G1 record: generated-files.sha256 has the same path-dependent entries #94 fixed in G2
 
 ## PRs Awaiting Review
 
 PRs waiting on Judge (`loom:review-requested`).
 
-- **#78**: docs: roadmap as of 2026-11-13
+- **#109**: fix: scope SDF bench rise-to-rise period state per test, not per module
+- **#110**: verification: add the G1 generation driver, re-record its manifest path-masked
+- **#111**: fix: record bitstream bench step failures as per-bench FAILs instead of aborting verification/run.sh mid-suite
 
 ## Approved (Awaiting Merge)
 
 PRs that passed review and are queued for Champion auto-merge (`loom:pr`).
 
-_None._
+- **#104**: ci: correct the OSS cache-key rationale and key the iverilog cache on its build recipe
+- **#112**: fix(flow): pin klayout-tools to the v0.9.0 release tag, matching signoff.yml
 
 ## Proposed
 
 Issues carrying `loom:curated`.
 
 - **#65**: Generate a 2×2 LOGIC4 fabric with the pinned FABulous and run an inter-tile bitstream test *(curated)*
+- **#79**: Re-run the tile flow on klt v0.9.0 and record what the closed upstream gaps now report *(curated)*
+- **#94**: fabric-2x2: generated-files.sha256 is not reproducible across hosts or checkout paths *(curated)*
+- **#95**: verification/run.sh dies mid-suite on a failing command substitution: the remaining benches get no verdict and summary.txt is never written *(curated)*
+- **#96**: verification.yml:120-122 states a reason for the OSS cache key that #88 removed *(curated)*
+- **#97**: Annotate ROADMAP.md Now 1 and Now 2 for main as merged after 2026-11-14 20:14Z *(curated)*
+- **#99**: Bump the klayout-tools pin: the pinned klt (bf24d463) refuses every routed-tile SDF that layout/sdf-verify.sh needs to annotate *(curated)*
+- **#101**: SDF bench: the rise-to-rise period assert leaks state across cocotb tests (_last_rise_ns is never reset) *(curated)*
+- **#105**: G1 record: generated-files.sha256 has the same path-dependent entries #94 fixed in G2 *(curated)*
+- **#107**: fabric-2x2.sh: the masked-file allowlist and the find exclusion list can drift silently *(curated)*
 
 ## Proposed (Architect / Hermit)
 
@@ -66,13 +83,13 @@ _None._
 | Bucket | Count |
 |------|-------|
 | Operator merge-risk holds | 0 |
-| Very important | 1 |
+| Very important | 0 |
 | Important | 3 |
 | Ready (`loom:issue`) | 0 |
-| In Progress (`loom:building`) | 0 |
-| PRs awaiting review | 1 |
-| Approved PRs awaiting merge | 0 |
-| Curated | 1 |
+| In Progress (`loom:building`) | 6 |
+| PRs awaiting review | 3 |
+| Approved PRs awaiting merge | 2 |
+| Curated | 10 |
 | Architect / Hermit proposals | 0 |
 | Active epics | 0 |
 <!-- guide:plan-body:end -->

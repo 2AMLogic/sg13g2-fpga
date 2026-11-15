@@ -4,6 +4,11 @@ Chronological record of merged PRs and closed issues, newest first. Maintained b
 
 ### 2026-11-15
 
+- **PR #106**: fix: pin generation-stage yosys and mask checkout paths in the G2 manifest
+- **PR #102**: docs: correct four stale status passages and regenerate the item-10 attestation
+- **PR #93**: chore: delete the no-op npm scaffolding manifest, pin it against resync
+- **Issue #90** (closed): Remove root package.json: a no-op npm test/check entry point in a repo with no JS
+- **Issue #82** (closed): Correct four stale status passages in measurements/README.md, rtl/README.md, README.md and layout/README.md
 - **PR #100**: fix: give FABulous the suite's yosys explicitly; drop the CI PATH workaround
 - **PR #98**: fix: SDF bench clock_edge drives one full PERIOD_NS period, asserted at every rise
 - **Issue #86** (closed): verification/cold-start.sh is not self-contained: fabulous_generate needs a host-wide yosys
