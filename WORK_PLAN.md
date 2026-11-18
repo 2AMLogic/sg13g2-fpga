@@ -19,12 +19,12 @@ _None._
 
 `loom:important`; taken before unlabelled work.
 
-- **#65**: Generate a 2×2 LOGIC4 fabric with the pinned FABulous and run an inter-tile bitstream test
-- **#79**: Re-run the tile flow on klt v0.9.0 and record what the closed upstream gaps now report
+- **#65**: Generate a 2×2 LOGIC4 fabric with the pinned FABulous and run an inter-tile bitstream test *(held)*
+- **#79**: Re-run the tile flow on klt v0.9.0 and record what the closed upstream gaps now report *(held)*
 
 ## Ready
 
-Human-approved issues ready for implementation (`loom:issue`).
+Human-approved issues (`loom:issue`) ready for implementation — excluding held (`loom:blocked`/`loom:operator`/`loom:frozen`), `loom:building`, and issues closed by an open `loom:pr` PR (listed under Approved).
 
 _None._
 
@@ -50,9 +50,9 @@ _None._
 
 Issues carrying `loom:curated`.
 
-- **#65**: Generate a 2×2 LOGIC4 fabric with the pinned FABulous and run an inter-tile bitstream test *(curated)*
-- **#79**: Re-run the tile flow on klt v0.9.0 and record what the closed upstream gaps now report *(curated)*
-- **#94**: fabric-2x2: generated-files.sha256 is not reproducible across hosts or checkout paths *(curated)*
+- **#65**: Generate a 2×2 LOGIC4 fabric with the pinned FABulous and run an inter-tile bitstream test *(curated)* *(held)*
+- **#79**: Re-run the tile flow on klt v0.9.0 and record what the closed upstream gaps now report *(curated)* *(held)*
+- **#94**: fabric-2x2: generated-files.sha256 is not reproducible across hosts or checkout paths *(curated)* *(held)*
 
 ## Proposed (Architect / Hermit)
 
@@ -69,7 +69,7 @@ _None._
 | Operator merge-risk holds | 0 |
 | Very important | 0 |
 | Important | 2 |
-| Ready (`loom:issue`) | 0 |
+| Ready (`loom:issue`, net of holds/building/merge-pending) | 0 |
 | In Progress (`loom:building`) | 0 |
 | PRs awaiting review | 0 |
 | Approved PRs awaiting merge | 0 |
