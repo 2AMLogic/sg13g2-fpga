@@ -3,5 +3,5 @@
   "sources": ["lut4_slice.v", "logic_tile_switch_matrix.v", "logic_tile_routed.v"],
   "hdl_toplevel": "logic_tile_routed",
   "pdk": {"cell_library": "sg13g2_stdcell", "corner": "typ_1p20V_25C"},
-  "constraints": {"clock_port": "clk", "clock_period_ns": 10.0}
+  "constraints": {"clock_port": "clk", "clock_period_ns": 20.0}
 }

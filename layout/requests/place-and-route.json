@@ -328,7 +328,7 @@
   },
   "constraints": {
     "clock_port": "clk",
-    "clock_period_ns": 10.0
+    "clock_period_ns": 20.0
   },
   "power": {
     "preset": "sg13g2"
