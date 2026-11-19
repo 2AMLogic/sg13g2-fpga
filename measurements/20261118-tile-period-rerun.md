@@ -7,6 +7,7 @@ matching `sta.json` and `sta-info.json`.
 |---|---|---|
 | Record | `layout/records/20261030-09fa1bd` (period 10.0 ns) | `layout/records/20261118-c1e517b` (period 20.0 ns) |
 | klt | `0.8.1.dev849+gf05774458ae2` | `0.9.0.dev1379+g5dbbad05ff42` (pinned v0.9.0, via uvx) |
+| KLayout engine (DRC/LVS `provenance.klayout_version`) | 0.30.12 | 0.30.13 (`klayout_version_mismatch: true`) |
 
 The baseline predates the v0.9.0 pin, so the klt change is a second variable.
 #79's v0.9.0 10 ns record had not landed, so it was not used.
@@ -22,9 +23,10 @@ The baseline predates the v0.9.0 pin, so the klt change is a second variable.
 A zero delta is the result. The routed stream (`logic_tile_routed.gds`), the
 routed netlist and the synthesized netlist (`netlist_sha256` `0ce67b67...`) are
 byte-identical to the baseline, as are synthesized area (3557.4336 µm²) and the
-instance count (181). The only synthesis field that changed is
-`clock_targets.delay_target_ps` (10000 to 20000). In this flow, with this klt,
-the implementation period did not change cell sizing, buffering or placement.
+instance count (181). Both synthesis target fields record the new period:
+`clock_targets.delay_target_ps` and `timing.delay_target_ps` each go from 10000
+to 20000. In this flow, with this klt, the implementation period did not change
+cell sizing, buffering or placement.
 
 Two place-and-route outputs changed alongside the period (the second has an unexcluded second cause, below). Both are in
 `layout/records/20261118-c1e517b/place-and-route.json`:
@@ -49,19 +51,36 @@ Two place-and-route outputs changed alongside the period (the second has an unex
 
 These are the only period-associated deltas in the tile-flow envelopes (`sta`,
 `sta-info`, `extract`, `drc`, `lvs`, `synthesize`, the SDF runs and
-`place-and-route`). The following also differ between the two records but are
-klt v0.9.0 tool-version artifacts, not period effects:
-`applied.{placement_density,route_allow_congestion,route_congestion_iterations,signal_layers}`,
-`power_basis.*`, `abc_constr.*`, `timing.regions[].module`, the extra
-`synthesize.check.*`, `*.stderr` and `logic_tile_routed_synth.v` outputs, and
-SDF `schema_version` 1 to 2.
+`place-and-route`). The following also differ between the two records, in three
+distinct groups, none of them period effects:
+
+- **klt v0.9.0 envelope/schema changes:**
+  `applied.{placement_density,route_allow_congestion,route_congestion_iterations,signal_layers}`,
+  `power_basis.*`, `abc_constr.*`, `timing.regions[].module`, and SDF
+  `schema_version` 1 to 2.
+- **Flow-wrapper additions** (`flow/klt-flow.sh`, changed between `09fa1bd` and
+  `c1e517b`, independent of the klt version): the synthesized-netlist copy
+  `logic_tile_routed_synth.v` (wrapper line 82) and the
+  `synthesize.check.txt` / `synthesize.check.rc` outputs (lines 164-166). The
+  wrapper already kept nonempty stderr at the baseline.
+- **KLayout engine warnings:** the new `drc.stderr` and `lvs.stderr` each warn
+  of an engine mismatch. In both DRC and LVS envelopes,
+  `[.provenance.klayout_version,.provenance.klayout_version_mismatch]` is
+  `["0.30.12",false]` at baseline and `["0.30.13",true]` in the new run. The
+  warning says verdicts are unaffected but deck hash, `rules_skipped` and
+  category counts may differ from a 0.30.12 report, so KLayout 0.30.13 is a
+  third variable alongside the period and klt.
 
 ## Verdicts observed
 
 - Synthesis, place-and-route, DRC (`clean`), extract, LVS (`match`), parasitic
   extraction, STA and STA-info: step rc 0. `synthesize`, `drc`, `lvs` and `erc`
   `.check.rc` are 0.
-- ERC step rc 4 with `erc_status: clean`, the same as the baseline record.
+- ERC step rc 4, the same as the baseline record. Two verdicts: connectivity
+  ERC `erc_status: clean` (`erc_finding_count` 0), but the antenna check is
+  `status: not_checked`: 0 checks performed, 4403 skipped, all with reason
+  `missing_antenna_pdk` (identical in both records). Antenna coverage is a gap,
+  not a pass.
 - STA (SPEF annotated, 0 violations): worst setup / worst hold slack in ns:
   slow_1p08V_125C 17.4128 / 0.05689, typ_1p20V_25C 18.3785 / 0.0359,
   fast_1p32V_m40C 18.9404 / 0.02672. These equal the baseline values.
@@ -71,3 +90,5 @@ SDF `schema_version` 1 to 2.
   fail).
 
 No step failed at 20.0 ns and no corner was waived; nothing was tuned.
+Antenna rule coverage remains unchecked (`missing_antenna_pdk`), so the clean
+connectivity ERC must not be read as antenna-clean.
