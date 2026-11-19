@@ -31,8 +31,27 @@ ihp-sg13g2` resolves it) and `yosys`, `openroad`, `jq` on `PATH`:
 ```bash
 flow/smoke/run.sh [--pdk-root <dir containing ihp-sg13g2/>]
 # or, against the pinned klt without touching the host install:
-KLT="uvx --from klayout-tools@git+https://github.com/2AMLogic/klayout-tools@v0.9.0 klt" flow/smoke/run.sh
+KLT="uvx --from klayout-tools@git+https://github.com/2AMLogic/klayout-tools@v0.9.0 --with klayout==0.30.12 klt" flow/smoke/run.sh
 ```
+
+The `--with klayout==0.30.12` constraint selects the pinned KLayout engine in
+the same disposable environment as the tool; `flow/klt-flow.sh` enforces it:
+before PDK discovery or any record/build write it probes the selected `KLT`
+(`klt version --format json`) and compares the **resolved**
+`.klayout_version` against `toolchain.json`'s `.klayout.version` pin. A
+mismatch or an unreadable probe exits nonzero, naming the required and
+observed versions (or saying the probe failed), and no record directory or
+`flow/build/` output is touched.
+
+**Record attribution across the engine change.** Each envelope's
+`provenance.klayout_version` (with `klayout_version_mismatch: true` where it
+disagreed with the pin) identifies the engine that actually produced it.
+Record `20261118-c1e517b` ran on 0.30.13 against the 0.30.12 pin; its DRC
+(`clean`, 0 violations) and LVS (`match`) verdicts stand, but detailed report
+counts (deck content hash, `rules_skipped`, `category_counts`) are only
+comparable within one engine — account for the 0.30.12 → 0.30.13 change when
+comparing against the 0.30.12 records. See
+[`measurements/20261118-tile-period-rerun.md`](../measurements/20261118-tile-period-rerun.md).
 
 The script writes a new `flow/smoke/records/<UTC date>-<short HEAD>/` (it
 refuses to overwrite one; records are append-only evidence) containing one

@@ -10,11 +10,22 @@ Place-and-route of the stamped tile `logic_tile_routed` (issue #9).
 | `check-pin-abutment.py` | checks facing track pins from a `place-and-route.json` `pins[]` (`--self-test` for the negative cases); see `measurements/20261024-tile-pin-placement.md` |
 | `records/<UTC date>-<short HEAD>/` | One envelope per step plus `<step>.rc`; append-only, never overwritten |
 
-Re-run against the pinned `klt` without touching the host install:
+Re-run against the pinned `klt` and the pinned KLayout engine
+(`flow/toolchain.json`) without touching the host install:
 
 ```bash
-KLT="uvx --from klayout-tools@git+https://github.com/2AMLogic/klayout-tools@v0.9.0 klt" layout/run.sh
+KLT="uvx --from klayout-tools@git+https://github.com/2AMLogic/klayout-tools@v0.9.0 --with klayout==0.30.12 klt" layout/run.sh
 ```
+
+`flow/klt-flow.sh` checks the selected `KLT`'s resolved KLayout engine against
+that pin before PDK discovery or any record/build write and exits nonzero on a
+mismatch (details in [`flow/README.md`](../flow/README.md)). Each historical
+envelope names the engine it actually ran under
+(`provenance.klayout_version`): `20261030-09fa1bd` is 0.30.12,
+`20261118-c1e517b` is 0.30.13 (`klayout_version_mismatch: true`). The November
+DRC/LVS verdicts stand; comparisons of detailed report counts (deck hash,
+`rules_skipped`, `category_counts`) must account for the engine change
+([`measurements/20261118-tile-period-rerun.md`](../measurements/20261118-tile-period-rerun.md)).
 
 SDF reports (`functional-verification-sdf-*.json`) committed in the records
 above predate the `v0.9.0` bump (issue #99): the former `bf24d463` pin could

@@ -18,6 +18,10 @@
 #   (default: sta),
 #   KLT=<klt command> (default: klt), RECORD_ID=<id> to override the record id.
 #
+# Before anything runs, the selected KLT's resolved KLayout engine is checked
+# against the .klayout.version pin in flow/toolchain.json (issue #130); a
+# mismatch or an unreadable probe exits nonzero before any record/build write.
+#
 # Usage (via a wrapper): <wrapper> [--pdk-root DIR]
 #   --pdk-root  IHP-Open-PDK install root (default: klt's own resolution).
 #
@@ -39,6 +43,26 @@ KLT=${KLT:-klt}
 PDK=ihp-sg13g2
 PDK_ARGS=(--pdk "$PDK")
 if [[ "${1:-}" == "--pdk-root" ]]; then PDK_ARGS+=(--pdk-root "$2"); fi
+
+# Engine-version gate (issue #130): each DRC/LVS/ERC envelope records the
+# KLayout engine it actually ran under (provenance.klayout_version), and the
+# pin in flow/toolchain.json is what keeps those records comparable. Check the
+# selected $KLT's *resolved* engine before PDK discovery or any record/build
+# write, so a drifted host cannot mint a klayout_version_mismatch record.
+EXPECTED_KLAYOUT=$(jq -r '.klayout.version // empty' "$REPO/flow/toolchain.json" 2>/dev/null)
+KLAYOUT_PROBE=$($KLT version --format json 2>/dev/null)
+RESOLVED_KLAYOUT=$(jq -r '.klayout_version // empty' <<<"$KLAYOUT_PROBE" 2>/dev/null)
+if [[ -z "$EXPECTED_KLAYOUT" ]]; then
+  echo "cannot read .klayout.version from $REPO/flow/toolchain.json; klayout engine pin unknown" >&2
+  exit 2
+elif [[ -z "$RESOLVED_KLAYOUT" ]]; then
+  echo "klayout engine probe failed: '$KLT version --format json' reported no .klayout_version (required: $EXPECTED_KLAYOUT per flow/toolchain.json)" >&2
+  exit 2
+elif [[ "$RESOLVED_KLAYOUT" != "$EXPECTED_KLAYOUT" ]]; then
+  echo "klayout engine mismatch: required $EXPECTED_KLAYOUT (flow/toolchain.json), observed $RESOLVED_KLAYOUT. Select the pinned engine, e.g.
+  KLT=\"uvx --from klayout-tools@git+https://github.com/2AMLogic/klayout-tools@v0.9.0 --with klayout==$EXPECTED_KLAYOUT klt\" $0 (flow/README.md)" >&2
+  exit 2
+fi
 
 # Resolve the SG13G2 root explicitly and export it: a bare `klt pdk find` (what
 # the docker openroad wrapper falls back to) can pick another variant, and the
