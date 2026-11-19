@@ -32,6 +32,12 @@ Single process, no `-j`; each `vvp` run is bounded by `SIM_TIMEOUT_SECONDS`
 | `fixtures_*`, `assembler_reproduce` | `top_io.v`/`top_reg.v` map (yosys + nextpnr-generic) onto the generated fabric; the assembled stream is byte-identical to FABulous `bit_gen`; fixtures in `bitstream/` are reproducible | |
 | `tb_logic_tile_bitstream` (`comb`, `reg`) | a stream loaded through the frame interface configures the single-LOGIC4 harness so the mapped design behaves as its independent oracle; every used routing/LUT/FF bit flip is detected (`+mutate`); malformed streams are rejected (`+expect_reject`) | see below |
 
+`verification/test-fixtures-regenerate-fail.sh` is the committed regression
+test for the fixture-stage FAIL path (issue #153): driving
+`fixtures-regenerate.sh` with stubbed tools and the real `cmp`, a byte
+mismatch on either design must exit nonzero without that design's
+`byte-identical` line, and the matching case must still print it for both.
+
 **Claim boundary.** Single-LOGIC4 harness; the switch matrix is the sibling's
 same-index stand-in, not a verified Wilton-class matrix; no inter-tile routing;
 no timing; no area. Sibling gaps G5 and G6 are inherited open. Nothing here
