@@ -192,7 +192,7 @@
         "role": "testbench",
         "path": "verification/run.sh",
         "passed": true,
-        "content_hash": "sha256:eec3524369285a904c95a2bfcf95683f11c64b083c5762c53233866eaf2a64a2"
+        "content_hash": "sha256:c27faf3f57a55ae5c66de199d631fb75ee95513b3a1c0ecf3d437c1dbb4ec328"
       },
       {
         "check": "command",
