@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "description": "Cited public price input for the cost-per-LUT4 estimate (see measurements/20261119-cost-per-lut.md and measurements/cost-per-lut/estimate.py). One entry per fabric technology; the estimate script reads the fields below and rejects the file if source.url or source.date_retrieved are missing.",
+  "technology": "IHP SG13G2 (130 nm SiGe BiCMOS), Open Source SG13G2 MPW run",
+  "price_per_area_unit": 2800,
+  "currency": "EUR",
+  "area_unit": "mm2",
+  "area_basis": "registered (drawn) die area submitted to the MPW run",
+  "minimum_area_mm2": null,
+  "minimum_area_note": "No minimum registered area is published for the SG13G2 open-source MPW runs. The run page states the run only starts once the total area requested by all customers exceeds the minimum required area, and that the price per customer then decreases as the total requested area increases until a lowest price level is reached; 2800 EUR/mm2 is the listed rate as of the date below, not a guaranteed best rate.",
+  "source": {
+    "name": "IHP — Low cost open-source MPW access (IHP Microelectronics, MPW prototyping service)",
+    "url": "https://www.ihp-microelectronics.com/services/research-and-prototyping-service/mpw-prototyping-service/low-cost-open-source-mpw-access-1",
+    "date_retrieved": "2026-11-19",
+    "quote": "Run: Open Source SG13G2 — Technologies SG13G2 - 2800€ per ㎟",
+    "publisher": "IHP-GmbH (Leibniz Institute for High Performance Microelectronics)"
+  }
+}

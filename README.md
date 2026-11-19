@@ -13,7 +13,11 @@ OpenROAD flow.
 at the three 1.2 V core corners (records in
 [`layout/records/20261030-09fa1bd/`](layout/records/20261030-09fa1bd/), which
 also commits the routed GDS; see
-[`measurements/`](measurements/)). The demonstration fabric is not yet
+[`measurements/`](measurements/)). A derived, script-regenerated area and
+cost per LUT4 estimate — measurement arithmetic on the committed record plus
+a cited public IHP shuttle price, labelled an estimate — is in
+[`measurements/20261119-cost-per-lut.md`](measurements/20261119-cost-per-lut.md).
+The demonstration fabric is not yet
 assembled, and not every T1 evidence item is met: the committed grade is in
 [`manifests/`](manifests/).
 
