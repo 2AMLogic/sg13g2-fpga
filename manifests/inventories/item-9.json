@@ -27,6 +27,7 @@
     "verification/bitstream_corrupt.py",
     "verification/gatelevel/test_tile_sdf.py",
     "verification/fixtures-regenerate.sh",
+    "verification/test-fixtures-regenerate-fail.sh",
     "verification/run.sh",
     "layout/run.sh",
     "layout/sdf-verify.sh",
