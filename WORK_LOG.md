@@ -2,6 +2,11 @@
 
 Chronological record of merged PRs and closed issues, newest first. Maintained by the Guide role.
 
+### 2026-11-19
+
+- **PR #129**: feat(layout): implement the tile at 20.0 ns and record the re-run
+- **Issue #91** (closed): Implement the tile at 20.0 ns and measure the area and utilization change
+
 ### 2026-11-15
 
 - **PR #123**: docs: correct stale below-T1 grade prose in manifests README and signoff.yml header
