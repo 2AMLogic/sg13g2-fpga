@@ -11,6 +11,7 @@ is the product" — recorded results are append-only evidence).
 | `20261018-tile-timing.md` | Tile timing: `logic_tile_routed` at the SG13G2 core corners (issue #10) |
 | `20261023-tile-sdf.md` | Tile SDF-annotated gate-level re-simulation (issue #27, T1 item 7) |
 | `20261024-tile-pin-placement.md` | Tile pin placement for abutment: `logic_tile_routed` on SG13G2 (issue #14) |
+| `20261118-tile-period-rerun.md` | Tile re-run at the ratified 20.0 ns implementation period (issue #91) |
 | `g1-fabulous-generation/` | G1: pinned FABulous generation of the stamped description (issue #8) |
 | `v1-bitstream-verification/` | V1: bitstream-level verification of the stamped tile (issue #11) |
 | `v2-stream-benches/` | V2: stream-driven benches (issue #68, ADR-0004) |

@@ -17,3 +17,19 @@ had been run when this period was written.
 | Information corners | `slow_1p35V_125C`, `typ_1p50V_25C`, `fast_1p65V_m40C` | Outside the setup/hold claim. `sta-info.json`, same period. |
 
 Fmax is not reported as a figure.
+
+## Where the period is set (issue #91)
+
+The 20.0 ns period is carried by four tile request files, all in `layout/requests/`:
+
+| File | Step | Role |
+|---|---|---|
+| `synthesize.json` | `klt synthesize` | implementation target (delay target 20000 ps) |
+| `place-and-route.json` | `klt place-and-route` | implementation target |
+| `sta.json` | `klt sta` | claim corners (setup/hold) |
+| `sta-info.json` | `klt sta` | information corners |
+
+Until issue #91 the first two carried `10.0`, an unrecorded leftover from the
+smoke run, so the tile was implemented at 10 ns and checked at 20 ns. Change the
+period in all four together. The `flow/smoke/` copies belong to a different
+design and are out of scope. See `measurements/20261118-tile-period-rerun.md`.
