@@ -1,11 +1,12 @@
 {
   "schema_version": 1,
-  "description": "Cited public price input for the cost-per-LUT4 estimate (see measurements/20261119-cost-per-lut.md and measurements/cost-per-lut/estimate.py). One entry per fabric technology; the estimate script reads the fields below and rejects the file if source.url or source.date_retrieved are missing.",
+  "description": "Cited public price input for the cost-per-LUT4 estimate (see measurements/20261119-cost-per-lut.md and measurements/cost-per-lut/estimate.py). One entry per fabric technology; the estimate script reads the fields below and rejects the file if source.url, source.date_retrieved, area_basis or ordering_unit are missing.",
   "technology": "IHP SG13G2 (130 nm SiGe BiCMOS), Open Source SG13G2 MPW run",
   "price_per_area_unit": 2800,
   "currency": "EUR",
   "area_unit": "mm2",
   "area_basis": "registered (drawn) die area submitted to the MPW run",
+  "ordering_unit": "one MPW submission (shuttle seat); the listed standard submission includes 40 bare-die samples of the submitted design, so a per-area figure here is that submission fee's share attributable to the given area, not a per-chip or per-die price",
   "minimum_area_mm2": null,
   "minimum_area_note": "No minimum registered area is published for the SG13G2 open-source MPW runs. The run page states the run only starts once the total area requested by all customers exceeds the minimum required area, and that the price per customer then decreases as the total requested area increases until a lowest price level is reached; 2800 EUR/mm2 is the listed rate as of the date below, not a guaranteed best rate.",
   "source": {

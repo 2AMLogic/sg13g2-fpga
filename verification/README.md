@@ -13,6 +13,7 @@ verification/run.sh --setup        # once: fetch the pinned OSS CAD Suite + FABu
 verification/run.sh                # run everything; logs in flow/build/verification/
 verification/run.sh --out measurements/<new-id>   # keep a record (refuses a non-empty dir)
 verification/run.sh --update-fixtures             # rewrite verification/bitstream/ after an intended change
+verification/blinky.sh             # the one-command blinky (README § Reproduce): map verification/blinky/blinky.v, assemble its stream, simulate it; logs in flow/build/blinky-run/
 ```
 
 Needs `iverilog`/`vvp` on `PATH` at the pinned version, `python3`, `uv`, `curl`.

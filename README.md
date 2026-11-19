@@ -105,6 +105,25 @@ manifests/     block manifest, T1 attestations and the committed signoff grade
 
 Each step is a single local run; the toolchain pins are in `flow/`.
 
+- **A blinky from RTL to a simulated bitstream, one command**:
+  `verification/blinky.sh` maps the one-bit clock divider in
+  [`verification/blinky/`](verification/blinky/) with the pinned
+  yosys + nextpnr-generic, assembles the FABulous frame stream
+  (cross-checked byte-for-byte against FABulous `bit_gen`) and simulates
+  it on the single-LOGIC4 harness with Icarus, printing the sampled
+  output pad: `blinky q = 0, 1, 0, 1, 0`. Measured on an 8-vCPU Ubuntu
+  24.04 x86_64 host: **30 s** from a clean checkout with no
+  `flow/build/` (the timer covers the whole command including the
+  one-time toolchain fetch, which is network-bound), **1–2 s** once the
+  pinned toolchain is under `flow/build/`. Tool versions of that run:
+  iverilog 13.0 (v13_0), yosys 0.69+260 and nextpnr-generic
+  nextpnr-0.11.1-54-g861c57be (OSS CAD Suite 2026-10-08), FABulous 2.2.0
+  — the pins in `flow/toolchain.json`, which the command checks and
+  enforces. Host prerequisites: `iverilog`/`vvp` at the pinned version,
+  `python3`, `uv`, `curl`. CI runs this same command on every push and
+  pull request that touches `rtl/`, `verification/` or
+  `flow/toolchain.json`. This example is single-LOGIC4; multi-tile
+  routing and simulation are tracked separately (issue #65).
 - **Bitstream-level functional tests**: `verification/run.sh` (Icarus +
   cocotb; per-bench verdicts, see [verification/README.md](verification/README.md)).
   `verification/cold-start.sh` fetches the pinned toolchain into `flow/build/`
