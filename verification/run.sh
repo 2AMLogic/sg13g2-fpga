@@ -168,8 +168,13 @@ if [[ "$HAVE_TOOLS" -eq 1 ]]; then
         echo "FABulous: $("$VENV/bin/FABulous" --version 2>&1 | sed -n "\$p")"
         echo "yosys (FABulous fabric generation, FAB_YOSYS_PATH): $OSS/bin/yosys -- $("$OSS/bin/yosys" -V)"
     } >> "$OUT/env.txt"
-    grep -q "FABulous CLI $FAB_PIN" "$OUT/env.txt" || { echo "error: FABulous version is not the pinned $FAB_PIN" >&2; exit 1; }
-    grep -q "^nextpnr-generic: .*$NEXTPNR_PIN" "$OUT/env.txt" || { echo "error: nextpnr-generic is not the pinned $NEXTPNR_PIN" >&2; exit 1; }
+    FABV="$(sed -n 's/^FABulous: //p' "$OUT/env.txt")"
+    [[ "$FABV" == "FABulous CLI $FAB_PIN" ]] \
+        || { echo "error: FABulous version is not the pinned $FAB_PIN" >&2; exit 1; }
+    # The leading nextpnr tag can be shorter than the full (Version ...) field.
+    PNRV_FIELD="$(sed -n 's/^nextpnr-generic: .*(Version \([^)]*\)).*/\1/p' "$OUT/env.txt")"
+    [[ "$PNRV_FIELD" == "$NEXTPNR_PIN" ]] \
+        || { echo "error: nextpnr-generic is not the pinned $NEXTPNR_PIN" >&2; exit 1; }
 fi
 NOTOOLS="pinned toolchain not present under flow/build/ (run verification/run.sh --setup)"
 
