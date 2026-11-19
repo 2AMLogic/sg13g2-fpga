@@ -49,25 +49,46 @@ if [[ "${1:-}" == "--pdk-root" ]]; then PDK_ARGS+=(--pdk-root "$2"); fi
 # pin in flow/toolchain.json is what keeps those records comparable. Check the
 # selected $KLT's *resolved* engine before PDK discovery or any record/build
 # write, so a drifted host cannot mint a klayout_version_mismatch record.
+# Every command below must exit 0 before the versions are compared: a probe
+# that fails after printing the pinned version, a probe whose JSON is followed
+# by unparsable text, or a corrupted pin file would otherwise pass the
+# comparison on stale output (issue #130 review).
 EXPECTED_KLAYOUT=$(jq -r '.klayout.version // empty' "$REPO/flow/toolchain.json" 2>/dev/null)
+PIN_RC=$?
 KLAYOUT_PROBE=$($KLT version --format json 2>/dev/null)
+PROBE_RC=$?
 RESOLVED_KLAYOUT=$(jq -r '.klayout_version // empty' <<<"$KLAYOUT_PROBE" 2>/dev/null)
-if [[ -z "$EXPECTED_KLAYOUT" ]]; then
+READ_RC=$?
+if [[ $PIN_RC -ne 0 || -z "$EXPECTED_KLAYOUT" ]]; then
   echo "cannot read .klayout.version from $REPO/flow/toolchain.json; klayout engine pin unknown" >&2
   exit 2
-elif [[ -z "$RESOLVED_KLAYOUT" ]]; then
+elif [[ $PROBE_RC -ne 0 ]]; then
+  echo "klayout engine probe failed: '$KLT version --format json' exited $PROBE_RC (required: $EXPECTED_KLAYOUT per flow/toolchain.json)" >&2
+  exit 2
+elif [[ $READ_RC -ne 0 || -z "$RESOLVED_KLAYOUT" ]]; then
   echo "klayout engine probe failed: '$KLT version --format json' reported no .klayout_version (required: $EXPECTED_KLAYOUT per flow/toolchain.json)" >&2
   exit 2
 elif [[ "$RESOLVED_KLAYOUT" != "$EXPECTED_KLAYOUT" ]]; then
-  echo "klayout engine mismatch: required $EXPECTED_KLAYOUT (flow/toolchain.json), observed $RESOLVED_KLAYOUT. Select the pinned engine, e.g.
-  KLT=\"uvx --from klayout-tools@git+https://github.com/2AMLogic/klayout-tools@v0.9.0 --with klayout==$EXPECTED_KLAYOUT klt\" $0 (flow/README.md)" >&2
+  echo "klayout engine mismatch: required $EXPECTED_KLAYOUT (flow/toolchain.json), observed $RESOLVED_KLAYOUT. Select the pinned engine in the environment and rerun your original wrapper with it, e.g.
+  KLT=\"uvx --from klayout-tools@git+https://github.com/2AMLogic/klayout-tools@v0.9.0 --with klayout==$EXPECTED_KLAYOUT klt\" flow/smoke/run.sh (flow/README.md)" >&2
   exit 2
 fi
 
 # Resolve the SG13G2 root explicitly and export it: a bare `klt pdk find` (what
 # the docker openroad wrapper falls back to) can pick another variant, and the
-# container then cannot see the Liberty/LEF files.
-PDK_ROOT="$($KLT pdk find "${PDK_ARGS[@]}" --format json | jq -r .root)" || exit 2
+# container then cannot see the Liberty/LEF files. The command and the jq read
+# must both succeed and .root must be nonempty; otherwise no record is started.
+PDK_FIND=$($KLT pdk find "${PDK_ARGS[@]}" --format json 2>/dev/null)
+PDK_RC=$?
+PDK_ROOT=$(jq -r '.root // empty' <<<"$PDK_FIND" 2>/dev/null)
+PDK_JQ_RC=$?
+if [[ $PDK_RC -ne 0 ]]; then
+  echo "'$KLT pdk find' exited $PDK_RC; cannot resolve the SG13G2 PDK root" >&2
+  exit 2
+elif [[ $PDK_JQ_RC -ne 0 || -z "$PDK_ROOT" ]]; then
+  echo "'$KLT pdk find' reported no readable .root; cannot resolve the SG13G2 PDK root" >&2
+  exit 2
+fi
 export PDK_ROOT PDK
 
 ID="${RECORD_ID:-$(date -u +%Y%m%d)-$(git -C "$REPO" rev-parse --short HEAD)}"

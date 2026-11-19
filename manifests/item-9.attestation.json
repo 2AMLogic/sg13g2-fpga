@@ -17,7 +17,7 @@
         "role": "testbench",
         "path": "flow/klt-flow.sh",
         "passed": true,
-        "content_hash": "sha256:4915359bc4e1c4f67feabca057186b68df90309bcf6a1827d16518c747c859ac"
+        "content_hash": "sha256:c5d05149d302555750df625cb4abc162ebf92f2bf64cc372ae1ef6569a80a3cd"
       },
       {
         "check": "present",

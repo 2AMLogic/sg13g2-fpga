@@ -41,7 +41,17 @@ before PDK discovery or any record/build write it probes the selected `KLT`
 `.klayout_version` against `toolchain.json`'s `.klayout.version` pin. A
 mismatch or an unreadable probe exits nonzero, naming the required and
 observed versions (or saying the probe failed), and no record directory or
-`flow/build/` output is touched.
+`flow/build/` output is touched. Every command in the gate must exit 0 before
+the versions are compared: a probe that fails *after* printing the pinned
+version, or one whose JSON is followed by unparsable text, is rejected like an
+unreadable probe, and so is a `toolchain.json` that `jq` cannot fully parse.
+`flow/check-engine-gate.sh` runs these cases (plus the mismatch and a
+valid-probe control) against both wrappers with a stub `KLT` — no PDK or
+tools needed — asserting each rejection exits 2 before PDK discovery, with no
+record directory created and `flow/build/` untouched. On a mismatch the
+message names the `KLT=` assignment to set and says to rerun the original
+wrapper; do not run `flow/klt-flow.sh` directly (it is not runnable without
+the wrapper's variables).
 
 **Record attribution across the engine change.** Each envelope's
 `provenance.klayout_version` (with `klayout_version_mismatch: true` where it
