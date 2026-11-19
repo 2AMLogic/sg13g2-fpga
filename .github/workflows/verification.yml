@@ -7,7 +7,11 @@
 # manifests/inventories/item-9.json — and fails on any FAIL or NOT-RUN, then
 # runs verification/blinky.sh — README.md § Reproduce's timed
 # RTL-to-bitstream command — on the same toolchain, so that claim cannot go
-# stale silently either (issue #138).
+# stale silently either (issue #138). A second job,
+# fixtures-regenerate-fail-path, runs
+# verification/test-fixtures-regenerate-fail.sh — the committed regression
+# test for the fixture-stage FAIL path (issue #153) — which stubs the whole
+# toolchain in a temp dir and needs none of the pins above.
 #
 # This is not, and must not be made, a required status check: it is
 # path-filtered, so it does not run at all on a docs- or layout-only pull
@@ -225,3 +229,21 @@ jobs:
             exit 1
           fi
           echo "no NOT-RUN benches"
+
+  # The fixture-stage FAIL path (issue #153): a byte mismatch between the
+  # assembler and FABulous bit_gen must make
+  # verification/fixtures-regenerate.sh exit nonzero with no byte-identical
+  # line for the mismatching design. verification/test-fixtures-regenerate-fail.sh
+  # stubs the whole toolchain in a temp dir and keeps the real `cmp`, so it
+  # deliberately runs as its own job, without any of the pins the benches job
+  # builds -- toolchain-independence is structural, not a matter of step
+  # order there. A nonzero exit fails the step and the job.
+  fixtures-regenerate-fail-path:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Run the fixtures-regenerate FAIL-path regression test
+        run: verification/test-fixtures-regenerate-fail.sh
