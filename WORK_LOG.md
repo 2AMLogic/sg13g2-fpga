@@ -4,6 +4,8 @@ Chronological record of merged PRs and closed issues, newest first. Maintained b
 
 ### 2026-11-19
 
+- **PR #133**: flow: enforce the pinned KLayout engine before any record/build write
+- **Issue #130** (closed): Reconcile the KLayout engine version: toolchain.json pins 0.30.12, new records resolve 0.30.13 (klayout_version_mismatch: true)
 - **PR #129**: feat(layout): implement the tile at 20.0 ns and record the re-run
 - **Issue #91** (closed): Implement the tile at 20.0 ns and measure the area and utilization change
 
