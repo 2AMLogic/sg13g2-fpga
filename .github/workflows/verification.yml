@@ -4,7 +4,10 @@
 # behind it, so an edit under rtl/ or verification/ could break a bench with
 # every check still green. This job runs verification/cold-start.sh — the same
 # one-command cold start a third party runs, named by
-# manifests/inventories/item-9.json — and fails on any FAIL or NOT-RUN.
+# manifests/inventories/item-9.json — and fails on any FAIL or NOT-RUN, then
+# runs verification/blinky.sh — README.md § Reproduce's timed
+# RTL-to-bitstream command — on the same toolchain, so that claim cannot go
+# stale silently either (issue #138).
 #
 # This is not, and must not be made, a required status check: it is
 # path-filtered, so it does not run at all on a docs- or layout-only pull
@@ -165,6 +168,15 @@ jobs:
       # *.failures - the compiled .vvp images and the generated stimulus
       # streams in the same directory are ~5 MB of the 5.5 MB and are
       # reproducible from the inputs.
+      - name: Run the blinky example (the README command)
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.local/icarus/bin:$PATH"
+          # The toolchain is already under flow/build/ (cold start above), so
+          # this is the warm path of README.md § Reproduce's timed command.
+          # It must fail the job on any failed stage or simulation verdict.
+          verification/blinky.sh
+
       - name: Upload summary.txt and results.tsv
         if: always()
         uses: actions/upload-artifact@v4
@@ -176,6 +188,8 @@ jobs:
             flow/build/verification/env.txt
             flow/build/verification/logs/**/*.log
             flow/build/verification/logs/**/*.failures
+            flow/build/blinky-run.env
+            flow/build/blinky-run/logs/*.log
           if-no-files-found: error
 
       # cold-start.sh exits nonzero only on FAIL; verification/run.sh records a
