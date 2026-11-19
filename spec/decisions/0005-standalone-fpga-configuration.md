@@ -21,14 +21,15 @@
 
 ## Context
 
-The issue asks whether a tiny standalone FPGA configuration of this fabric on
+[Issue #139](https://github.com/2AMLogic/sg13g2-fpga/issues/139) asks whether
+a tiny standalone FPGA configuration of this fabric on
 SG13G2 (a few hundred to ~1000 LUT4s with I/O in a small package) is worth
 specifying. It is a research-and-record decision, not a design commitment:
 `CLAUDE.md` declines fabric growth "before the tile is verified" and says such
 proposals are recorded in an issue and moved on from — this record is that
-proposal's disposition. The same question is open on the master
-([sky130-fpga#325](https://github.com/2AMLogic/sky130-fpga/issues/325), open
-and in progress as of 2026-11-19).
+proposal's disposition. The master recorded its decision in [sky130 ADR-0007],
+merged in [PR #326](https://github.com/2AMLogic/sky130-fpga/pull/326), which
+closed [sky130-fpga#325](https://github.com/2AMLogic/sky130-fpga/issues/325).
 
 ## Decision
 
@@ -48,10 +49,8 @@ and in progress as of 2026-11-19).
    ratified-20 ns re-run ([20261118](../../measurements/20261118-tile-period-rerun.md)).
    Repo rules allow area claims only from characterized SG13G2 data promoted
    through a decision record — never a sky130 figure or a FABulous placeholder.
-   Any LUT count, I/O count or package estimate for a standalone configuration
-   built today would rest on an un-ratified number. Accordingly no LUT, I/O,
-   package or configuration-path figure is derived here: deriving them is the
-   standalone design study this ADR declines.
+   Sizing a standalone part from that area, choosing its I/O and package,
+   and specifying its configuration path belong to a future design study.
 
 2. **What the decision waits on** (each condition checkable by a later
    issue):
@@ -60,21 +59,23 @@ and in progress as of 2026-11-19).
      figure from the measured records above — the promotion of the 10468.4 µm²
      measured die into `spec/target-spec.md` through a decision record.
    - The demonstration fabric (row 4, 2×2–4×4) has its own verification
-     evidence: bitstream-level tests on the simulated fabric (row 4's stated
-     evidence — today only
-     [`g2-fabric-2x2-generation/`](../../measurements/g2-fabric-2x2-generation/)
-     exists, a description-level 2×2 generation with a cross-tile mapping, and
-     no fabric bitstream test record), and a fabric-level assembly record
-     through `klt` (fabric place-and-route, DRC and LVS remain in
-     [`20261018-tile-place-and-route.md`](../../measurements/20261018-tile-place-and-route.md)'s
-     "Not established here" list).
+     evidence. Row 4 calls for bitstream-level tests on the simulated fabric.
+     The [2×2 generation record](../../measurements/g2-fabric-2x2-generation/)
+     maps a design across tiles and generates a bitstream. Simulation of that
+     bitstream and physical layout of the fabric remain open. A fabric-level
+     assembly record through `klt` must document place-and-route, DRC and LVS.
+     The [tile place-and-route record](../../measurements/20261018-tile-place-and-route.md)
+     explicitly lists fabric-level DRC/LVS under “Not established here”.
 
-   The tile itself is close to verified — bitstream-level tile verification
-   ([V1, 19 PASS](../../measurements/v1-bitstream-verification/)), tile
-   timing and SDF records, routed tile with abutment satisfied — but a
-   standalone configuration is the *fabric* scaled up by two orders of
-   magnitude beyond the ratified ≤4×4 (row 4: "No fabric above 4×4"), so the
-   verification bar that matters is the fabric's, and it is not met.
+   [Tile bitstream verification (V1)](../../measurements/v1-bitstream-verification/)
+   recorded 19 PASS, 0 FAIL, 5 NOT-RUN. The tile also has timing and SDF
+   records and a routed layout with abutting pins. The standalone question
+   depends on how those tiles work together. At the [row 4 ceiling](../target-spec.md),
+   a 4×4 fabric has 16 LOGIC4 tiles. Each [LOGIC4 tile](../../rtl/common/fabulous/Tile/LOGIC4/LOGIC4.csv)
+   contains four [single-LUT4 BELs](../../rtl/common/fabulous/Tile/LOGIC4/lut4_ff_bel.v),
+   giving 64 LUT4s in total. The upper end of issue #139's range, about
+   1000 LUT4s, is roughly 16 times that capacity. Verifying the demonstration
+   fabric is the first step toward judging a larger one.
 
 3. **Rejected: a standalone-package design study** (pad ring, I/O cells,
    configuration storage and load path, package selection). That is a spec
@@ -82,14 +83,12 @@ and in progress as of 2026-11-19).
    it here records it. If the conditions above are met, a fresh issue may
    propose the study with evidence.
 
-4. **Relation to the master.** Per the lineage rule (`CLAUDE.md` "Scope
-   discipline: designed once"), [sky130-fpga#325](https://github.com/2AMLogic/sky130-fpga/issues/325)
-   decides the same question for the master and is cross-referenced, not
-   absorbed. The two answers are expected to share a shape — each repo is
-   tile-first and each waits on its own ratified area and verified fabric —
-   but this ADR decides for this repo on this repo's measured SG13G2 records
-   only. A finding here that bears on the master is filed there, not re-argued.
+4. **Relation to the master.** [Sky130 ADR-0007] also defers a standalone
+   FPGA until the tile and demonstration fabric have verification evidence.
+   The two decisions agree on scope. Under the lineage rule in `CLAUDE.md`,
+   this ADR uses SG13G2 measurements for the local area question. Reopening
+   the question here also requires the row 3 area decision.
 
-`spec/target-spec.md` is not edited: the decision is "out", so the scope rows
-stand unchanged. No number in this ADR is a spec figure; every number cites
-its committed record.
+The existing scope rows in `spec/target-spec.md` continue to apply.
+
+[sky130 ADR-0007]: https://github.com/2AMLogic/sky130-fpga/blob/d0c57f9ef3e70f75ee9137eb2e66fe9ecfcb7ea5/spec/decisions/0007-standalone-fpga-configuration.md
