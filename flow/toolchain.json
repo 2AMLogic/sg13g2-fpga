@@ -3,7 +3,7 @@
     "release": "v0.9.0",
     "reported_version": "0.9.0",
     "source": "the same commit as .github/workflows/signoff.yml, which is the pin's only home (manifests/README.md, Rules: the pin lives only in signoff.yml, do not repeat the SHA elsewhere). The tag-agreement step in .github/workflows/signoff.yml checks on every run that this tag dereferences to that commit, failing the job on a mismatch, an absent tag or an unreachable remote. Previous pin bf24d463fb3fc0f32b6f90d884086fc8946d74a8 (0.7.1.dev2056+gbf24d463fb3f, bumped for issue #14 / klayout-tools#3887, itself from the host uv-receipt.toml).",
-    "reproduce": "uvx --from klayout-tools@git+https://github.com/2AMLogic/klayout-tools@v0.9.0 klt ..."
+    "reproduce": "uvx --from klayout-tools@git+https://github.com/2AMLogic/klayout-tools@v0.9.0 --with klayout==0.30.12 klt ..."
   },
   "yosys": {
     "version": "0.67+post",
@@ -17,7 +17,9 @@
   },
   "klayout": {
     "version": "0.30.12",
-    "used_by": ["klt drc", "klt extract", "klt lvs", "klt erc"]
+    "used_by": ["klt drc", "klt extract", "klt lvs", "klt erc"],
+    "enforced_by": "flow/klt-flow.sh probes the selected KLT's resolved .klayout_version against this pin before PDK discovery or any record/build write (issue #130); a mismatch exits nonzero",
+    "attribution": "each envelope's provenance.klayout_version[/klayout_version_mismatch] names the engine that actually ran: 20261030-09fa1bd is 0.30.12, 20261118-c1e517b is 0.30.13 (mismatch true) — verdicts stand, but deck hash / rules_skipped / category counts are only comparable within one engine (measurements/20261118-tile-period-rerun.md)"
   },
   "icarus-verilog": {
     "version": "13.0",
