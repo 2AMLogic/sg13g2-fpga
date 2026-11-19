@@ -86,9 +86,16 @@ fi
 # so the recorded banner is exactly the one that was checked.
 PNRV="$("$OSS/bin/nextpnr-generic" --version 2>&1 | sed -n 1p)"
 FABV="$("$VENV/bin/FABulous" --version 2>&1 | sed -n "\$p")"
-[[ "$PNRV" == *"$NEXTPNR_PIN"* ]] \
+# Exact matches only (issue #144): a warm install whose version merely starts
+# with the pin (FABulous 2.2.0rc1 vs pin 2.2.0, nextpnr ...-dirty) must stop
+# here, before the fabric generation below -- a substring match rides it
+# through. nextpnr is compared on the complete version inside its
+# (Version ...) field: the banner's leading tag can be shorter than the field
+# (nextpnr-0.11.1 vs nextpnr-0.11.1-54-g861c57be), so the field is the truth.
+PNRV_FIELD="$(sed -n 's/.*(Version \([^)]*\)).*/\1/p' <<<"$PNRV")"
+[[ "$PNRV_FIELD" == "$NEXTPNR_PIN" ]] \
     || { echo "error: nextpnr-generic $PNRV is not the pinned $NEXTPNR_PIN (flow/build/oss-cad-suite holds a stale install: remove it and rerun to refetch)" >&2; exit 1; }
-grep -q "FABulous CLI $FAB_PIN" <<<"$FABV" \
+[[ "$FABV" == "FABulous CLI $FAB_PIN" ]] \
     || { echo "error: FABulous $FABV is not the pinned $FAB_PIN (flow/build/fab-venv holds a stale install: remove it and rerun to refetch)" >&2; exit 1; }
 
 echo "== 2/5 generating the fabric with the pinned FABulous"
