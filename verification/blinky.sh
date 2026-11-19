@@ -101,6 +101,8 @@ PNRV_FIELD="$(sed -n 's/.*(Version \([^)]*\)).*/\1/p' <<<"$PNRV")"
 echo "== 2/5 generating the fabric with the pinned FABulous"
 GENDIR="$W/fab"; rm -rf "$GENDIR"; cp -r "$REPO/rtl/common/fabulous" "$GENDIR"
 GEN_RC=0
+# Keep the cd && timeout ... FABulous list last in the subshell. A successful
+# command after it would hide either failure and leave GEN_RC at zero.
 ( cd "$GENDIR" && FAB_YOSYS_PATH="$OSS/bin/yosys" \
     timeout --kill-after=10 600 "$VENV/bin/FABulous" -p . script FABulous.tcl ) \
     > "$W/logs/fabulous-generate.log" 2>&1 || GEN_RC=$?
