@@ -118,14 +118,15 @@ jobs:
           klt signoff --attest 1 --inventory manifests/inventories/item-1.json \
             --check manifests/item-1.attestation.json
 
-  # Run the two committed self-checks on every push and PR (issue #134): the
-  # engine-gate wrapper checks (flow/check-engine-gate.sh, stub KLT) and the
-  # pin-abutment self-test on the committed envelope. Both need only
-  # bash/jq/python3/git — no PDK, klt, yosys or openroad — so a wrapper or
-  # checker edit that voids their coverage fails CI instead of landing
-  # silently. Cheap enough to stay un-path-filtered: verification.yml's
-  # path filters do not apply, and neither self-check is a required status
-  # check (same reasoning as the benches job there).
+  # Run the three committed self-checks on every push and PR (issue #134):
+  # the engine-gate wrapper checks (flow/check-engine-gate.sh, stub KLT), the
+  # pin-abutment self-test on the committed envelope and, since issue #149,
+  # the cost-per-LUT estimator self-test. All need only bash/jq/python3/git —
+  # no PDK, klt, yosys or openroad — so a wrapper, checker or estimator edit
+  # that voids their coverage fails CI instead of landing silently. Cheap
+  # enough to stay un-path-filtered: verification.yml's path filters do not
+  # apply, and none of the self-checks is a required status check (same
+  # reasoning as the benches job there).
   self-checks:
     runs-on: ubuntu-latest
     steps:
@@ -137,3 +138,6 @@ jobs:
 
       - name: Run the pin-abutment self-test on the committed envelope
         run: python3 layout/check-pin-abutment.py --self-test layout/records/20261024-bf24d46/place-and-route.json
+
+      - name: Run the cost-per-LUT estimator self-test
+        run: python3 measurements/cost-per-lut/estimate.py --self-test
