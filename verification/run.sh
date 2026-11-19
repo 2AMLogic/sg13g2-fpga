@@ -238,37 +238,17 @@ FIX_OK=0
 if [[ "$GEN_OK" -eq 1 ]]; then
     W="$BUILD/nextpnr-run"; rm -rf "$W" "$BR"; mkdir -p "$W" "$BR"
     FL="$OUT/logs/fixtures.log"; : > "$FL"
-    (
-        set -euo pipefail
-        export PATH="$OSS/bin:$PATH"
-        python3 -I "$OVERLAY" "$GENDIR/.FABulous" "$W/io-model/.FABulous"
-        yosys -q -p "synth_fabulous -top top -extra-plib $NSRC/prims.v -extra-plib $NSRC/io_prims.v -extra-map $NSRC/io_map.v -cells-map $NSRC/cells_map.v -json $W/top_io.json" "$NSRC/top_io.v"
-        FAB_ROOT="$W/io-model" nextpnr-generic --uarch fabulous --json "$W/top_io.json" -o pcf="$NSRC/top_io.pcf" -o fasm="$W/top_io.fasm" --write "$W/top_io.post.json"
-        yosys -q -p "synth_fabulous -top top -ff \$_SDFFE_PP0P_ x -extra-plib $NSRC/prims.v -extra-plib $NSRC/io_prims.v -extra-map $NSRC/io_map.v -extra-map $NSRC/ff_map.v -cells-map $NSRC/cells_map.v -json $W/top_reg.raw.json" "$NSRC/top_reg.v"
-        # clk is the BEL's implicit UserCLK (no fabric pin): drop the unconnected top port
-        python3 -I - "$W/top_reg.raw.json" "$W/top_reg.json" <<'PY'
-import json, sys
-d = json.load(open(sys.argv[1])); m = d["modules"]["top"]
-bits = set(m["ports"]["clk"]["bits"])
-assert not any(bits & set(b) for c in m["cells"].values() for b in c["connections"].values()), "clk is connected to a cell"
-del m["ports"]["clk"]
-json.dump(d, open(sys.argv[2], "w"))
-PY
-        FAB_ROOT="$W/io-model" nextpnr-generic --uarch fabulous --json "$W/top_reg.json" -o pcf="$NSRC/top_reg.pcf" -o fasm="$W/top_reg.fasm" --write "$W/top_reg.post.json"
-        PY="$VENV/bin/python"
-        "$PY" -I "$TOOL" snapshot --spec "$GENDIR/.FABulous/bitStreamSpec.bin" \
-            --configmem "$GENDIR/Tile/LOGIC4/LOGIC4_ConfigMem.v" --pips "$W/io-model/.FABulous/pips.txt" \
-            --out "$BR" --fabulous-version "$("$PY" -c 'import importlib.metadata as m; print(m.version("fabulous-fpga"))')"
-        for d in top_io top_reg; do
-            cp "$W/$d.fasm" "$BR/$d.fasm"
-            python3 -I "$TOOL" summary "$W/$d.post.json" --out "$BR/$d.mapped.json"
-            python3 -I "$TOOL" assemble --fasm "$BR/$d.fasm" --snapshot "$BR/fabric_spec.json" \
-                --mapped "$BR/$d.mapped.json" --out "$BR/$d" --filtered-fasm "$BR/$d.logic.fasm"
-            "$VENV/bin/bit_gen" genBitstream "$BR/$d.logic.fasm" "$GENDIR/.FABulous/bitStreamSpec.bin" "$BR/$d.fabulous.bin" > "$BR/$d.bit_gen.out" 2>&1
-            cmp "$BR/$d.bin" "$BR/$d.fabulous.bin"
-            echo "bit_gen genBitstream output is byte-identical to the assembler's $d.bin"
-        done
-    ) >> "$FL" 2>&1 && FIX_OK=1
+    # The pipeline runs as its own process with its own strict mode
+    # (verification/fixtures-regenerate.sh): an inline `( set -e ... ) &&`
+    # subshell ignores set -e (left operand of &&), so a failed `cmp` fell
+    # through to the unconditional success echo and still recorded PASS
+    # (issue #140).
+    if REGEN_GENDIR="$GENDIR" REGEN_WORK="$W" REGEN_OUT="$BR" \
+            REGEN_OSS_BIN="$OSS/bin" REGEN_VENV="$VENV" REGEN_NSRC="$NSRC" \
+            REGEN_OVERLAY="$OVERLAY" REGEN_TOOL="$TOOL" \
+            "$REPO/verification/fixtures-regenerate.sh" >> "$FL" 2>&1; then
+        FIX_OK=1
+    fi
     if [[ "$FIX_OK" -eq 1 ]]; then
         record fixtures_regenerate PASS "top_io, top_reg mapped (yosys+nextpnr), assembled; assembler output byte-identical to FABulous bit_gen"
     else

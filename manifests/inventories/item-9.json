@@ -26,6 +26,7 @@
     "verification/common/flow/configmem_frames.py",
     "verification/bitstream_corrupt.py",
     "verification/gatelevel/test_tile_sdf.py",
+    "verification/fixtures-regenerate.sh",
     "verification/run.sh",
     "layout/run.sh",
     "layout/sdf-verify.sh",
