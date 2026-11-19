@@ -117,3 +117,23 @@ jobs:
         run: |
           klt signoff --attest 1 --inventory manifests/inventories/item-1.json \
             --check manifests/item-1.attestation.json
+
+  # Run the two committed self-checks on every push and PR (issue #134): the
+  # engine-gate wrapper checks (flow/check-engine-gate.sh, stub KLT) and the
+  # pin-abutment self-test on the committed envelope. Both need only
+  # bash/jq/python3/git — no PDK, klt, yosys or openroad — so a wrapper or
+  # checker edit that voids their coverage fails CI instead of landing
+  # silently. Cheap enough to stay un-path-filtered: verification.yml's
+  # path filters do not apply, and neither self-check is a required status
+  # check (same reasoning as the benches job there).
+  self-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Run the engine-gate wrapper checks (stub KLT, no PDK)
+        run: bash flow/check-engine-gate.sh
+
+      - name: Run the pin-abutment self-test on the committed envelope
+        run: python3 layout/check-pin-abutment.py --self-test layout/records/20261024-bf24d46/place-and-route.json
