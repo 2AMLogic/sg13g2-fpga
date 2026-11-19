@@ -3,14 +3,14 @@
   "kind": "generic",
   "status": "pass",
   "t1_item": 9,
-  "summary": "T1 item 9 (Testbenches shipped): 30/30 attestation checks passed (klt signoff --attest)",
+  "summary": "T1 item 9 (Testbenches shipped): 31/31 attestation checks passed (klt signoff --attest)",
   "source": "manifests/inventories/item-9.json",
   "attestation": {
     "producer": "klt signoff --attest",
     "inventory_schema_version": 1,
     "hash_algorithm": "sha256-raw-bytes",
-    "check_count": 30,
-    "passed_count": 30,
+    "check_count": 31,
+    "passed_count": 31,
     "checks": [
       {
         "check": "present",
@@ -202,6 +202,13 @@
         "content_hash": "sha256:b1e572a860878605551efd9cd8993cf0eaf7e30e3781d6c7025c5fbba7d969ae"
       },
       {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/test-fixtures-regenerate-fail.sh",
+        "passed": true,
+        "content_hash": "sha256:267ac7d730d8f7f96f73a8605f7d71d0b1bd5f3482b8b1ee2c6b80a34d506a4d"
+      },
+      {
         "check": "command",
         "role": "cold_start",
         "argv": [
@@ -247,7 +254,7 @@
         "path": "manifests/inventories/item-9.json",
         "scope": "repo"
       },
-      "content_hash": "sha256:9645e031b5ab7b7722d9e5e23cf62bba3535985f48c3ccdf7bc277fae81e07ed"
+      "content_hash": "sha256:0e17038034b7551ea8be7db28d129a8b749f08ee19b97cb40913c1bce12929b6"
     }
   }
 }

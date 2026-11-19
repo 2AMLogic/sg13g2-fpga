@@ -51,7 +51,7 @@
     },
     "9": {
       "file": "manifests/item-9.attestation.json",
-      "content_hash": "sha256:9645e031b5ab7b7722d9e5e23cf62bba3535985f48c3ccdf7bc277fae81e07ed"
+      "content_hash": "sha256:0e17038034b7551ea8be7db28d129a8b749f08ee19b97cb40913c1bce12929b6"
     },
     "10": {
       "file": "manifests/item-10.attestation.json",
