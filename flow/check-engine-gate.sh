@@ -16,6 +16,10 @@
 # where the stub deliberately fails -- still before any record or build write.
 # Both wrappers run against a stub KLT; no PDK, klt, yosys or openroad needed.
 #
+# Each failing stub case also writes a distinct marker to stderr, asserted to
+# reach the caller alongside the wrapper's own diagnostic (issue #134): the
+# gate replays the underlying command's stderr instead of discarding it.
+#
 # Usage: flow/check-engine-gate.sh
 set -u
 
@@ -44,10 +48,10 @@ case "${1:-}" in
   version)
     case "${KLT_STUB_MODE:-}" in
       ok) printf '{"klayout_version":"0.30.12"}\n'; exit 0 ;;
-      fail-after-json) printf '{"klayout_version":"0.30.12"}\n'; exit 17 ;;
-      garbage-after-json) printf '{"klayout_version":"0.30.12"}\nnot json at all\n'; exit 0 ;;
-      mismatch) printf '{"klayout_version":"0.30.13"}\n'; exit 0 ;;
-      empty) exit 0 ;;
+      fail-after-json) printf '{"klayout_version":"0.30.12"}\n'; echo 'stub: version probe failed after printing the pinned version' >&2; exit 17 ;;
+      garbage-after-json) printf '{"klayout_version":"0.30.12"}\nnot json at all\n'; echo 'stub: version probe wrote garbage after the json' >&2; exit 0 ;;
+      mismatch) printf '{"klayout_version":"0.30.13"}\n'; echo 'stub: version probe reported a different engine' >&2; exit 0 ;;
+      empty) echo 'stub: version probe wrote nothing' >&2; exit 0 ;;
       *) echo "klt stub: unknown KLT_STUB_MODE '${KLT_STUB_MODE:-}'" >&2; exit 9 ;;
     esac ;;
   pdk) # fail hard: the wrapper must stop before any record/build write
@@ -109,12 +113,16 @@ LAYOUT="$REPO/layout/run.sh";      LAYOUT_RECS="$REPO/layout/records"
 
 case_run_wrapper() { # <wrapper> <build> <recs>
   local wrapper=$1 build=$2 recs=$3
-  case_run "$wrapper" "$build" "$recs" ok yes
-  case_run "$wrapper" "$build" "$recs" fail-after-json no "probe failed" "exited 17"
-  case_run "$wrapper" "$build" "$recs" garbage-after-json no "probe failed" "reported no .klayout_version"
-  case_run "$wrapper" "$build" "$recs" empty no "reported no .klayout_version"
+  case_run "$wrapper" "$build" "$recs" ok yes "stub: not json"
+  case_run "$wrapper" "$build" "$recs" fail-after-json no "probe failed" "exited 17" \
+    "stub: version probe failed after printing the pinned version"
+  case_run "$wrapper" "$build" "$recs" garbage-after-json no "probe failed" "reported no .klayout_version" \
+    "stub: version probe wrote garbage after the json"
+  case_run "$wrapper" "$build" "$recs" empty no "reported no .klayout_version" \
+    "stub: version probe wrote nothing"
   case_run "$wrapper" "$build" "$recs" mismatch no "mismatch: required 0.30.12" "observed 0.30.13" \
-    'KLT="uvx' "rerun your original wrapper"
+    'KLT="uvx' "rerun your original wrapper" \
+    "stub: version probe reported a different engine"
   # finding: the recovery hint must not suggest invoking the shared runner,
   # which dies on the unset wrapper variables ($0 used to expand to it)
   local label
