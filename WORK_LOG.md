@@ -4,6 +4,12 @@ Chronological record of merged PRs and closed issues, newest first. Maintained b
 
 ### 2026-11-19
 
+- **PR #142**: docs: ADR-0005 — standalone-FPGA configuration out of scope until the tile area is ratified and the fabric is verified
+- **PR #141**: verification: one-command timed blinky from RTL to a simulated bitstream
+- **Issue #139** (closed): Spec question: a small standalone-FPGA configuration
+- **Issue #138** (closed): A timed blinky from a clean checkout with the open flow
+- **PR #136**: ci: run the flow self-check scripts; replay klt's stderr on a failed gate probe
+- **Issue #134** (closed): flow: run the shell self-check scripts in CI, and keep klt's own stderr on a failed probe
 - **PR #133**: flow: enforce the pinned KLayout engine before any record/build write
 - **Issue #130** (closed): Reconcile the KLayout engine version: toolchain.json pins 0.30.12, new records resolve 0.30.13 (klayout_version_mismatch: true)
 - **PR #129**: feat(layout): implement the tile at 20.0 ns and record the re-run
