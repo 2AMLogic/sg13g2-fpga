@@ -6,7 +6,11 @@
 #
 # What it runs, in order, all under the ignored flow/build/ tree:
 #   1. the pinned toolchain, if missing -- delegated to run.sh --setup
-#      (OSS CAD Suite + FABulous venv; iverilog/vvp stay host prerequisites)
+#      (OSS CAD Suite + FABulous venv; iverilog/vvp stay host prerequisites);
+#      the FABulous / nextpnr-generic pins are then enforced against the
+#      installed versions even when --setup skips a reinstall (its installs
+#      are existence-guarded, so a warm flow/build/ across a pin bump would
+#      otherwise run the stale tool and only report the mismatch)
 #   2. fabric generation with the pinned FABulous (FAB_YOSYS_PATH, the
 #      run.sh mechanism: a FABulous that ignores the override is a failure)
 #   3. yosys synth_fabulous + nextpnr-generic mapping of blinky.v with its
@@ -75,6 +79,25 @@ if ! "$REPO/verification/run.sh" --setup > "$W/logs/setup.log" 2>&1; then
     exit 1
 fi
 
+# Enforce the FABulous / nextpnr-generic pins on the installed tools -- the
+# same two comparisons run.sh makes before its benches (run.sh:171-172, which
+# sit behind run.sh's --setup early exit and so never run on this path).
+# Captured once here and reused verbatim in the blinky-run.env report below,
+# so the recorded banner is exactly the one that was checked.
+PNRV="$("$OSS/bin/nextpnr-generic" --version 2>&1 | sed -n 1p)"
+FABV="$("$VENV/bin/FABulous" --version 2>&1 | sed -n "\$p")"
+# Exact matches only (issue #144): a warm install whose version merely starts
+# with the pin (FABulous 2.2.0rc1 vs pin 2.2.0, nextpnr ...-dirty) must stop
+# here, before the fabric generation below -- a substring match rides it
+# through. nextpnr is compared on the complete version inside its
+# (Version ...) field: the banner's leading tag can be shorter than the field
+# (nextpnr-0.11.1 vs nextpnr-0.11.1-54-g861c57be), so the field is the truth.
+PNRV_FIELD="$(sed -n 's/.*(Version \([^)]*\)).*/\1/p' <<<"$PNRV")"
+[[ "$PNRV_FIELD" == "$NEXTPNR_PIN" ]] \
+    || { echo "error: nextpnr-generic $PNRV is not the pinned $NEXTPNR_PIN (flow/build/oss-cad-suite holds a stale install: remove it and rerun to refetch)" >&2; exit 1; }
+[[ "$FABV" == "FABulous CLI $FAB_PIN" ]] \
+    || { echo "error: FABulous $FABV is not the pinned $FAB_PIN (flow/build/fab-venv holds a stale install: remove it and rerun to refetch)" >&2; exit 1; }
+
 echo "== 2/5 generating the fabric with the pinned FABulous"
 GENDIR="$W/fab"; rm -rf "$GENDIR"; cp -r "$REPO/rtl/common/fabulous" "$GENDIR"
 GEN_RC=0
@@ -139,7 +162,8 @@ timeout --kill-after=10 300 vvp "$W/logs/tb_blinky.vvp" \
 cat "$W/logs/tb_blinky.log"
 if [[ "$SIM_RC" -eq 124 || "$SIM_RC" -eq 137 ]]; then
     echo "error: simulation timed out (infrastructure), rc=$SIM_RC" >&2; exit 1; fi
-if [[ "$SIM_RC" -ne 0 ]] || grep -q '^FAIL' "$W/logs/tb_blinky.log"; then
+if [[ "$SIM_RC" -ne 0 ]] || grep -q '^FAIL' "$W/logs/tb_blinky.log" \
+    || ! grep -q '^PASS: tb_blinky' "$W/logs/tb_blinky.log"; then
     echo "error: simulation did not pass (logs: flow/build/blinky-run/logs/tb_blinky.log)" >&2; exit 1; fi
 
 echo
@@ -149,8 +173,8 @@ echo "blinky: PASS in ${SECONDS}s"
     echo "elapsed: ${SECONDS}s (whole command, including $([[ "$FETCHED" -eq 1 ]] && echo 'the one-time toolchain fetch and ' || echo '')fabric generation, mapping, assembly and simulation)"
     echo "iverilog: $(iverilog -V 2>&1 | sed -n 1p)"
     echo "yosys: $("$OSS/bin/yosys" -V)"
-    echo "nextpnr-generic: $("$OSS/bin/nextpnr-generic" --version 2>&1 | sed -n 1p)"
-    echo "FABulous: $("$VENV/bin/FABulous" --version 2>&1 | sed -n "\$p")"
+    echo "nextpnr-generic: $PNRV"
+    echo "FABulous: $FABV"
     echo "Pins: flow/toolchain.json (iverilog $ICARUS_PIN, FABulous $FAB_PIN, nextpnr-generic $NEXTPNR_PIN)"
 } > "$BUILD/blinky-run.env"
 grep -E '^(run|elapsed|iverilog|yosys|nextpnr-generic|FABulous|Pins):' "$BUILD/blinky-run.env"
