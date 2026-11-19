@@ -4,6 +4,25 @@ Chronological record of merged PRs and closed issues, newest first. Maintained b
 
 ### 2026-11-19
 
+- **Issue #157** (closed): Should verification/test-fixtures-regenerate-fail.sh be registered in item-9's attestation inventory?
+- **PR #160**: manifests: pin test-fixtures-regenerate-fail.sh in item 9's attestation inventory
+- **Issue #156** (closed): Document why FABulous must stay last in blinky stage 2
+- **PR #159**: docs: explain stage 2 exit status in the blinky runner
+- **Issue #149** (closed): Run measurements/cost-per-lut/estimate.py --self-test in CI
+- **PR #158**: ci: run the cost-per-LUT estimator self-test in CI
+- **Issue #153** (closed): No committed test covers the fixture-stage FAIL path (mismatch -> FAIL, no fixture update)
+- **PR #155**: test: cover the fixtures-regenerate FAIL path with a stubbed-toolchain harness
+- **Issue #152** (closed): verification/blinky.sh: subshell as left operand of || suppresses its own set -e (same class as #140)
+- **PR #154**: fix: run blinky mapping stage as a standalone subshell with captured status
+- **Issue #147** (closed): run.sh warm-cache version greps match by substring (same trap PR #146 fixed in blinky.sh)
+- **PR #151**: fix: enforce exact tool versions before verification benches
+- **Issue #140** (closed): Isolate fixture regeneration so a byte mismatch fails verification
+- **PR #150**: fix: extract fixture regeneration into a strict-mode script so a byte mismatch fails verification
+- **Issue #137** (closed): Publish a cost-per-LUT estimate for the fabric
+- **PR #143**: measurements: derive area and cost per LUT4 from the committed layout record
+- **Issue #148** (closed): verification/run.sh: warm-cache pin checks use substring matches (follow-on from PR #146)
+- **Issue #144** (closed): verification/blinky.sh: two gates are weaker than verification/run.sh's equivalents
+- **PR #146**: verification: blinky.sh gates match run.sh strength
 - **PR #142**: docs: ADR-0005 — standalone-FPGA configuration out of scope until the tile area is ratified and the fabric is verified
 - **PR #141**: verification: one-command timed blinky from RTL to a simulated bitstream
 - **Issue #139** (closed): Spec question: a small standalone-FPGA configuration
