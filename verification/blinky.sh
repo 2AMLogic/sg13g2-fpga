@@ -114,6 +114,14 @@ fi
 echo "== 3/5 mapping blinky.v (yosys synth_fabulous + nextpnr-generic)"
 PNR="$W/nextpnr"; rm -rf "$PNR"; mkdir -p "$PNR"
 MAP_LOG="$W/logs/map.log"; : > "$MAP_LOG"
+# The mapping pipeline must run as a standalone subshell with the status
+# captured (issue #152): as the left operand of `||` a subshell's inner
+# `set -e` is suppressed, so a mid-pipeline failure would fall through to the
+# assembly stage and be recorded as success (the #140/#150 bug shape). Parent
+# errexit is disabled around it, its status is captured, and errexit is
+# restored before the status is handled -- the same shape fabric-2x2.sh uses.
+MAP_RC=0
+set +e
 (
     set -euo pipefail
     export PATH="$OSS/bin:$PATH"
@@ -132,7 +140,13 @@ PY
     FAB_ROOT="$PNR/io-model" nextpnr-generic --uarch fabulous --json "$PNR/blinky.json" \
         -o pcf="$REPO/verification/blinky/blinky.pcf" -o fasm="$PNR/blinky.fasm" \
         --write "$PNR/blinky.post.json"
-) >> "$MAP_LOG" 2>&1 || { echo "error: mapping failed (logs: flow/build/blinky-run/logs/map.log, tail: $(tail -1 "$MAP_LOG"))" >&2; exit 1; }
+) >> "$MAP_LOG" 2>&1
+MAP_RC=$?
+set -e
+if [[ "$MAP_RC" -ne 0 ]]; then
+    echo "error: mapping failed (logs: flow/build/blinky-run/logs/map.log, tail: $(tail -1 "$MAP_LOG"))" >&2
+    exit 1
+fi
 
 echo "== 4/5 assembling the frame stream (fasm_to_bitstream.py, bit_gen cross-check)"
 PY="$VENV/bin/python"
