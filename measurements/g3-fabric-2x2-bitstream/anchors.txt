@@ -1,0 +1,5 @@
+   anchor ok: .FABulous/bitStreamSpec.bin = 8521e2ba58d96edf3fc2e6d35ae741e2743729ceda14cb21dbcdbe35c52d4f68
+   anchor ok: .FABulous/pips.txt = df4d1f6b7442ab54e9507144e010217b19c75624ea4870f4a099e33d0bde412a
+   anchor ok: Tile/LOGIC4/LOGIC4_ConfigMem.v = dcdfc776e732e5ed0043014bd4a4aefab0981baec9ea0f0d9a767df42a2e2686
+   anchor ok: nextpnr-2x2/cross_tile.fasm = 3f458a8686d555fff77d1bc39334822e84f8b12ab29791c93effa9954a822876
+   anchor ok: nextpnr-2x2/cross_tile.bin = e4a0ff127ce7602e8f20dbe7dcba5dbf89a2aa547ef84f3ae16bc121c3f5fbf2

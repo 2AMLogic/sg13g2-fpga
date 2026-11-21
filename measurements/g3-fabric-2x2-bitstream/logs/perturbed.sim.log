@@ -1,0 +1,2 @@
+FAIL: tb_fabric_bitstream (96 checks, 32 failures)
+<repo>/verification/common/sim/tb_fabric_bitstream.v:70: $finish called at 2054000 (1ps)

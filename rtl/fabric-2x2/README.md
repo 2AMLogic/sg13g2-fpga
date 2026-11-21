@@ -79,6 +79,11 @@ findings; the generated `.FABulous/template.pcf` is empty, so no pads exist).
 ```sh
 verification/run.sh --setup     # once: fetch the pinned toolchain into flow/build/
 verification/fabric-2x2.sh      # generate, map, route, assemble, check the crossing
+verification/fabric-2x2-bitstream.sh   # G3: assemble with the vendored multi-tile
+                                # assembler (== bit_gen), replay through the fabric's
+                                # configuration port, detect the one-bit perturbation
 ```
 
-Results and the claim boundary: `measurements/g2-fabric-2x2-generation/`.
+Results and the claim boundary: `measurements/g2-fabric-2x2-generation/`
+(generation and mapping) and `measurements/g3-fabric-2x2-bitstream/`
+(bitstream-level test).
