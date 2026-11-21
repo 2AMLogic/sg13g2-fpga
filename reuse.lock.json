@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source_repo": "2AMLogic/sky130-fpga",
-  "source_commit": "42a8db00e138aa892a388b077a8ae2ea2ccab511",
+  "source_commit": "ad55b3b443fe045beb2af75161a9872bf8d079c2",
   "files": [
     {
       "path": "design/fabulous/.FABulous/.env",
@@ -167,7 +167,7 @@
     },
     {
       "path": "design/fabulous/tb_configmem_equiv.v",
-      "sha256": "613e07b2367ad773a1104460eedbc9cae57697b9d8f26d41d54247dfe46e0fde",
+      "sha256": "b06ed1d884ada5d30d1b0c4ec17f773f46c311e271492562ee7f668315e257e1",
       "mode": "vendored",
       "destination": "verification/common/fabulous/tb_configmem_equiv.v"
     },
@@ -214,6 +214,18 @@
       "destination": "rtl/common/rtl/lut4_slice.v"
     },
     {
+      "path": "flow/_modload.py",
+      "sha256": "e3c8b91d4d054940f79c35e00251b1a859cc31e34b881704e2a53235de7d8dcd",
+      "mode": "vendored",
+      "destination": "verification/common/flow/_modload.py"
+    },
+    {
+      "path": "flow/_stream_gen.py",
+      "sha256": "d9c6c8228deac92f7db7b45b038b87cea039b3d59905ab7efdf57b5b9d9cb568",
+      "mode": "vendored",
+      "destination": "verification/common/flow/_stream_gen.py"
+    },
+    {
       "path": "flow/configmem_frames.py",
       "sha256": "c1a2b5aca673dbfada8d57617d49ce22393c0144636b925fa6f4db5e43f4bb3c",
       "mode": "vendored",
@@ -221,19 +233,19 @@
     },
     {
       "path": "flow/ctrl_route.py",
-      "sha256": "e56c65945c2ded40a561fa514e738ef988775423369561d3716b46eb2683474f",
+      "sha256": "384626030736de3deb63481394b6f9cbff32110f626a54d7a7d9d51a18ebdd48",
       "mode": "vendored",
       "destination": "verification/common/flow/ctrl_route.py"
     },
     {
       "path": "flow/fasm_to_bitstream.py",
-      "sha256": "b3d51401f465ba5694c755607caa5ec9615816eea1d92d84ce51658e437b386a",
+      "sha256": "b1120f5cc95e84d50275b38f8db7248eebec477eeb9ccdfea23534d3720be399",
       "mode": "vendored",
       "destination": "verification/common/flow/fasm_to_bitstream.py"
     },
     {
       "path": "flow/lut_basis.py",
-      "sha256": "4cba671bfb7bc25882b131e87882eaf843e1be34c05a9d54e3ec421327a5ea50",
+      "sha256": "c013a4dca68b5addd1c251d553567bab6fd5e2e785cad5b3806a613bfd1edbfe",
       "mode": "vendored",
       "destination": "verification/common/flow/lut_basis.py"
     },
@@ -245,15 +257,27 @@
     },
     {
       "path": "flow/output_route.py",
-      "sha256": "7070ad5d4154612ef5bc4be18ed517f2ff63a812cb30df18b7e2f007386e320b",
+      "sha256": "3aba72c83d9b184214212224eff71e751c316dfe36b0a106feeeecbc4ec23cda",
       "mode": "vendored",
       "destination": "verification/common/flow/output_route.py"
     },
     {
       "path": "flow/route_diag.py",
-      "sha256": "4d9a109cfb66c064d1f2051a0e754b8656909f70d985689e9921667ce03663ce",
+      "sha256": "69101c30a878e1ad236526c76b13e9c69b17ad17ebdf9fc156cb392442bbaf72",
       "mode": "vendored",
       "destination": "verification/common/flow/route_diag.py"
+    },
+    {
+      "path": "sim/bitstream_load.vh",
+      "sha256": "e59b7ae4bffabb6ecc7fef13068eb199dc5a2793f3f2e8febfed3d012feab134",
+      "mode": "vendored",
+      "destination": "verification/common/sim/bitstream_load.vh"
+    },
+    {
+      "path": "sim/bitstream_parse.vh",
+      "sha256": "f9fec06e12d870ee118990e13ba9c8503b302a7a1a3d313819b47af695cfb629",
+      "mode": "vendored",
+      "destination": "verification/common/sim/bitstream_parse.vh"
     },
     {
       "path": "sim/switch_matrix_tb_gen.vh",
@@ -269,9 +293,15 @@
     },
     {
       "path": "sim/tb_ctrl_route.v",
-      "sha256": "a1c6a55b773c1510d980f5d1ff88ba79e509db1b7b64c4e4be229d26c869f603",
+      "sha256": "f72b280abbfe83f9bc76f431677992a1fdb46dc2f4830316195f50af754111e0",
       "mode": "vendored",
       "destination": "verification/common/sim/tb_ctrl_route.v"
+    },
+    {
+      "path": "sim/tb_fabric_bitstream.v",
+      "sha256": "ef310bef394436a3c05ad90965a3b7f7773b24dabd33c58366828d778885b9da",
+      "mode": "vendored",
+      "destination": "verification/common/sim/tb_fabric_bitstream.v"
     },
     {
       "path": "sim/tb_logic_tile.v",
@@ -281,7 +311,7 @@
     },
     {
       "path": "sim/tb_logic_tile_bitstream.v",
-      "sha256": "20b42058541902130769c0e4791462fc585e4edcd7632a2b0635ebd20d43e1f9",
+      "sha256": "301e6f6eeaccec175fce6b8facc1fbdbabd885a34edc04ae262a922f423bdbef",
       "mode": "vendored",
       "destination": "verification/common/sim/tb_logic_tile_bitstream.v"
     },
@@ -305,19 +335,19 @@
     },
     {
       "path": "sim/tb_lut_basis.v",
-      "sha256": "45a7d48b418e09ce2264a8cbce20cfb757fff9140ee5369aa0b347a7913fdfd8",
+      "sha256": "b7e6a554ee7d1894b2af4e25eb0b19b7a88924da99b002052111b607410d7211",
       "mode": "vendored",
       "destination": "verification/common/sim/tb_lut_basis.v"
     },
     {
       "path": "sim/tb_output_route.v",
-      "sha256": "ca6245b6c413371fe90f75eb1d134c9e8ebc154ccd6710a1a3736ef6817972b8",
+      "sha256": "855d4e0c0442fa64059d293a1c585a3630db0d101496158749cbbd4fc01f7ca1",
       "mode": "vendored",
       "destination": "verification/common/sim/tb_output_route.v"
     },
     {
       "path": "sim/tb_route_diag.v",
-      "sha256": "5500be2c541dbaa48f990a2c431222237d104b58dcb06b3c4cd1b3145cb7214a",
+      "sha256": "52335e977d65fbdbc9e365fec4fcdc68fb50797da4f82aec09548b7ea4e56ccc",
       "mode": "vendored",
       "destination": "verification/common/sim/tb_route_diag.v"
     },
