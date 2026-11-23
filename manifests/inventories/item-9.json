@@ -34,6 +34,7 @@
     "verification/gatelevel/test_tile_sdf.py",
     "verification/fixtures-regenerate.sh",
     "verification/fabric-2x2-bitstream.sh",
+    "rtl/fabric-2x2/io_overlay.py",
     "verification/test-fixtures-regenerate-fail.sh",
     "verification/run.sh",
     "layout/run.sh",

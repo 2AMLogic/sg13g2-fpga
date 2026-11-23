@@ -14,7 +14,7 @@ simulated fabric") has its first entry for the fallback 2×2 size.
 `bit_gen`.**
 
 - **The fabric is G2's, proven by sha256, not re-asserted.** The three
-  assembler snapshot inputs (`.FABulous/bitStreamSpec.bin`,
+  generated fabric files (`.FABulous/bitStreamSpec.bin`,
   `.FABulous/pips.txt`, `Tile/LOGIC4/LOGIC4_ConfigMem.v`) and the routed
   `cross_tile.fasm` all hash to the lines G2 committed in
   `measurements/g2-fabric-2x2-generation/generated-files.sha256`
@@ -28,6 +28,18 @@ simulated fabric") has its first entry for the fallback 2×2 size.
   stream is **byte-identical to `bit_gen genBitstream`** run on the same FASM
   (`cmp` clean, both `e4a0ff12…fbf2` — also the sha G2 recorded and the one
   upstream's fixture carries).
+- **I/O designs.** The pinned yosys and nextpnr mapped `top_io.v` and
+  `top_reg.v` onto the same four-LOGIC4 fabric. The harness pads sit on
+  `X1Y0` and `X1Y3`, the north and south caps in column 1. The pad model
+  contributes zero configuration bits. For each design the assembler checked
+  six pad pips against the routed netlist and removed them from the FASM
+  supplied to FABulous `bit_gen`. Both independent byte comparisons passed.
+
+  | 2×2 design | Routed logic BELs | Bytes | SHA-256 of both streams |
+  |---|---|---:|---|
+  | `top_io` | `X1Y1/A`, `X1Y1/C` | 984 | `8941ccc3faa014f3cf5717f1ff89b92bcd5003bc4b23ea7115841fda15bceb3d` |
+  | `top_reg` | `X1Y1/A`, `X1Y2/B` | 984 | `6c6e80748bbe84b46e26523cbc1051c73ffb96b3ad95c4d4b8987e885ceddd70` |
+
 - **Replay.** The stream is loaded by the bench
   (`verification/common/sim/tb_fabric_bitstream.v`, vendored from the same
   commit) through `eFPGA_top`'s parallel configuration port, driven by the
@@ -76,8 +88,9 @@ reproduces it, as G2 recorded.
   (`tb_logic_tile_bitstream`, 26/26 and 27/27 perturbations there), not here.
 - **G5/G6 inherited open** (the sibling's recorded gaps: no verified switch
   matrix architecture; no characterized fabric timing).
-- **One fabric, one design.** 2×2 `LOGIC4` core, one six-LUT chain. Growing
-  the fabric or adding tile types is spec-gated, not taken here.
+- **Design coverage.** All three designs were routed, assembled and compared
+  against `bit_gen`. The 2×2 behavioral replay and negative control cover the
+  six-LUT `cross_tile` chain.
 
 ## Pins (also in `flow/toolchain.json`, `env.txt`)
 
@@ -101,7 +114,10 @@ Stage by stage: copy `rtl/common/fabulous/` to scratch, overlay
 `rtl/fabric-2x2/fabric.csv`, generate with `FAB_YOSYS_PATH` pinned (issue #94
 mechanism); map `rtl/fabric-2x2/cross_tile.v` (`--write` post-route JSON kept
 — the only nextpnr difference from G2's invocation, anchored not to change
-the route); `snapshot`/`summary`/`assemble` with the vendored tool;
+the route); map the two I/O designs with `verification/fixtures-regenerate.sh`
+and the same pad model and constraints as G1 with the south pad group moved
+from `X1Y2` to `X1Y3`. The three designs share a snapshot built from the
+G2-anchored fabric and the harness pad pips. Run `summary`/`assemble`;
 `bit_gen genBitstream` + `cmp`; perturb; `decode`; compile the bench against
 the generated fabric RTL plus the venv's config template RTL; replay both
 streams.
@@ -110,21 +126,26 @@ streams.
 
 - `anchors.txt` — the five G2-manifest sha256 equalities this run is tied by.
 - `env.txt` — tool banners and the assembler's lock commit.
-- `logs/assemble.log` — snapshot/summary/assemble output (the one-line
-  accounting of the 29 FASM lines).
+- `logs/assemble.log` — assembler accounting for the 29 cross-tile FASM lines.
+- `logs/io-assembly.log` — assembler accounting and byte comparison for each
+  I/O design. The full mapping log is in the scratch run at `logs/io-mapping.log`.
 - `logs/bit_gen.log` — the cross-check tool's own log, timestamps masked.
 - `logs/perturb.log` — the map-position → stream-byte arithmetic for the flip.
 - `logs/bench.compile.log`, `logs/cross_tile.sim.log`, `logs/perturbed.sim.log`
   — the bench compile (clean at 13.0) and the two replay verdicts.
 - `outputs.sha256` — hashes of every run artifact (snapshot, map, FASM,
-  mapped summary, stream, wiring, cfg, perturbed pair, `bit_gen` reference)
+  mapped summaries, streams, wiring, cfg, perturbed pair, filtered I/O FASMs and
+  three `bit_gen` references)
   plus the six config-template RTL files under `config-rtl/`.
 
 Committed fixtures live in `verification/bitstream-2x2/` (with
 `PROVENANCE.txt`); `fasm_to_bitstream.py check verification/bitstream-2x2/`
 re-derives `.bin`/`.wiring`/`.cfg` from the committed FASM + snapshot
 byte-for-byte, so the fixture set is a standing regression independent of the
-fabric-generation toolchain.
+fabric-generation toolchain. Plain and `--record` runs require every listed
+fixture and its provenance hash. To restore missing or stale fixtures, run
+`verification/fabric-2x2-bitstream.sh --update-fixtures`. It validates the
+newly generated set before copying it into place.
 
 ## The vendored-tool re-stamp (and the G1 regression)
 

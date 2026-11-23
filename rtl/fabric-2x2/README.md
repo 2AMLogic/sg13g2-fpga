@@ -5,18 +5,19 @@ plus the design used to show a net crossing a tile boundary (issue #80).
 
 ## Provenance: what is new here and what is stamped
 
-This directory holds **only** the new fabric description and the cross-tile
-design. Everything the generator actually builds — the tile descriptions, the
-switch-matrix lists, the BEL, the models pack, the FABulous script and the
+This directory holds the fabric description, the cross-tile design and the
+2×2 pad placement for the I/O mapping tests. Everything the generator actually
+builds — the tile descriptions, the switch-matrix lists, the BEL, the models pack, the FABulous script and the
 nextpnr source overlay — is the stamped material under
 `rtl/common/fabulous/`, copied from `2AMLogic/sky130-fpga` at the commit in
-`reuse.lock.json` and **not edited here**. All 54 `reuse.lock.json`
+`reuse.lock.json` and **not edited here**. All 59 `reuse.lock.json`
 destinations hash to their recorded sha256 after this work.
 
 | File | Origin |
 |---|---|
 | `fabric.csv` | **New here.** The 4×4 grid with a 2×2 `LOGIC4` core inside a `CAP_*` ring. |
 | `cross_tile.v` | **New here.** A six-`lut4_ff_bel` chain that cannot fit in one tile. |
+| `io_overlay.py` | Places the vendored harness pad model on the north (`X1Y0`) and south (`X1Y3`) caps for `top_io` and `top_reg`. |
 | `Tile/`, `Fabric/`, `FABulous.tcl`, `nextpnr/` | **Not here.** Stamped, in `rtl/common/fabulous/`. |
 
 `fabric.csv` differs from the stamped `rtl/common/fabulous/fabric.csv` in the
