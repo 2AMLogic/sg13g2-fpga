@@ -5,14 +5,15 @@
 #
 # What this proves, end to end and on the pinned tools only:
 #   * the 2x2 fabric generated from rtl/fabric-2x2/fabric.csv is byte-the-same
-#     one G2 attested: the three snapshot inputs (.FABulous/bitStreamSpec.bin,
+#     one G2 attested: the three generated inputs (.FABulous/bitStreamSpec.bin,
 #     .FABulous/pips.txt, Tile/LOGIC4/LOGIC4_ConfigMem.v) and the routed
 #     cross_tile.fasm are checked against the sha256 lines committed in
 #     measurements/g2-fabric-2x2-generation/generated-files.sha256;
 #   * the vendored multi-tile assembler (verification/common/flow/
 #     fasm_to_bitstream.py, re-stamped from sky130-fpga ad55b3b4 for this
-#     issue) assembles nextpnr's unfiltered FASM into a 984-byte stream
-#     byte-identical to FABulous's own `bit_gen genBitstream`;
+#     issue) assembles cross_tile, top_io and top_reg into 984-byte streams.
+#     Each matches FABulous bit_gen. For the I/O designs, bit_gen consumes
+#     the FASM after the assembler accounts for the zero-bit harness pad pips;
 #   * the stream, loaded through the fabric's parallel configuration port
 #     (the FABulous ConfigFSM template RTL from the pinned venv), configures
 #     all four LOGIC4 tiles so the six-LUT cross-tile chain behaves as its
@@ -58,7 +59,6 @@ FIXDIR="$REPO/verification/bitstream-2x2"
 REC="$REPO/measurements/g3-fabric-2x2-bitstream"
 G2MAN="$REPO/measurements/g2-fabric-2x2-generation/generated-files.sha256"
 ICARUS_PIN="$(python3 -I -c 'import json; print(json.load(open("flow/toolchain.json"))["icarus-verilog"]["version"])')"
-FAB_PIN="$(python3 -I -c 'import json; print(json.load(open("flow/toolchain.json"))["fabulous"]["version"])')"
 SIM_TIMEOUT_SECONDS="${SIM_TIMEOUT_SECONDS:-600}"
 SIM_KILL_AFTER_SECONDS="${SIM_KILL_AFTER_SECONDS:-10}"
 
@@ -154,13 +154,26 @@ echo "== mapping cross_tile.v with the pinned yosys + nextpnr-generic (post-rout
 # FASM is anchored to G2's committed sha too.
 anchor "$RUN/cross_tile.fasm" "nextpnr-2x2/cross_tile.fasm"
 
-echo "== assembling with the vendored multi-tile assembler"
-"$VENV/bin/python" -I "$TOOL" snapshot --spec "$RUN/fab/.FABulous/bitStreamSpec.bin" \
-    --configmem "$RUN/fab/Tile/LOGIC4/LOGIC4_ConfigMem.v" --pips "$RUN/fab/.FABulous/pips.txt" \
-    --out "$RUN" --fabulous-version "$FAB_PIN" --source verification/fabric-2x2-bitstream.sh \
-    > "$RUN/logs/assemble.log" 2>&1 \
-  || { echo "error: snapshot failed; log: flow/build/fabric-bitstream-2x2/logs/assemble.log" >&2; exit 1; }
-python3 -I "$TOOL" summary "$RUN/cross_tile.post.json" --out "$RUN/cross_tile.mapped.json" >> "$RUN/logs/assemble.log" 2>&1 \
+echo "== mapping and assembling top_io and top_reg on the generated 2x2 fabric"
+# G1's pad model uses X1Y0 (north) and X1Y2 (south). On this grid the
+# south cap is X1Y3. Move its pad constraints together with the model.
+mkdir -p "$RUN/pcf" "$RUN/io-work"
+for design in top_io top_reg; do
+    sed 's|X1Y2/|X1Y3/|g' "$NSRC/$design.pcf" > "$RUN/pcf/$design.pcf"
+done
+REGEN_GENDIR="$RUN/fab" REGEN_WORK="$RUN/io-work" REGEN_OUT="$RUN" \
+    REGEN_NSRC="$NSRC" REGEN_PCF_DIR="$RUN/pcf" REGEN_OSS_BIN="$OSS/bin" REGEN_VENV="$VENV" \
+    REGEN_OVERLAY="$SRC/io_overlay.py" REGEN_TOOL="$TOOL" \
+    timeout --kill-after=10 600 "$REPO/verification/fixtures-regenerate.sh" \
+        --source "verification/fabric-2x2-bitstream.sh + rtl/fabric-2x2/io_overlay.py" \
+        > "$RUN/logs/io-mapping.log" 2>&1 \
+    || { tail -20 "$RUN/logs/io-mapping.log" >&2; exit 1; }
+# The helper exits successfully only after both routed designs assemble and
+# compare byte-for-byte. Retain its per-design results in the G3 record.
+grep -E '^(assembled |bit_gen genBitstream output)' "$RUN/logs/io-mapping.log" | tee "$RUN/logs/io-assembly.log"
+
+echo "== assembling cross_tile with the same fabric snapshot"
+python3 -I "$TOOL" summary "$RUN/cross_tile.post.json" --out "$RUN/cross_tile.mapped.json" > "$RUN/logs/assemble.log" 2>&1 \
   || { echo "error: summary failed; log: flow/build/fabric-bitstream-2x2/logs/assemble.log" >&2; exit 1; }
 python3 -I "$TOOL" assemble --fasm "$RUN/cross_tile.fasm" --snapshot "$RUN/fabric_spec.json" \
     --mapped "$RUN/cross_tile.mapped.json" --out "$RUN/cross_tile" >> "$RUN/logs/assemble.log" 2>&1 \
@@ -244,27 +257,35 @@ fi
 echo "   PASS: tb_fabric_bitstream (96 checks, 0 failures)"
 echo "   negative control detected: FAIL: tb_fabric_bitstream (96 checks, 32 failures)"
 
-FILES="fabric_spec.json logic4_configmem.map cross_tile.fasm cross_tile.mapped.json cross_tile.bin cross_tile.wiring cross_tile.cfg"
-if [[ -d "$FIXDIR" && -f "$FIXDIR/cross_tile.fasm" ]]; then
-    echo "== checking against the committed fixtures (assembler check + byte drift)"
-    python3 -I "$TOOL" check "$FIXDIR" > "$RUN/logs/fixtures-check.log" 2>&1 \
-      || { echo "error: fasm_to_bitstream check failed on verification/bitstream-2x2/ (logs/fixtures-check.log)" >&2; exit 1; }
-    drift=0
-    for f in $FILES perturbed.bin perturbed.cfg; do
-        cmp -s "$RUN/$f" "$FIXDIR/$f" 2>/dev/null || { echo "DRIFT: verification/bitstream-2x2/$f" >> "$RUN/logs/fixture-drift.log"; drift=1; }
+# The assembler's check discovers designs by globbing *.fasm. Stage the
+# explicit fixture list so a missing design fails before check can skip it,
+# and bit_gen's filtered *.logic.fasm intermediates stay outside that glob.
+FILES=(fabric_spec.json logic4_configmem.map)
+for design in cross_tile top_io top_reg; do
+    FILES+=("$design".{fasm,mapped.json,bin,wiring,cfg})
+done
+FILES+=(perturbed.bin perturbed.cfg)
+STAGED="$RUN/fixtures"
+mkdir "$STAGED"
+for f in "${FILES[@]}"; do cp "$RUN/$f" "$STAGED/$f"; done
+check_dir="$STAGED"
+if [[ "$UPDATE" -eq 0 ]]; then
+    check_dir="$FIXDIR"
+    echo "== checking regenerated artifacts against verification/bitstream-2x2/"
+    for f in "${FILES[@]}"; do
+        if ! cmp "$STAGED/$f" "$FIXDIR/$f"; then
+            echo "error: fixture $f is missing or stale; use --update-fixtures to regenerate" >&2
+            exit 1
+        fi
     done
-    if [[ "$drift" -eq 1 && "$UPDATE" -ne 1 ]]; then
-        echo "error: regenerated artifacts differ from verification/bitstream-2x2/ (logs/fixture-drift.log); rerun with --update-fixtures if intended" >&2
-        exit 1
-    fi
-    [[ "$drift" -eq 1 ]] && echo "   drift recorded (--update-fixtures)"
-else
-    echo "== no committed fixtures in verification/bitstream-2x2/ yet (first run: --update-fixtures writes them)"
+    # Verify the complete hash list, even when only provenance is missing or stale.
+    (cd "$STAGED" && sha256sum "${FILES[@]}") > "$RUN/fixture-hashes.txt"
+    sed '1,/^sha256:$/d' "$FIXDIR/PROVENANCE.txt" | diff -u "$RUN/fixture-hashes.txt" -
 fi
 
+python3 -I "$TOOL" check "$check_dir" > "$RUN/logs/fixtures-check.log" 2>&1 \
+    || { cat "$RUN/logs/fixtures-check.log" >&2; exit 1; }
 if [[ "$UPDATE" -eq 1 ]]; then
-    mkdir -p "$FIXDIR"
-    for f in $FILES perturbed.bin perturbed.cfg; do cp "$RUN/$f" "$FIXDIR/$f"; done
     {
         echo "Regenerated by verification/fabric-2x2-bitstream.sh --update-fixtures (issue #65)."
         echo "commit: $(git rev-parse HEAD)"
@@ -275,17 +296,20 @@ if [[ "$UPDATE" -eq 1 ]]; then
         echo "Pins: flow/toolchain.json. Fabric: rtl/fabric-2x2/fabric.csv overlaid on the"
         echo "stamped rtl/common/fabulous/ project (G2, issue #80); its sha256 lines in"
         echo "measurements/g2-fabric-2x2-generation/generated-files.sha256 anchor the"
-        echo "generated tree and the routed FASM. Design: rtl/fabric-2x2/cross_tile.v."
+        echo "generated fabric and cross_tile route. Designs: rtl/fabric-2x2/cross_tile.v"
+        echo "and rtl/common/fabulous/nextpnr/{top_io,top_reg}.v. The harness I/O pads"
+        echo "are on X1Y0 and X1Y3 (rtl/fabric-2x2/io_overlay.py and relocated PCFs)."
         echo "Assembler: verification/common/flow/fasm_to_bitstream.py (vendored, reuse.lock.json"
         echo "@ ad55b3b4); cross-checked byte-for-byte against FABulous bit_gen genBitstream."
         echo "Bench: verification/common/sim/tb_fabric_bitstream.v over the FABulous config"
         echo "template RTL (config-rtl.sha256) and the generated fabric RTL."
         echo "Command: verification/fabric-2x2-bitstream.sh --update-fixtures"
-        echo "sha256:"; (cd "$FIXDIR" && sha256sum $FILES perturbed.bin perturbed.cfg)
-    } > "$FIXDIR/PROVENANCE.txt"
+        echo "sha256:"; (cd "$STAGED" && sha256sum "${FILES[@]}")
+    } > "$STAGED/PROVENANCE.txt"
+    mkdir -p "$FIXDIR"
+    cp "$STAGED/"* "$FIXDIR/"
     echo "== fixtures written to verification/bitstream-2x2/"
 fi
-
 if [[ "$RECORD" -eq 1 ]]; then
     # Rebuild the record directory except README.md (hand-written): a
     # re-record must not leave files from an older record shape behind.
@@ -300,25 +324,24 @@ if [[ "$RECORD" -eq 1 ]]; then
         echo "FABulous: $("$VENV/bin/FABulous" --version 2>&1 | sed -n '$p')"
         echo "assembler: verification/common/flow/fasm_to_bitstream.py @ reuse.lock.json ad55b3b443fe045beb2af75161a9872bf8d079c2"
     } > "$REC/env.txt"
-    # Only this flow's own logs are committed. Generation and mapping evidence
+    # Only this flow's own logs are committed. Generation and cross_tile mapping evidence
     # is G2's (measurements/g2-fabric-2x2-generation/); this record ties itself
     # to it by the anchors, not by a second, differently-normalized copy of the
     # same generator/nextpnr logs. bit_gen's per-line wall-clock stamp is
     # rewritten to <timestamp> (G2 Finding 2: not reproducible); everything is
     # ANSI-stripped and path-masked.
-    for f in assemble.log bit_gen.log perturb.log bench.compile.log cross_tile.sim.log perturbed.sim.log; do
+    for f in assemble.log io-assembly.log bit_gen.log perturb.log bench.compile.log cross_tile.sim.log perturbed.sim.log; do
         sed -e 's/\x1b\[[0-9;]*m//g' "${PATHMASK[@]}" \
             -e 's/^[0-9]\{4\}-[0-9][0-9]-[0-9][0-9] [0-9:.]\+ +[0-9:]\+ | /<timestamp> | /' \
             "$RUN/logs/$f" > "$REC/logs/$f"
     done
     cp "$RUN/anchors.txt" "$REC/anchors.txt"
     {
-        ( cd "$RUN" && sha256sum fabric_spec.json logic4_configmem.map \
-            cross_tile.fasm cross_tile.mapped.json cross_tile.bin cross_tile.wiring cross_tile.cfg \
-            perturbed.bin perturbed.cfg reference.bin )
+        ( cd "$RUN" && sha256sum "${FILES[@]}" reference.bin \
+            top_io.logic.fasm top_io.fabulous.bin top_reg.logic.fasm top_reg.fabulous.bin )
         cat "$RUN/config-rtl.sha256"
     } > "$REC/outputs.sha256"
     echo "== record written to measurements/g3-fabric-2x2-bitstream/ (README.md is hand-written)"
 fi
 
-echo "== PASS: 2x2 fabric bitstream assembled (== bit_gen), replayed, and perturbation detected"
+echo "== PASS: all three 2x2 streams match bit_gen; cross_tile replay passed and its perturbation was detected"
