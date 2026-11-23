@@ -2,6 +2,11 @@
 
 Chronological record of merged PRs and closed issues, newest first. Maintained by the Guide role.
 
+### 2026-11-23
+
+- **Issue #65** (closed): Generate a 2×2 LOGIC4 fabric with the pinned FABulous and run an inter-tile bitstream test
+- **PR #163**: feat(verification): bitstream-level test of the 2x2 fabric (multi-tile assembler re-stamp + G3 record)
+
 ### 2026-11-19
 
 - **Issue #157** (closed): Should verification/test-fixtures-regenerate-fail.sh be registered in item-9's attestation inventory?
