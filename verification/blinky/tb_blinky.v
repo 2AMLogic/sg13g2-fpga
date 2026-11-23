@@ -248,6 +248,14 @@ module tb_blinky;
                 end else if (kw == "BEL" || kw == "SEL") begin
                     // recorded for provenance; blinky's check is directed, not exhaustive
                     r = $fscanf(fd, "%d", a);
+                end else if (kw == "RED") begin
+                    // same-driver routing-select redundancy proof (upstream
+                    // issue #342, vendored with the multi-tile assembler
+                    // re-stamp): a provenance record like BEL/SEL, parsed and
+                    // skipped the same way -- blinky's check is directed, not
+                    // exhaustive, and the flip it proves redundant is covered
+                    // by tb_logic_tile_bitstream's mutate sweep instead
+                    r = $fscanf(fd, "%d %s %s %s %s", a, nm, nm, nm, nm);
                 end else if (kw == "END") end_seen = 1;
                 else ok_all = 0;
                 if (!end_seen) r = $fscanf(fd, "%s", kw);

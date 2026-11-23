@@ -5,7 +5,7 @@
 # assembler (fasm_to_bitstream.py), and require the assembler's bytes to
 # equal FABulous bit_gen's output.
 #
-# Executed directly by verification/run.sh -- never sourced and never a
+# Executed directly by the G1 and G3 drivers -- never sourced and never a
 # subshell of the runner. The script carries its own strict mode, so a
 # failing step -- in particular a failed `cmp` byte comparison -- aborts it
 # with a nonzero exit status the runner branches on. (A subshell on the left
@@ -24,7 +24,9 @@
 #   REGEN_NSRC     rtl/common/fabulous/nextpnr/ overlay sources
 #   REGEN_OVERLAY  verification/common/flow/nextpnr_io_overlay.py
 #   REGEN_TOOL     verification/common/flow/fasm_to_bitstream.py
-# Log text goes to stdout/stderr; the runner redirects it into fixtures.log.
+#   REGEN_PCF_DIR  optional fabric-specific pin constraints (default: REGEN_NSRC)
+# Additional arguments go to the assembler's snapshot command (e.g. --source).
+# Log text goes to stdout/stderr; the caller selects the log file.
 set -euo pipefail
 
 for v in REGEN_GENDIR REGEN_WORK REGEN_OUT REGEN_OSS_BIN REGEN_VENV \
@@ -35,10 +37,11 @@ done
 W="$REGEN_WORK"; BR="$REGEN_OUT"
 export PATH="$REGEN_OSS_BIN:$PATH"
 PY="$REGEN_VENV/bin/python"
+PCFDIR="${REGEN_PCF_DIR:-$REGEN_NSRC}"
 
 python3 -I "$REGEN_OVERLAY" "$REGEN_GENDIR/.FABulous" "$W/io-model/.FABulous"
 yosys -q -p "synth_fabulous -top top -extra-plib $REGEN_NSRC/prims.v -extra-plib $REGEN_NSRC/io_prims.v -extra-map $REGEN_NSRC/io_map.v -cells-map $REGEN_NSRC/cells_map.v -json $W/top_io.json" "$REGEN_NSRC/top_io.v"
-FAB_ROOT="$W/io-model" nextpnr-generic --uarch fabulous --json "$W/top_io.json" -o pcf="$REGEN_NSRC/top_io.pcf" -o fasm="$W/top_io.fasm" --write "$W/top_io.post.json"
+FAB_ROOT="$W/io-model" nextpnr-generic --uarch fabulous --json "$W/top_io.json" -o pcf="$PCFDIR/top_io.pcf" -o fasm="$W/top_io.fasm" --write "$W/top_io.post.json"
 yosys -q -p "synth_fabulous -top top -ff \$_SDFFE_PP0P_ x -extra-plib $REGEN_NSRC/prims.v -extra-plib $REGEN_NSRC/io_prims.v -extra-map $REGEN_NSRC/io_map.v -extra-map $REGEN_NSRC/ff_map.v -cells-map $REGEN_NSRC/cells_map.v -json $W/top_reg.raw.json" "$REGEN_NSRC/top_reg.v"
 # clk is the BEL's implicit UserCLK (no fabric pin): drop the unconnected top port
 python3 -I - "$W/top_reg.raw.json" "$W/top_reg.json" <<'PY'
@@ -49,10 +52,10 @@ assert not any(bits & set(b) for c in m["cells"].values() for b in c["connection
 del m["ports"]["clk"]
 json.dump(d, open(sys.argv[2], "w"))
 PY
-FAB_ROOT="$W/io-model" nextpnr-generic --uarch fabulous --json "$W/top_reg.json" -o pcf="$REGEN_NSRC/top_reg.pcf" -o fasm="$W/top_reg.fasm" --write "$W/top_reg.post.json"
+FAB_ROOT="$W/io-model" nextpnr-generic --uarch fabulous --json "$W/top_reg.json" -o pcf="$PCFDIR/top_reg.pcf" -o fasm="$W/top_reg.fasm" --write "$W/top_reg.post.json"
 "$PY" -I "$REGEN_TOOL" snapshot --spec "$REGEN_GENDIR/.FABulous/bitStreamSpec.bin" \
     --configmem "$REGEN_GENDIR/Tile/LOGIC4/LOGIC4_ConfigMem.v" --pips "$W/io-model/.FABulous/pips.txt" \
-    --out "$BR" --fabulous-version "$("$PY" -c 'import importlib.metadata as m; print(m.version("fabulous-fpga"))')"
+    --out "$BR" --fabulous-version "$("$PY" -c 'import importlib.metadata as m; print(m.version("fabulous-fpga"))')" "$@"
 for d in top_io top_reg; do
     cp "$W/$d.fasm" "$BR/$d.fasm"
     python3 -I "$REGEN_TOOL" summary "$W/$d.post.json" --out "$BR/$d.mapped.json"

@@ -1,0 +1,4 @@
+assembled top_io.fasm: 35 FASM lines = 6 zero-bit pad pips (cross-checked against the routed netlist) + lines expanding to 53 logic-tile and 6 cap/wire spec features; 26 cfg bits set; 984 bytes
+bit_gen genBitstream output is byte-identical to the assembler's top_io.bin
+assembled top_reg.fasm: 28 FASM lines = 6 zero-bit pad pips (cross-checked against the routed netlist) + lines expanding to 47 logic-tile and 5 cap/wire spec features; 24 cfg bits set; 984 bytes
+bit_gen genBitstream output is byte-identical to the assembler's top_reg.bin

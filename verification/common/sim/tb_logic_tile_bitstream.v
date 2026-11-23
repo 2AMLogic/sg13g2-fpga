@@ -14,12 +14,19 @@
 //   +bin=<frame stream>   FABulous bit_gen output
 //   +map=<file>           "cfg_index frame_position" per line (from ConfigMem.v)
 //   +wiring=<file>        pad/loopback/placement manifest derived from the FASM
-//   +design=comb|reg|quad4|casc2|fan4|casc_fan|regcasc|regbel
+//   +design=comb|reg|quad4|casc2|fan4|casc_fan|regcasc|regbel|blinky
 //                         which mapped design's functional spec is the oracle
 //                         (comb/reg: issue #74; the rest: issue #115 corpus,
-//                         design/fabulous/corpus/*.v)
+//                         design/fabulous/corpus/*.v; blinky: issue #324,
+//                         design/fabulous/nextpnr/blinky.v)
 //   +mutate               also flip each used routing-select bit, and LUT/FF
-//                         bits of each used BEL; every flip must be DETECTED
+//                         bits of each used BEL; every flip must be DETECTED,
+//                         except a flip the manifest proves redundant (RED
+//                         records, issue #342: the flip only swaps a mux to a
+//                         second input that resolves, through the configured
+//                         pips, to the same physical driver). A proven flip is
+//                         reported as REDUNDANT and counted separately in the
+//                         PASS line; it is neither detected nor a failure.
 //   +expect_reject        the loader must reject +bin (malformed-input test)
 //
 // Nothing here uses hand-written LUT/matrix constants: cfg comes only from the
@@ -93,17 +100,11 @@ module tb_logic_tile_bitstream;
     endtask
 
     // ------------------------------------------------------------- plusargs
-    reg [8*256-1:0] f_bin, f_map, f_wire;
+    reg [8*256-1:0] f_map, f_wire;   // f_bin comes from bitstream_parse.vh
     reg [8*8-1:0]   design_name;
     reg             is_comb, do_mutate, expect_reject;
 
-    // ------------------------------------------------- FABulous stream format
-    localparam CFG_N = 158;
-    localparam FBITS = 32, NFR = 20, SELW = 5, DESYNC_BIT = 20;
-    localparam [159:0] SYNC = 160'h00AAFF01000000010000000000000000FAB0FAB1;
-
     // ------------------------------------------------- manifest / wiring state
-    integer grid_cols, grid_rows, lx, ly;
     // input-track source: 0 = unused (harness constant/random), 1 = pad slot, 2 = loopback from an output track
     integer tin_kind [0:15];
     integer tin_arg  [0:15];
@@ -113,6 +114,16 @@ module tb_logic_tile_bitstream;
     integer nbel, nsel;
     integer bel_list [0:3];
     integer sel_list [0:127];
+    // provably redundant select flips (issue #342): manifest RED records.
+    // bit -> mux + both mux inputs + the common physical driver, as resolved by
+    // the assembler from the configured pips; a surviving flip of a recorded
+    // bit is REDUNDANT, anything else stays a failing SURVIVED.
+    integer nred;
+    integer red_bit [0:127];
+    reg [8*16-1:0] red_mux  [0:127];
+    reg [8*16-1:0] red_from [0:127];
+    reg [8*16-1:0] red_to   [0:127];
+    reg [8*16-1:0] red_drv  [0:127];
     integer n_loops;
 
     // input pad slots / output pad slots (port names)
@@ -155,25 +166,19 @@ module tb_logic_tile_bitstream;
     endfunction
 
     // ------------------------------------------------------------ the loader
-    reg [8*80-1:0] reject_reason;
-    reg            load_ok;
-    integer cb_pos [0:CFG_N-1];
-    reg [31:0] mapped_mask [0:NFR-1];
-    reg [31:0] logic_frame [0:NFR-1];
-    reg        seen_frame  [0:(8*NFR)-1];
-    integer    fd, c0;
+    // The wire-format parser is shared with the four diagnostic benches
+    // (sim/bitstream_load.vh -> sim/bitstream_parse.vh, issue #338):
+    // bitstream_parse.vh declares the format constants and the parser state
+    // (f_bin, fd, grid_cols/grid_rows/lx/ly, cb_pos, logic_frame, seen_frame,
+    // load_ok, reject_reason) and defines rd_word, reject and parse_bitstream
+    // with the eleven wire-format checks. What stays here is corpus-specific:
+    // mapped_mask and the unmapped-bit rejection, cfg reconstruction in both
+    // DUT modes, and the frame writer that remembers each stored frame so
+    // perturbation and restoration rewrite only changed frames.
+    `include "bitstream_parse.vh"
 
-    task rd_word(output [31:0] w, output ok);
-        integer i, b;
-        begin
-            w = 0; ok = 1'b1;
-            for (i = 0; i < FBITS/8; i = i + 1) begin
-                b = $fgetc(fd);
-                if (b < 0) ok = 1'b0;
-                else w = {w[23:0], b[7:0]};
-            end
-        end
-    endtask
+    reg [31:0] mapped_mask [0:NFR-1];
+    integer    c0;
 
     // ------------------------------------- GEN_TILE: real frame-port writes
     // One legal frame write into the generated tile: data, one-hot strobe,
@@ -214,82 +219,20 @@ module tb_logic_tile_bitstream;
         end
     endtask
 
-    task reject(input [8*80-1:0] why);
-        begin
-            if (load_ok) reject_reason = why;
-            load_ok = 1'b0;
-        end
-    endtask
-
+    // parse_bitstream owns the wire-format checks; on success the corpus bench
+    // adds its own: every set bit must lie inside the configuration map, and
+    // cfg is rebuilt from the decoded frames in both DUT modes.
     task load_bitstream;
-        reg [31:0] w, fw;
-        reg ok;
-        integer i, col, frame, nframes, row, order, strobe_pop, done;
-        reg [FBITS-NFR-SELW-1:0] reserved;
-        reg [NFR-1:0] strobe;
-        reg [159:0] hdr;
-        integer b;
+        integer i;
         begin
-            load_ok = 1'b1; reject_reason = "";
-            for (i = 0; i < NFR; i = i + 1) logic_frame[i] = 32'b0;
-            for (i = 0; i < 8*NFR; i = i + 1) seen_frame[i] = 1'b0;
-            fd = $fopen(f_bin, "rb");
-            if (fd == 0) begin reject("cannot open bitstream"); disable load_bitstream; end
-            // sync header
-            hdr = 0;
-            for (i = 0; i < 20; i = i + 1) begin
-                b = $fgetc(fd);
-                if (b < 0) begin reject("truncated sync header"); i = 99; end
-                else hdr = {hdr[151:0], b[7:0]};
-            end
-            if (load_ok && hdr !== SYNC) reject("bad sync header");
-            nframes = 0; done = 0;
-            while (load_ok && !done) begin
-                rd_word(w, ok);
-                if (!ok) reject("truncated: no desync word");
-                else if (w[DESYNC_BIT] && w[FBITS-1:FBITS-SELW] == 0 && w[NFR-1:0] == 0) begin
-                    if (w !== (32'b1 << DESYNC_BIT)) reject("malformed desync word");
-                    done = 1;
-                end else begin
-                    col = w[FBITS-1:FBITS-SELW];
-                    reserved = w[FBITS-SELW-1:NFR];
-                    strobe = w[NFR-1:0];
-                    strobe_pop = 0;
-                    for (i = 0; i < NFR; i = i + 1) if (strobe[i]) begin strobe_pop = strobe_pop + 1; frame = i; end
-                    if (reserved != 0 || strobe_pop != 1 || col >= grid_cols) begin
-                        reject("invalid frame-select word");
-                    end else if (seen_frame[col*NFR + frame]) begin
-                        reject("duplicate frame");
-                    end else begin
-                        seen_frame[col*NFR + frame] = 1'b1;
-                        nframes = nframes + 1;
-                        // interior rows, Y descending: row index grid_rows-2 .. 1
-                        for (order = 0; order < grid_rows - 2; order = order + 1) begin
-                            rd_word(fw, ok);
-                            if (!ok) reject("truncated frame data");
-                            else if (col == lx && (grid_rows - 2 - order) == ly) begin
-                                logic_frame[frame] = fw;
-                                write_frame(frame, fw);   // GEN_TILE: real frame port
-                            end else if (fw != 0) begin
-                                reject("data for a tile without config bits");
-                            end
-                        end
-                    end
-                end
-            end
-            if (load_ok) begin
-                if ($fgetc(fd) >= 0) reject("trailing data after desync");
-                if (nframes != grid_cols * NFR) reject("incomplete frame set");
-            end
-            $fclose(fd);
-            // frame bits -> cfg through the generated ConfigMem map
+            parse_bitstream;
             if (load_ok) begin
                 for (i = 0; i < NFR; i = i + 1)
                     if ((logic_frame[i] & ~mapped_mask[i]) != 0) reject("set bit at an unmapped frame position");
+                if (load_ok)
+                    for (i = 0; i < CFG_N; i = i + 1)
+                        cfg[i] = logic_frame[cb_pos[i] / FBITS][cb_pos[i] % FBITS];
             end
-            if (load_ok)
-                for (i = 0; i < CFG_N; i = i + 1)
-                    cfg[i] = logic_frame[cb_pos[i] / FBITS][cb_pos[i] % FBITS];
         end
     endtask
 
@@ -315,11 +258,14 @@ module tb_logic_tile_bitstream;
 
     task read_manifest;
         reg [8*8-1:0] kw, nm;
+        reg [8*16-1:0] nm2, nm3, nm4, nm5;
+        reg [8*256-1:0] red_line;
+        reg [7:0] extra;
         integer d, k, a, b, s, r, ok_all, i, end_seen;
         begin
             for (i = 0; i < 16; i = i + 1) begin tin_kind[i] = 0; tin_arg[i] = 0; end
             for (i = 0; i < 8; i = i + 1) out_track[i] = -1;
-            slot_wired_in = 0; slot_wired_out = 0; nbel = 0; nsel = 0; n_loops = 0;
+            slot_wired_in = 0; slot_wired_out = 0; nbel = 0; nsel = 0; nred = 0; n_loops = 0;
             ok_all = 1; end_seen = 0;
             fd = $fopen(f_wire, "r");
             if (fd == 0) begin $display("FAIL: tb_logic_tile_bitstream: cannot open wiring manifest"); $finish; end
@@ -345,6 +291,19 @@ module tb_logic_tile_bitstream;
                     n_loops = n_loops + 1;
                 end else if (kw == "BEL") begin r = $fscanf(fd, "%d", a); bel_list[nbel] = a; nbel = nbel + 1; end
                 else if (kw == "SEL") begin r = $fscanf(fd, "%d", a); sel_list[nsel] = a; nsel = nsel + 1; end
+                else if (kw == "RED") begin
+                    // A proof occupies one line. A short proof must never borrow
+                    // fields from the next SEL, which would also skip its flip.
+                    r = $fgets(red_line, fd);
+                    if (r > 0 && red_line[7:0] == 8'h0a)
+                        r = $sscanf(red_line, "%d %s %s %s %s %s", a, nm2, nm3, nm4, nm5, extra);
+                    else r = 0;
+                    if (r != 5) ok_all = 0;
+                    else begin
+                        red_bit[nred] = a; red_mux[nred] = nm2; red_from[nred] = nm3;
+                        red_to[nred] = nm4; red_drv[nred] = nm5; nred = nred + 1;
+                    end
+                end
                 else if (kw == "END") end_seen = 1;
                 else ok_all = 0;
                 if (!end_seen) r = $fscanf(fd, "%s", kw);
@@ -580,12 +539,40 @@ module tb_logic_tile_bitstream;
         end
     endtask
 
+    // ------------------------------- oracle 7: blinky divider (issue #324)
+    //   @(posedge clk)  q <= rst ? 0 : (en ? ~q : q)
+    // Written from design/fabulous/nextpnr/blinky.v. After a synchronous reset
+    // the output pad starts at 0 and, with en held high, toggles on every
+    // rising edge: one full blink period per two input clocks. An independent
+    // reference register predicts the whole sequence; the === comparisons
+    // reject an unknown (X) value, and the between-edges checks catch a stuck
+    // or free-running output (wrong phase). Twelve toggles = six blink periods.
+    task run_blinky;
+        integer i;
+        reg en, rst, refq;
+        begin
+            // synchronous reset through the programmed fabric: q must be 0
+            pad_in[4] = 1; pad_in[5] = 1; #1; pulse;
+            chk(pad_out(2) === 1'b0, "blinky: reset state");
+            refq = 1'b0;
+            pad_in[5] = 0; pad_in[4] = 1;   // rst released, en held high
+            for (i = 0; i < 12; i = i + 1) begin
+                #1;
+                chk(pad_out(2) === refq, "blinky: q holds until the clock edge");
+                pulse;
+                refq = ~refq;
+                chk(pad_out(2) === refq, "blinky: q toggles after edge");
+            end
+        end
+    endtask
+
     task run_design;
         begin
             if (is_comb) run_comb;
             else if (design_name == "reg") run_reg;
             else if (design_name == "regcasc") run_regcasc;
             else if (design_name == "regbel") run_regbel;
+            else if (design_name == "blinky") run_blinky;
             else run_corpus_comb;
         end
     endtask
@@ -603,9 +590,19 @@ module tb_logic_tile_bitstream;
     endtask
 
     // ------------------------------------------------------------------ main
-    integer i, m, det, surv, nmut, nper;
+    integer i, m, k, det, surv, red, nmut, nper;
     reg [157:0] saved_cfg;
     reg need_ok;
+
+    // index of bit b's RED record, or -1 when its redundancy is not provable
+    function integer red_find(input integer b);
+        integer j;
+        begin
+            red_find = -1;
+            for (j = 0; j < nred; j = j + 1)
+                if (red_bit[j] == b) red_find = j;
+        end
+    endfunction
 
     initial begin
         pad_in = 8'b0; unused = 16'b0;
@@ -636,6 +633,7 @@ module tb_logic_tile_bitstream;
             "regcasc":  need_ok = &slot_wired_in[3:0] && slot_wired_in[4] && slot_wired_in[5] &&
                                   slot_wired_in[6] && slot_wired_out[2];
             "regbel":   need_ok = &slot_wired_in[5:0] && slot_wired_out[2];
+            "blinky":   need_ok = slot_wired_in[4] && slot_wired_in[5] && slot_wired_out[2];
             default:    need_ok = 1'b0;
         endcase
         if (!need_ok) begin $display("FAIL: tb_logic_tile_bitstream[%0s]: manifest lacks required ports", design_name); $finish; end
@@ -675,7 +673,7 @@ module tb_logic_tile_bitstream;
         $display("baseline: %0d checks, %0d failures", checks, cur_fail);
 
         // (2) deliberate perturbation of the loaded configuration must be detected
-        det = 0; surv = 0; nmut = 0;
+        det = 0; surv = 0; red = 0; nmut = 0;
         if (do_mutate) begin
             saved_cfg = cfg; clean_cfg = cfg;
             for (m = 0; m < nsel; m = m + 1) begin     // every used routing-select bit
@@ -684,7 +682,17 @@ module tb_logic_tile_bitstream;
                 apply_cfg;
                 cur_fail = 0; run_all_env(2); nmut = nmut + 1;
                 if (cur_fail > 0) det = det + 1;
-                else begin surv = surv + 1; $display("  SURVIVED: flip of routing-select cfg[%0d]", sel_list[m]); end
+                else begin
+                    k = red_find(sel_list[m]);
+                    if (k >= 0) begin
+                        red = red + 1;
+                        $display("  REDUNDANT: flip of routing-select cfg[%0d] (%0s: %0s -> %0s, both driven by %0s)",
+                                 sel_list[m], red_mux[k], red_from[k], red_to[k], red_drv[k]);
+                    end else begin
+                        surv = surv + 1;
+                        $display("  SURVIVED: flip of routing-select cfg[%0d]", sel_list[m]);
+                    end
+                end
             end
             for (m = 0; m < nbel; m = m + 1) begin
                 // comb/reg (#74): LUT bits 0,1 and reg_sel of every used BEL.
@@ -711,10 +719,14 @@ module tb_logic_tile_bitstream;
             cur_fail = 0; run_all_env(1); fails = fails + cur_fail;
         end
 
-        if (fails == 0)
-            $display("PASS: tb_logic_tile_bitstream[%0s] (%0d checks, 0 failures; %0d/%0d perturbations detected)",
-                     design_name, checks, det, nmut);
-        else
+        if (fails == 0) begin
+            if (red == 0)
+                $display("PASS: tb_logic_tile_bitstream[%0s] (%0d checks, 0 failures; %0d/%0d perturbations detected)",
+                         design_name, checks, det, nmut);
+            else
+                $display("PASS: tb_logic_tile_bitstream[%0s] (%0d checks, 0 failures; %0d/%0d perturbations detected, %0d redundant)",
+                         design_name, checks, det, nmut, red);
+        end else
             $display("FAIL: tb_logic_tile_bitstream[%0s] (%0d checks, %0d failures, %0d perturbations survived)",
                      design_name, checks, fails, surv);
         $finish;

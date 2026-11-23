@@ -1,0 +1,1 @@
+assembled cross_tile.fasm: 29 FASM lines = 0 zero-bit pad pips (cross-checked against the routed netlist) + lines expanding to 113 logic-tile and 6 cap/wire spec features; 64 cfg bits set; 984 bytes
