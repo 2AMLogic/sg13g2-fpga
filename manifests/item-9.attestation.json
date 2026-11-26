@@ -255,7 +255,7 @@
         "role": "testbench",
         "path": "verification/run.sh",
         "passed": true,
-        "content_hash": "sha256:b1e572a860878605551efd9cd8993cf0eaf7e30e3781d6c7025c5fbba7d969ae"
+        "content_hash": "sha256:d9e2999f87342ace06b576bb8140d8839e9bbadf3f90dad64cc342591f925e40"
       },
       {
         "check": "present",
