@@ -10,8 +10,11 @@
 # stale silently either (issue #138). A second job,
 # fixtures-regenerate-fail-path, runs
 # verification/test-fixtures-regenerate-fail.sh — the committed regression
-# test for the fixture-stage FAIL path (issue #153) — which stubs the whole
-# toolchain in a temp dir and needs none of the pins above.
+# test for the fixture-stage FAIL path (issue #153) — and
+# verification/test-toolchain-pins.sh — the committed regression test for the
+# FABulous / nextpnr pin gate the bench runner and the blinky demo share
+# (issue #169). Both stub the whole toolchain in a temp dir and need none of
+# the pins above.
 #
 # This is not, and must not be made, a required status check: it is
 # path-filtered, so it does not run at all on a docs- or layout-only pull
@@ -131,7 +134,7 @@ jobs:
       # Keyed on verification/run.sh as well as the pin file: the pin file
       # carries the tarball URL and its sha256 (run.sh reads both from it),
       # and run.sh carries the tarball extraction recipe
-      # (verification/run.sh:77-79: which oss-cad-suite/* subtrees get
+      # (verification/run.sh:74-76: which oss-cad-suite/* subtrees get
       # unpacked), so adding a subtree at an unchanged pin misses the cache
       # instead of being served one that lacks it.
       # flow/build/fab-venv is deliberately not cached - `uv pip install
@@ -247,3 +250,12 @@ jobs:
 
       - name: Run the fixtures-regenerate FAIL-path regression test
         run: verification/test-fixtures-regenerate-fail.sh
+
+      # The pin gate the bench runner and the blinky demo share (issue #169):
+      # both source verification/common/flow/toolchain-pins.sh for their
+      # FABulous / nextpnr-generic banner comparisons, so a comparison
+      # weakened there would let a stale tool through both entry points at
+      # once. verification/test-toolchain-pins.sh runs both drivers in a
+      # stubbed tree through the accept and reject cases.
+      - name: Run the toolchain pin-gate regression test
+        run: verification/test-toolchain-pins.sh

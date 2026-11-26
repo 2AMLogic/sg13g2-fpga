@@ -41,6 +41,14 @@ test for the fixture-stage FAIL path (issue #153): driving
 mismatch on either design must exit nonzero without that design's
 `byte-identical` line, and the matching case must still print it for both.
 
+`verification/test-toolchain-pins.sh` is the committed regression test for
+the FABulous / nextpnr-generic pin gate that `run.sh` and `blinky.sh` share
+through `common/flow/toolchain-pins.sh` (issue #169): with stubbed tools in a
+temp tree, each entry point must accept the pinned banners and reach its next
+stage, and exit 1 at the gate on a FABulous release candidate, a dirty
+nextpnr version and a banner carrying the pin without its version field;
+`env.txt` must record the banners the bench runner checked.
+
 **Claim boundary.** Single-LOGIC4 harness; the switch matrix is the sibling's
 same-index stand-in, not a verified Wilton-class matrix; no inter-tile routing;
 no timing; no area. Sibling gaps G5 and G6 are inherited open. Nothing here
