@@ -31,7 +31,8 @@ _None._
 
 Issues currently being built (`loom:building`).
 
-_None._
+- **#166**: Reuse the shared frame parser in the blinky testbench
+- **#169**: Share the FABulous and nextpnr version checks between blinky and the bench runner
 
 ## PRs Awaiting Review
 
@@ -43,7 +44,7 @@ _None._
 
 PRs that passed review and are queued for Champion auto-merge (`loom:pr`).
 
-_None._
+- **#168**: refactor: load blinky frames with the shared FABulous parser
 
 ## Proposed
 
@@ -54,7 +55,7 @@ Issues carrying `loom:curated`.
 
 ## Proposed (Architect / Hermit)
 
-- **#166**: Reuse the shared frame parser in the blinky testbench *(hermit)*
+_None._
 
 ## Epics
 
@@ -68,10 +69,10 @@ _None._
 | Very important | 0 |
 | Important | 1 |
 | Ready (`loom:issue`) | 0 |
-| In Progress (`loom:building`) | 0 |
+| In Progress (`loom:building`) | 2 |
 | PRs awaiting review | 0 |
-| Approved PRs awaiting merge | 0 |
+| Approved PRs awaiting merge | 1 |
 | Curated | 2 |
-| Architect / Hermit proposals | 1 |
+| Architect / Hermit proposals | 0 |
 | Active epics | 0 |
 <!-- guide:plan-body:end -->
