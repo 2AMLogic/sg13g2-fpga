@@ -90,11 +90,15 @@ EOF
 cat > "$T/stubs/nextpnr-generic" <<'EOF'
 #!/usr/bin/env bash
 [[ "${1:-}" = "--version" ]] || { echo "stub nextpnr-generic: unexpected argv: $*" >&2; exit 1; }
-echo "$PINTEST_NEXTPNR_BANNER"
+echo "$PINTEST_NEXTPNR_BANNER" >&2
+exit "${PINTEST_NEXTPNR_RC:-0}"
 EOF
 cat > "$T/stubs/FABulous" <<'EOF'
 #!/usr/bin/env bash
-if [[ "${1:-}" = "--version" ]]; then echo "$PINTEST_FAB_BANNER"; exit 0; fi
+if [[ "${1:-}" = "--version" ]]; then
+    echo "$PINTEST_FAB_BANNER" >&2
+    exit "${PINTEST_FAB_RC:-0}"
+fi
 : > "$PINTEST_MARKERS/fabulous-generate"
 exit 99
 EOF
@@ -178,6 +182,21 @@ grep -Fxq -- "FABulous: $FAB_RC" "$ENVTXT" || fail "run.sh: env.txt does not rec
 grep -Fxq -- "nextpnr-generic: $NEXTPNR_DIRTY" "$ENVTXT" || fail "run.sh: env.txt does not record the nextpnr banner it rejected"
 [[ "$(wc -l < "$RESULTS")" -eq 1 ]] || fail "run.sh: a bench was recorded after a rejected banner"
 
+# A probe can print even the expected banner before failing. Its exit status
+# must stop the benches, and env.txt must still contain both tools' output.
+check_failed_probe() {
+    local tool="$1" pin="$2"
+    mktree
+    run run "$FAB_OK" "$NEXTPNR_OK"
+    [[ "$rc" -eq 1 ]] || { dump; fail "run.sh: $tool probe failed but runner exited $rc (expected 1)"; }
+    grep -Fxq -- "error: $tool --version exited 23 (expected $pin)" "$T/out" || { dump; fail "run.sh: missing $tool probe diagnostic"; }
+    grep -Fxq -- "nextpnr-generic: $NEXTPNR_OK" "$ENVTXT" || fail "run.sh: $tool probe failure lost the nextpnr banner"
+    grep -Fxq -- "FABulous: $FAB_OK" "$ENVTXT" || fail "run.sh: $tool probe failure lost the FABulous banner"
+    [[ -z "$(markers)" ]] || fail "run.sh: started work after $tool probe failed: $(markers)"
+}
+PINTEST_FAB_RC=23 check_failed_probe FABulous "$FAB_PIN"
+PINTEST_NEXTPNR_RC=23 check_failed_probe nextpnr-generic "$NEXTPNR_PIN"
+
 # --setup is setup only: the gate sits behind its early exit.
 mktree; run run "$FAB_RC" "$NEXTPNR_DIRTY" --setup
 [[ "$rc" -eq 0 ]] || { dump; fail "run.sh --setup: exited $rc on rejected banners (want 0, the gate must not run); output above"; }
@@ -211,4 +230,4 @@ if nextpnr_banner_is_pinned "$NEXTPNR_NOFIELD"; then fail "helper: a banner with
 if nextpnr_banner_is_pinned "$NEXTPNR_OK"; then fail "helper: a banner matched a missing pin"; fi
 if fabulous_banner_is_pinned "FABulous CLI "; then fail "helper: an empty FABulous pin matched"; fi
 
-echo "test-toolchain-pins: PASS (run.sh and blinky.sh: accept, release candidate, dirty nextpnr, no version field; env.txt banners; --setup; no toolchain; missing pin)"
+echo "test-toolchain-pins: PASS (run.sh and blinky.sh: accept, release candidate, dirty nextpnr, no version field; env.txt banners; failed version probes; --setup; no toolchain; missing pin)"

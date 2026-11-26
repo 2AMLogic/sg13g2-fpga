@@ -164,14 +164,21 @@ if [[ "$HAVE_TOOLS" -eq 1 ]]; then
     # too. The comparisons are the shared helper's (issue #169): exact matches
     # only (issues #144, #151), so a warm flow/build/ across a pin bump stops
     # here instead of running the stale tool.
-    PNRV="$("$OSS/bin/nextpnr-generic" --version 2>&1 | sed -n 1p)"
-    FABV="$("$VENV/bin/FABulous" --version 2>&1 | sed -n "\$p")"
+    PNR_RC=0
+    FAB_RC=0
+    PNRV="$("$OSS/bin/nextpnr-generic" --version 2>&1 | sed -n 1p)" || PNR_RC=$?
+    FABV="$("$VENV/bin/FABulous" --version 2>&1 | sed -n "\$p")" || FAB_RC=$?
     {
         echo "yosys: $("$OSS/bin/yosys" -V)"
         echo "nextpnr-generic: $PNRV"
         echo "FABulous: $FABV"
         echo "yosys (FABulous fabric generation, FAB_YOSYS_PATH): $OSS/bin/yosys -- $("$OSS/bin/yosys" -V)"
     } >> "$OUT/env.txt"
+    if (( FAB_RC != 0 || PNR_RC != 0 )); then
+        (( FAB_RC == 0 )) || echo "error: FABulous --version exited $FAB_RC (expected $FAB_PIN)" >&2
+        (( PNR_RC == 0 )) || echo "error: nextpnr-generic --version exited $PNR_RC (expected $NEXTPNR_PIN)" >&2
+        exit 1
+    fi
     fabulous_banner_is_pinned "$FABV" \
         || { echo "error: FABulous version is not the pinned $FAB_PIN" >&2; exit 1; }
     nextpnr_banner_is_pinned "$PNRV" \
