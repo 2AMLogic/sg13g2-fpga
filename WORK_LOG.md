@@ -2,6 +2,15 @@
 
 Chronological record of merged PRs and closed issues, newest first. Maintained by the Guide role.
 
+### 2026-11-26
+
+- **Issue #171** (closed): Register the shared toolchain pin helper and its regression test in item 9's attestation inventory
+- **PR #173**: fix(manifests): attest both toolchain pin scripts under item 9
+- **Issue #169** (closed): Share the FABulous and nextpnr version checks between blinky and the bench runner
+- **PR #172**: refactor(verification): share the FABulous and nextpnr pin checks between blinky and the bench runner
+- **Issue #166** (closed): Reuse the shared frame parser in the blinky testbench
+- **PR #168**: refactor: load blinky frames with the shared FABulous parser
+
 ### 2026-11-23
 
 - **Issue #65** (closed): Generate a 2×2 LOGIC4 fabric with the pinned FABulous and run an inter-tile bitstream test
