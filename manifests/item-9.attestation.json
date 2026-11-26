@@ -3,14 +3,14 @@
   "kind": "generic",
   "status": "pass",
   "t1_item": 9,
-  "summary": "T1 item 9 (Testbenches shipped): 39/39 attestation checks passed (klt signoff --attest)",
+  "summary": "T1 item 9 (Testbenches shipped): 41/41 attestation checks passed (klt signoff --attest)",
   "source": "manifests/inventories/item-9.json",
   "attestation": {
     "producer": "klt signoff --attest",
     "inventory_schema_version": 1,
     "hash_algorithm": "sha256-raw-bytes",
-    "check_count": 39,
-    "passed_count": 39,
+    "check_count": 41,
+    "passed_count": 41,
     "checks": [
       {
         "check": "present",
@@ -123,6 +123,13 @@
         "path": "verification/common/flow/route_diag.py",
         "passed": true,
         "content_hash": "sha256:69101c30a878e1ad236526c76b13e9c69b17ad17ebdf9fc156cb392442bbaf72"
+      },
+      {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/common/flow/toolchain-pins.sh",
+        "passed": true,
+        "content_hash": "sha256:29d28996dd3b45e97b2404be6175ea5965450a718b1c33fcbf479186f5fecec8"
       },
       {
         "check": "present",
@@ -265,6 +272,13 @@
         "content_hash": "sha256:267ac7d730d8f7f96f73a8605f7d71d0b1bd5f3482b8b1ee2c6b80a34d506a4d"
       },
       {
+        "check": "present",
+        "role": "testbench",
+        "path": "verification/test-toolchain-pins.sh",
+        "passed": true,
+        "content_hash": "sha256:d75725c33d0168f6777f3541ec18bfc2a59875df350b463661de8a5309c9edce"
+      },
+      {
         "check": "command",
         "role": "cold_start",
         "argv": [
@@ -310,7 +324,7 @@
         "path": "manifests/inventories/item-9.json",
         "scope": "repo"
       },
-      "content_hash": "sha256:12be2fe878023833aa0aab25f943b331ea6f21b05929512138287b11d4a4fc86"
+      "content_hash": "sha256:f9adb2c51ab195552e7c7856425d05244a91123f40a6b9ecc8eb2fa75a78ec65"
     }
   }
 }
