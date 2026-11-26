@@ -54,14 +54,11 @@ SIM_KILL_AFTER_SECONDS="${SIM_KILL_AFTER_SECONDS:-10}"
 
 # Every pin below is read from flow/toolchain.json -- that manifest is the only
 # copy, including the suite tarball's URL and sha256 (issue #88). Takes a key
-# path, so nested pins work: `pin nextpnr-generic tarball sha256`.
-pin() { python3 -I -c 'import json,sys
-d = json.load(open(sys.argv[1]))
-for k in sys.argv[2:]:
-    if not isinstance(d, dict) or k not in d:
-        sys.exit("flow/toolchain.json: no pin " + ".".join(sys.argv[2:]))
-    d = d[k]
-print(d)' "$REPO/flow/toolchain.json" "$@"; }
+# path, so nested pins work: `pin nextpnr-generic tarball sha256`. The reader
+# and the FABulous / nextpnr-generic banner comparisons made before the
+# benches are the helper this runner shares with verification/blinky.sh.
+# shellcheck source=verification/common/flow/toolchain-pins.sh
+source "$REPO/verification/common/flow/toolchain-pins.sh"
 ICARUS_PIN="$(pin icarus-verilog version)"
 FAB_PIN="$(pin fabulous version)"
 NEXTPNR_PIN="$(pin nextpnr-generic version)"
@@ -162,18 +159,22 @@ HAVE_TOOLS=1
 for f in "$OSS/bin/nextpnr-generic" "$OSS/bin/yosys" "$VENV/bin/FABulous" "$VENV/bin/bit_gen"; do
     [[ -x "$f" ]] || HAVE_TOOLS=0; done
 if [[ "$HAVE_TOOLS" -eq 1 ]]; then
+    # Captured once and recorded in env.txt before they are checked, so the
+    # report carries exactly the banners the pin gate saw, a rejected one
+    # too. The comparisons are the shared helper's (issue #169): exact matches
+    # only (issues #144, #151), so a warm flow/build/ across a pin bump stops
+    # here instead of running the stale tool.
+    PNRV="$("$OSS/bin/nextpnr-generic" --version 2>&1 | sed -n 1p)"
+    FABV="$("$VENV/bin/FABulous" --version 2>&1 | sed -n "\$p")"
     {
         echo "yosys: $("$OSS/bin/yosys" -V)"
-        echo "nextpnr-generic: $("$OSS/bin/nextpnr-generic" --version 2>&1 | sed -n 1p)"
-        echo "FABulous: $("$VENV/bin/FABulous" --version 2>&1 | sed -n "\$p")"
+        echo "nextpnr-generic: $PNRV"
+        echo "FABulous: $FABV"
         echo "yosys (FABulous fabric generation, FAB_YOSYS_PATH): $OSS/bin/yosys -- $("$OSS/bin/yosys" -V)"
     } >> "$OUT/env.txt"
-    FABV="$(sed -n 's/^FABulous: //p' "$OUT/env.txt")"
-    [[ "$FABV" == "FABulous CLI $FAB_PIN" ]] \
+    fabulous_banner_is_pinned "$FABV" \
         || { echo "error: FABulous version is not the pinned $FAB_PIN" >&2; exit 1; }
-    # The leading nextpnr tag can be shorter than the full (Version ...) field.
-    PNRV_FIELD="$(sed -n 's/^nextpnr-generic: .*(Version \([^)]*\)).*/\1/p' "$OUT/env.txt")"
-    [[ "$PNRV_FIELD" == "$NEXTPNR_PIN" ]] \
+    nextpnr_banner_is_pinned "$PNRV" \
         || { echo "error: nextpnr-generic is not the pinned $NEXTPNR_PIN" >&2; exit 1; }
 fi
 NOTOOLS="pinned toolchain not present under flow/build/ (run verification/run.sh --setup)"

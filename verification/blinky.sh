@@ -45,14 +45,10 @@ TOOL="$REPO/verification/common/flow/fasm_to_bitstream.py"
 RTL="$REPO/rtl/common/rtl"
 
 # The toolchain pins are read from flow/toolchain.json -- that manifest is the
-# only copy (issue #88). Same helper as verification/run.sh.
-pin() { python3 -I -c 'import json,sys
-d = json.load(open(sys.argv[1]))
-for k in sys.argv[2:]:
-    if not isinstance(d, dict) or k not in d:
-        sys.exit("flow/toolchain.json: no pin " + ".".join(sys.argv[2:]))
-    d = d[k]
-print(d)' "$REPO/flow/toolchain.json" "$@"; }
+# only copy (issue #88). The reader and the FABulous / nextpnr-generic banner
+# comparisons below are the helper this demo shares with verification/run.sh.
+# shellcheck source=verification/common/flow/toolchain-pins.sh
+source "$REPO/verification/common/flow/toolchain-pins.sh"
 ICARUS_PIN="$(pin icarus-verilog version)"
 FAB_PIN="$(pin fabulous version)"
 NEXTPNR_PIN="$(pin nextpnr-generic version)"
@@ -80,22 +76,20 @@ if ! "$REPO/verification/run.sh" --setup > "$W/logs/setup.log" 2>&1; then
 fi
 
 # Enforce the FABulous / nextpnr-generic pins on the installed tools -- the
-# same two comparisons run.sh makes before its benches (run.sh:171-172, which
-# sit behind run.sh's --setup early exit and so never run on this path).
-# Captured once here and reused verbatim in the blinky-run.env report below,
-# so the recorded banner is exactly the one that was checked.
-PNRV="$("$OSS/bin/nextpnr-generic" --version 2>&1 | sed -n 1p)"
-FABV="$("$VENV/bin/FABulous" --version 2>&1 | sed -n "\$p")"
+# same two comparisons run.sh makes before its benches, through the helper
+# both source (run.sh's sit behind its --setup early exit and so never run on
+# this path). Captured once here and reused verbatim in the blinky-run.env
+# report below, so the recorded banner is exactly the one that was checked.
 # Exact matches only (issue #144): a warm install whose version merely starts
 # with the pin (FABulous 2.2.0rc1 vs pin 2.2.0, nextpnr ...-dirty) must stop
 # here, before the fabric generation below -- a substring match rides it
-# through. nextpnr is compared on the complete version inside its
-# (Version ...) field: the banner's leading tag can be shorter than the field
-# (nextpnr-0.11.1 vs nextpnr-0.11.1-54-g861c57be), so the field is the truth.
-PNRV_FIELD="$(sed -n 's/.*(Version \([^)]*\)).*/\1/p' <<<"$PNRV")"
-[[ "$PNRV_FIELD" == "$NEXTPNR_PIN" ]] \
+# through. The rule itself, including why nextpnr is compared on its complete
+# (Version ...) field rather than its leading tag, is the helper's.
+PNRV="$("$OSS/bin/nextpnr-generic" --version 2>&1 | sed -n 1p)"
+FABV="$("$VENV/bin/FABulous" --version 2>&1 | sed -n "\$p")"
+nextpnr_banner_is_pinned "$PNRV" \
     || { echo "error: nextpnr-generic $PNRV is not the pinned $NEXTPNR_PIN (flow/build/oss-cad-suite holds a stale install: remove it and rerun to refetch)" >&2; exit 1; }
-[[ "$FABV" == "FABulous CLI $FAB_PIN" ]] \
+fabulous_banner_is_pinned "$FABV" \
     || { echo "error: FABulous $FABV is not the pinned $FAB_PIN (flow/build/fab-venv holds a stale install: remove it and rerun to refetch)" >&2; exit 1; }
 
 echo "== 2/5 generating the fabric with the pinned FABulous"
