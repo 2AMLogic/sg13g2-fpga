@@ -167,7 +167,7 @@ cmp "$W/blinky.bin" "$W/blinky.fabulous.bin" >> "$W/logs/assemble.log" 2>&1 \
 echo "   assembled stream is byte-identical to FABulous bit_gen genBitstream"
 
 echo "== 5/5 simulating on the fabric (tb_blinky.v)"
-iverilog -g2012 -Wall -o "$W/logs/tb_blinky.vvp" "$RTL/lut4_slice.v" \
+iverilog -g2012 -Wall -I "$REPO/verification/common/sim" -o "$W/logs/tb_blinky.vvp" "$RTL/lut4_slice.v" \
     "$RTL/logic_tile_switch_matrix.v" "$RTL/logic_tile_routed.v" \
     "$REPO/verification/blinky/tb_blinky.v" > "$W/logs/tb_blinky.compile.log" 2>&1 \
     || { echo "error: iverilog compile failed (logs: flow/build/blinky-run/logs/tb_blinky.compile.log)" >&2; exit 1; }
